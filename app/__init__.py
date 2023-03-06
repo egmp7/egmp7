@@ -31,6 +31,9 @@ def create_app(test_config=None):
     # home blueprint
     from . import home
     app.register_blueprint(home.bp)
-    app.add_url_rule('/', endpoint='index')
+
+    # home blueprint
+    from . import game
+    app.register_blueprint(game.bp)
 
     return app

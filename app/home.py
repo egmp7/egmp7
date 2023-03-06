@@ -8,8 +8,7 @@ bp = Blueprint('home', __name__)
 
 @bp.route('/')
 def index():
-    
-    return getJson()
+    return render_template('index.html', data=getJson())
 
 """ Get jason file from static folder """
 def getJson():
