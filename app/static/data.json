@@ -1,0 +1,321 @@
+{
+    "spanish":
+     {   
+         "nav":
+         {
+             "language":"🇪🇸→🇬🇧",
+             "home":"Home",
+             "about":"Acerca",
+             "services":"Servicios",
+             "projects":"Proyectos",
+             "contact":"Contacto"
+         },
+         "carousel":
+         {
+             "title":"Esencial Construcciones",
+             "slogan":"La belleza de vivir en el paraíso."
+         },
+         "about":
+         {
+             "title": "Acerca de nosotros",
+             "description":"Esencial construcciones nace en octubre del 2015 con el propósito de crear una arquitectura que responda tanto a la necesidad del cliente como a la relación con el contexto; enfocándonos en el cumplimiento de todos los requerimientos y normas técnicas necesarias para que la edificación sea habitable, por esa razón contamos con un grupo interdisciplinario de profesionales dispuestos a cumplir con nuestro objetivo."
+         },
+         "objective":
+         {
+             "title": "Objetivo:",
+             "description": "Diseñar y construir edificaciones con los más altos estándares de calidad e implementando tecnologías innovadoras y sostenibles con la finalidad de satisfacer las necesidades de nuestros clientes."
+         },
+         "contact":
+         {
+             "title":"Contacto",
+             "name":"Diego Trujillo",
+             "phone":"+593 98 747 1096",
+             "form":
+             {
+                 "title":"¿Necesita una proforma?",
+                 "name":"Nombre:",
+                 "email": "E-mail:",
+                 "description": "Descripción:",
+                 "send":"Envíar"
+             }
+         },
+         "services":
+         {
+             "title": "Servicios",
+             "dis":
+             {
+                 "name":"Diseño y Planificación",
+                 "description":"Elaboramos propuestas para cualquier tipo de proyectos inmobiliarios sean urbanos y/o rurales, entregando un estudio técnico con todos los planos y cálculos correspondientes para las diversas infraestructuras."
+             },
+             "cons":
+             {
+                 "name":"Construcción",
+                 "description":"Edificamos tus proyectos arquitectónicos con los mejores materiales del mercado garantizando un sistema estructural resistente y confiable; a cargo de profesionales con gran experiencia en el ámbito de la construcción."
+             },
+             "remo":
+             {
+                 "name":"Ampliación y Remodelación",
+                 "description":"Incrementamos y/o modernizamos sus espacios interiores y exteriores, con excelentes acabados para lograr que las edificaciones adquieran una nueva identidad, adaptándonos a los requerimientos de nuestros clientes."
+             },
+             "topo":
+             {
+                 "name":"Topografía",
+                 "description":"Levantamos y mapeamos terrenos urbanos y/o rurales aprobados en el municipio, además elaboramos planos para la subdivisión de lotes incluyendo en nuestros servicios el replanteo sobre el terreno."
+             },
+             "auto":
+             {
+                 "name":"Domótica del Hogar",
+                 "description":"Con el propósito de actualizar nuestros servicios contamos con ingenieros expertos en automatización de viviendas, para controlar varias acciones realizadas por el humano en las actividades diarias del hogar mediante la implementación de la tecnología."
+             },
+             "pub":
+             {
+                 "name":"Publicidad",
+                 "description":"Poseemos un equipo de profesionales encargados del marketing y publicidad para crear anuncios publicitarios satisfaciendo las demandas de nuestros clientes, nos enfocamos en gran parte al marketing digital implementando estrategias de vanguardia."
+             },
+             "ma":
+             {
+                 "name":"Maquetería",
+                 "description":"Elaboramos maquetas virtuales y/o físicas para cualquier tipo de proyecto sea inmobiliario o estudiantil con el fin de aportar en la expresión formal del proyecto."
+             }
+         }
+         ,
+         "projects":
+         {
+             "title": "Proyectos",
+             "list":
+             [{
+                 "id":"p1",
+                 "name":"Diseño de Piscina",
+                 "description":"Diseño de Piscina cubierta incluye servicios.",
+                 "client":"Ing. Pareja",
+                 "location":"Valle de Tumbaco"
+             },
+             {
+                 "id":"p2",
+                 "name":"Diseño de Jardín Zen",
+                 "description":"Diseño de Jardín Zen con B.B.Q.",
+                 "client":"Dr. Paúl Gamboa",
+                 "location":"Barrio San José de Moran"
+             },
+             {
+                 "id":"p3",
+                 "name":"Pérgola en madera",
+                 "description":"Diseño y construcción de pérgola en madera.",
+                 "client":"Familia Suárez - Benavides",
+                 "location":"Barrio San Carlos de Calderón"
+             },
+             {
+                 "id":"p4",
+                 "name":"Ampliación en tercer piso",
+                 "description":"Ampliación en tercer piso, incluye dormitorios y cuarto de lavar.",
+                 "client":"Familia Avilés",
+                 "location":" Sector Villa flora"
+             },
+             {
+                 "id":"p5",
+                 "name":"Locales comerciales",
+                 "description":"Diseño y construcción de locales comerciales.",
+                 "client":"Sra. Verónica Esparza",
+                 "location":" Sector Calderón"
+             },
+             {
+                 "id":"p6",
+                 "name":"Remodelación de vivienda",
+                 "description":"Remodelación de vivienda.",
+                 "client":"Familia Guano",
+                 "location":" Sector Calderón"
+             },
+             {
+                 "id":"p7",
+                 "name":"Construcción de vivienda 1",
+                 "description":"Construcción de vivienda.",
+                 "client":"Familia Sambrano",
+                 "location":" Sector Carcelén"
+             },
+             {
+                 "id":"p8",
+                 "name":"Construcción de vivienda 2",
+                 "description":"Construcción de vivienda.",
+                 "client":"Familia Benalcázar",
+                 "location":" Sector Guajaló"
+             },
+             {
+                 "id":"p9",
+                 "name":"Proyecto víal - urbano",
+                 "description":"Visualización de proyecto víal - urbano.",
+                 "client":"GAMA Consultoría"
+             },
+             {
+                 "id":"p10",
+                 "name":"Ampliación y remodelación de vivienda",
+                 "description":"Ampliación y remodelación de vivienda.",
+                 "client":" Familia Boada Sanchez",
+                 "location":"Calderón, vía Panamericana Norte"
+             }]
+         },
+         "success":
+         {
+             "description": "Su información ha sido enviada correctamente. Nos comunicaremos pronto con usted!",
+             "button": "Regresar"
+         }
+     },
+     "english":
+     {   
+         "nav":
+         {
+             "language":"🇬🇧→🇪🇸",
+             "home":"Home",
+             "about":"About",
+             "services":"Services",
+             "projects":"Projects",
+             "contact":"Contact"
+         },
+         "carousel":
+         {
+             "title":"Esencial Construcciones",
+             "slogan":"Paradise Living"
+         },
+         "about":
+         {
+             "title": "About us:",
+             "description":"Esencial Construcciones was established in October 2015 and aims to facilitate architectural customer needs with a relationship to the context. Our team follows the required technical guidelines in every project, ensuring that the project is appropriate for people's living conditions. Therefore Esencial Construcciones provides a professional team to accomplish the task. "
+         },
+         "objective":
+         {
+             "title": "Objective:",
+             "description": "Design and construct housing, apartments, and building with high-quality standards. By applying sustainable and innovative technology to satisfy customer needs."
+         },        
+         "contact":
+         {
+             "title":"Contact",
+             "name":"Diego Trujillo",
+             "phone":"+593 98 747 1096",
+             "form":
+             {
+                 "title":"Get in touch",
+                 "name":"Name:",
+                 "email": "E-mail:",
+                 "description": "Description:",
+                 "send":"Send"
+             }
+         },
+         "services":
+         {
+             "title": "Services",
+             "dis":
+             {
+                 "name":"Architectural Design",
+                 "description":"Esencial Construcciones develop proposals for any Real state, urban or not-urban. Customers also receive a technical statement with the calculations of the infrastructure."
+             },
+             "cons":
+             {
+                 "name":"Construction",
+                 "description":"Esencial Construcciones builds architectural projects with the best available materials in the market, which guarantees a resistant and trustworthy structure."
+             },
+             "remo":
+             {
+                 "name":"Renovation",
+                 "description":"Expand and modernize interiors or exteriors with excellent finishes to achieve a new identity."
+             },
+             "topo":
+             {
+                 "name":"Topography Services",
+                 "description":"Topography services for rural or urban areas previously approved by municipal entities."
+             },
+             "auto":
+             {
+                 "name":"Smart House",
+                 "description":"Esencial Construcciones counts with expert engineers in smart housing. Provide the house of the future for people."
+             },
+             "pub":
+             {
+                 "name":"Publicity",
+                 "description":"Esencial Construcciones also provides the technology to produce publicity in Real State"
+             },
+             "ma":
+             {
+                 "name":"Scale Models",
+                 "description":"Esencial Construcciones develops virtual or physical models for companies or students."
+             }
+         },
+         "projects":
+         {
+             "title": "Projects",
+             "list":
+             [{
+                 "id":"p1",
+                 "name":"Pool Design",
+                 "description":"Covered pool design with services.",
+                 "client":"Ing. Pareja",
+                 "location":"Valle de Tumbaco"
+             },
+             {
+                 "id":"p2",
+                 "name":"Zen Garden Design",
+                 "description":"Zen Garden Design with B.B.Q.",
+                 "client":"Dr. Paúl Gamboa",
+                 "location":"Barrio San José de Moran"
+             },
+             {
+                 "id":"p3",
+                 "name":"Pérgola en madera",
+                 "description":"Design and build of pérgola en madera.",
+                 "client":"Familia Suárez - Benavides",
+                 "location":"Barrio San Carlos de Calderón"
+             },
+             {
+                 "id":"p4",
+                 "name":"Third floor renovation",
+                 "description":"Third floor renovation with rooms",
+                 "client":"Familia Avilés",
+                 "location":" Sector Villa flora"
+             },
+             {
+                 "id":"p5",
+                 "name":"Commercial buildings design",
+                 "description":"Commercial buildings design.",
+                 "client":"Sra. Verónica Esparza",
+                 "location":" Sector Calderón"
+             },
+             {
+                 "id":"p6",
+                 "name":"House Renovation",
+                 "description":"House Renovation.",
+                 "client":"Familia Guano",
+                 "location":" Sector Calderón"
+             },
+             {
+                 "id":"p7",
+                 "name":"House construction 1",
+                 "description":"House Construction.",
+                 "client":"Familia Sambrano",
+                 "location":" Sector Carcelén"
+             },
+             {
+                 "id":"p8",
+                 "name":"House construction 2",
+                 "description":"CHouse construction.",
+                 "client":"Familia Benalcázar",
+                 "location":" Sector Guajaló"
+             },
+             {
+                 "id":"p9",
+                 "name":"Street project- urban",
+                 "description":"Street project- urban.",
+                 "client":"GAMA Consultoría"
+             },
+             {
+                 "id":"p10",
+                 "name":"House renovation",
+                 "description":"House renovation",
+                 "client":" Familia Boada Sanchez",
+                 "location":"Calderón, vía Panamericana Norte"
+             }]
+         },
+         "success":
+         {
+             "description": "Your information has been sent succesfully! We'll contact you shortly!",
+             "button": "Return"
+         }
+     }
+ }
