@@ -2,6 +2,10 @@
 
 <title>{% block title %}{% endblock %} - EGMP7</title>
 
+<!--CSS-->
+<link rel="stylesheet" 
+      href="{{ url_for('static', filename='styles/style.css') }}">
+
 <section class="content">
   <header>
     {% block header %}{% endblock %}
@@ -13,3 +17,5 @@
 
   {% block content %}{% endblock %}
 </section>
+
+<script src="{{ url_for('static',filename='library/jquery.js')}}"></script>
