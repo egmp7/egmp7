@@ -1,15 +1,16 @@
 class Canyon 
 {
-    constructor ( x , width )
+    constructor ( worldX , canyonWidth )
     {
-        this.x = x;
-        this.y = floorPos_y;
-        this.width = width;
-        this.height = height/4;
+        this.x = worldX;
+        this.y = floorPos_y -2 ;
+        this.width = canyonWidth;
+        this.height = height/4 + 2;
     }
     
     draw = function () 
     {
+        this.check()
             
         fill(100,155,255);
         rect(this.x,this.y,this.width,this.height);
@@ -18,26 +19,23 @@ class Canyon
         rect(this.x+this.width,this.y,15,this.height);
     }
     
-    check = function(gc_x , gc_y) 
+    check = function() 
     {
         
-        if( this.x <= gc_x 
-        &&  gc_x <= this.x + this.width 
-        &&  gc_y >= this.y)
-        {
-            isPlummeting = true;
-            return true
-        }
+        if( this.x <= player.getWorldX() 
+        &&  player.getWorldX() <= this.x + this.width 
+        &&  player.getY() >= this.y)
+            player.deadByCanyon()
     }
 
-    dies = function(gc_y)
-    {
+    // dies = function(gc_y)
+    // {
 
-        if(gc_y > height && lives >0)
-        {
-            lives --;
-            startGame();
-            //.canyonFall.play();
-        }
-    }
+    //     if(gc_y > height && lives >0)
+    //     {
+    //         lives --;
+    //         startGame();
+    //         //.canyonFall.play();
+    //     }
+    // }
 }

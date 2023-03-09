@@ -3,13 +3,13 @@ class FlagPole
     constructor (x)
     {
         this.x = x;
-        this.isReached = false;
-        this.playSound = true;
-
+        this.isReached = false
     }
 
     draw = function ()
     {
+        this.checkCloseToFlagPole()
+
         fill(250,0,0);
         if(this.isReached)
         {
@@ -23,16 +23,12 @@ class FlagPole
         rect(this.x,floorPos_y - 70,6,70)
     }
 
-    check = function (gc_x)
+    checkCloseToFlagPole = function ()
     {
-        if(abs(this.x - gc_x) < 10)
+        if( abs (this.x - player.getWorldX()) < 10)
         {
-            this.isReached = true;
-            if(this.playSound)
-                {
-                    //sounds.flag_pole.play()
-                    this.playSound = false;
-                }
-        }    
+            this.isReached = true
+            console.log("FlagPole::checkCloseToFlagPole")    
+        }
     } 
 }

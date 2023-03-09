@@ -23,14 +23,14 @@ class Player
         this.isRight = bool;
     }
 
-    setIsFalling = function (bool)
+    getWorldX = function ()
     {
-        this.isFalling = bool;
+        return this.worldX;
     }
 
-    setIsPlummeting = function (bool)
+    getY = function ()
     {
-        this.isPlummeting = bool;
+        return this.y;
     }
 
     getLives = function ()
@@ -40,24 +40,28 @@ class Player
 
     draw = function ()
     {
+        this.movePlayer()
+        this.physics()
+        this.updateWorldX()
+
         if( this.isLeft && this.isFalling )
         {
             // add your jumping-left code
             //body
             fill(0,0,200)
-            triangle(gameChar_x-7,gameChar_y-40,gameChar_x+7,gameChar_y-40,gameChar_x,gameChar_y-50);
-            rect(gameChar_x-7,gameChar_y-40,14,30);
-            ellipse(gameChar_x-3,gameChar_y-10,4,6);
-            ellipse(gameChar_x+5,gameChar_y-10,4,6);
+            triangle(this.x-7,this.y-40,this.x+7,this.y-40,this.x,this.y-50);
+            rect(this.x-7,this.y-40,14,30);
+            ellipse(this.x-3,this.y-10,4,6);
+            ellipse(this.x+5,this.y-10,4,6);
             //hands
             stroke(0,0,200);
             strokeWeight(5);
-            line(gameChar_x+7,gameChar_y-30,gameChar_x+11,gameChar_y-23);
+            line(this.x+7,this.y-30,this.x+11,this.y-23);
             strokeWeight(1);
             noStroke();
             //eyes
             fill(255,255,102)
-            ellipse(gameChar_x-3,gameChar_y-37,5,7);
+            ellipse(this.x-3,this.y-37,5,7);
             
         }
         else if( this.isRight && this.isFalling )
@@ -65,19 +69,19 @@ class Player
             // add your jumping-right code
             //body
             fill(0,0,200)
-            triangle(gameChar_x-7,gameChar_y-40,gameChar_x+7,gameChar_y-40,gameChar_x,gameChar_y-50);
-            rect(gameChar_x-7,gameChar_y-40,14,30);
-            ellipse(gameChar_x-3,gameChar_y-10,4,6);
-            ellipse(gameChar_x+5,gameChar_y-10,4,6);
+            triangle(this.x-7,this.y-40,this.x+7,this.y-40,this.x,this.y-50);
+            rect(this.x-7,this.y-40,14,30);
+            ellipse(this.x-3,this.y-10,4,6);
+            ellipse(this.x+5,this.y-10,4,6);
             //hands
             stroke(0,0,200);
             strokeWeight(5);
-            line(gameChar_x-7,gameChar_y-30,gameChar_x-11,gameChar_y-23);
+            line(this.x-7,this.y-30,this.x-11,this.y-23);
             strokeWeight(1);
             noStroke();
             //eyes
             fill(255,255,102)
-            ellipse(gameChar_x+3,gameChar_y-37,5,7);
+            ellipse(this.x+3,this.y-37,5,7);
             
         }
         else if( this.isLeft )
@@ -85,26 +89,26 @@ class Player
             // add your walking left code
             //body
             fill(0,0,200)
-            triangle(gameChar_x-7,gameChar_y-40,gameChar_x+7,gameChar_y-40,gameChar_x,gameChar_y-50);
-            rect(gameChar_x-7,gameChar_y-40,14,30);
-            ellipse(gameChar_x-3,gameChar_y-10,4,6);
-            ellipse(gameChar_x+5,gameChar_y-10,4,6);
+            triangle(this.x-7,this.y-40,this.x+7,this.y-40,this.x,this.y-50);
+            rect(this.x-7,this.y-40,14,30);
+            ellipse(this.x-3,this.y-10,4,6);
+            ellipse(this.x+5,this.y-10,4,6);
             //eyes
             fill(255,255,102)
-            ellipse(gameChar_x-3,gameChar_y-37,5,7)
+            ellipse(this.x-3,this.y-37,5,7)
         }
         else if( this.isRight )
         {
             // add your walking right code
             //body
             fill(0,0,200)
-            triangle(gameChar_x-7,gameChar_y-40,gameChar_x+7,gameChar_y-40,gameChar_x,gameChar_y-50);
-            rect(gameChar_x-7,gameChar_y-40,14,30);
-            ellipse(gameChar_x-3,gameChar_y-10,4,6);
-            ellipse(gameChar_x+5,gameChar_y-10,4,6);
+            triangle(this.x-7,this.y-40,this.x+7,this.y-40,this.x,this.y-50);
+            rect(this.x-7,this.y-40,14,30);
+            ellipse(this.x-3,this.y-10,4,6);
+            ellipse(this.x+5,this.y-10,4,6);
             //eyes
             fill(255,255,102)
-            ellipse(gameChar_x+3,gameChar_y-37,5,7)
+            ellipse(this.x+3,this.y-37,5,7)
             
         }
         else if( this.isFalling || this.isPlummeting)
@@ -112,37 +116,129 @@ class Player
             // add your jumping facing forwards code
             //body
             fill(0,0,200)
-            triangle(gameChar_x-10,gameChar_y-40,gameChar_x+10,gameChar_y-40,gameChar_x,gameChar_y-50);
-            rect(gameChar_x-10,gameChar_y-40,20,30);
-            ellipse(gameChar_x-6,gameChar_y-10,4,6);
-            ellipse(gameChar_x+6,gameChar_y-10,4,6);
+            triangle(this.x-10,this.y-40,this.x+10,this.y-40,this.x,this.y-50);
+            rect(this.x-10,this.y-40,20,30);
+            ellipse(this.x-6,this.y-10,4,6);
+            ellipse(this.x+6,this.y-10,4,6);
             //hands
             stroke(0,0,200);
             strokeWeight(5);
-            line(gameChar_x-10,gameChar_y-35,gameChar_x-16,gameChar_y-42);
-            line(gameChar_x+10,gameChar_y-35,gameChar_x+16,gameChar_y-42);
+            line(this.x-10,this.y-35,this.x-16,this.y-42);
+            line(this.x+10,this.y-35,this.x+16,this.y-42);
             strokeWeight(1);
             noStroke();
             //eyes
             fill(255,255,102)
-            ellipse(gameChar_x-3,gameChar_y-38,5,7)
-            ellipse(gameChar_x+3,gameChar_y-38,5,7)
+            ellipse(this.x-3,this.y-38,5,7)
+            ellipse(this.x+3,this.y-38,5,7)
         }
         else
         {
             // add your standing front facing code
             //body
             fill(0,0,200)
-            triangle(gameChar_x-10,gameChar_y-40,gameChar_x+10,gameChar_y-40,gameChar_x,gameChar_y-50);
-            rect(gameChar_x-10,gameChar_y-40,20,30);
-            rect(gameChar_x-6,gameChar_y-10,4,10);
-            rect(gameChar_x+2,gameChar_y-10,4,10);
+            triangle(this.x-10,this.y-40,this.x+10,this.y-40,this.x,this.y-50);
+            rect(this.x-10,this.y-40,20,30);
+            rect(this.x-6,this.y-10,4,10);
+            rect(this.x+2,this.y-10,4,10);
             //eyes
             fill(255,255,102)
-            ellipse(gameChar_x-3,gameChar_y-38,5,7)
-            ellipse(gameChar_x+3,gameChar_y-38,5,7)
+            ellipse(this.x-3,this.y-38,5,7)
+            ellipse(this.x+3,this.y-38,5,7)
         }
     }
 
-    
+    updateWorldX = function ()
+    {
+        this.worldX = this.x - scrollPos;
+    }
+
+
+    // Logic to make the game character move or the background scroll.
+    movePlayer = function()
+    {
+
+        if(this.isLeft)
+        {
+            if(this.x > width * 0.2)
+                this.x -= 10;
+            else
+                scrollPos += 10;
+        }
+
+        if(this.isRight)
+        {
+            if(this.x < width * 0.4)
+                this.x  += 10;
+            else
+                scrollPos -= 10; 
+        }
+    }
+
+    jump = function()
+    {
+        const JUMP_HEIGHT = 130;
+        this.y -= JUMP_HEIGHT;
+        this.isFalling = true ;
+    }
+
+    physics = function ()
+    {
+        const GRAVITY = 10;
+
+        if(this.isFalling)
+            this.y += GRAVITY;
+        
+
+        let isContact = false;
+
+        // Logic to make the game character rise and fall.
+        
+        if(this.y < floorPos_y)
+        {
+            
+
+            
+            
+            // for(var i = 0 ; i < platforms.length ; i++)
+            // {
+            //     if(platforms[i].check(gameChar_world_x,this.y))
+            //     {
+            //         isContact = true;
+            //         player.setIsFalling( false );
+            //         isFalling = false;
+            //         this.y = platforms[i].y;
+            //     }    
+            // }
+            // if(!isContact)
+            // {
+            //     player.setIsFalling( true );
+            //     isFalling = true;
+            //     this.y += 7;
+            // }
+            
+        }
+        else if(this.isPlummeting)
+            {
+                this.y +=18;
+                this.isLeft = false;
+                this.isRight = false;
+            }
+        else{
+
+            this.isFalling = false;
+            this.y = floorPos_y;
+        }
+    }
+
+    deadByEnemy = function ()
+    {
+        console.log("Player::deadByEnemy")
+    }
+    deadByCanyon = function ()
+    {
+        console.log("Player::deadBCanyon")
+        //this.isPlummeting = true;
+    }
+
 }

@@ -10,6 +10,8 @@ class Platform
     }
               
     draw = function (){
+        this.checkPlayerOnTop()
+
         fill(255,155,0);
         rect(this.x,this.y,this.length,this.height);
         fill(255,555,0);
@@ -20,13 +22,11 @@ class Platform
             this.height * 8/10)
     };
 
-    check = function (gc_x,gc_y){
-        if(gc_x > this.x && gc_x < this.x + this.length){
-            var d = this.y - gc_y;
-            if(d >= 0 && d < 8){
-                return true
-            }
-        }
-        return false
+    checkPlayerOnTop = function (){
+        if(player.getWorldX() > this.x 
+        && player.getWorldX() < this.x + this.length
+        && player.getY() < this .y + 10
+        && player.getY() > this.y -2)
+            console.log("Platform::checkPlayerOnTop")
     }    
 }

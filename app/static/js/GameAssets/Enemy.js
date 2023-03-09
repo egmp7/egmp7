@@ -9,18 +9,11 @@ class Enemy
         this.inc = 1;
     }
     
-    update = function() {
-        this.currentX += this.inc;
-        
-        if(this.currentX >= this.x + this.range){
-            this.inc = -1;
-        }
-        else if(this.currentX < this.x){
-            this.inc = 1;
-        }
-    }
     draw = function () {
-        this.update();
+
+        this.checkCloseToEnemy();
+        this.updateEnemyPosition();
+
         if( this.inc > 0)
         {
             //body
@@ -46,13 +39,22 @@ class Enemy
             ellipse(this.currentX-3,this.y-37,5,7)
         }   
     }
-    check = function (gc_x,gc_y){
-        var d = dist(gc_x,gc_y,this.currentX,this.y)
+
+    checkCloseToEnemy = function ()
+    {
         
-        if(d < 20)
-        {
-            return true;
-        }
-        return false;
+        if( dist( player.getWorldX(), player.getY(), this.currentX, this.y ) < 20 )
+            player.deadByEnemy();   
     }
+
+    updateEnemyPosition = function() {
+        this.currentX += this.inc;
+        
+        if(this.currentX >= this.x + this.range){
+            this.inc = -1;
+        }
+        else if(this.currentX < this.x){
+            this.inc = 1;
+        }
+    } 
 }
