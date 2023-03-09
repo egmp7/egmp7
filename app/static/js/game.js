@@ -3,6 +3,7 @@ var gameChar_y;
 var floorPos_y;
 var scrollPos;
 var gameChar_world_x;
+var player;
 
 var clouds = [];
 var mountains;
@@ -106,7 +107,8 @@ function draw()
         return
     };
 
-    drawGameChar();
+    //drawGameChar();
+    player.draw()
         
     // Update real position of gameChar for collision detection.
 	gameChar_world_x = gameChar_x - scrollPos;
@@ -271,6 +273,7 @@ function startGame(){
 
     
     flag_pole = new FlagPole (10000)
+    player = new Player (10,50);
     
     game_score = 0;
         
@@ -281,12 +284,15 @@ function startGame(){
 function keyPressed(){
     
     if(keyCode == 37){
+        player.setIsLeft( true );
         isLeft = true;
     }
     else if(keyCode == 39){
+        player.setIsRight( true );
         isRight = true;
     }
     else if(keyCode == 32 && isFalling == false){
+        player.setIsFalling( true );
         isFalling = true;
         gameChar_y -= 110;
         
@@ -297,10 +303,12 @@ function keyReleased(){
 
     if(keyCode == 37)
     {
+        player.setIsLeft( false );
         isLeft = false;
     }
     else if(keyCode == 39)
     {
+        player.setIsRight( false );
         isRight = false;
     }
     else if(keyCode == 13 && lives==0)
@@ -316,8 +324,9 @@ function keyReleased(){
     {
         gameStart = true;
         startGame();
-        elem = document.getElementById ("defaultCanvas0");
-        elem.requestFullscreen();
+        // Make Full Screen CODE
+        // elem = document.getElementById ("defaultCanvas0");
+        // elem.requestFullscreen();
 
         //sounds.soundtrack.loop();
     }    
@@ -363,12 +372,14 @@ function controls()
             if(platforms[i].check(gameChar_world_x,gameChar_y))
             {
                 isContact = true;
+                player.setIsFalling( false );
                 isFalling = false;
                 gameChar_y = platforms[i].y;
             }    
         }
         if(!isContact)
         {
+            player.setIsFalling( true );
             isFalling = true;
             gameChar_y += 7;
         }
@@ -437,114 +448,6 @@ function drawGameEvents(){
         text("Game over. Press Enter to continue.",width/2,height/2);
         return true;
     }
-}
-// ------------------------------
-// Game character render function
-// ------------------------------
-function drawGameChar(){
-	// draw game character
-	if(isLeft && isFalling)
-	{
-		// add your jumping-left code
-        //body
-        fill(0,0,200)
-        triangle(gameChar_x-7,gameChar_y-40,gameChar_x+7,gameChar_y-40,gameChar_x,gameChar_y-50);
-        rect(gameChar_x-7,gameChar_y-40,14,30);
-        ellipse(gameChar_x-3,gameChar_y-10,4,6);
-        ellipse(gameChar_x+5,gameChar_y-10,4,6);
-        //hands
-        stroke(0,0,200);
-        strokeWeight(5);
-        line(gameChar_x+7,gameChar_y-30,gameChar_x+11,gameChar_y-23);
-        strokeWeight(1);
-        noStroke();
-        //eyes
-        fill(255,255,102)
-        ellipse(gameChar_x-3,gameChar_y-37,5,7);
-        
-	}
-	else if(isRight && isFalling)
-	{
-		// add your jumping-right code
-        //body
-        fill(0,0,200)
-        triangle(gameChar_x-7,gameChar_y-40,gameChar_x+7,gameChar_y-40,gameChar_x,gameChar_y-50);
-        rect(gameChar_x-7,gameChar_y-40,14,30);
-        ellipse(gameChar_x-3,gameChar_y-10,4,6);
-        ellipse(gameChar_x+5,gameChar_y-10,4,6);
-        //hands
-        stroke(0,0,200);
-        strokeWeight(5);
-        line(gameChar_x-7,gameChar_y-30,gameChar_x-11,gameChar_y-23);
-        strokeWeight(1);
-        noStroke();
-        //eyes
-        fill(255,255,102)
-        ellipse(gameChar_x+3,gameChar_y-37,5,7);
-        
-	}
-	else if(isLeft)
-	{
-		// add your walking left code
-        //body
-        fill(0,0,200)
-        triangle(gameChar_x-7,gameChar_y-40,gameChar_x+7,gameChar_y-40,gameChar_x,gameChar_y-50);
-        rect(gameChar_x-7,gameChar_y-40,14,30);
-        ellipse(gameChar_x-3,gameChar_y-10,4,6);
-        ellipse(gameChar_x+5,gameChar_y-10,4,6);
-        //eyes
-        fill(255,255,102)
-        ellipse(gameChar_x-3,gameChar_y-37,5,7)
-	}
-	else if(isRight)
-	{
-		// add your walking right code
-        //body
-        fill(0,0,200)
-        triangle(gameChar_x-7,gameChar_y-40,gameChar_x+7,gameChar_y-40,gameChar_x,gameChar_y-50);
-        rect(gameChar_x-7,gameChar_y-40,14,30);
-        ellipse(gameChar_x-3,gameChar_y-10,4,6);
-        ellipse(gameChar_x+5,gameChar_y-10,4,6);
-        //eyes
-        fill(255,255,102)
-        ellipse(gameChar_x+3,gameChar_y-37,5,7)
-        
-	}
-	else if(isFalling || isPlummeting)
-	{
-		// add your jumping facing forwards code
-        //body
-        fill(0,0,200)
-        triangle(gameChar_x-10,gameChar_y-40,gameChar_x+10,gameChar_y-40,gameChar_x,gameChar_y-50);
-        rect(gameChar_x-10,gameChar_y-40,20,30);
-        ellipse(gameChar_x-6,gameChar_y-10,4,6);
-        ellipse(gameChar_x+6,gameChar_y-10,4,6);
-        //hands
-        stroke(0,0,200);
-        strokeWeight(5);
-        line(gameChar_x-10,gameChar_y-35,gameChar_x-16,gameChar_y-42);
-        line(gameChar_x+10,gameChar_y-35,gameChar_x+16,gameChar_y-42);
-        strokeWeight(1);
-        noStroke();
-        //eyes
-        fill(255,255,102)
-        ellipse(gameChar_x-3,gameChar_y-38,5,7)
-        ellipse(gameChar_x+3,gameChar_y-38,5,7)
-	}
-	else
-	{
-		// add your standing front facing code
-        //body
-        fill(0,0,200)
-        triangle(gameChar_x-10,gameChar_y-40,gameChar_x+10,gameChar_y-40,gameChar_x,gameChar_y-50);
-        rect(gameChar_x-10,gameChar_y-40,20,30);
-        rect(gameChar_x-6,gameChar_y-10,4,10);
-        rect(gameChar_x+2,gameChar_y-10,4,10);
-        //eyes
-        fill(255,255,102)
-        ellipse(gameChar_x-3,gameChar_y-38,5,7)
-        ellipse(gameChar_x+3,gameChar_y-38,5,7)
-	}
 }
 
 
