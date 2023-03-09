@@ -23,6 +23,11 @@ class Player
         this.isRight = bool;
     }
 
+    setIsFalling =function(bool)
+    {
+        this.isFalling = bool;
+    }
+
     getWorldX = function ()
     {
         return this.worldX;
@@ -182,6 +187,7 @@ class Player
         this.isFalling = true ;
     }
 
+    // Logic to make the game character rise and fall.
     physics = function ()
     {
         const GRAVITY = 10;
@@ -189,34 +195,11 @@ class Player
         if(this.isFalling)
             this.y += GRAVITY;
         
-
-        let isContact = false;
-
-        // Logic to make the game character rise and fall.
-        
-        if(this.y < floorPos_y)
+        if(this.y >= floorPos_y)
         {
-            
+            this.isFalling = false;
+            this.y = floorPos_y;
 
-            
-            
-            // for(var i = 0 ; i < platforms.length ; i++)
-            // {
-            //     if(platforms[i].check(gameChar_world_x,this.y))
-            //     {
-            //         isContact = true;
-            //         player.setIsFalling( false );
-            //         isFalling = false;
-            //         this.y = platforms[i].y;
-            //     }    
-            // }
-            // if(!isContact)
-            // {
-            //     player.setIsFalling( true );
-            //     isFalling = true;
-            //     this.y += 7;
-            // }
-            
         }
         else if(this.isPlummeting)
             {
@@ -226,8 +209,7 @@ class Player
             }
         else{
 
-            this.isFalling = false;
-            this.y = floorPos_y;
+            
         }
     }
 

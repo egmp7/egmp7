@@ -5,6 +5,7 @@ let levelAssets;
 
 function setup()
 {
+    deviceOrientation = "landscape";
     createCanvas($( window ).width(), $( window ).height());
 	scrollPos = 0;
     floorPos_y = height * 3/4;;
