@@ -195,21 +195,19 @@ class Player
         if(this.isFalling)
             this.y += GRAVITY;
         
-        if(this.y >= floorPos_y)
-        {
-            this.isFalling = false;
-            this.y = floorPos_y;
-
-        }
-        else if(this.isPlummeting)
+        
+        if(this.isPlummeting)
             {
                 this.y +=18;
                 this.isLeft = false;
                 this.isRight = false;
             }
-        else{
-
             
+        if(this.y >= floorPos_y && this.isPlummeting == false)
+        {
+            this.isFalling = false;
+            this.y = floorPos_y;
+
         }
     }
 
@@ -219,8 +217,7 @@ class Player
     }
     deadByCanyon = function ()
     {
-        console.log("Player::deadBCanyon")
-        //this.isPlummeting = true;
+        this.isPlummeting = true;
     }
 
 }

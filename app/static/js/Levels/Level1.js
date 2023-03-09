@@ -7,40 +7,40 @@ function initLevel1(){
     const GRID_X = width / 16;
     const GRID_Y = floorPos_y / 12;
 
-    // levelAssets.push(new Mountain(  300 ,   190));
-    // levelAssets.push(new Mountain(  900 ,   170));
-    // levelAssets.push(new Mountain(  1400,   200));
-    // levelAssets.push(new Mountain(  2000,   300));
-    // levelAssets.push(new Mountain(  3200,   280));
-    // levelAssets.push(new Mountain(  4500,   350));
-    // levelAssets.push(new Mountain(  5800,   250));
-    // levelAssets.push(new Mountain(  6500,   200));
-    // levelAssets.push(new Mountain(  9000,   370));
-    // levelAssets.push(new Mountain(  10300,   270));
+    levelAssets.push(new Mountain(  300 ,   190));
+    levelAssets.push(new Mountain(  900 ,   170));
+    levelAssets.push(new Mountain(  1400,   200));
+    levelAssets.push(new Mountain(  2000,   300));
+    levelAssets.push(new Mountain(  3200,   280));
+    levelAssets.push(new Mountain(  4500,   350));
+    levelAssets.push(new Mountain(  5800,   250));
+    levelAssets.push(new Mountain(  6500,   200));
+    levelAssets.push(new Mountain(  9000,   370));
+    levelAssets.push(new Mountain(  10300,   270));
 
-    // levelAssets.push(new Tree(100));
-    // levelAssets.push(new Tree(300));
-    // levelAssets.push(new Tree(800));
-    // levelAssets.push(new Tree(1100));
-    // levelAssets.push(new Tree(1900));
-    // levelAssets.push(new Tree(2100));
-    // levelAssets.push(new Tree(3400));
-    // levelAssets.push(new Tree(3600));
-    // levelAssets.push(new Tree(4200));
-    // levelAssets.push(new Tree(4700));
-    // levelAssets.push(new Tree(4800));
-    // levelAssets.push(new Tree(5570));
-    // levelAssets.push(new Tree(6800));
-    // levelAssets.push(new Tree(6400));
-    // levelAssets.push(new Tree(6200));
-    // levelAssets.push(new Tree(8500));
-    // levelAssets.push(new Tree(8900));
-    // levelAssets.push(new Tree(9100));
-    // levelAssets.push(new Tree(9300));
-    // levelAssets.push(new Tree(9800));
-    // levelAssets.push(new Tree(10500));
-    // levelAssets.push(new Tree(10560));
-    // levelAssets.push(new Tree(10760));
+    levelAssets.push(new Tree(100));
+    levelAssets.push(new Tree(300));
+    levelAssets.push(new Tree(800));
+    levelAssets.push(new Tree(1100));
+    levelAssets.push(new Tree(1900));
+    levelAssets.push(new Tree(2100));
+    levelAssets.push(new Tree(3400));
+    levelAssets.push(new Tree(3600));
+    levelAssets.push(new Tree(4200));
+    levelAssets.push(new Tree(4700));
+    levelAssets.push(new Tree(4800));
+    levelAssets.push(new Tree(5570));
+    levelAssets.push(new Tree(6800));
+    levelAssets.push(new Tree(6400));
+    levelAssets.push(new Tree(6200));
+    levelAssets.push(new Tree(8500));
+    levelAssets.push(new Tree(8900));
+    levelAssets.push(new Tree(9100));
+    levelAssets.push(new Tree(9300));
+    levelAssets.push(new Tree(9800));
+    levelAssets.push(new Tree(10500));
+    levelAssets.push(new Tree(10560));
+    levelAssets.push(new Tree(10760));
 
     levelAssets.push(new Canyon( -1000    ,   1000));
     // levelAssets.push(new Canyon(  1200    ,   100));
@@ -102,7 +102,7 @@ function initLevel1(){
     // levelAssets.push(new Collectable(  9800  ,   410));
     // levelAssets.push(new Collectable(  9860  ,   410));
     
-    // levelAssets.push(new Enemy(2000,floorPos_y,60));
+    levelAssets.push(new Enemy(2000,floorPos_y,60));
     // levelAssets.push(new Enemy(3300,floorPos_y,60));
     // levelAssets.push(new Enemy(3400,floorPos_y,60));
     // levelAssets.push(new Enemy(4000,floorPos_y,         100));
@@ -120,12 +120,12 @@ function initLevel1(){
     // levelAssets.push(new Enemy(8700,floorPos_y - 50 ,  200));
     // levelAssets.push(new Enemy(8790,floorPos_y,         40));
 
-    // levelAssets.push(new FlagPole (10000))
+    levelAssets.push(new FlagPole (10000))
 
-    // for(var i = 0 ; i < 100 ; i++)
-    // {
-    //     levelAssets.push(new Cloud( 100 * i * random( 0.7, 1 ), 200 * random( 0.25, 1 ), 90  * random( 0.6, 1 )))
-    // }
+    for(var i = 0 ; i < 100 ; i++)
+    {
+        levelAssets.push(new Cloud( 100 * i * random( 0.7, 1 ), 200 * random( 0.25, 1 ), 90  * random( 0.6, 1 )))
+    }
 
     return levelAssets;    
 }
