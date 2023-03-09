@@ -1,8 +1,4 @@
 function initLevel1(){
-
-    player = new Player (width/2,floorPos_y);
-    game_score = 0;
-	scrollPos = 0;
     
     levelAssets = [];
     

@@ -1,12 +1,14 @@
-var floorPos_y;
-var scrollPos;
-var player;
+let scrollPos;
+let floorPos_y;
+let player;
+let levelAssets;
 
 function setup()
 {
-	createCanvas($( window ).width(), $( window ).height());
-	floorPos_y = height * 3/4;
-    
+    createCanvas($( window ).width(), $( window ).height());
+	scrollPos = 0;
+    floorPos_y = height * 3/4;;
+    player = new Player (width/2,floorPos_y);
     levelAssets = initLevel1();
 }
 
