@@ -22,7 +22,13 @@ function draw()
     translate(scrollPos,0);
     LEVEL_ONE.grounds.forEach((asset)=>{
         asset.draw();
-    })    
+    })
+    LEVEL_ONE.platforms.forEach((asset)=>{
+        asset.draw();
+    })
+    LEVEL_ONE.assets.forEach((asset)=>{
+        asset.draw();
+    })     
     pop();
     player.draw()
     playerPhysics.applyPlayerPhysics ()  

@@ -1,5 +1,8 @@
 class Platform 
 {
+
+    contact;
+
     constructor ( _x, _y, _width )
     {
         this.x =  _x;
@@ -27,10 +30,15 @@ class Platform
         const PLAYER_Y = player.getY()
         if( PLAYER_X > this.x 
         && PLAYER_X < ( this.x + this.width )
-        && PLAYER_Y < ( this.y + 10 )
+        && PLAYER_Y < ( this.y + 2 )
         && PLAYER_Y > ( this.y - 2 ))
-            playerPhysics.setPlatformContact( true )
+            this.contact = true;
         else 
-            playerPhysics.setPlatformContact( false )
+            this.contact = false;
     }    
+    
+    isInContact = function ()
+    {
+        return this.contact;
+    }
 }
