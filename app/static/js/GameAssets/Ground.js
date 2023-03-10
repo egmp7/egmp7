@@ -1,5 +1,7 @@
 class Ground 
 {
+    contact;
+
     constructor ( _x, _y, _width )
     {
         this.x = _x;
@@ -9,13 +11,13 @@ class Ground
 
     draw = function()
     {
-        this.check()
+        this.checkIfPlayerMakesContact()
         noStroke();
 	    fill( 0,155,0 ); // green
         rect( this.x, this.y, this.width, (height - this.y) );
     }
 
-    check = function()
+    checkIfPlayerMakesContact = function()
     {
         const PLAYER_X = player.getWorldX();
         const PLAYER_Y = player.getY();
@@ -24,9 +26,14 @@ class Ground
         && PLAYER_X < ( this.x +  this.width )
         && PLAYER_Y > ( this.y - 4 )
         && PLAYER_Y < ( this.y + 2 ))
-            playerPhysics.setGroundContact ( true )
+            this.contact = true
         else 
-            playerPhysics.setGroundContact( false )
+            this.contact = false
+    }
+
+    isInContact = function ()
+    {
+        return this.contact;
     }
 
 }

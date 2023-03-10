@@ -2,9 +2,17 @@ class LevelOne
 {
     constructor()
     {
-        this.assets = [];
+        this.grounds = [];
 
-        this.assets.push(new Ground(  300 ,   550 , 800));
+        const GRID_X = width / 32;
+        const GRID_Y = height / 24;
+
+        this.grounds.push(new Ground(  GRID_X ,      GRID_Y * 20 ,   GRID_X * 10));
+        //this.assets.push(new Canyon(  GRID_X * 10 , GRID_Y * 18,    GRID_X * 2 ));
+        this.grounds.push(new Ground(  GRID_X * 12 , GRID_Y * 20 ,   GRID_X * 10));
+
+        this.grounds.push(new Ground(  GRID_X * 24 , GRID_Y * 20 ,   GRID_X * 10));
+
     }
 }
 

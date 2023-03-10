@@ -10,7 +10,7 @@ function setup()
     createCanvas($( window ).width(), $( window ).height());
 	scrollPos = 0;
     floorPos_y = height * 3/4;;
-    player = new Player (width/2,floorPos_y);
+    player = new Player (width/2,height/2);
     playerPhysics = new PlayerPhysics;
     LEVEL_ONE = new LevelOne;
 }
@@ -20,7 +20,7 @@ function draw()
 	drawBackground();
     push();
     translate(scrollPos,0);
-    LEVEL_ONE.assets.forEach((asset)=>{
+    LEVEL_ONE.grounds.forEach((asset)=>{
         asset.draw();
     })    
     pop();

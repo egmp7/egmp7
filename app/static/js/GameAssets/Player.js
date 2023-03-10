@@ -159,7 +159,7 @@ class Player
 
     jump = function()
     {
-        if (playerPhysics.isPlayerOnGround() || playerPhysics.isPlayerOnPlatform() )
+        if ( !this.isFalling )
             this.y -= 130;
     }
 
