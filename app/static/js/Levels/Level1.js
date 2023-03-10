@@ -7,6 +7,8 @@ function initLevel1(){
     const GRID_X = width / 16;
     const GRID_Y = floorPos_y / 12;
 
+    levelAssets.push(new Ground(  300 ,   550 , 800));
+
     levelAssets.push(new Mountain(  300 ,   190));
     levelAssets.push(new Mountain(  900 ,   170));
     levelAssets.push(new Mountain(  1400,   200));

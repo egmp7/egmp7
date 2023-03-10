@@ -1,10 +1,10 @@
 class Platform 
 {
-    constructor (x,y,lenght)
+    constructor ( _x, _y, _width )
     {
-        this.x =  x;
-        this.y = y;
-        this.length = lenght;
+        this.x =  _x;
+        this.y = _y;
+        this.width = _width;
         this.height = 12;
 
     }
@@ -13,22 +13,24 @@ class Platform
         this.checkPlayerOnTop()
 
         fill(255,155,0);
-        rect(this.x,this.y,this.length,this.height);
+        rect(this.x,this.y,this.width,this.height);
         fill(255,555,0);
         rect(
-            this.x + this.length * 0.5/10,
+            this.x + this.width * 0.5/10,
             this.y + this.height * 1/10,
-            this.length * 9/10,
+            this.width * 9/10,
             this.height * 8/10)
     };
 
     checkPlayerOnTop = function (){
-        if( player.getWorldX() > this.x 
-        && player.getWorldX() < this.x + this.length
-        && player.getY() < this .y + 10
-        && player.getY() > this.y -2 )
-            player.setIsFalling( false )
+        const PLAYER_X = player.getWorldX();
+        const PLAYER_Y = player.getY()
+        if( PLAYER_X > this.x 
+        && PLAYER_X < ( this.x + this.width )
+        && PLAYER_Y < ( this.y + 10 )
+        && PLAYER_Y > ( this.y - 2 ))
+            playerPhysics.setPlatformContact( true )
         else 
-            player.setIsFalling( true )
+            playerPhysics.setPlatformContact( false )
     }    
 }

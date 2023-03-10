@@ -13,6 +13,11 @@ class Player
         this.lives = 3;
     }
 
+    setY = function ( value )
+    {
+        this.y = value;
+    }
+
     setIsLeft =function(bool)
     {
         this.isLeft = bool;
@@ -46,7 +51,6 @@ class Player
     draw = function ()
     {
         this.movePlayer()
-        this.physics()
         this.updateWorldX()
 
         if( this.isLeft && this.isFalling )
@@ -153,11 +157,16 @@ class Player
         }
     }
 
+    jump = function()
+    {
+        if (playerPhysics.isPlayerOnGround() || playerPhysics.isPlayerOnPlatform() )
+            this.y -= 130;
+    }
+
     updateWorldX = function ()
     {
         this.worldX = this.x - scrollPos;
     }
-
 
     // Logic to make the game character move or the background scroll.
     movePlayer = function()
@@ -180,44 +189,13 @@ class Player
         }
     }
 
-    jump = function()
-    {
-        const JUMP_HEIGHT = 130;
-        this.y -= JUMP_HEIGHT;
-        this.isFalling = true ;
-    }
-
-    // Logic to make the game character rise and fall.
-    physics = function ()
-    {
-        const GRAVITY = 10;
-
-        if(this.isFalling)
-            this.y += GRAVITY;
-        
-        
-        if(this.isPlummeting)
-            {
-                this.y +=18;
-                this.isLeft = false;
-                this.isRight = false;
-            }
-            
-        if(this.y >= floorPos_y && this.isPlummeting == false)
-        {
-            this.isFalling = false;
-            this.y = floorPos_y;
-
-        }
-    }
-
     deadByEnemy = function ()
     {
         console.log("Player::deadByEnemy")
     }
     deadByCanyon = function ()
     {
-        this.isPlummeting = true;
+        console.log("Player::deadByCanyon")
     }
 
 }

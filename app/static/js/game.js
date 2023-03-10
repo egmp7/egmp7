@@ -2,6 +2,7 @@ let scrollPos;
 let floorPos_y;
 let player;
 let levelAssets;
+let palyerPhysics;
 
 function setup()
 {
@@ -10,6 +11,7 @@ function setup()
 	scrollPos = 0;
     floorPos_y = height * 3/4;;
     player = new Player (width/2,floorPos_y);
+    playerPhysics = new PlayerPhysics;
     levelAssets = initLevel1();
 }
 
@@ -22,7 +24,8 @@ function draw()
         asset.draw();
     })    
     pop();
-    player.draw()    
+    player.draw()
+    playerPhysics.applyPlayerPhysics ()  
 }
 
 

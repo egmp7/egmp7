@@ -1,9 +1,9 @@
 class Ground 
 {
-    constructor (x,y,_width)
+    constructor ( _x, _y, _width )
     {
-        this.x = x;
-        this.y = y;
+        this.x = _x;
+        this.y = _y;
         this.width = _width;
     }
 
@@ -22,12 +22,11 @@ class Ground
 
         if ( PLAYER_X > this.x 
         && PLAYER_X < ( this.x +  this.width )
-        && PLAYER_Y > ( this.y - 10 )
+        && PLAYER_Y > ( this.y - 4 )
         && PLAYER_Y < ( this.y + 2 ))
-            player.setIsFalling( false )
-        
+            playerPhysics.setGroundContact ( true )
         else 
-            player.setIsFalling( true )
+            playerPhysics.setGroundContact( false )
     }
 
 }
