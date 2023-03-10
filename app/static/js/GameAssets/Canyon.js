@@ -1,11 +1,11 @@
 class Canyon 
 {
-    constructor ( worldX , canyonWidth )
+    constructor ( _x , _y, _width )
     {
-        this.x = worldX;
-        this.y = floorPos_y -2 ;
-        this.width = canyonWidth;
-        this.height = height/4 + 2;
+        this.x = _x;
+        this.y = _y ;
+        this.width = _width;
+        this.height = ( height - _y );
     }
     
     draw = function () 
@@ -27,15 +27,4 @@ class Canyon
         &&  player.getY() >= this.y)
             player.deadByCanyon()
     }
-
-    // dies = function(gc_y)
-    // {
-
-    //     if(gc_y > height && lives >0)
-    //     {
-    //         lives --;
-    //         startGame();
-    //         //.canyonFall.play();
-    //     }
-    // }
 }

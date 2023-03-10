@@ -1,7 +1,7 @@
 let scrollPos;
 let floorPos_y;
 let player;
-let levelAssets;
+let LEVEL_ONE;
 let palyerPhysics;
 
 function setup()
@@ -12,7 +12,7 @@ function setup()
     floorPos_y = height * 3/4;;
     player = new Player (width/2,floorPos_y);
     playerPhysics = new PlayerPhysics;
-    levelAssets = initLevel1();
+    LEVEL_ONE = new LevelOne;
 }
 
 function draw()
@@ -20,7 +20,7 @@ function draw()
 	drawBackground();
     push();
     translate(scrollPos,0);
-    levelAssets.forEach((asset)=>{
+    LEVEL_ONE.assets.forEach((asset)=>{
         asset.draw();
     })    
     pop();
