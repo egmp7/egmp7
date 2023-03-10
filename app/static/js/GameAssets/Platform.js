@@ -23,10 +23,12 @@ class Platform
     };
 
     checkPlayerOnTop = function (){
-        if(player.getWorldX() > this.x 
+        if( player.getWorldX() > this.x 
         && player.getWorldX() < this.x + this.length
         && player.getY() < this .y + 10
-        && player.getY() > this.y -2)
-            console.log("Platform::checkPlayerOnTop")
+        && player.getY() > this.y -2 )
+            player.setIsFalling( false )
+        else 
+            player.setIsFalling( true )
     }    
 }

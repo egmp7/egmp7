@@ -23,6 +23,11 @@ class Player
         this.isRight = bool;
     }
 
+    setIsFalling =function(bool)
+    {
+        this.isFalling = bool;
+    }
+
     getWorldX = function ()
     {
         return this.worldX;
@@ -182,6 +187,7 @@ class Player
         this.isFalling = true ;
     }
 
+    // Logic to make the game character rise and fall.
     physics = function ()
     {
         const GRAVITY = 10;
@@ -189,45 +195,19 @@ class Player
         if(this.isFalling)
             this.y += GRAVITY;
         
-
-        let isContact = false;
-
-        // Logic to make the game character rise and fall.
         
-        if(this.y < floorPos_y)
-        {
-            
-
-            
-            
-            // for(var i = 0 ; i < platforms.length ; i++)
-            // {
-            //     if(platforms[i].check(gameChar_world_x,this.y))
-            //     {
-            //         isContact = true;
-            //         player.setIsFalling( false );
-            //         isFalling = false;
-            //         this.y = platforms[i].y;
-            //     }    
-            // }
-            // if(!isContact)
-            // {
-            //     player.setIsFalling( true );
-            //     isFalling = true;
-            //     this.y += 7;
-            // }
-            
-        }
-        else if(this.isPlummeting)
+        if(this.isPlummeting)
             {
                 this.y +=18;
                 this.isLeft = false;
                 this.isRight = false;
             }
-        else{
-
+            
+        if(this.y >= floorPos_y && this.isPlummeting == false)
+        {
             this.isFalling = false;
             this.y = floorPos_y;
+
         }
     }
 
@@ -237,8 +217,7 @@ class Player
     }
     deadByCanyon = function ()
     {
-        console.log("Player::deadBCanyon")
-        //this.isPlummeting = true;
+        this.isPlummeting = true;
     }
 
 }
