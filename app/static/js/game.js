@@ -29,9 +29,6 @@ function draw()
 // Function to draw the Background
 function drawBackground (){
     background(100, 155, 255); // fill the sky blue
-	noStroke();
-	fill(0,155,0);
-	rect(0, floorPos_y, width, height/4); // draw some green ground 
 }
 
 // Function to draw lives tokens and Score
