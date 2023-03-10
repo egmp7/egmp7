@@ -45,11 +45,11 @@ function keyReleased(){
 }
 
 
-// function mouseClicked() {
-//     var sound = new Howl({
+function mouseClicked() {
+    var sound = new Howl({
     
-//         src: [ './static/GameAudios/canyonFall.wav']
+        src: [ './static/GameAudios/canyonFall.wav']
     
-//     });
-//     sound.play();
-// }
+    });
+    sound.play();
+}
