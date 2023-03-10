@@ -29,6 +29,18 @@ class Ground
             this.contact = true
         else 
             this.contact = false
+
+        if(PLAYER_X < this.x 
+        && PLAYER_X > this.x - 15 
+        && PLAYER_Y > this.y)
+            player.setIsRight( false )
+
+        if(PLAYER_X > this.x + this.width
+        && PLAYER_X < this.x + this.width + 15
+        && PLAYER_Y > this.y)
+            player.setIsLeft( false )
+            
+        
     }
 
     isInContact = function ()

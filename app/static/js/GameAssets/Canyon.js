@@ -21,10 +21,7 @@ class Canyon
     
     check = function() 
     {
-        
-        if( this.x <= player.getWorldX() 
-        &&  player.getWorldX() <= this.x + this.width 
-        &&  player.getY() >= Math.max( this.left_y , this.rigth_y ))
+        if( player.getY() >= height)
             player.deadByCanyon()
     }
 }

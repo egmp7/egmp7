@@ -9,15 +9,21 @@ class LevelOne
         const GRID_X = width / 32;
         const GRID_Y = height / 24;
 
-        this.grounds.push(new Ground(  GRID_X ,      GRID_Y * 20 ,   GRID_X * 10));
-        this.grounds.push(new Ground(  GRID_X * 18 , GRID_Y * 18 ,   GRID_X * 10));
-        //this.grounds.push(new Ground(  GRID_X * 25 , GRID_Y * 20 ,   GRID_X * 10));
+        // this.grounds.push(new Ground(  GRID_X ,      GRID_Y * 20 ,   GRID_X * 10));
+        // this.grounds.push(new Ground(  GRID_X * 18 , GRID_Y * 21 ,   GRID_X * 10));
+        // this.grounds.push(new Ground(  GRID_X * 34 , GRID_Y * 20 ,   GRID_X * 20));
+        // this.grounds.push(new Ground(  GRID_X * 54 , GRID_Y * 10 ,   GRID_X * 20));
 
-        this.assets.push(new Canyon(  GRID_X * 11 ,  GRID_X * 7, GRID_Y * 20, GRID_Y * 18 ));
+        this.grounds.push(new Ground(  GRID_X ,      GRID_Y * 10 ,   GRID_X * 6));
+        this.grounds.push(new Ground(  GRID_X * 7 , GRID_Y * 18 ,   GRID_X * 18));
+        this.grounds.push(new Ground(  GRID_X * 25 , GRID_Y * 17 ,   GRID_X * 20));
+        //this.grounds.push(new Ground(  GRID_X * 54 , GRID_Y * 10 ,   GRID_X * 20));
 
-        this.platforms.push(new Platform( GRID_X * 12 , GRID_Y * 22 , GRID_X * 5));
-        //this.platforms.push(new Platform( GRID_X * 24 , GRID_Y * 20 - 140 , GRID_X * 4));
+        // this.assets.push(new Canyon(  GRID_X * 11 ,  GRID_X * 7, GRID_Y * 20, GRID_Y * 21 ));
+        // this.assets.push(new Canyon(  GRID_X * 28 ,  GRID_X * 6, GRID_Y * 21, GRID_Y * 20 ));
 
+        // this.platforms.push(new Platform( GRID_X * 12 , GRID_Y * 22 , GRID_X * 5));
+        // this.platforms.push(new Platform( GRID_X * 29 , GRID_Y * 22 , GRID_X * 4));
 
     }
 }
