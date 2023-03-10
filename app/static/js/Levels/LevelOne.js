@@ -10,13 +10,13 @@ class LevelOne
         const GRID_Y = height / 24;
 
         this.grounds.push(new Ground(  GRID_X ,      GRID_Y * 20 ,   GRID_X * 10));
-        this.grounds.push(new Ground(  GRID_X * 13 , GRID_Y * 20 ,   GRID_X * 10));
-        this.grounds.push(new Ground(  GRID_X * 25 , GRID_Y * 20 ,   GRID_X * 10));
+        this.grounds.push(new Ground(  GRID_X * 18 , GRID_Y * 18 ,   GRID_X * 10));
+        //this.grounds.push(new Ground(  GRID_X * 25 , GRID_Y * 20 ,   GRID_X * 10));
 
-        this.assets.push(new Canyon(  GRID_X * 11 , GRID_Y * 20,    GRID_X * 2 ));
+        this.assets.push(new Canyon(  GRID_X * 11 ,  GRID_X * 7, GRID_Y * 20, GRID_Y * 18 ));
 
-        this.platforms.push(new Platform( GRID_X * 24 , GRID_Y * 20 - 70 , GRID_X * 4));
-        this.platforms.push(new Platform( GRID_X * 24 , GRID_Y * 20 - 140 , GRID_X * 4));
+        this.platforms.push(new Platform( GRID_X * 12 , GRID_Y * 22 , GRID_X * 5));
+        //this.platforms.push(new Platform( GRID_X * 24 , GRID_Y * 20 - 140 , GRID_X * 4));
 
 
     }

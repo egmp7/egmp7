@@ -1,22 +1,22 @@
 class Canyon 
 {
-    constructor ( _x , _y, _width )
+    constructor ( _x , _width , _left_y, _rigth_y)
     {
         this.x = _x;
-        this.y = _y ;
         this.width = _width;
-        this.height = ( height - _y );
+        this.left_y = _left_y ;
+        this.rigth_y = _rigth_y ;
+        this.left_height = ( height - _left_y);
+        this.right_height = ( height - _rigth_y );
     }
     
     draw = function () 
     {
         this.check()
             
-        fill(100,155,255);
-        rect(this.x,this.y,this.width,this.height);
         fill(102,51,0);
-        rect(this.x-15,this.y,15,this.height);
-        rect(this.x+this.width,this.y,15,this.height);
+        rect( ( this.x - 15 ),           this.left_y,    15,     this.left_height);
+        rect( ( this.x + this.width ),   this.rigth_y,    15,     this.right_height);
     }
     
     check = function() 
@@ -24,7 +24,7 @@ class Canyon
         
         if( this.x <= player.getWorldX() 
         &&  player.getWorldX() <= this.x + this.width 
-        &&  player.getY() >= this.y)
+        &&  player.getY() >= Math.max( this.left_y , this.rigth_y ))
             player.deadByCanyon()
     }
 }
