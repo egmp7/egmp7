@@ -2,7 +2,8 @@ let scrollPos;
 let floorPos_y;
 let player;
 let LEVEL_ONE;
-let palyerPhysics;
+let BUTTONS = [];
+
 
 function setup()
 {
@@ -13,6 +14,9 @@ function setup()
     player = new Player (width/2,height/2);
     playerPhysics = new PlayerPhysics;
     LEVEL_ONE = new LevelOne;
+    BUTTONS.push(new LeftButton     ( 60 , height - 60 ))
+    BUTTONS.push(new RightButton    ( 170 , height - 60 ))
+    BUTTONS.push(new JumpButton     ( width - 60 , height - 60 ))
 }
 
 function draw()
@@ -28,10 +32,14 @@ function draw()
     })
     LEVEL_ONE.assets.forEach((asset)=>{
         asset.draw();
-    })     
+    }) 
     pop();
     player.draw()
     playerPhysics.applyPlayerPhysics ()  
+    
+    BUTTONS.forEach(( button )=>{
+        button.draw();
+    })
 }
 
 

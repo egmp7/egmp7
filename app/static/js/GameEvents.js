@@ -21,29 +21,82 @@ function keyReleased(){
         player.setIsLeft( false );
 
     if(keyCode == RIGHT_KEY)
-        player.setIsRight( false );
-    
-    // else if(keyCode == ENTER_KEY && lives==0)
-    // {
-    //     lives =3;
-    //     initLevel1();
-    // }
-    // else if(keyCode ==ENTER_KEY && flag_pole.isReached)
-    // {
-    //      initLevel1();    
-    // }
-    else if(keyCode == ENTER_KEY && gameStart == false)
-    {
-        gameStart = true;
-        initLevel1();
-        // Make Full Screen CODE
-        // elem = document.getElementById ("defaultCanvas0");
-        // elem.requestFullscreen();
-
-        //sounds.soundtrack.loop();
-    }    
+        player.setIsRight( false );   
 }
 
+function touchStarted ()
+{
+    BUTTONS.forEach(( button )=>{
+        button.click();
+    })
+}
+
+function touchEnded ()
+{
+    console.log("GamesEvents::touchEnded")
+    player.setIsLeft( false )
+    player.setIsRight( false )
+}
+
+function LeftButton( _x, _y ){
+    this.x = _x;
+    this.y = _y;
+
+    this.draw = function()
+    {
+        fill(0)
+        ellipse( this.x ,this.y ,100 ,100)
+    }
+
+    this.click = function ()
+    {
+        if (touches.length == 1 && dist (this.x , this.y , touches[0].x, touches[0].y) < 50)
+        {
+            console.log("GamesEvents::LeftButton")
+            player.setIsLeft( true )
+        }
+    }
+}
+
+function RightButton( _x, _y ){
+    this.x = _x;
+    this.y = _y;
+
+    this.draw = function()
+    {
+        fill(0)
+        ellipse( this.x ,this.y ,100 ,100)
+    }
+
+    this.click = function ()
+    {
+        if (touches.length == 1 && dist (this.x , this.y , touches[0].x, touches[0].y) < 50)
+        {
+            player.setIsRight( true )
+            console.log("GamesEvents::RightButton")
+        }
+    }
+}
+
+function JumpButton( _x, _y ){
+    this.x = _x;
+    this.y = _y;
+
+    this.draw = function()
+    {
+        fill(0)
+        ellipse( this.x ,this.y ,100 ,100)
+    }
+
+    this.click = function ()
+    {
+        if (touches.length == 1 && dist (this.x , this.y , touches[0].x, touches[0].y) < 50)
+        {
+            player.jump()
+            console.log("GamesEvents::JumpButton")
+        }
+    }
+}
 
 function mouseClicked() {
     var sound = new Howl({
