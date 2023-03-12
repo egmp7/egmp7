@@ -33,9 +33,14 @@ function touchStarted ()
 
 function touchEnded ()
 {
-    console.log("GamesEvents::touchEnded")
-    player.setIsLeft( false )
-    player.setIsRight( false )
+    console.log("GamesEvents::touchEnded ")
+
+    BUTTONS.forEach(( button )=>{
+        button.release();
+    })
+
+    // player.setIsLeft( false )
+    // player.setIsRight( false )
 }
 
 function LeftButton( _x, _y ){
@@ -50,11 +55,22 @@ function LeftButton( _x, _y ){
 
     this.click = function ()
     {
-        if (touches.length == 1 && dist (this.x , this.y , touches[0].x, touches[0].y) < 50)
-        {
-            console.log("GamesEvents::LeftButton")
-            player.setIsLeft( true )
-        }
+        touches.forEach(( touch )=>{
+            if ( dist (this.x , this.y , touch.x, touch.y) < 50)
+                player.setIsLeft( true )
+        })
+
+    }
+    this.release = function ()
+    {
+        console.log("GameEvents::LeftButton.release()")
+        touches.forEach(( touch )=>{
+            if (( dist (this.x , this.y , touch.x, touch.y) < 50 ))
+                return;         
+        })
+
+        player.setIsLeft( false )
+
     }
 }
 
@@ -70,11 +86,21 @@ function RightButton( _x, _y ){
 
     this.click = function ()
     {
-        if (touches.length == 1 && dist (this.x , this.y , touches[0].x, touches[0].y) < 50)
-        {
-            player.setIsRight( true )
-            console.log("GamesEvents::RightButton")
-        }
+        touches.forEach(( touch )=>{
+            if ( dist (this.x , this.y , touch.x, touch.y) < 50)
+                player.setIsRight( true )
+        })
+    }
+    this.release = function ()
+    {
+        console.log("GameEvents::RightButton.release()")
+        touches.forEach(( touch )=>{
+            if (( dist (this.x , this.y , touch.x, touch.y) < 50 ))
+                return;         
+        })
+
+        player.setIsRight( false )
+
     }
 }
 
@@ -90,11 +116,15 @@ function JumpButton( _x, _y ){
 
     this.click = function ()
     {
-        if (touches.length == 1 && dist (this.x , this.y , touches[0].x, touches[0].y) < 50)
-        {
-            player.jump()
-            console.log("GamesEvents::JumpButton")
-        }
+
+        touches.forEach(( touch )=>{
+            if ( dist (this.x , this.y , touch.x, touch.y) < 50)
+                player.jump()
+        })
+
+    }
+    this.release = function ()
+    {
     }
 }
 
