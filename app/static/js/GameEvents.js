@@ -33,14 +33,9 @@ function touchStarted ()
 
 function touchEnded ()
 {
-    console.log("GamesEvents::touchEnded ")
-
     BUTTONS.forEach(( button )=>{
         button.release();
     })
-
-    // player.setIsLeft( false )
-    // player.setIsRight( false )
 }
 
 function LeftButton( _x, _y ){
@@ -64,12 +59,12 @@ function LeftButton( _x, _y ){
     this.release = function ()
     {
         console.log("GameEvents::LeftButton.release()")
+        if (touches == 0)
+            player.setIsLeft( false )
         touches.forEach(( touch )=>{
-            if (( dist (this.x , this.y , touch.x, touch.y) < 50 ))
-                return;         
+            if ( dist (this.x , this.y , touch.x, touch.y) < 50)
+                player.setIsLeft( true )
         })
-
-        player.setIsLeft( false )
 
     }
 }
@@ -94,12 +89,12 @@ function RightButton( _x, _y ){
     this.release = function ()
     {
         console.log("GameEvents::RightButton.release()")
+        if (touches == 0)
+            player.setIsRight( false )
         touches.forEach(( touch )=>{
-            if (( dist (this.x , this.y , touch.x, touch.y) < 50 ))
-                return;         
-        })
-
-        player.setIsRight( false )
+            if ( dist (this.x , this.y , touch.x, touch.y) < 50)
+                player.setIsRight( true )
+        })       
 
     }
 }
