@@ -2,15 +2,20 @@ class PlayerController
 {
 
     limit;
-    constructor()
+    constructor(_x, _y)
     {
+        this.x = _x;
+        this.y = _y;
         this.gravity = 10;
     }
 
     update = function ()
     {
         this.checkIfPlayerIsOutOfLimit();
-        this.applyPlayerLimits();  
+        this.applyPlayerLimits();
+        
+        PLAYER.setX ( this.x )
+        PLAYER.setY ( this.y )
     }
 
     setLimit = function( _limit)
@@ -18,38 +23,48 @@ class PlayerController
         this.limit = _limit;
     }
 
+    getX = function ()
+    {
+        return this.x
+    }
+
+    getY = function ()
+    {
+        return this.y
+    }
+
     /** Applies constrain to player position with objects that set limits */
     applyPlayerLimits = function ()
     {
         if ( this.limit == undefined )
         {
-            PLAYER.setX(mouseX)
-            PLAYER.setY(mouseY)
+            this.x = mouseX
+            this.y = mouseY
         }
         else 
         {
             if ( this.limit.touchedSide == "up" )
             {
-                PLAYER.setX(mouseX)
-                PLAYER.setY( constrain (mouseY, 0, this.limit.coordenates.y ))
+                this.x = mouseX
+                this.y = constrain (mouseY, 0, this.limit.coordenates.y )
             }
 
             if ( this.limit.touchedSide == "down" )
             {
-                PLAYER.setX(mouseX)
-                PLAYER.setY( constrain (mouseY, (this.limit.coordenates.y + this.limit.coordenates.height), height ))
+                this.x = mouseX
+                this.y = constrain (mouseY, (this.limit.coordenates.y + this.limit.coordenates.height), height )
             }
 
             if ( this.limit.touchedSide == "left" )
             {
-                PLAYER.setX( constrain (mouseX, 0 , this.limit.coordenates.x ))
-                PLAYER.setY( mouseY )
+                this.x = constrain (mouseX, 0 , this.limit.coordenates.x )
+                this.y = mouseY 
             }
 
             if ( this.limit.touchedSide == "right" )
             {
-                PLAYER.setX( constrain (mouseX, (this.limit.coordenates.x + this.limit.coordenates.width) , width ))
-                PLAYER.setY( mouseY )
+                this.x = constrain (mouseX, (this.limit.coordenates.x + this.limit.coordenates.width) , width )
+                this.y = mouseY 
             }
         }
 
@@ -60,19 +75,13 @@ class PlayerController
     checkIfPlayerIsOutOfLimit = function()
     {
         if (this.limit == undefined) return;
-
-        const PLAYER_X = PLAYER.getX();
-        const PLAYER_Y = PLAYER.getY();
         
-        if ( PLAYER_X < this.limit.coordenates.x 
-            || PLAYER_X > ( this.limit.coordenates.x  +  this.limit.coordenates.width )
-            || PLAYER_Y < ( this.limit.coordenates.y  )
-            || PLAYER_Y > ( this.limit.coordenates.y + this.limit.coordenates.height ))
-        {
-            
-            this.limit = undefined
-        }
-        
+        if ( this.x < this.limit.coordenates.x 
+            || this.x > ( this.limit.coordenates.x  +  this.limit.coordenates.width )
+            || this.y < ( this.limit.coordenates.y  )
+            || this.y > ( this.limit.coordenates.y + this.limit.coordenates.height ))
+         
+            this.limit = undefined 
     }
 
     

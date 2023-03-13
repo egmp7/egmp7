@@ -1,11 +1,11 @@
 class PlayerDraw
 {
-    constructor(x , y)
+    constructor()
 
     {
-        this.x = x;
+        this.x;
         //this.worldX = x;
-        this.y = y;
+        this.y;
         this.isLeft = false;
         this.isRight = false;
         this.isFalling = false;
