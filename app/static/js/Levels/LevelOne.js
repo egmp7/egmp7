@@ -14,9 +14,10 @@ class LevelOne
         // this.grounds.push(new Ground(  GRID_X * 34 , GRID_Y * 20 ,   GRID_X * 20));
         // this.grounds.push(new Ground(  GRID_X * 54 , GRID_Y * 10 ,   GRID_X * 20));
 
-        this.grounds.push(new Ground(  GRID_X ,      GRID_Y * 10 ,   GRID_X * 6));
-        this.grounds.push(new Ground(  GRID_X * 7 , GRID_Y * 18 ,   GRID_X * 18));
-        this.grounds.push(new Ground(  GRID_X * 25 , GRID_Y * 17 ,   GRID_X * 20));
+        this.grounds.push(new Ground(  GRID_X * 4 ,      GRID_Y * 10 ,   GRID_X * 6, GRID_Y * 5));
+        this.grounds.push(new Ground(  GRID_X * 18 ,      GRID_Y * 10 ,   GRID_X * 6, GRID_Y * 5));
+        // this.grounds.push(new Ground(  GRID_X * 7 , GRID_Y * 18 ,   GRID_X * 18));
+        // this.grounds.push(new Ground(  GRID_X * 25 , GRID_Y * 17 ,   GRID_X * 20));
         //this.grounds.push(new Ground(  GRID_X * 54 , GRID_Y * 10 ,   GRID_X * 20));
 
         // this.assets.push(new Canyon(  GRID_X * 11 ,  GRID_X * 7, GRID_Y * 20, GRID_Y * 21 ));
