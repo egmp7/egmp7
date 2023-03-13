@@ -6,22 +6,22 @@ const ENTER_KEY = 13;
 function keyPressed(){
 
     if(keyCode == LEFT_KEY)
-        player.setIsLeft( true );
+        PLAYER_CONTROLLER.setMoveLeft( true );
     
     else if(keyCode == RIGHT_KEY)
-        player.setIsRight( true );
+        PLAYER_CONTROLLER.setMoveRight( true );
 
     else if(keyCode == SPACE_KEY)
-        player.jump();
+        PLAYER_CONTROLLER.jump();
                 
 }
 function keyReleased(){
 
     if(keyCode == LEFT_KEY)
-        player.setIsLeft( false );
+        PLAYER_CONTROLLER.setMoveLeft( false );
 
     if(keyCode == RIGHT_KEY)
-        player.setIsRight( false );   
+        PLAYER_CONTROLLER.setMoveRight( false );
 }
 
 function touchStarted ()
