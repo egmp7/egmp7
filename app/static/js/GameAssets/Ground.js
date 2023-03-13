@@ -14,7 +14,7 @@ class Ground
 
     draw = function()
     {
-        this.checkIfPlayerMakesContact()
+        //this.checkIfPlayerMakesContact()
         noStroke();
 	    fill( 0,155,0 ); // green
         rect( this.x, this.y, this.width, this.height );
@@ -38,17 +38,24 @@ class Ground
             this.side = "up"
 
         
-        norm()    
 
-        if ( this.side =="left" && PLAYER_X <= ( this.x + this.width ) && PLAYER_Y >= this.y)
-        {
-            player.setX( constrain (PLAYER_X , 0 , this.x) + scrollPos )
-        }
+          
 
-        if ( this.side == "up" && PLAYER_X >= this.x && PLAYER_X <= this.x + this.width)
-        {
-            player.setY( constrain(PLAYER_Y, 0, this.y))
-        }
+        // if ( this.side =="left" && PLAYER_X <= ( this.x + this.width ) && PLAYER_Y >= this.y)
+        // {
+            
+        //     player.setX( constrain (PLAYER_X , 0 , this.x) + scrollPos )
+        //     console.log(PLAYER_X , this.x , constrain (PLAYER_X , 0 , this.x) , scrollPos, player.getX())
+            
+
+        //     if (player.getX() == this.x - 30)
+        //         player.setIsRight( false )
+        // }
+
+        // if ( this.side == "up" && PLAYER_X >= this.x && PLAYER_X <= this.x + this.width)
+        // {
+        //     player.setY( constrain(PLAYER_Y, 0, this.y))
+        // }
             
 
 

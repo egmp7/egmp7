@@ -1,16 +1,16 @@
-class Player 
+class PlayerDraw
 {
     constructor(x , y)
 
     {
         this.x = x;
-        this.worldX = x;
+        //this.worldX = x;
         this.y = y;
         this.isLeft = false;
         this.isRight = false;
         this.isFalling = false;
         this.isPlummeting = false;   
-        this.lives = 3;
+        //this.lives = 3;
     }
 
     setX = function ( value )
@@ -60,8 +60,8 @@ class Player
 
     draw = function ()
     {
-        this.movePlayer()
-        this.updateWorldX()
+        // this.movePlayer()
+        // this.updateWorldX()
 
         fill( 255,0,0 )
         ellipse(this.x,this.y,3,3)

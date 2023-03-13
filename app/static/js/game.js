@@ -1,7 +1,8 @@
 let scrollPos;
 let floorPos_y;
-let player;
 let LEVEL_ONE;
+let PLAYER;
+let PLAYER_CONTROLLER;
 let BUTTONS = [];
 
 
@@ -11,8 +12,8 @@ function setup()
     createCanvas($( window ).width(), $( window ).height());
 	scrollPos = 0;
     floorPos_y = height * 3/4;;
-    player = new Player (width/2,height/2);
-    playerPhysics = new PlayerPhysics;
+    PLAYER = new PlayerDraw (width/2,height/2);
+    PLAYER_CONTROLLER = new PlayerController;
     LEVEL_ONE = new LevelOne;
     BUTTONS.push(new LeftButton     ( 60 , height - 60 ))
     BUTTONS.push(new RightButton    ( 170 , height - 60 ))
@@ -34,8 +35,10 @@ function draw()
         asset.draw();
     }) 
     pop();
-    player.draw()
-    playerPhysics.applyPlayerPhysics ()  
+    
+    PLAYER_CONTROLLER.update ()
+    
+    PLAYER.draw()
     
     BUTTONS.forEach(( button )=>{
         button.draw();
