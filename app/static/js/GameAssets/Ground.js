@@ -1,6 +1,7 @@
 class Ground 
 {
     limit = { touchedSide : "", coordenates: {}};
+    contact = false;
 
     constructor ( _x, _y, _width, _height )
     {
@@ -52,17 +53,28 @@ class Ground
     /** Checks if player makes contact with this object */
     checkIfPlayerMakesContact = function()
     {
-        
         const PLAYER_X = PLAYER_CONTROLLER.getX();
         const PLAYER_Y = PLAYER_CONTROLLER.getY();
 
-        if ( PLAYER_X >= this.x 
-            && PLAYER_X <= ( this.x +  this.width )
-            && PLAYER_Y >= ( this.y )
-            && PLAYER_Y <= ( this.y + this.height ))
-        {
-            this.limit.coordenates = { x:this.x, y:this.y, width:this.width, height:this.height }
-            PLAYER_CONTROLLER.setLimit( this.limit )
-        }            
+        // check outside
+        if ( this.contact )
+            if ( PLAYER_X < this.x 
+                || PLAYER_X > ( this.x +  this.width )
+                || PLAYER_Y < ( this.y )
+                || PLAYER_Y > ( this.y + this.height ))
+            
+                this.contact = false;
+
+        // check inside
+        if ( !this.contact )
+            if ( PLAYER_X >= this.x 
+                && PLAYER_X <= ( this.x +  this.width )
+                && PLAYER_Y >= ( this.y )
+                && PLAYER_Y <= ( this.y + this.height ))
+            {
+                this.limit.coordenates = { x:this.x, y:this.y, width:this.width, height:this.height }                
+                PLAYER_CONTROLLER.addLimit( this.limit )
+                this.contact = true;
+            }         
     }
 }

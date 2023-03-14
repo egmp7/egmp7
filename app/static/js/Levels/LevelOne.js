@@ -15,8 +15,8 @@ class LevelOne
         // this.grounds.push(new Ground(  GRID_X * 54 , GRID_Y * 10 ,   GRID_X * 20));
 
         this.grounds.push(new Ground( 0 ,      GRID_Y * 16 ,  width, GRID_Y * 5));
-        this.grounds.push(new Ground( 0 ,      GRID_Y * 10 ,  width, GRID_Y * 5));
-        this.grounds.push(new Ground( GRID_X * 4 ,      GRID_Y * 10 ,  GRID_X, GRID_Y * 10 ));
+        //this.grounds.push(new Ground( 0 ,      GRID_Y * 10 ,  width, GRID_Y * 5));
+        this.grounds.push(new Ground( GRID_X * 4 ,      GRID_Y * 15 ,  GRID_X, GRID_Y * 10 ));
 
 
         // this.grounds.push(new Ground(  GRID_X * 4 ,      GRID_Y * 10 ,   GRID_X * 6, GRID_Y * 5));

@@ -1,6 +1,6 @@
 class PlayerController
 {
-    limit;
+    limits =[];
     moveLeft;
     moveRight;
     
@@ -21,9 +21,9 @@ class PlayerController
         PLAYER.setY ( this.y )
     }
 
-    setLimit = function( _limit)
+    addLimit = function( limit)
     {
-        this.limit = _limit;
+        this.limits.push( limit ) 
     }
     
     setMoveLeft = function (bool)
@@ -48,44 +48,53 @@ class PlayerController
     /** Applies constrain to player position with objects that set limits */
     applyPlayerLimits = function ()
     {
-        if ( this.limit != undefined )
+        if ( this.limits != undefined )
         {
-            if ( this.limit.touchedSide == "up" )
-            {
-                this.y = constrain (this.y, 0, this.limit.coordenates.y )
-            }
+            this.limits.forEach( limit => {
+            
+                if ( limit.touchedSide == "up" )
+                {
+                    this.y = constrain (this.y, 0, limit.coordenates.y )
+                }
 
-            if ( this.limit.touchedSide == "down" )
-            {  
-                this.y = constrain (this.y, (this.limit.coordenates.y + this.limit.coordenates.height), height )
-            }
+                if ( limit.touchedSide == "down" )
+                {  
+                    this.y = constrain (this.y, ( limit.coordenates.y + limit.coordenates.height), height )
+                }
 
-            if ( this.limit.touchedSide == "left" )
-            {
-                this.x = constrain (this.x, 0 , this.limit.coordenates.x)
-                this.moveRight = false;
-            }
+                if ( limit.touchedSide == "left" )
+                {
+                    this.x = constrain (this.x, 0 , limit.coordenates.x)
+                    this.moveRight = false;
+                }
 
-            if ( this.limit.touchedSide == "right" )
-            {
-                this.x = constrain (this.x, (this.limit.coordenates.x + this.limit.coordenates.width), width )
-                this.moveLeft = false;
-            }
+                if ( limit.touchedSide == "right" )
+                {
+                    this.x = constrain (this.x, (limit.coordenates.x + limit.coordenates.width), width )
+                    this.moveLeft = false;
+                }
+            });
         }
     }
 
     /** Algorithm to check if player is outside of the limit bounds, 
-     * sets an undefined limit when out*/
+     * remove item from the array*/
     checkIfPlayerIsOutOfLimit = function()
     {
-        if (this.limit == undefined) return;
-        
-        if ( this.x < this.limit.coordenates.x 
-            || this.x > ( this.limit.coordenates.x  +  this.limit.coordenates.width )
-            || this.y < ( this.limit.coordenates.y  )
-            || this.y > ( this.limit.coordenates.y + this.limit.coordenates.height ))
-         
-            this.limit = undefined 
+        console.log(this.limits)
+        if (this.limits == undefined) return;
+
+        this.limits.forEach( limit => {
+
+            // outside
+            if ( this.x < limit.coordenates.x 
+                || this.x > ( limit.coordenates.x  +  limit.coordenates.width )
+                || this.y < ( limit.coordenates.y  )
+                || this.y > ( limit.coordenates.y + limit.coordenates.height ))
+                
+                    this.limits.splice(this.limits.indexOf(limit), 1)
+   
+        })
     }
 
     applyGravity = function()
