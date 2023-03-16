@@ -21,6 +21,7 @@ class LevelOne
         this.assets.push(new Ground( 0 ,      GRID_Y * 16 ,  width * 2, GRID_Y * 5));
         this.assets.push(new Mountain(  300 , GRID_Y * 16,  190));
         this.assets.push(new Tree ( 100,  GRID_Y * 16 ));
+        this.assets.push(new Collectable(  150   ,   GRID_Y * 16));
         
         this.assets.push(new Platform( 400 ,  GRID_Y * 14 , 100));
         this.assets.push(new Platform( 400 ,  GRID_Y * 12 , 100));

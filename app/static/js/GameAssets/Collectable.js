@@ -1,32 +1,34 @@
 class Collectable 
 {
-    constructor ( x , y )
+    isFound = false;
+    size = 50;
+
+    constructor ( _x, _y )
     {
-        this.x = x;
-        this.y = y;
-        this.isFound = false;
+        this.x = _x;
+        this.y = _y - this.size / 2 -5;
     }
     
     draw = function ()
     { 
-        const SIZE = 50;
-
-        this.check( player.getWorldX() , player.getY() )
-        
+        this.checkIfFound()
         if(!this.isFound){
             
             fill( 255, 230, 0 );
-            ellipse( this.x,this.y, SIZE / 2, SIZE );
+            ellipse( this.x, this.y, this.size / 2, this.size );
             fill( 255, 180, 0 );
-            ellipse( this.x, this.y, SIZE / 2.8, SIZE / 1.2 );
+            ellipse( this.x, this.y, this.size / 2.8, this.size / 1.2 );
             fill( 255, 100, 0 );
-            ellipse( this.x, this.y,SIZE / 5, SIZE / 5 );   
+            ellipse( this.x, this.y, this.size / 5, this.size / 5 );   
         }
     }
     
-    check = function(playerX,playerY){
+    checkIfFound = function()
+    {
+        const PLAYER_X = PLAYER_CONTROLLER.getWorldX();
+        const PLAYER_Y = PLAYER_CONTROLLER.getY();
         
-        if( dist( playerX, playerY, this.x, this.y ) < 45 ){
+        if( dist( PLAYER_X, PLAYER_Y, this.x, this.y ) < 40 ){
 
             if ( !this.isFound )
             {
