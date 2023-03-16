@@ -14,6 +14,7 @@ class Cloud
     draw = function ()
     {      
         this.update();
+        noStroke()
         
         fill(255,255,255);
         ellipse(

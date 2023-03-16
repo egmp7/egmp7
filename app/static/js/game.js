@@ -14,6 +14,8 @@ function setup()
     BUTTONS.push(new LeftButton     ( 60 , height - 60 ))
     BUTTONS.push(new RightButton    ( 170 , height - 60 ))
     BUTTONS.push(new JumpButton     ( width - 60 , height - 60 ))
+    BUTTONS.push(new startButton     ( width - 170 , height - 60 ))
+    
 }
 
 function draw()

@@ -123,11 +123,39 @@ function JumpButton( _x, _y ){
     }
 }
 
-function mouseClicked() {
-    var sound = new Howl({
-    
-        src: [ './static/GameAudios/canyonFall.wav']
-    
-    });
-    sound.play();
+function startButton( _x, _y ){
+    this.x = _x;
+    this.y = _y;
+
+    this.draw = function()
+    {
+        fill(0)
+        ellipse( this.x ,this.y ,100 ,100)
+    }
+
+    this.click = function ()
+    {
+
+        touches.forEach(( touch )=>{
+            if ( dist (this.x , this.y , touch.x, touch.y) < 50)
+            {
+                const canvas = document.getElementById("defaultCanvas0")
+                canvas.requestFullscreen()
+            }
+        })
+
+    }
+    this.release = function ()
+    {
+    }
 }
+
+
+// function mouseClicked() {
+//     var sound = new Howl({
+    
+//         src: [ './static/GameAudios/canyonFall.wav']
+    
+//     });
+//     sound.play();
+// }

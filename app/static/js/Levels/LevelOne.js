@@ -18,6 +18,11 @@ class LevelOne
         //this.grounds.push(new Ground( 0 ,      GRID_Y * 10 ,  width, GRID_Y * 5));
         //this.grounds.push(new Ground( GRID_X * 4 ,      GRID_Y * 15 ,  GRID_X, GRID_Y * 10 ));
 
+        for(var i = 0 ; i < 100 ; i++)
+        {
+            this.assets.push(new Cloud( 100 * i * random( 0.7, 1 ), 200 * random( 0.25, 1 ), 90  * random( 0.6, 1 )))
+        }
+
         this.assets.push(new Ground( 0 ,      GRID_Y * 16 ,  width * 2, GRID_Y * 5));
         this.assets.push(new Mountain(  300 , GRID_Y * 16,  190));
         this.assets.push(new Tree ( 100,  GRID_Y * 16 ));
@@ -29,10 +34,7 @@ class LevelOne
         this.assets.push(new Platform( 400 ,  GRID_Y * 12 , 100));
         this.assets.push(new Platform( 1000 ,  GRID_Y * 14 , 100));
 
-        for(var i = 0 ; i < 100 ; i++)
-        {
-            this.assets.push(new Cloud( 100 * i * random( 0.7, 1 ), 200 * random( 0.25, 1 ), 90  * random( 0.6, 1 )))
-        }
+        
         
         
         
