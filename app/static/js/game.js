@@ -1,4 +1,3 @@
-let floorPos_y;
 let LEVEL_ONE;
 let PLAYER;
 let PLAYER_CONTROLLER;
@@ -9,7 +8,6 @@ function setup()
 {
     //deviceOrientation = "landscape";
     createCanvas($( window ).width(), $( window ).height());
-    floorPos_y = height * 3/4;;
     PLAYER = new PlayerDraw;
     PLAYER_CONTROLLER = new PlayerController (width/2,height/2);
     LEVEL_ONE = new LevelOne;
@@ -20,28 +18,14 @@ function setup()
 
 function draw()
 {
-	drawBackground();
+	background(100, 155, 255); // fill the sky blue
     push();
     translate( PLAYER_CONTROLLER.getScrollPos(), 0 );
-
-    LEVEL_ONE.assets.forEach((asset)=>{
-        asset.draw();
-    }) 
+    LEVEL_ONE.assets.forEach(( asset )=>{ asset.draw() }) 
     pop();
-    
     PLAYER_CONTROLLER.update ()
-    
     PLAYER.draw()
-    
-    BUTTONS.forEach(( button )=>{
-        button.draw();
-    })
-}
-
-
-// Function to draw the Background
-function drawBackground (){
-    background(100, 155, 255); // fill the sky blue
+    BUTTONS.forEach(( button )=>{ button.draw() })
 }
 
 // Function to draw lives tokens and Score

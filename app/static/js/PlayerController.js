@@ -142,4 +142,13 @@ class PlayerController
     {
         this.worldX = this.x - this.scrollPos;
     }
+
+    deadByEnemy = function ()
+    {
+        console.log("Player::deadByEnemy")
+    }
+    deadByCanyon = function ()
+    {
+        console.log("Player::deadByCanyon")
+    }
 }

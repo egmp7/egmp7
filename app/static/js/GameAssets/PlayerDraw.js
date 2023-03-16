@@ -4,13 +4,11 @@ class PlayerDraw
 
     {
         this.x;
-        //this.worldX = x;
         this.y;
         this.isLeft = false;
         this.isRight = false;
         this.isFalling = false;
         this.isPlummeting = false;   
-        //this.lives = 3;
     }
 
     setX = function ( value )
@@ -36,26 +34,6 @@ class PlayerDraw
     setIsFalling =function(bool)
     {
         this.isFalling = bool;
-    }
-
-    getWorldX = function ()
-    {
-        return this.worldX;
-    }
-
-    getX = function ()
-    {
-        return this.x;
-    }
-
-    getY = function ()
-    {
-        return this.y;
-    }
-
-    getLives = function ()
-    {
-        return this.lives;
     }
 
     draw = function ()
@@ -168,37 +146,6 @@ class PlayerDraw
         //     ellipse(this.x-3,this.y-38,5,7)
         //     ellipse(this.x+3,this.y-38,5,7)
         // }
-    }
-
-
-    // Logic to make the game character move or the background scroll.
-    movePlayer = function()
-    {
-
-        if(this.isLeft)
-        {
-            if(this.x > width * 0.2)
-                this.x -= 10;
-            else
-                scrollPos += 10;
-        }
-
-        if(this.isRight)
-        {
-            if(this.x < width * 0.4)
-                this.x  += 10;
-            else
-                scrollPos -= 10; 
-        }
-    }
-
-    deadByEnemy = function ()
-    {
-        console.log("Player::deadByEnemy")
-    }
-    deadByCanyon = function ()
-    {
-        console.log("Player::deadByCanyon")
     }
 
 }
