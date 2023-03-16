@@ -52,7 +52,7 @@ function LeftButton( _x, _y ){
     {
         touches.forEach(( touch )=>{
             if ( dist (this.x , this.y , touch.x, touch.y) < 50)
-                player.setIsLeft( true )
+                PLAYER_CONTROLLER.setMoveLeft( true );
         })
 
     }
@@ -60,10 +60,10 @@ function LeftButton( _x, _y ){
     {
         console.log("GameEvents::LeftButton.release()")
         if (touches == 0)
-            player.setIsLeft( false )
+            PLAYER_CONTROLLER.setMoveLeft( false );
         touches.forEach(( touch )=>{
             if ( dist (this.x , this.y , touch.x, touch.y) < 50)
-                player.setIsLeft( true )
+                PLAYER_CONTROLLER.setMoveLeft( true );
         })
 
     }
@@ -83,17 +83,17 @@ function RightButton( _x, _y ){
     {
         touches.forEach(( touch )=>{
             if ( dist (this.x , this.y , touch.x, touch.y) < 50)
-                player.setIsRight( true )
+                PLAYER_CONTROLLER.setMoveRight( true );
         })
     }
     this.release = function ()
     {
         console.log("GameEvents::RightButton.release()")
         if (touches == 0)
-            player.setIsRight( false )
+            PLAYER_CONTROLLER.setMoveRight( false );
         touches.forEach(( touch )=>{
             if ( dist (this.x , this.y , touch.x, touch.y) < 50)
-                player.setIsRight( true )
+                PLAYER_CONTROLLER.setMoveRight( true );
         })       
 
     }
@@ -114,7 +114,7 @@ function JumpButton( _x, _y ){
 
         touches.forEach(( touch )=>{
             if ( dist (this.x , this.y , touch.x, touch.y) < 50)
-                player.jump()
+                PLAYER_CONTROLLER.jump();
         })
 
     }
