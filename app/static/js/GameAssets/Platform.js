@@ -1,7 +1,8 @@
 class Platform 
 {
 
-    contact;
+    limit = { touchedSide : "", coordenates: {}};
+    contact = false;
 
     constructor ( _x, _y, _width )
     {
@@ -13,7 +14,8 @@ class Platform
     }
               
     draw = function (){
-        this.checkPlayerOnTop()
+        this.checkPlayerPosition()
+        this.checkIfPlayerMakesContact()
 
         fill(255,155,0);
         rect(this.x,this.y,this.width,this.height);
@@ -25,20 +27,59 @@ class Platform
             this.height * 8/10)
     };
 
-    checkPlayerOnTop = function (){
-        const PLAYER_X = player.getWorldX();
-        const PLAYER_Y = player.getY()
-        if( PLAYER_X > this.x 
-        && PLAYER_X < ( this.x + this.width )
-        && PLAYER_Y < ( this.y + 2 )
-        && PLAYER_Y > ( this.y - 2 ))
-            this.contact = true;
-        else 
-            this.contact = false;
-    }    
-    
-    isInContact = function ()
+    /** Algorithm to check which side the player is coming from
+     * Eg: left,top,right
+     */
+    checkPlayerPosition = function ()
     {
-        return this.contact;
+        const PLAYER_X = PLAYER_CONTROLLER.getX();
+        const PLAYER_Y = PLAYER_CONTROLLER.getY();
+
+        if ( PLAYER_X < this.x 
+            && PLAYER_Y >= this.y 
+            && PLAYER_Y <= ( this.y + this.height ) )
+                this.limit = { touchedSide: "left" }
+        
+        if  ( PLAYER_X > ( this.x + this.width ) 
+            && PLAYER_Y >= this.y 
+            && PLAYER_Y <= ( this.y + this.height ))
+                this.limit = { touchedSide: "right" }
+
+        if ( PLAYER_Y < this.y 
+            && PLAYER_X >= this.x 
+            && PLAYER_X <= ( this.x + this.width ))
+                this.limit = { touchedSide: "up" }
+
+        if ( PLAYER_Y > ( this.y + this.height )
+            && PLAYER_X >= this.x 
+            && PLAYER_X <= ( this.x + this.width ))
+                this.limit = { touchedSide: "down" }
+    }
+    
+    checkIfPlayerMakesContact = function()
+    {
+        const PLAYER_X = PLAYER_CONTROLLER.getX();
+        const PLAYER_Y = PLAYER_CONTROLLER.getY();
+
+        // check outside
+        if ( this.contact )
+            if ( PLAYER_X < this.x 
+                || PLAYER_X > ( this.x +  this.width )
+                || PLAYER_Y < ( this.y )
+                || PLAYER_Y > ( this.y + this.height ))
+            
+                this.contact = false;
+
+        // check inside
+        if ( !this.contact )
+            if ( PLAYER_X >= this.x 
+                && PLAYER_X <= ( this.x +  this.width )
+                && PLAYER_Y >= ( this.y )
+                && PLAYER_Y <= ( this.y + this.height ))
+            {
+                this.limit.coordenates = { x:this.x, y:this.y, width:this.width, height:this.height }                
+                PLAYER_CONTROLLER.addLimit( this.limit )
+                this.contact = true;
+            }         
     }
 }

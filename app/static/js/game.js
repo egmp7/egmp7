@@ -8,7 +8,7 @@ let BUTTONS = [];
 
 function setup()
 {
-    deviceOrientation = "landscape";
+    //deviceOrientation = "landscape";
     createCanvas($( window ).width(), $( window ).height());
 	scrollPos = 0;
     floorPos_y = height * 3/4;;
@@ -25,12 +25,7 @@ function draw()
 	drawBackground();
     push();
     translate(scrollPos,0);
-    LEVEL_ONE.grounds.forEach((asset)=>{
-        asset.draw();
-    })
-    LEVEL_ONE.platforms.forEach((asset)=>{
-        asset.draw();
-    })
+    
     LEVEL_ONE.assets.forEach((asset)=>{
         asset.draw();
     }) 
