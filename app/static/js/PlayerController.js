@@ -3,11 +3,13 @@ class PlayerController
     limits =[];
     moveLeft;
     moveRight;
+    scrollPos = 0;
     
     constructor(_x, _y)
     {
         this.x = _x;
         this.y = _y;
+        this.worldX = _x;
     }
 
     update = function ()
@@ -40,9 +42,19 @@ class PlayerController
         return this.x
     }
 
+    getWorldX = function()
+    {
+        return this.worldX;
+    }
+
     getY = function ()
     {
         return this.y
+    }
+
+    getScrollPos = function ()
+    {
+        return this.scrollPos;
     }
 
     /** Applies constrain to player position with objects that set limits */
@@ -110,8 +122,24 @@ class PlayerController
     walk = function(  )
     {
         if (this.moveRight)
-            this.x += 10
+        {
+            if(this.x < width * 0.4)
+                this.x  += 10;
+            else
+                this.scrollPos -= 10; 
+        }
+
         if (this.moveLeft)
-            this.x -= 10
+        {
+            if(this.x > width * 0.2)
+                this.x -= 10;
+            else
+                this.scrollPos += 10;
+        }
+    }
+
+    updateWorldX = function ()
+    {
+        this.worldX = this.x - this.scrollPos;
     }
 }

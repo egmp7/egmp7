@@ -170,17 +170,6 @@ class PlayerDraw
         // }
     }
 
-    jump = function()
-    {
-        this.y -= 130;
-       // if ( !this.isFalling )
-            
-    }
-
-    updateWorldX = function ()
-    {
-        this.worldX = this.x - scrollPos;
-    }
 
     // Logic to make the game character move or the background scroll.
     movePlayer = function()

@@ -1,4 +1,3 @@
-let scrollPos;
 let floorPos_y;
 let LEVEL_ONE;
 let PLAYER;
@@ -10,7 +9,6 @@ function setup()
 {
     //deviceOrientation = "landscape";
     createCanvas($( window ).width(), $( window ).height());
-	scrollPos = 0;
     floorPos_y = height * 3/4;;
     PLAYER = new PlayerDraw;
     PLAYER_CONTROLLER = new PlayerController (width/2,height/2);
@@ -24,8 +22,8 @@ function draw()
 {
 	drawBackground();
     push();
-    translate(scrollPos,0);
-    
+    translate( PLAYER_CONTROLLER.getScrollPos(), 0 );
+
     LEVEL_ONE.assets.forEach((asset)=>{
         asset.draw();
     }) 
