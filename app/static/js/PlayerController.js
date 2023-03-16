@@ -18,6 +18,7 @@ class PlayerController
         this.applyPlayerLimits();
         this.checkIfPlayerIsOutOfLimit();
         this.walk();
+        this.updateWorldX();
         
         PLAYER.setX ( this.x )
         PLAYER.setY ( this.y )
@@ -76,13 +77,13 @@ class PlayerController
 
                 if ( limit.touchedSide == "left" )
                 {
-                    this.x = constrain (this.x, 0 , limit.coordenates.x)
+                    this.worldX = constrain (this.worldX, 0 , limit.coordenates.x)
                     this.moveRight = false;
                 }
 
                 if ( limit.touchedSide == "right" )
                 {
-                    this.x = constrain (this.x, (limit.coordenates.x + limit.coordenates.width), width )
+                    this.worldX = constrain (this.worldX, (limit.coordenates.x + limit.coordenates.width), width )
                     this.moveLeft = false;
                 }
             });
@@ -93,14 +94,13 @@ class PlayerController
      * remove item from the array*/
     checkIfPlayerIsOutOfLimit = function()
     {
-        console.log(this.limits)
         if (this.limits == undefined) return;
 
         this.limits.forEach( limit => {
 
             // outside
-            if ( this.x < limit.coordenates.x 
-                || this.x > ( limit.coordenates.x  +  limit.coordenates.width )
+            if ( this.worldX < limit.coordenates.x 
+                || this.worldX > ( limit.coordenates.x  +  limit.coordenates.width )
                 || this.y < ( limit.coordenates.y  )
                 || this.y > ( limit.coordenates.y + limit.coordenates.height ))
                 

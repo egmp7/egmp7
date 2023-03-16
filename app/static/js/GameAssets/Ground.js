@@ -26,7 +26,7 @@ class Ground
      */
     checkPlayerPosition = function ()
     {
-        const PLAYER_X = PLAYER_CONTROLLER.getX();
+        const PLAYER_X = PLAYER_CONTROLLER.getWorldX();
         const PLAYER_Y = PLAYER_CONTROLLER.getY();
 
         if ( PLAYER_X < this.x 
@@ -53,7 +53,7 @@ class Ground
     /** Checks if player makes contact with this object */
     checkIfPlayerMakesContact = function()
     {
-        const PLAYER_X = PLAYER_CONTROLLER.getX();
+        const PLAYER_X = PLAYER_CONTROLLER.getWorldX();
         const PLAYER_Y = PLAYER_CONTROLLER.getY();
 
         // check outside
