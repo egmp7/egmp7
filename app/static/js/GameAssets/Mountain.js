@@ -1,9 +1,10 @@
 class Mountain 
 {
-    constructor (x , size)
+    constructor ( _x, _y,_size )
     {
-        this.x = x;
-        this.size = size;
+        this.x = _x;
+        this.y = _y;
+        this.size = _size;
     }
 
     draw = function (){
@@ -11,17 +12,17 @@ class Mountain
         fill(153,76,0);
         triangle(
             this.x,
-            floorPos_y,
+            this.y,
             this.x + this.size,
-            floorPos_y,
+            this.y,
             this.x + this.size /2,
-            floorPos_y - this.size /3*2);
+            this.y - this.size /3*2);
         triangle(
             this.x + this.size /4,
-            floorPos_y,
+            this.y,
             this.x + this.size + this.size/4,
-            floorPos_y,
+            this.y,
             this.x + this.size/2 + this.size/4,
-            floorPos_y - this.size/3*1.8);
+            this.y - this.size/3*1.8);
     }
 }

@@ -18,10 +18,13 @@ class LevelOne
         //this.grounds.push(new Ground( 0 ,      GRID_Y * 10 ,  width, GRID_Y * 5));
         //this.grounds.push(new Ground( GRID_X * 4 ,      GRID_Y * 15 ,  GRID_X, GRID_Y * 10 ));
 
+        this.assets.push(new Mountain(  300 , GRID_Y * 16,  190));
+        this.assets.push(new Tree (100));
         this.assets.push(new Ground( 0 ,      GRID_Y * 16 ,  width * 2, GRID_Y * 5));
         this.assets.push(new Platform( 400 ,  GRID_Y * 14 , 100));
         this.assets.push(new Platform( 400 ,  GRID_Y * 12 , 100));
         this.assets.push(new Platform( 1000 ,  GRID_Y * 14 , 100));
+        
 
 
 
