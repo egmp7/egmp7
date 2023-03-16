@@ -43,8 +43,8 @@ class Enemy
     checkCloseToEnemy = function ()
     {
         
-        if( dist( player.getWorldX(), player.getY(), this.currentX, this.y ) < 20 )
-            player.deadByEnemy();   
+        if( dist( PLAYER_CONTROLLER.getWorldX(), PLAYER_CONTROLLER.getY(), this.currentX, this.y ) < 20 )
+            PLAYER_CONTROLLER.deadByEnemy();   
     }
 
     updateEnemyPosition = function() {
