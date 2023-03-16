@@ -23,10 +23,16 @@ class LevelOne
         this.assets.push(new Tree ( 100,  GRID_Y * 16 ));
         this.assets.push(new Collectable(  150   ,   GRID_Y * 16));
         this.assets.push(new Enemy( 300, GRID_Y * 16, 60 ));
+        this.assets.push(new FlagPole ( 100, GRID_Y * 16 ))
         
         this.assets.push(new Platform( 400 ,  GRID_Y * 14 , 100));
         this.assets.push(new Platform( 400 ,  GRID_Y * 12 , 100));
         this.assets.push(new Platform( 1000 ,  GRID_Y * 14 , 100));
+
+        for(var i = 0 ; i < 100 ; i++)
+        {
+            this.assets.push(new Cloud( 100 * i * random( 0.7, 1 ), 200 * random( 0.25, 1 ), 90  * random( 0.6, 1 )))
+        }
         
         
         
