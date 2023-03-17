@@ -23,10 +23,8 @@ addEventListener("fullscreenchange", (event) => {
 
 function setup()
 {
-    if( screen.width > screen.height )
-        createCanvas( screen.width, screen.height );
-    else
-        createCanvas( screen.height, screen.width );
+    const SCALE = 0.6
+    createCanvas( 1600 * SCALE, 900 * SCALE);
     
     PLAYER = new PlayerDraw;
     PLAYER_CONTROLLER = new PlayerController (width/2,height/2);
