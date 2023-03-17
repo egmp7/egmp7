@@ -88,7 +88,6 @@ class LeftButton extends Buttons
 
     checkIfPressed = function ()
     {
-        console.log("left: ", this.isPressed())
         if (this.isPressed())
             PLAYER_CONTROLLER.setMoveLeft( true )
         else
@@ -104,7 +103,6 @@ class RightButton extends Buttons
     }
     checkIfPressed = function ()
     {
-        console.log("right: ", this.isPressed())
         if (this.isPressed())
             PLAYER_CONTROLLER.setMoveRight( true );
         else
@@ -119,11 +117,20 @@ class JumpButton extends Buttons
     {
         super ( _x, _y, "jump" )
     }
-    checkIfPressed = function ()
+    
+    click = function ()
     {
-        console.log("jump: ", this.isPressed())
-        if (this.isPressed())
-            PLAYER_CONTROLLER.jump()
+        touches.forEach(( touch )=>{
+            if ( dist (this.x , this.y , touch.x, touch.y) < 50)
+                PLAYER_CONTROLLER.jump()
+        })
+       
+    }
+    release = function()
+    {
+    }
+    checkIfPressed = function ()
+    {   
     }
 }
 
