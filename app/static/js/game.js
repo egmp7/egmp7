@@ -6,7 +6,7 @@ let BUTTONS = [];
 /**Init click focuses on setting correct display mode*/
 $(document).ready(function() {
     $( "#initGame" ).click( () =>{
-        const canvas = document.getElementById("defaultCanvas0")
+        const canvas = document.getElementById("canvasDiv")
         canvas.requestFullscreen()
         screen.orientation.lock("landscape");
         $( "#defaultCanvas0" ).show()
@@ -24,8 +24,10 @@ addEventListener("fullscreenchange", (event) => {
 
 function setup()
 {
+    
     const CANVAS_SCALE = 0.6
-    createCanvas( 1600 * CANVAS_SCALE, 900 * CANVAS_SCALE)
+    const myCanvas = createCanvas( 1600 * CANVAS_SCALE, 900 * CANVAS_SCALE)
+    myCanvas.parent('canvasDiv');
     PLAYER = new PlayerDraw;
     PLAYER_CONTROLLER = new PlayerController (width/2,height/2);
     LEVEL_ONE = new LevelOne;

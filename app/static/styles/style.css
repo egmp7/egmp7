@@ -16,3 +16,10 @@ body {
     left:50%;
     transform:translate(-50%,-50%);
 }
+
+#canvasDiv { display: flex; justify-content: center;
+    
+    /* align-items: center;  */
+}
+
+#defaultCanvas0 { width: unset !important; height: unset !important;}
