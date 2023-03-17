@@ -3,13 +3,22 @@ let PLAYER;
 let PLAYER_CONTROLLER;
 let BUTTONS = [];
 
+/**Init click focuses on setting correct display mode*/
 $(document).ready(function() {
     $( "#initGame" ).click( () =>{
         const canvas = document.getElementById("defaultCanvas0")
         canvas.requestFullscreen()
         screen.orientation.lock("landscape");
-        $( "#defaultCanvas0" ).show()
+        
     })
+});
+
+/** Listens for fullscreen changes*/
+addEventListener("fullscreenchange", (event) => {
+    if (document.fullscreenElement)
+        $( "#defaultCanvas0" ).show()
+    else
+        $( "#defaultCanvas0" ).hide()
 });
 
 function setup()
@@ -25,7 +34,6 @@ function setup()
     BUTTONS.push(new LeftButton     ( 60 , height - 60 ))
     BUTTONS.push(new RightButton    ( 170 , height - 60 ))
     BUTTONS.push(new JumpButton     ( width - 60 , height - 60 ))
-    BUTTONS.push(new startButton     ( width - 170 , height - 60 ))
     $( "#defaultCanvas0" ).hide()
     
 }
