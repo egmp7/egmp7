@@ -40,88 +40,90 @@ function touchEnded ()
     })
 }
 
-function LeftButton( _x, _y ){
-    this.x = _x;
-    this.y = _y;
+class Buttons 
+{
+    pressed = false;
+    radius = 50;
+    constructor ( _x, _y, _name )
+    {
+        this.x = _x;
+        this.y = _y;
+        this.name = _name;
+    }
 
-    this.draw = function()
+    draw = function()
     {
         fill(0)
-        ellipse( this.x ,this.y ,100 ,100)
+        ellipse( this.x ,this.y , this. radius * 2 ,this. radius * 2)
     }
-
-    this.click = function ()
+    click = function ()
     {
         touches.forEach(( touch )=>{
             if ( dist (this.x , this.y , touch.x, touch.y) < 50)
-                PLAYER_CONTROLLER.setMoveLeft( true );
+                this.pressed = true;
         })
-
+       
     }
-    this.release = function ()
+    release = function()
     {
-        console.log("GameEvents::LeftButton.release()")
-        if (touches == 0)
-            PLAYER_CONTROLLER.setMoveLeft( false );
+        this.pressed =  false;
         touches.forEach(( touch )=>{
             if ( dist (this.x , this.y , touch.x, touch.y) < 50)
-                PLAYER_CONTROLLER.setMoveLeft( true );
+                this.pressed = true;  
         })
+    }
+
+    isPressed = function()
+    {
+        return this.pressed;
+    }
+}
+
+class LeftButton extends Buttons
+{
+    constructor ( _x, _y)
+    {
+        super ( _x, _y, "left" )
+    }
+
+    checkIfPressed = function ()
+    {
+        console.log("left: ", this.isPressed())
+        if (this.isPressed())
+            PLAYER_CONTROLLER.setMoveLeft( true )
+        else
+            PLAYER_CONTROLLER.setMoveLeft( false )
+    }
+}
+
+class RightButton extends Buttons
+{
+    constructor ( _x, _y)
+    {
+        super ( _x, _y , "right" )
+    }
+    checkIfPressed = function ()
+    {
+        console.log("right: ", this.isPressed())
+        if (this.isPressed())
+            PLAYER_CONTROLLER.setMoveRight( true );
+        else
+            PLAYER_CONTROLLER.setMoveRight( false )
 
     }
 }
 
-function RightButton( _x, _y ){
-    this.x = _x;
-    this.y = _y;
-
-    this.draw = function()
+class JumpButton extends Buttons
+{
+    constructor ( _x, _y)
     {
-        fill(0)
-        ellipse( this.x ,this.y ,100 ,100)
+        super ( _x, _y, "jump" )
     }
-
-    this.click = function ()
+    checkIfPressed = function ()
     {
-        touches.forEach(( touch )=>{
-            if ( dist (this.x , this.y , touch.x, touch.y) < 50)
-                PLAYER_CONTROLLER.setMoveRight( true );
-        })
-    }
-    this.release = function ()
-    {
-        console.log("GameEvents::RightButton.release()")
-        if (touches == 0)
-            PLAYER_CONTROLLER.setMoveRight( false );
-        touches.forEach(( touch )=>{
-            if ( dist (this.x , this.y , touch.x, touch.y) < 50)
-                PLAYER_CONTROLLER.setMoveRight( true );
-        })       
-
-    }
-}
-
-function JumpButton( _x, _y ){
-    this.x = _x;
-    this.y = _y;
-
-    this.draw = function()
-    {
-        fill(0)
-        ellipse( this.x ,this.y ,100 ,100)
-    }
-
-    this.click = function ()
-    {
-
-        touches.forEach(( touch )=>{
-            if ( dist (this.x , this.y , touch.x, touch.y) < 50)
-                PLAYER_CONTROLLER.jump();
-        })
-
-    }
-    this.release = function ()
-    {
+        console.log("jump: ", this.isPressed())
+        if (this.isPressed())
+            PLAYER_CONTROLLER.jump()
     }
 }
 

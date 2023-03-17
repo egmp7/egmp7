@@ -6,10 +6,11 @@ let BUTTONS = [];
 /**Init click focuses on setting correct display mode*/
 $(document).ready(function() {
     $( "#initGame" ).click( () =>{
-        const canvas = document.getElementById("defaultCanvas0")
-        canvas.requestFullscreen()
+
+        const fs = fullscreen();
+        fullscreen(!fs); 
         screen.orientation.lock("landscape");
-        
+        $( "#game" ).hide()
     })
 });
 
@@ -23,8 +24,13 @@ addEventListener("fullscreenchange", (event) => {
 
 function setup()
 {
-    const SCALE = 0.6
-    createCanvas( 1600 * SCALE, 900 * SCALE);
+    const CANVAS_RATIO = 16/9
+    const CANVAS_WIDTH = screen.height * CANVAS_RATIO
+    const CANVAS_HEIGHT = screen.width / CANVAS_RATIO
+    if (CANVAS_WIDTH < screen.width)
+        createCanvas( CANVAS_WIDTH, screen.height );
+    else
+        createCanvas( screen.width, CANVAS_HEIGHT );
     
     PLAYER = new PlayerDraw;
     PLAYER_CONTROLLER = new PlayerController (width/2,height/2);
@@ -45,7 +51,7 @@ function draw()
     pop();
     PLAYER_CONTROLLER.update ()
     PLAYER.draw()
-    BUTTONS.forEach(( button )=>{ button.draw() })
+    BUTTONS.forEach(( button )=>{ button.draw(); button.checkIfPressed(); })
 }
 
 // Function to draw lives tokens and Score
