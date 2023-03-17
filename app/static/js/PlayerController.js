@@ -116,7 +116,7 @@ class PlayerController
 
     jump = function()
     {
-        this.y -= 110
+        this.y -= height * 0.15;
     }
 
     walk = function(  )
