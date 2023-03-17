@@ -1,3 +1,15 @@
+
+
+$(document).ready(function() {
+    $( "#initGame" ).click( () =>{
+        const canvas = document.getElementById("defaultCanvas0")
+        canvas.requestFullscreen()
+        screen.orientation.lock("landscape");
+        loop()
+    })
+});
+
+
 const LEFT_KEY = 37;
 const RIGHT_KEY = 39;
 const SPACE_KEY = 32;
@@ -139,9 +151,7 @@ function startButton( _x, _y ){
         touches.forEach(( touch )=>{
             if ( dist (this.x , this.y , touch.x, touch.y) < 50)
             {
-                const canvas = document.getElementById("defaultCanvas0")
-                canvas.requestFullscreen()
-                screen.orientation.lock( "landscape" )
+                
             }
         })
 
