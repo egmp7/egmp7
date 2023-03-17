@@ -1,15 +1,5 @@
 
 
-$(document).ready(function() {
-    $( "#initGame" ).click( () =>{
-        const canvas = document.getElementById("defaultCanvas0")
-        canvas.requestFullscreen()
-        screen.orientation.lock("landscape");
-        loop()
-    })
-});
-
-
 const LEFT_KEY = 37;
 const RIGHT_KEY = 39;
 const SPACE_KEY = 32;
@@ -135,31 +125,6 @@ function JumpButton( _x, _y ){
     }
 }
 
-function startButton( _x, _y ){
-    this.x = _x;
-    this.y = _y;
-
-    this.draw = function()
-    {
-        fill(0)
-        ellipse( this.x ,this.y ,100 ,100)
-    }
-
-    this.click = function ()
-    {
-
-        touches.forEach(( touch )=>{
-            if ( dist (this.x , this.y , touch.x, touch.y) < 50)
-            {
-                
-            }
-        })
-
-    }
-    this.release = function ()
-    {
-    }
-}
 
 
 // function mouseClicked() {

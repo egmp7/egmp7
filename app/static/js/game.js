@@ -3,10 +3,22 @@ let PLAYER;
 let PLAYER_CONTROLLER;
 let BUTTONS = [];
 
+$(document).ready(function() {
+    $( "#initGame" ).click( () =>{
+        const canvas = document.getElementById("defaultCanvas0")
+        canvas.requestFullscreen()
+        screen.orientation.lock("landscape");
+        $( "#defaultCanvas0" ).show()
+    })
+});
 
 function setup()
 {
-    createCanvas($( window ).width(), $( window ).height());
+    if( screen.width > screen.height )
+        createCanvas( screen.width, screen.height );
+    else
+        createCanvas( screen.height, screen.width );
+    
     PLAYER = new PlayerDraw;
     PLAYER_CONTROLLER = new PlayerController (width/2,height/2);
     LEVEL_ONE = new LevelOne;
@@ -14,6 +26,7 @@ function setup()
     BUTTONS.push(new RightButton    ( 170 , height - 60 ))
     BUTTONS.push(new JumpButton     ( width - 60 , height - 60 ))
     BUTTONS.push(new startButton     ( width - 170 , height - 60 ))
+    $( "#defaultCanvas0" ).hide()
     
 }
 
