@@ -141,6 +141,7 @@ function startButton( _x, _y ){
             {
                 const canvas = document.getElementById("defaultCanvas0")
                 canvas.requestFullscreen()
+                screen.orientation.lock( "landscape" )
             }
         })
 

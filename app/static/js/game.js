@@ -6,7 +6,6 @@ let BUTTONS = [];
 
 function setup()
 {
-    //deviceOrientation = "landscape";
     createCanvas($( window ).width(), $( window ).height());
     PLAYER = new PlayerDraw;
     PLAYER_CONTROLLER = new PlayerController (width/2,height/2);
