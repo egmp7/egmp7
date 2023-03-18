@@ -1,7 +1,7 @@
 class Collectable 
 {
     isFound = false;
-    size = 50;
+    size = 32;
 
     constructor ( _x, _y )
     {
