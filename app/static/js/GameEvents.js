@@ -120,11 +120,8 @@ class JumpButton extends Buttons
     
     click = function ()
     {
-        touches.forEach(( touch )=>{
-            if ( dist (this.x , this.y , touch.x, touch.y) < 50)
+        if ( dist (this.x , this.y , touches[touches.length -1].x, touches[touches.length -1].y) < 50)
                 PLAYER_CONTROLLER.jump()
-        })
-       
     }
     release = function()
     {

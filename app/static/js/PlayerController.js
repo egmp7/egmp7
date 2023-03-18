@@ -124,9 +124,8 @@ class PlayerController
         if (this.limits.length == 0) return true
         
         this.limits.forEach( limit => {
-
-            // on top of limit
-            if (limit.touchedSide == "up")
+            
+            if (limit.touchedSide == "up")   // on top of limit
                 return false
             else
                 return true
