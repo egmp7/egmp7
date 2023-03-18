@@ -58,6 +58,16 @@ class PlayerController
         return this.scrollPos;
     }
 
+    getMoveLeft = function ()
+    {
+        return this.moveLeft;
+    }
+
+    getMoveRight = function ()
+    {
+        return this.moveRight;
+    }    
+
     /** Applies constrain to player position with objects that set limits */
     applyPlayerLimits = function ()
     {
@@ -106,6 +116,20 @@ class PlayerController
                 
                     this.limits.splice(this.limits.indexOf(limit), 1)
    
+        })
+    }
+
+    checkIfJumping = function ()
+    {
+        if (this.limits.length == 0) return true
+        
+        this.limits.forEach( limit => {
+
+            // on top of limit
+            if (limit.touchedSide == "up")
+                return false
+            else
+                return true
         })
     }
 
