@@ -26,13 +26,14 @@ class PlayerController
 
     addLimit = function( limit)
     {
-        this.limits.push( limit ) 
+        this.limits.push( limit ); 
     }
     
     setMoveLeft = function (bool)
     {
         this.moveLeft = bool;
     }
+
     setMoveRight = function (bool)
     {
         this.moveRight = bool;
@@ -40,7 +41,17 @@ class PlayerController
     
     setWorldX = function (value)
     {
-        this.worldX = value
+        this.worldX = value;
+    }
+
+    setY = function (value)
+    {
+        this.y = value;
+    }
+
+    setScrollPos = function (value)
+    {
+        this.scrollPos = value;
     }
 
     getX = function ()
