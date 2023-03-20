@@ -29,7 +29,7 @@ class Status
         }
     }
 
-    setScore = function (score)
+    setScore = function ( score )
     {
         this.score = score;
     }
@@ -37,5 +37,15 @@ class Status
     getScore = function ()
     {
         return this.score;
+    }
+
+    setLives = function ( lives )
+    {
+        this.lives = lives;
+    }
+
+    getLives = function ()
+    {
+        return this.lives;
     }
 }
