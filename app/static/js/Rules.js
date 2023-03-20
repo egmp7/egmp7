@@ -1,5 +1,6 @@
 class Rules
 {
+    /** Checks how many lives are left and sets game over if there are no more lives */
     static playerDead = function ()
     {
         STATUS.setLives( STATUS.getLives() - 1 )
@@ -15,6 +16,7 @@ class Rules
         this.resetPlayerPosition()
     }
 
+    /** Activates win menu when player reaches flag pole */
     static playerWins = function ()
     {
         MENU.setActive ( true )
@@ -24,6 +26,7 @@ class Rules
         
     }
 
+    /** Resets player initial position */
     static resetPlayerPosition = function ()
     {
         PLAYER_CONTROLLER.setScrollPos ( 0 )
