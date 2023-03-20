@@ -2,6 +2,7 @@ let LEVEL_ONE;
 let PLAYER;
 let PLAYER_CONTROLLER;
 let BUTTONS = [];
+let STATUS;
 let MENU
 
 function setup()
@@ -19,6 +20,7 @@ function setup()
     BUTTONS.push(new RightButton    ( 170 , height - 60 ));
     BUTTONS.push(new JumpButton     ( width - 60 , height - 60 ));
     MENU = new Menu();
+    STATUS = new Status();
     noLoop();
     
 }
@@ -52,6 +54,7 @@ function draw()
         pop();
         PLAYER.draw();
         BUTTONS.forEach(( button )=>{ button.draw() });
+        STATUS.draw()
     } 
 }
 
