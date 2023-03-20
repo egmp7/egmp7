@@ -44,7 +44,7 @@ class Enemy
     {
         
         if( dist( PLAYER_CONTROLLER.getWorldX(), PLAYER_CONTROLLER.getY(), this.currentX, this.y ) < 20 )
-            PLAYER_CONTROLLER.deadByEnemy();   
+            Rules.playerDead()   
     }
 
     updateEnemyPosition = function() {

@@ -37,6 +37,11 @@ class PlayerController
     {
         this.moveRight = bool;
     }
+    
+    setWorldX = function (value)
+    {
+        this.worldX = value
+    }
 
     getX = function ()
     {
@@ -164,14 +169,5 @@ class PlayerController
     updateWorldX = function ()
     {
         this.worldX = this.x - this.scrollPos;
-    }
-
-    deadByEnemy = function ()
-    {
-        console.log("Player::deadByEnemy")
-    }
-    deadByCanyon = function ()
-    {
-        console.log("Player::deadByCanyon")
     }
 }
