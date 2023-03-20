@@ -17,6 +17,11 @@ class Menu
 
     setShow = function ( bool )
     {
-        this.show = bool
+        this.show = bool;
+    }
+
+    getShow = function () 
+    {
+        return this.show;
     }
 }

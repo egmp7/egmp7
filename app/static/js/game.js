@@ -33,23 +33,26 @@ $(document).ready(function() {
         canvas.requestFullscreen()
         screen.orientation.lock("landscape");
         $( "#defaultCanvas0" ).show()
+        MENU.setShow( true )
         loop();
     })
 });
 
 function draw()
 {
+    if (MENU.getShow())
+        MENU.draw();
+    else{
+        PLAYER_CONTROLLER.update ();
 
-    PLAYER_CONTROLLER.update ();
-
-	background(100, 155, 255); // fill the sky blue
-    push();
-    translate( PLAYER_CONTROLLER.getScrollPos(), 0 );
-    LEVEL_ONE.assets.forEach(( asset )=>{ asset.draw() }) 
-    pop();
-    PLAYER.draw();
-    BUTTONS.forEach(( button )=>{ button.draw() });
-    MENU.draw();
+        background(100, 155, 255); // fill the sky blue
+        push();
+        translate( PLAYER_CONTROLLER.getScrollPos(), 0 );
+        LEVEL_ONE.assets.forEach(( asset )=>{ asset.draw() }) 
+        pop();
+        PLAYER.draw();
+        BUTTONS.forEach(( button )=>{ button.draw() });
+    } 
 }
 
 // Function to draw lives tokens and Score
