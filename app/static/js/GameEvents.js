@@ -31,6 +31,7 @@ function keyReleased(){
 
 function touchStarted ()
 {
+    MENU.setShow( false )
     BUTTONS.forEach(( button )=>{
         button.click();
     })
