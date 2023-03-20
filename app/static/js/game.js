@@ -3,7 +3,8 @@ let PLAYER;
 let PLAYER_CONTROLLER;
 let BUTTONS = [];
 let STATUS;
-let MENU
+let MENU;
+let SOUNDS;
 
 function setup()
 {
@@ -21,6 +22,7 @@ function setup()
     BUTTONS.push(new JumpButton     ( width - 60 , height - 60 ));
     MENU = new Menu();
     STATUS = new Status();
+    SOUNDS = new Sounds();
     noLoop();
     
 }
@@ -37,6 +39,8 @@ $(document).ready(function() {
         $( "#defaultCanvas0" ).show()
         MENU.setInitMenu (true )
         MENU.setActive( true )
+        SOUNDS.loadSounds();
+        SOUNDS.playSoundtrack();
         loop();
     })
 });

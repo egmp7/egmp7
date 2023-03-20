@@ -25,9 +25,7 @@ function keyPressed(){
         PLAYER_CONTROLLER.jump();
 
     if ( keyCode == ENTER_KEY )
-    {
         MENU.click()
-    }
                 
 }
 function keyReleased(){
@@ -151,14 +149,3 @@ class JumpButton extends Buttons
     {   
     }
 }
-
-
-
-// function mouseClicked() {
-//     var sound = new Howl({
-    
-//         src: [ './static/GameAudios/canyonFall.wav']
-    
-//     });
-//     sound.play();
-// }
