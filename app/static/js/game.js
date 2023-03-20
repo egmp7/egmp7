@@ -40,7 +40,7 @@ $(document).ready(function() {
         MENU.setInitMenu (true )
         MENU.setActive( true )
         SOUNDS.loadSounds();
-        SOUNDS.playSoundtrack();
+        SOUNDS.soundtrack.play();
         loop();
     })
 });

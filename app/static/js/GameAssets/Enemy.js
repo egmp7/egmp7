@@ -44,7 +44,10 @@ class Enemy
     {
         
         if( dist( PLAYER_CONTROLLER.getWorldX(), PLAYER_CONTROLLER.getY(), this.currentX, this.y ) < 20 )
+        {
+            SOUNDS.enemy.play();   
             Rules.playerDead()   
+        }    
     }
 
     updateEnemyPosition = function() {

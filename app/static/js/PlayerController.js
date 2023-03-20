@@ -140,7 +140,10 @@ class PlayerController
     checkIfPlayerIsOutOfCanvas = function ()
     {
         if ( this.y > height)
+        {
             Rules.playerDead();
+            SOUNDS.canyonFall.play();
+        }
     }
 
     /** Checks if Player is jumping */
@@ -165,6 +168,7 @@ class PlayerController
     jump = function()
     {
         this.y -= height * 0.15;
+        SOUNDS.jump.play();
     }
 
     walk = function(  )

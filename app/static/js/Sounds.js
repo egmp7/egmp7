@@ -1,7 +1,11 @@
 class Sounds 
 
 {
-    coin
+    canyonFall;
+    coin;
+    enemy;
+    flagPole;
+    jump;
     soundtrack;
 
     constructor()
@@ -11,19 +15,13 @@ class Sounds
 
     loadSounds = function ()
     {
+        this.canyonFall = new Howl({ src: [ './static/GameAudios/canyonFall.wav' ]});
         this.coin = new Howl({ src: [ './static/GameAudios/coin.wav' ]});
+        this.enemy = new Howl({ src: [ './static/GameAudios/enemy.wav' ]});
+        this.flagPole = new Howl({ src: [ './static/GameAudios/flagPole.wav' ]});        
+        this.jump = new Howl({ src: [ './static/GameAudios/jump.wav' ]});
         this.soundtrack = new Howl({ src: [ './static/GameAudios/soundtrack.wav' ], 
                                     loop: true,
                                     volume: 0.5})
-    }
-
-    playCoin =  function ()
-    {
-        this.coin.play();
-    }
-
-    playSoundtrack = function ()
-    {
-        this.soundtrack.play();
     }
 }

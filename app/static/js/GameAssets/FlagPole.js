@@ -24,8 +24,9 @@ class FlagPole
     {
         if( abs (this.x - PLAYER_CONTROLLER.getWorldX()) < 10)
         {
-            this.isReached = true
-            Rules.playerWins()   
+            this.isReached = true;
+            SOUNDS.flagPole.play();   
+            Rules.playerWins();
         }
     } 
 }

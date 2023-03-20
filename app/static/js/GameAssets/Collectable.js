@@ -34,6 +34,7 @@ class Collectable
             {
                 STATUS.setScore( STATUS.getScore() + 100 )
                 this.isFound = true;
+                SOUNDS.coin.play()
             }
         }
     }
