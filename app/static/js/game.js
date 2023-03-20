@@ -61,6 +61,7 @@ function draw()
         LEVEL.clouds.forEach(( asset )=>{ asset.draw() }) 
         LEVEL.mountains.forEach(( asset )=>{ asset.draw() }) 
         LEVEL.trees.forEach(( asset )=>{ asset.draw() }) 
+        LEVEL.platforms.forEach(( asset )=>{ asset.draw() }) 
         LEVEL.collectables.forEach(( asset )=>{ asset.draw() }) 
         LEVEL.enemies.forEach(( asset )=>{ asset.draw() }) 
         LEVEL.flagPole.draw();
@@ -71,7 +72,7 @@ function draw()
         push();
         translate( PLAYER_CONTROLLER.getScrollPos(), 0 );
         LEVEL.grounds.forEach(( asset )=>{ asset.draw() }) 
-        LEVEL.platforms.forEach(( asset )=>{ asset.draw() }) 
+    
         pop();
 
         BUTTONS.forEach(( button )=>{ button.draw() });
