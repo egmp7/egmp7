@@ -4,31 +4,14 @@ let PLAYER_CONTROLLER;
 let BUTTONS = [];
 let MENU
 
-/**Init click focuses on setting correct display mode*/
-$(document).ready(function() {
-    $( "#initGame" ).click( () =>{
-        const canvas = document.getElementById("canvasDiv")
-        canvas.requestFullscreen()
-        screen.orientation.lock("landscape");
-        $( "#defaultCanvas0" ).show()
-
-    })
-});
-
-/** Listens for fullscreen changes*/
-addEventListener("fullscreenchange", (event) => {
-    if (document.fullscreenElement)
-        $( "#defaultCanvas0" ).show()
-    else
-        $( "#defaultCanvas0" ).hide()
-});
-
 function setup()
 {
-    
+    // canvas
     const CANVAS_SCALE = 0.6
     const myCanvas = createCanvas( 1600 * CANVAS_SCALE, 900 * CANVAS_SCALE)
     myCanvas.parent('canvasDiv');
+
+    // game
     PLAYER = new PlayerDraw;
     PLAYER_CONTROLLER = new PlayerController (width/2,height/2);
     LEVEL_ONE = new LevelOne;
@@ -36,9 +19,23 @@ function setup()
     BUTTONS.push(new RightButton    ( 170 , height - 60 ));
     BUTTONS.push(new JumpButton     ( width - 60 , height - 60 ));
     MENU = new Menu();
-    $( "#defaultCanvas0" ).hide()
+    noLoop();
     
 }
+
+/**Init click focuses on setting correct display mode*/
+$(document).ready(function() {
+
+    $( "#defaultCanvas0" ).hide()
+
+    $( "#initGame" ).click( () => {
+        const canvas = document.getElementById("canvasDiv")
+        canvas.requestFullscreen()
+        screen.orientation.lock("landscape");
+        $( "#defaultCanvas0" ).show()
+        loop();
+    })
+});
 
 function draw()
 {

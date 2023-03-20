@@ -1,4 +1,12 @@
 
+/** Listens for fullscreen changes*/
+addEventListener("fullscreenchange", (event) => {
+    if (document.fullscreenElement)
+        $( "#defaultCanvas0" ).show()
+    else
+        $( "#defaultCanvas0" ).hide()
+});
+
 
 const LEFT_KEY = 37;
 const RIGHT_KEY = 39;
