@@ -7,6 +7,9 @@ class Rules
         {
             MENU.setActive( true )
             MENU.setGameOverMenu ( true )
+            STATUS.setLives( 3 );
+            STATUS.setScore ( 0 );
+            LEVEL.collectables.forEach(( asset )=>{ asset.reset() })
         }
 
         this.resetPlayerPosition()
@@ -16,7 +19,9 @@ class Rules
     {
         MENU.setActive ( true )
         MENU.setCompletedMenu ( true )
+        LEVEL.collectables.forEach(( asset )=>{ asset.reset() })
         this.resetPlayerPosition()
+        
     }
 
     static resetPlayerPosition = function ()

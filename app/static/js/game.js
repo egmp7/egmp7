@@ -51,9 +51,14 @@ function draw()
         background(100, 155, 255); // fill the sky blue
         push();
         translate( PLAYER_CONTROLLER.getScrollPos(), 0 );
-        LEVEL.assets.forEach(( asset )=>{ asset.draw() }) 
+        LEVEL.behindAssets.forEach(( asset )=>{ asset.draw() }) 
+        LEVEL.collectables.forEach(( asset )=>{ asset.draw() }) 
         pop();
         PLAYER.draw();
+        push();
+        translate( PLAYER_CONTROLLER.getScrollPos(), 0 );
+        LEVEL.frontAssets.forEach(( asset )=>{ asset.draw() }) 
+        pop();
         BUTTONS.forEach(( button )=>{ button.draw() });
         STATUS.draw()
     } 

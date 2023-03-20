@@ -37,4 +37,9 @@ class Collectable
             }
         }
     }
+
+    reset = function ()
+    {
+        this.isFound = false;
+    }
 }
