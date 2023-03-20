@@ -2,6 +2,7 @@ let LEVEL_ONE;
 let PLAYER;
 let PLAYER_CONTROLLER;
 let BUTTONS = [];
+let MENU
 
 /**Init click focuses on setting correct display mode*/
 $(document).ready(function() {
@@ -31,9 +32,10 @@ function setup()
     PLAYER = new PlayerDraw;
     PLAYER_CONTROLLER = new PlayerController (width/2,height/2);
     LEVEL_ONE = new LevelOne;
-    BUTTONS.push(new LeftButton     ( 60 , height - 60 ))
-    BUTTONS.push(new RightButton    ( 170 , height - 60 ))
-    BUTTONS.push(new JumpButton     ( width - 60 , height - 60 ))
+    BUTTONS.push(new LeftButton     ( 60 , height - 60 ));
+    BUTTONS.push(new RightButton    ( 170 , height - 60 ));
+    BUTTONS.push(new JumpButton     ( width - 60 , height - 60 ));
+    MENU = new Menu();
     $( "#defaultCanvas0" ).hide()
     
 }
@@ -45,9 +47,10 @@ function draw()
     translate( PLAYER_CONTROLLER.getScrollPos(), 0 );
     LEVEL_ONE.assets.forEach(( asset )=>{ asset.draw() }) 
     pop();
-    PLAYER_CONTROLLER.update ()
-    PLAYER.draw()
-    BUTTONS.forEach(( button )=>{ button.draw(); button.checkIfPressed(); })
+    PLAYER_CONTROLLER.update ();
+    PLAYER.draw();
+    BUTTONS.forEach(( button )=>{ button.draw(); button.checkIfPressed(); });
+    MENU.draw();
 }
 
 // Function to draw lives tokens and Score
