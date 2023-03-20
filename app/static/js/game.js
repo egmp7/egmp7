@@ -42,14 +42,16 @@ function setup()
 
 function draw()
 {
+
+    PLAYER_CONTROLLER.update ();
+
 	background(100, 155, 255); // fill the sky blue
     push();
     translate( PLAYER_CONTROLLER.getScrollPos(), 0 );
     LEVEL_ONE.assets.forEach(( asset )=>{ asset.draw() }) 
     pop();
-    PLAYER_CONTROLLER.update ();
     PLAYER.draw();
-    BUTTONS.forEach(( button )=>{ button.draw(); button.checkIfPressed(); });
+    BUTTONS.forEach(( button )=>{ button.draw() });
     MENU.draw();
 }
 

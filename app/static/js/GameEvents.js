@@ -7,22 +7,25 @@ const ENTER_KEY = 13;
 
 function keyPressed(){
 
-    if(keyCode == LEFT_KEY)
+    if( keyCode == LEFT_KEY )
         PLAYER_CONTROLLER.setMoveLeft( true );
     
-    else if(keyCode == RIGHT_KEY)
+    if( keyCode == RIGHT_KEY )
         PLAYER_CONTROLLER.setMoveRight( true );
 
-    else if(keyCode == SPACE_KEY)
+    if( keyCode == SPACE_KEY ) 
         PLAYER_CONTROLLER.jump();
+
+    if ( keyCode == SPACE_KEY );
+        MENU.setShow( false );
                 
 }
 function keyReleased(){
 
-    if(keyCode == LEFT_KEY)
+    if( keyCode == LEFT_KEY )
         PLAYER_CONTROLLER.setMoveLeft( false );
 
-    if(keyCode == RIGHT_KEY)
+    if( keyCode == RIGHT_KEY )
         PLAYER_CONTROLLER.setMoveRight( false );
 }
 
@@ -53,6 +56,7 @@ class Buttons
 
     draw = function()
     {
+        this.checkIfPressed()
         fill(0)
         ellipse( this.x ,this.y , this. radius * 2 ,this. radius * 2)
     }
@@ -76,6 +80,10 @@ class Buttons
     isPressed = function()
     {
         return this.pressed;
+    }
+
+    checkIfPressed = function ()
+    {   
     }
 }
 
