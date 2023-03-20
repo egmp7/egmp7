@@ -25,7 +25,7 @@ function keyPressed(){
         PLAYER_CONTROLLER.jump();
 
     if ( keyCode == SPACE_KEY );
-        MENU.setShow( false );
+        MENU.setActive( false );
                 
 }
 function keyReleased(){
@@ -39,7 +39,7 @@ function keyReleased(){
 
 function touchStarted ()
 {
-    MENU.setShow( false )
+    MENU.setActive( false )
     BUTTONS.forEach(( button )=>{
         button.click();
     })
