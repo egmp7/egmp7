@@ -4,6 +4,7 @@ class PlayerController
     moveLeft;
     moveRight;
     scrollPos = 0;
+    doubleJump = 0;
     
     constructor(_x, _y)
     {
@@ -162,31 +163,52 @@ class PlayerController
 
     applyGravity = function()
     {
-        this.y += 10;
+        this.y += 8;
     }
 
     jump = function()
     {
-        this.y -= height * 0.15;
-        SOUNDS.jump.play();
+        
+        if (this.limits == 0)
+            this.doubleJump += 1;
+        
+        // regular jump
+        this.limits.forEach( limit => { 
+            if( limit.touchedSide == "up")
+            {
+                SOUNDS.jump.play();
+                this.y -= 100;
+                this.doubleJump = 1;
+            }   
+        }) 
+
+        // double jump
+        if ( this.doubleJump == 2 )
+        {
+            this.y -= 100;
+            this.doubleJump = 0;
+            console.log("doubleJump")
+            SOUNDS.jump.play();
+        }
     }
 
     walk = function(  )
     {
+        const SPEED = 8
         if (this.moveRight)
         {
             if(this.x < width * 0.4)
-                this.x  += 10;
+                this.x  += SPEED;
             else
-                this.scrollPos -= 10; 
+                this.scrollPos -= SPEED; 
         }
 
         if (this.moveLeft)
         {
             if(this.x > width * 0.2)
-                this.x -= 10;
+                this.x -= SPEED;
             else
-                this.scrollPos += 10;
+                this.scrollPos += SPEED;
         }
     }
 
