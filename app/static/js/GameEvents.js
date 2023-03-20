@@ -103,6 +103,21 @@ class LeftButton extends Buttons
         super ( _x, _y, "left" )
     }
 
+    draw = function()
+    {
+        this.checkIfPressed()
+        fill('rgba(255,255,255, 0.25)');
+        ellipse( this.x ,this.y , this. radius * 2 ,this. radius * 2)
+
+        const size = this.radius - 30;
+        const xOffset = - 6;
+        fill (0,255,0)
+        triangle( this.x + size + xOffset, this.y + size,
+                  this.x + size + xOffset, this.y -size,
+                  this.x - size + xOffset, this.y )
+        
+    }
+
     checkIfPressed = function ()
     {
         if (this.isPressed())
@@ -118,6 +133,21 @@ class RightButton extends Buttons
     {
         super ( _x, _y , "right" )
     }
+
+    draw = function()
+    {
+        this.checkIfPressed()
+        fill('rgba(255,255,255, 0.25)');
+        ellipse( this.x ,this.y , this. radius * 2 ,this. radius * 2)
+
+        const size = this.radius - 30;
+        const xOffset = 6;
+        fill (0,255,0)
+        triangle( this.x - size + xOffset, this.y - size,
+                  this.x - size + xOffset, this.y +size,
+                  this.x + size + xOffset, this.y )
+    }
+
     checkIfPressed = function ()
     {
         if (this.isPressed())
@@ -134,6 +164,24 @@ class JumpButton extends Buttons
     {
         super ( _x, _y, "jump" )
     }
+
+    draw = function()
+    {
+        fill('rgba(255,255,255, 0.25)');
+        ellipse( this.x ,this.y , this. radius * 2 ,this. radius * 2)
+
+        strokeWeight(6)
+        stroke (0,0,180)
+        const size = this.radius - 32;
+
+        line( this.x - size, this.y - size,
+              this.x + size, this.y + size )
+        line( this.x + size, this.y - size,
+              this.x - size, this.y + size )
+
+        noStroke()
+    }
+
     
     click = function ()
     {

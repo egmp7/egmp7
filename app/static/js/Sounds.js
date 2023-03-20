@@ -16,10 +16,10 @@ class Sounds
     loadSounds = function ()
     {
         this.canyonFall = new Howl({ src: [ './static/GameAudios/canyonFall.wav' ]});
-        this.coin = new Howl({ src: [ './static/GameAudios/coin.wav' ]});
+        this.coin = new Howl({ src: [ './static/GameAudios/coin.wav' ], volume: 0.25});
         this.enemy = new Howl({ src: [ './static/GameAudios/enemy.wav' ]});
         this.flagPole = new Howl({ src: [ './static/GameAudios/flagPole.wav' ]});        
-        this.jump = new Howl({ src: [ './static/GameAudios/jump.wav' ]});
+        this.jump = new Howl({ src: [ './static/GameAudios/jump.wav' ], volume: 0.4});
         this.soundtrack = new Howl({ src: [ './static/GameAudios/soundtrack.wav' ], 
                                     loop: true,
                                     volume: 0.5})

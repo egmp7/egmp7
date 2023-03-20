@@ -14,17 +14,18 @@ function setup()
     myCanvas.parent('canvasDiv');
 
     // game
+    LEVEL = new LevelOne;
     PLAYER = new PlayerDraw;
     PLAYER_CONTROLLER = new PlayerController (width/2,height/2);
-    LEVEL = new LevelOne;
-    BUTTONS.push(new LeftButton     ( 60 , height - 60 ));
-    BUTTONS.push(new RightButton    ( 170 , height - 60 ));
-    BUTTONS.push(new JumpButton     ( width - 60 , height - 60 ));
+
+    const midY = ( height / 24 * 19 ) + ( height - ( height / 24 * 19 )) / 2
+    BUTTONS.push(new LeftButton     ( 60 , midY ));
+    BUTTONS.push(new RightButton    ( 170 , midY ));
+    BUTTONS.push(new JumpButton     ( width - 60 , midY ));
     MENU = new Menu();
     STATUS = new Status();
     SOUNDS = new Sounds();
     noLoop();
-    
 }
 
 /**Init click focuses on setting correct display mode*/
