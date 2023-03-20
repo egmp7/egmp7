@@ -17,6 +17,7 @@ class PlayerController
         this.applyGravity();
         this.applyPlayerLimits();
         this.checkIfPlayerIsOutOfLimit();
+        this.checkIfPlayerIsOutOfCanvas();
         this.walk();
         this.updateWorldX();
         
@@ -135,6 +136,14 @@ class PlayerController
         })
     }
 
+    /** Checks if Player is out of canvas */
+    checkIfPlayerIsOutOfCanvas = function ()
+    {
+        if ( this.y > height)
+            Rules.playerDead();
+    }
+
+    /** Checks if Player is jumping */
     checkIfJumping = function ()
     {
         if (this.limits.length == 0) return true
