@@ -35,6 +35,7 @@ $(document).ready(function() {
         canvas.requestFullscreen()
         screen.orientation.lock("landscape");
         $( "#defaultCanvas0" ).show()
+        MENU.setInit (true )
         MENU.setActive( true )
         loop();
     })
@@ -42,7 +43,7 @@ $(document).ready(function() {
 
 function draw()
 {
-    if (MENU.getActive())
+    if ( MENU.getActive() )
         MENU.draw();
     else{
         PLAYER_CONTROLLER.update ();

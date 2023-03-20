@@ -1,6 +1,6 @@
 class Menu 
 {
-    init = true;
+    init;
     active = true;
 
     constructor()
@@ -31,6 +31,11 @@ class Menu
                 text("Game over. Press Enter to continue.",width/2,height/2);
             }
         }
+    }
+
+    setInit( bool )
+    {
+        this.init = bool;
     }
 
     setActive = function ( bool )
