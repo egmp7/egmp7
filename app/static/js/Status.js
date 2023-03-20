@@ -36,6 +36,6 @@ class Status
 
     getScore = function ()
     {
-        return score;
+        return this.score;
     }
 }

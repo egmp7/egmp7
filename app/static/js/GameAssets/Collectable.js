@@ -32,7 +32,7 @@ class Collectable
 
             if ( !this.isFound )
             {
-                //game_score += 100;
+                STATUS.setScore( STATUS.getScore() + 100 )
                 this.isFound = true;
             }
         }
