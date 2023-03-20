@@ -26,9 +26,7 @@ function keyPressed(){
 
     if ( keyCode == ENTER_KEY )
     {
-        MENU.setInit ( false )
-        MENU.setActive( false );
-
+        MENU.click()
     }
                 
 }
@@ -43,8 +41,7 @@ function keyReleased(){
 
 function touchStarted ()
 {
-    MENU.setActive( false )
-    MENU.setInit ( false )
+    MENU.click()
     BUTTONS.forEach(( button )=>{
         button.click();
     })

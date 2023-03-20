@@ -1,6 +1,8 @@
 class Menu 
 {
-    init;
+    initMenu = true;
+    gameOverMenu = false;
+    completedMenu = false;
     active = true;
 
     constructor()
@@ -17,25 +19,43 @@ class Menu
             textAlign(CENTER);
             fill(255);
             // Start Level
-            if( this.init == true )
+            if( this.initMenu )
             {
                 text("Tap (phone) or Press Enter (desktop) to start",width/2,height/2);
             }
             //Level Completed
-            if( LEVEL.assets[LEVEL.assets.length - 1].isReached == true)
+            if( this.completedMenu )
             {
-                text("Level complete. Press Enter to continue.",width/2,height/2);
+                text("Level complete. Tap (phone) or Press Enter (desktop)  to continue.",width/2,height/2);
             }
             // Game Over
-            if( STATUS.getLives() < 1 ){
-                text("Game over. Press Enter to continue.",width/2,height/2);
+            if( this.gameOverMenu ){
+                text("Game over. Tap (phone) or Press Enter (desktop) to continue.",width/2,height/2);
             }
         }
     }
 
-    setInit( bool )
+    click = function()
     {
-        this.init = bool;
+        this.initMenu = false;
+        this.gameOverMenu = false;
+        this.completedMenu = false;
+        this.active = false;
+    }
+
+    setInitMenu( bool )
+    {
+        this.initMenu = bool;
+    }
+
+    setGameOverMenu ( bool )
+    {
+        this.gameOverMenu = bool;
+    }
+
+    setCompletedMenu ( bool )
+    {
+        this.completedMenu = bool;
     }
 
     setActive = function ( bool )

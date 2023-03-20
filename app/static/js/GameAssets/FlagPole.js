@@ -25,7 +25,7 @@ class FlagPole
         if( abs (this.x - PLAYER_CONTROLLER.getWorldX()) < 10)
         {
             this.isReached = true
-            console.log("FlagPole::checkCloseToFlagPole")    
+            Rules.playerWins()   
         }
     } 
 }
