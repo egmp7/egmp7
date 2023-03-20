@@ -43,14 +43,14 @@ $(document).ready(function() {
 
 function draw()
 {
+    background(100, 155, 255); // sky blue
+
     if ( MENU.getActive() ) // menu
         MENU.draw();
 
     else{   // gameplay
 
         PLAYER_CONTROLLER.update ();
-
-        background(100, 155, 255); // sky blue
         
         push();
         translate( PLAYER_CONTROLLER.getScrollPos(), 0 );
@@ -59,6 +59,7 @@ function draw()
         LEVEL.trees.forEach(( asset )=>{ asset.draw() }) 
         LEVEL.collectables.forEach(( asset )=>{ asset.draw() }) 
         LEVEL.enemies.forEach(( asset )=>{ asset.draw() }) 
+        LEVEL.flagPole.draw();
         pop();
 
         PLAYER.draw();

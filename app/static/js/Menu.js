@@ -13,8 +13,12 @@ class Menu
     {
         if (this.active)
         {
-            fill(125)
-            rect(0,0,width,height)
+            LEVEL.clouds.forEach(( asset )=>{ asset.draw() }) 
+            LEVEL.grounds.forEach(( asset )=>{ asset.draw() }) 
+            LEVEL.mountains.forEach(( asset )=>{ asset.draw() }) 
+            LEVEL.trees.forEach(( asset )=>{ asset.draw() })
+            LEVEL.collectables.forEach(( asset )=>{ asset.draw() })
+            LEVEL.platforms.forEach(( asset )=>{ asset.draw() })
             // Function to draw Start Level, Level Completed or Game Over
             textAlign(CENTER);
             fill(255);
