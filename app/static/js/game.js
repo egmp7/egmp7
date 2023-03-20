@@ -43,22 +43,32 @@ $(document).ready(function() {
 
 function draw()
 {
-    if ( MENU.getActive() )
+    if ( MENU.getActive() ) // menu
         MENU.draw();
-    else{
+
+    else{   // gameplay
+
         PLAYER_CONTROLLER.update ();
 
-        background(100, 155, 255); // fill the sky blue
+        background(100, 155, 255); // sky blue
+        
         push();
         translate( PLAYER_CONTROLLER.getScrollPos(), 0 );
-        LEVEL.behindAssets.forEach(( asset )=>{ asset.draw() }) 
+        LEVEL.clouds.forEach(( asset )=>{ asset.draw() }) 
+        LEVEL.mountains.forEach(( asset )=>{ asset.draw() }) 
+        LEVEL.trees.forEach(( asset )=>{ asset.draw() }) 
         LEVEL.collectables.forEach(( asset )=>{ asset.draw() }) 
+        LEVEL.enemies.forEach(( asset )=>{ asset.draw() }) 
         pop();
+
         PLAYER.draw();
+
         push();
         translate( PLAYER_CONTROLLER.getScrollPos(), 0 );
-        LEVEL.frontAssets.forEach(( asset )=>{ asset.draw() }) 
+        LEVEL.grounds.forEach(( asset )=>{ asset.draw() }) 
+        LEVEL.platforms.forEach(( asset )=>{ asset.draw() }) 
         pop();
+
         BUTTONS.forEach(( button )=>{ button.draw() });
         STATUS.draw()
     } 
