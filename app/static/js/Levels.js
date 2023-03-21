@@ -1,4 +1,3 @@
-/**Last item must be a FlagPole */
 class LevelOne
 {
     constructor()

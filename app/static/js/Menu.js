@@ -19,28 +19,53 @@ class Menu
             LEVEL.trees.forEach(( asset )=>{ asset.draw() })
             LEVEL.collectables.forEach(( asset )=>{ asset.draw() })
             LEVEL.platforms.forEach(( asset )=>{ asset.draw() })
-            // Function to draw Start Level, Level Completed or Game Over
+            
+            fill(`rgba(0,0,0, 0.25)`); // background rectangle
+            rect( width / 16 * 2, height / 9 * 2 , width / 16 * 12, height / 9 * 5 )
+            
+            textSize(24);   // text setup
             textAlign(CENTER);
             fill(255);
+
             // Start Level
             if( this.initMenu )
             {
-                text("Tap (phone) or Press Enter (desktop) to start",width/2,height/2);
+                text("Tap 📱 or Press Enter 💻",width/2,height/2 + 10);
             }
             //Level Completed
             if( this.completedMenu )
             {
-                text("Level complete. Tap (phone) or Press Enter (desktop)  to continue.",width/2,height/2);
+                const offsetY = + 25
+                textSize(38);
+                text(`Level completed!`,width/2,height/2 - 58 + offsetY );
+                textSize(42);
+                text(`Your score is ${ STATUS.getScore()}`, width/2, height/2 - 21 + offsetY )
+                textSize(32);
+                text(`Thank you for playing`, width/2, height/2 + 16 + offsetY )
+                textSize(24);
+                text("Tap 📱 or Press Enter 💻 to continue.",width/2,height/2 + 48 + offsetY );
             }
             // Game Over
             if( this.gameOverMenu ){
-                text("Game over. Tap (phone) or Press Enter (desktop) to continue.",width/2,height/2);
+                const offsetY = + 40
+                textSize(38);
+                text("Game over ☠️",width/2,height/2 - 61 + offsetY);
+                textSize(42);
+                text(`Your score is ${ STATUS.getScore()}`, width/2, height/2 - 21 + offsetY)
+                textSize(24);
+                text("Tap 📱 or Press Enter 💻 to continue.",width/2,height/2 + 16 + offsetY);
             }
         }
     }
 
     click = function()
     {
+        if (this.gameOverMenu)
+        {
+            STATUS.setLives( 3 );
+            STATUS.setScore ( 0 );
+        }
+
         this.initMenu = false;
         this.gameOverMenu = false;
         this.completedMenu = false;

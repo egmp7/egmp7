@@ -15,7 +15,7 @@ class Status
         textFont('Courier')
         textAlign(LEFT);
         text('Lives: ', 50, 30);
-        text(`Score ${ this.score }`, 50, 55 )
+        text(`Score: ${ this.score }`, 50, 55 )
         
         // Draw Tokens:
         for(var i=0;i< this.lives ;i++){

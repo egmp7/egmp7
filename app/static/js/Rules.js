@@ -8,8 +8,6 @@ class Rules
         {
             MENU.setActive( true )
             MENU.setGameOverMenu ( true )
-            STATUS.setLives( 3 );
-            STATUS.setScore ( 0 );
             LEVEL.collectables.forEach(( asset )=>{ asset.reset() })
         }
 

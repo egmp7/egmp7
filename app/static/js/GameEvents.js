@@ -4,7 +4,11 @@ addEventListener("fullscreenchange", (event) => {
     if (document.fullscreenElement)
         $( "#defaultCanvas0" ).show()
     else
+    {
         $( "#defaultCanvas0" ).hide()
+        SOUNDS.soundtrack.stop();
+    }
+        
 });
 
 
