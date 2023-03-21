@@ -19,16 +19,17 @@ class LevelOne
             this.clouds.push(new Cloud( 100 * i * random( 0.7, 1 ), 200 * random( 0.25, 1 ), 90  * random( 0.6, 1 )))
         }
 
+        
+        this.grounds.push(new Ground( -50,  FLOOR , 1200 + 50,  height - FLOOR ));
+        this.grounds.push(new Ground( 1300, FLOOR , 400,        height - FLOOR ));
+        this.grounds.push(new Ground( 1840, FLOOR , 660,        height - FLOOR ));
+        this.grounds.push(new Ground( 3000, FLOOR , 800,        height - FLOOR ));
+        this.grounds.push(new Ground( 3900, FLOOR , 100,        height - FLOOR ));
+        this.grounds.push(new Ground( 4100, FLOOR , 900,        height - FLOOR ));
+        this.grounds.push(new Ground( 5400, FLOOR , 1900,       height - FLOOR ));
+        this.grounds.push(new Ground( 8300, FLOOR , 1200,       height - FLOOR ));
+        this.grounds.push(new Ground( 9600, FLOOR , 2000,       height - FLOOR ));
         this.grounds.push(new Ground( -500, 0 ,  500, height));
-        this.grounds.push(new Ground( 0,    FLOOR , 1200, height - FLOOR ));
-        this.grounds.push(new Ground( 1300, FLOOR , 400,  height - FLOOR ));
-        this.grounds.push(new Ground( 1840, FLOOR , 660,  height - FLOOR ));
-        this.grounds.push(new Ground( 3000, FLOOR , 800,  height - FLOOR ));
-        this.grounds.push(new Ground( 3900, FLOOR , 100,  height - FLOOR ));
-        this.grounds.push(new Ground( 4100, FLOOR , 900,  height - FLOOR ));
-        this.grounds.push(new Ground( 5400, FLOOR , 1900, height - FLOOR ));
-        this.grounds.push(new Ground( 8300, FLOOR , 1200, height - FLOOR ));
-        this.grounds.push(new Ground( 9600, FLOOR , 2000, height - FLOOR ));
 
         this.mountains.push(new Mountain( 300,   FLOOR, 190 ));
         this.mountains.push(new Mountain( 900,   FLOOR, 170 ));

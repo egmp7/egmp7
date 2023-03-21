@@ -19,6 +19,10 @@ class Ground
         noStroke();
 	    fill( 0,155,0 ); // green
         rect( this.x, this.y, this.width, this.height );
+
+        fill ( 102,51,0 )
+        rect( this.x, this.y, 15, this.height );
+        rect( this.x + this.width -15, this.y, 15, this.height );
     }
 
     /** Algorithm to check which side the player is coming from

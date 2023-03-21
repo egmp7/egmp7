@@ -6,8 +6,9 @@ class Rules
         STATUS.setLives( STATUS.getLives() - 1 )
         if (STATUS.getLives() < 1)
         {
-            MENU.setActive( true )
-            MENU.setGameOverMenu ( true )
+            MENU.setActive( true );
+            MENU.setGameOverMenu ( true );
+            frameBlock = frameCount + blockTime;
             LEVEL.collectables.forEach(( asset )=>{ asset.reset() })
         }
 
@@ -19,6 +20,7 @@ class Rules
     {
         MENU.setActive ( true )
         MENU.setCompletedMenu ( true )
+        frameBlock = frameCount + blockTime;
         LEVEL.collectables.forEach(( asset )=>{ asset.reset() })
         this.resetPlayerPosition()
         

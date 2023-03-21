@@ -40,6 +40,7 @@ $(document).ready(function() {
         $( "#defaultCanvas0" ).show()
         MENU.setInitMenu (true )
         MENU.setActive( true )
+        frameBlock = frameCount + blockTime;
         SOUNDS.loadSounds();
         SOUNDS.soundtrack.play();
         loop();

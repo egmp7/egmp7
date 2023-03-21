@@ -16,6 +16,8 @@ const LEFT_KEY = 37;
 const RIGHT_KEY = 39;
 const SPACE_KEY = 32;
 const ENTER_KEY = 13;
+let frameBlock = 0;
+let blockTime = 50;
 
 function keyPressed(){
 
@@ -43,6 +45,7 @@ function keyReleased(){
 
 function touchStarted ()
 {
+    if ( frameBlock > frameCount ) return
     MENU.click()
     BUTTONS.forEach(( button )=>{
         button.click();

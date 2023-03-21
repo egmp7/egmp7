@@ -38,14 +38,9 @@ class PlayerDraw
 
     draw = function ()
     {
-        // this.movePlayer()
-        // this.updateWorldX()
         this.isLeft = PLAYER_CONTROLLER.getMoveLeft()
         this.isRight = PLAYER_CONTROLLER.getMoveRight()
         this.isFalling = PLAYER_CONTROLLER.checkIfJumping()
-
-        fill( 255,0,0 )
-        ellipse(this.x,this.y,3,3)
 
         if( this.isLeft && this.isFalling )
         {
