@@ -1,4 +1,4 @@
-import { Vector } from "matter-js";
+import {Bodies} from "matter-js";
 
 export class Player
 {
@@ -11,6 +11,8 @@ export class Player
         this.isRight = false;
         this.isFalling = false;
         this.isPlummeting = false;   
+        this.physics = Bodies.rectangle(x, y, 20, 50);
+
     }
 
     setX = function ( value )
@@ -36,6 +38,10 @@ export class Player
     setIsFalling =function(bool)
     {
         this.isFalling = bool;
+    }
+
+    run = function (p5){
+        this.draw(p5,this.physics.position)
     }
 
     draw = function (p5,position)

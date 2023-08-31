@@ -54,23 +54,21 @@ export default function Game() {
     // create an engine
     engine = Engine.create();
     // create two boxes and a ground
-    boxA = Bodies.rectangle(100, 200, 20, 50);
-    boxB = Bodies.rectangle(400, 50, 80, 80);
     ground = Bodies.rectangle(250, 500, width, 60, { isStatic: true });
 
-    player = new Player(boxA.position.x,boxA.position.y);
+    player = new Player(200,100);
 
     // add all of the bodies to the world
-    Composite.add(engine.world, [boxA, boxB, ground]);
+    Composite.add(engine.world, [player.physics, ground]);
 
     // EVENTS
     cnv.mousePressed((event) => {
-      Body.setVelocity(boxA, Vector.create(1, 0))
       
+      Body.setVelocity(player.physics, Vector.create(1, 0))
     })
     cnv.touchStarted((event) => {
       //sound.play();
-      Body.setVelocity(boxA, Vector.create(1, 0))
+      Body.setVelocity(player.physics, Vector.create(1, 0))
     })
   }
 
@@ -78,11 +76,9 @@ export default function Game() {
     cnv.background(255, 130, 20)
     Engine.update(engine);
     
-    
-    drawVertices(p5, boxA.vertices)
-    drawVertices(p5, boxB.vertices)
+    drawVertices(p5, player.physics.vertices)
     drawVertices(p5, ground.vertices)
-    player.draw(p5,boxA.position)
+    player.run(p5)
   };
 
   return (<Sketch setup={setup} draw={draw} />);
