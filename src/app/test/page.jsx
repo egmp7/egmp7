@@ -5,9 +5,11 @@ import {
   Engine,
   Bodies,
   Composite,
+  Body,
+  Vector
 } from "matter-js";
 
-const Sketch = dynamic(()=> import('react-p5'),{ssr:false})
+const Sketch = dynamic(() => import('react-p5'), { ssr: false })
 
 var engine;
 var ground;
@@ -17,21 +19,25 @@ let height = 500;
 var boxA;
 var boxB;
 var ground;
+var cnv
 
-const  drawVertices = function(p5,vertices){
-  p5.fill(255,0,0)
+const drawVertices = function (p5,vertices) {
+  cnv.fill(255, 0, 0)
   p5.beginShape();
-  for (var i = 0 ; i < vertices.length ; i++)
-  {
-      p5.vertex( vertices[i].x, vertices[i].y );
+  for (var i = 0; i < vertices.length; i++) {
+    p5.vertex(vertices[i].x, vertices[i].y);
   }
   p5.endShape(p5.CENTER);
 }
 
-export default function Game(){
+export default function Game() {
 
   const setup = (p5, canvasParentRef) => {
-    p5.createCanvas(width, height).parent(canvasParentRef);
+    
+    // CANVAS
+    cnv = p5.createCanvas(width, height).parent(canvasParentRef)
+
+    // MATTER
     // create an engine
     engine = Engine.create();
     // create two boxes and a ground
@@ -40,11 +46,19 @@ export default function Game(){
     ground = Bodies.rectangle(250, 500, width, 60, { isStatic: true });
     // add all of the bodies to the world
     Composite.add(engine.world, [boxA, boxB, ground]);
+
+    // EVENTS
+    cnv.mousePressed((event) => {
+      Body.setVelocity(boxA,Vector.create(1,0))
+    })
+    cnv.touchStarted((event) => {
+      Body.setVelocity(boxB,Vector.create(1,0))
+    })
   }
 
   const draw = (p5) => {
     Engine.update(engine);
-    p5.background(255, 130, 20)
+    cnv.background(255, 130, 20)
     drawVertices(p5,boxA.vertices)
     drawVertices(p5,boxB.vertices)
     drawVertices(p5,ground.vertices)
