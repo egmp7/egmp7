@@ -9,7 +9,19 @@ import {
   Vector
 } from "matter-js";
 
-const Sketch = dynamic(() => import('react-p5'), { ssr: false })
+// Will only import `react-p5` on client-side
+const Sketch = dynamic(() => import("react-p5").then((mod) => {
+
+  // importing sound lib only after react-p5 is loaded
+  require('p5/lib/addons/p5.sound');
+
+  // returning react-p5 default export
+  return mod.default
+}), {
+  ssr: false
+});
+
+var song;
 
 var engine;
 var ground;
@@ -19,7 +31,7 @@ let height = 500;
 var boxA;
 var boxB;
 var ground;
-var cnv
+var cnv;
 
 const drawVertices = function (p5,vertices) {
   cnv.fill(255, 0, 0)
@@ -32,10 +44,17 @@ const drawVertices = function (p5,vertices) {
 
 export default function Game() {
 
+  const preload = (p5) =>{
+    p5.soundFormats('mp3');
+    song = p5.loadSound("/tictoc.mp3")
+  }
+
   const setup = (p5, canvasParentRef) => {
     
     // CANVAS
     cnv = p5.createCanvas(width, height).parent(canvasParentRef)
+
+    
 
     // MATTER
     // create an engine
@@ -50,6 +69,16 @@ export default function Game() {
     // EVENTS
     cnv.mousePressed((event) => {
       Body.setVelocity(boxA,Vector.create(1,0))
+      if (song.isPlaying()) {
+        // .isPlaying() returns a boolean
+        song.stop();
+      } else {
+        try{song.play();}
+        catch(e){
+          console.log(e)
+        }
+        
+      }
     })
     cnv.touchStarted((event) => {
       Body.setVelocity(boxB,Vector.create(1,0))
@@ -64,5 +93,5 @@ export default function Game() {
     drawVertices(p5,ground.vertices)
   };
 
-  return (<Sketch setup={setup} draw={draw} />);
+  return (<Sketch preload={preload} setup={setup} draw={draw} />);
 }
