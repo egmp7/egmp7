@@ -10,6 +10,9 @@ import {
   Vector
 } from "matter-js";
 
+import {Player} from './player.js'
+
+
 // Dynamic import
 const Sketch = dynamic(() => import("react-p5"), { ssr: false });
 
@@ -25,6 +28,8 @@ var cnv;
 var sound = new Howl({
   src: ['/tictoc.mp3']
 });
+
+var player;
 
 const drawVertices = function (p5, vertices) {
   cnv.fill(255, 0, 0)
@@ -42,6 +47,8 @@ export default function Game() {
     // CANVAS
     cnv = p5.createCanvas(width, height).parent(canvasParentRef)
 
+    
+
     // MATTER
     // create an engine
     engine = Engine.create();
@@ -49,6 +56,9 @@ export default function Game() {
     boxA = Bodies.rectangle(100, 200, 80, 80);
     boxB = Bodies.rectangle(400, 50, 80, 80);
     ground = Bodies.rectangle(250, 500, width, 60, { isStatic: true });
+
+    player = new Player(boxA.position.x,boxA.position.y);
+
     // add all of the bodies to the world
     Composite.add(engine.world, [boxA, boxB, ground]);
 
@@ -64,8 +74,10 @@ export default function Game() {
   }
 
   const draw = (p5) => {
-    Engine.update(engine);
     cnv.background(255, 130, 20)
+    Engine.update(engine);
+    player.draw(p5)
+    
     drawVertices(p5, boxA.vertices)
     drawVertices(p5, boxB.vertices)
     drawVertices(p5, ground.vertices)
