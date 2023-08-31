@@ -6,6 +6,8 @@ import {
   Engine,
   Bodies,
   Composite,
+  Body,
+  Vector
 } from "matter-js";
 
 import {Player} from './player.js'
@@ -36,7 +38,7 @@ const drawVertices = function (p5, vertices) {
   {
       p5.vertex( vertices[i].x, vertices[i].y );
   }
-  p5.endShape(p5.CENTER);
+  p5.endShape();
 }
 
 export default function Game() {
@@ -52,7 +54,7 @@ export default function Game() {
     // create an engine
     engine = Engine.create();
     // create two boxes and a ground
-    boxA = Bodies.rectangle(100, 200, 80, 80);
+    boxA = Bodies.rectangle(100, 200, 20, 50);
     boxB = Bodies.rectangle(400, 50, 80, 80);
     ground = Bodies.rectangle(250, 500, width, 60, { isStatic: true });
 
@@ -67,19 +69,20 @@ export default function Game() {
       
     })
     cnv.touchStarted((event) => {
-      sound.play();
-      Body.setVelocity(boxB, Vector.create(1, 0))
+      //sound.play();
+      Body.setVelocity(boxA, Vector.create(1, 0))
     })
   }
 
   const draw = (p5) => {
     cnv.background(255, 130, 20)
     Engine.update(engine);
-    player.draw(p5)
+    
     
     drawVertices(p5, boxA.vertices)
     drawVertices(p5, boxB.vertices)
     drawVertices(p5, ground.vertices)
+    player.draw(p5,boxA.position)
   };
 
   return (<Sketch setup={setup} draw={draw} />);

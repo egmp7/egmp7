@@ -38,7 +38,7 @@ export class Player
         this.isFalling = bool;
     }
 
-    draw = function (p5)
+    draw = function (p5,position)
     {
         // this.isLeft = PLAYER_CONTROLLER.getMoveLeft()
         // this.isRight = PLAYER_CONTROLLER.getMoveRight()
@@ -49,19 +49,19 @@ export class Player
             // add your jumping-left code
             //body
             p5.fill(0,0,200)
-            p5.triangle(this.x-7,this.y-40,this.x+7,this.y-40,this.x,this.y-50);
-            p5.rect(this.x-7,this.y-40,14,30);
-            p5.ellipse(this.x-3,this.y-10,4,6);
-            p5.ellipse(this.x+5,this.y-10,4,6);
+            p5.triangle(position.x-7,position.y-40,position.x+7,position.y-40,position.x,position.y-50);
+            p5.rect(position.x-7,position.y-40,14,30);
+            p5.ellipse(position.x-3,position.y-10,4,6);
+            p5.ellipse(position.x+5,position.y-10,4,6);
             //hands
             p5.stroke(0,0,200);
             p5.strokeWeight(5);
-            p5.line(this.x+7,this.y-30,this.x+11,this.y-23);
+            p5.line(position.x+7,position.y-30,position.x+11,position.y-23);
             p5.strokeWeight(1);
             p5.noStroke();
             //eyes
             p5.fill(255,255,102)
-            p5.ellipse(this.x-3,this.y-37,5,7);
+            p5.ellipse(position.x-3,position.y-37,5,7);
             
         }
         else if( this.isRight && this.isFalling )
@@ -69,19 +69,19 @@ export class Player
             // add your jumping-right code
             //body
             p5.fill(0,0,200)
-            p5.triangle(this.x-7,this.y-40,this.x+7,this.y-40,this.x,this.y-50);
-            p5.rect(this.x-7,this.y-40,14,30);
-            p5.ellipse(this.x-3,this.y-10,4,6);
-            p5.ellipse(this.x+5,this.y-10,4,6);
+            p5.triangle(position.x-7,position.y-40,position.x+7,position.y-40,position.x,position.y-50);
+            p5.rect(position.x-7,position.y-40,14,30);
+            p5.ellipse(position.x-3,position.y-10,4,6);
+            p5.ellipse(position.x+5,position.y-10,4,6);
             //hands
             p5.stroke(0,0,200);
             p5.strokeWeight(5);
-            p5.line(this.x-7,this.y-30,this.x-11,this.y-23);
+            p5.line(position.x-7,position.y-30,position.x-11,position.y-23);
             p5.strokeWeight(1);
             p5.noStroke();
             //eyes
             fill(255,255,102)
-            ellipse(this.x+3,this.y-37,5,7);
+            ellipse(position.x+3,position.y-37,5,7);
             
         }
         else if( this.isLeft )
@@ -89,26 +89,26 @@ export class Player
             // add your walking left code
             //body
             p5.fill(0,0,200)
-            p5.triangle(this.x-7,this.y-40,this.x+7,this.y-40,this.x,this.y-50);
-            p5.rect(this.x-7,this.y-40,14,30);
-            p5.ellipse(this.x-3,this.y-10,4,6);
-            p5.ellipse(this.x+5,this.y-10,4,6);
+            p5.triangle(position.x-7,position.y-40,position.x+7,position.y-40,position.x,position.y-50);
+            p5.rect(position.x-7,position.y-40,14,30);
+            p5.ellipse(position.x-3,position.y-10,4,6);
+            p5.ellipse(position.x+5,position.y-10,4,6);
             //eyes
             p5.fill(255,255,102)
-            p5.ellipse(this.x-3,this.y-37,5,7)
+            p5.ellipse(position.x-3,position.y-37,5,7)
         }
         else if( this.isRight )
         {
             // add your walking right code
             //body
             p5.fill(0,0,200)
-            p5.triangle(this.x-7,this.y-40,this.x+7,this.y-40,this.x,this.y-50);
-            p5.rect(this.x-7,this.y-40,14,30);
-            p5.ellipse(this.x-3,this.y-10,4,6);
-            p5.ellipse(this.x+5,this.y-10,4,6);
+            p5.triangle(position.x-7,position.y-40,position.x+7,position.y-40,position.x,position.y-50);
+            p5.rect(position.x-7,position.y-40,14,30);
+            p5.ellipse(position.x-3,position.y-10,4,6);
+            p5.ellipse(position.x+5,position.y-10,4,6);
             //eyes
             p5.fill(255,255,102)
-            p5.ellipse(this.x+3,this.y-37,5,7)
+            p5.ellipse(position.x+3,position.y-37,5,7)
             
         }
         else if( this.isFalling || this.isPlummeting)
@@ -116,35 +116,40 @@ export class Player
             // add your jumping facing forwards code
             //body
             p5.fill(0,0,200)
-            p5.triangle(this.x-10,this.y-40,this.x+10,this.y-40,this.x,this.y-50);
-            p5.rect(this.x-10,this.y-40,20,30);
-            p5.ellipse(this.x-6,this.y-10,4,6);
-            p5.ellipse(this.x+6,this.y-10,4,6);
+            p5.triangle(position.x-10,position.y-40,position.x+10,position.y-40,position.x,position.y-50);
+            p5.rect(position.x-10,position.y-40,20,30);
+            p5.ellipse(position.x-6,position.y-10,4,6);
+            p5.ellipse(position.x+6,position.y-10,4,6);
             //hands
             p5.stroke(0,0,200);
             p5.strokeWeight(5);
-            p5.line(this.x-10,this.y-35,this.x-16,this.y-42);
-            p5.line(this.x+10,this.y-35,this.x+16,this.y-42);
+            p5.line(position.x-10,position.y-35,position.x-16,position.y-42);
+            p5.line(position.x+10,position.y-35,position.x+16,position.y-42);
             p5.strokeWeight(1);
             p5.noStroke();
             //eyes
             p5.fill(255,255,102)
-            p5.ellipse(this.x-3,this.y-38,5,7)
-            p5.ellipse(this.x+3,this.y-38,5,7)
+            p5.ellipse(position.x-3,position.y-38,5,7)
+            p5.ellipse(position.x+3,position.y-38,5,7)
         }
+        // Standing front facing
         else
         {
-            // add your standing front facing code
-            //body
+            p5.push()
+            p5.translate(position.x,position.y)
+            
+            // body
             p5.fill(0,0,200)
-            p5.triangle(this.x-10,this.y-40,this.x+10,this.y-40,this.x,this.y-50);
-            p5.rect(this.x-10,this.y-40,20,30);
-            p5.rect(this.x-6,this.y-10,4,10);
-            p5.rect(this.x+2,this.y-10,4,10);
-            //eyes
+            p5.triangle(-10,-15,10,-15,0,-25);
+            p5.rect(-10,-15,20,30);
+            // legs
+            p5.rect(-6,15,4,10);
+            p5.rect(+2,15,4,10);
+            // eyes
             p5.fill(255,255,102)
-            p5.ellipse(this.x-3,this.y-38,5,7)
-            p5.ellipse(this.x+3,this.y-38,5,7)
+            p5.ellipse(-3,-13,5,7)
+            p5.ellipse(+3,-13,5,7)
+            p5.pop()
         }
     }
 
