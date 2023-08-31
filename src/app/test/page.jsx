@@ -6,8 +6,6 @@ import {
   Engine,
   Bodies,
   Composite,
-  Body,
-  Vector
 } from "matter-js";
 
 import {Player} from './player.js'
@@ -34,8 +32,9 @@ var player;
 const drawVertices = function (p5, vertices) {
   cnv.fill(255, 0, 0)
   p5.beginShape();
-  for (var i = 0; i < vertices.length; i++) {
-    p5.vertex(vertices[i].x, vertices[i].y);
+  for (var i = 0 ; i < vertices.length ; i++)
+  {
+      p5.vertex( vertices[i].x, vertices[i].y );
   }
   p5.endShape(p5.CENTER);
 }
