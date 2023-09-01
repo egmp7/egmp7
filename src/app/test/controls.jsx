@@ -1,4 +1,5 @@
 import dynamic from 'next/dynamic'
+import { classNames } from './utilities.js';
 const Sketch = dynamic(() => import("react-p5"), { ssr: false });
 
 const buttonWidth = 50;
@@ -37,10 +38,6 @@ export default function Controls({ name }) {
             onContextMenu={(e) => e.preventDefault()}>
             <Sketch setup={setup} />
         </button>)
-}
-
-function classNames(...classes) {
-    return classes.filter(Boolean).join(' ')
 }
 
 function drawButtons(p5, name) {

@@ -9,6 +9,7 @@ import {
 } from "matter-js";
 import { Player } from './player.js'
 import Controls from './controls.jsx';
+import { drawVertices } from './utilities.js';
 const Sketch = dynamic(() => import("react-p5"), { ssr: false });
 
 var engine;
@@ -56,14 +57,4 @@ export default function Game() {
         <Sketch setup={setup} draw={draw} />
       </div>
     </>);
-}
-
-// Utility
-const drawVertices = function (p5, vertices) {
-  p5.fill(255, 0, 0)
-  p5.beginShape();
-  for (var i = 0; i < vertices.length; i++) {
-    p5.vertex(vertices[i].x, vertices[i].y);
-  }
-  p5.endShape();
 }
