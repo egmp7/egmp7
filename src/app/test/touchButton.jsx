@@ -5,7 +5,7 @@ const Sketch = dynamic(() => import("react-p5"), { ssr: false });
 const buttonWidth = 50;
 const buttonHeight = 50;
 
-export default function Controls({ name }) {
+export default function TouchButton({ name }) {
 
     const setup = (p5, canvasParentRef) => {
 

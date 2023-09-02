@@ -8,8 +8,9 @@ import {
   Composite,
 } from "matter-js";
 import { Player } from './player.js'
-import Controls from './controls.jsx';
+import TouchButton from './touchButton.jsx';
 import { drawVertices } from './utilities.js';
+import KeyboardControl from './keyboardControl.jsx'
 const Sketch = dynamic(() => import("react-p5"), { ssr: false });
 
 var engine;
@@ -51,9 +52,10 @@ export default function Game() {
   return (
     <>
       <div className="relative">
-        <Controls name={"left"}/>
-        <Controls name={"right"}/>
-        <Controls name={"jump"}/>
+        <TouchButton name={"left"}/>
+        <TouchButton name={"right"}/>
+        <TouchButton name={"jump"}/>
+        <KeyboardControl />
         <Sketch setup={setup} draw={draw} />
       </div>
     </>);
