@@ -10,8 +10,9 @@ export class Player
         this.isLeft = false;
         this.isRight = false;
         this.isFalling = false;
-        this.isPlummeting = false;   
-        this.physics = Bodies.rectangle(x, y, 20, 50);
+        this.isPlummeting = false;
+        this.isJumping = false;   
+        this.physics = Bodies.rectangle(x, y, 20, 50,{inertia: Infinity});
 
     }
 
@@ -40,17 +41,29 @@ export class Player
         this.isFalling = bool;
     }
 
-    run = function (p5){
-        this.draw(p5,this.physics.position)
-        this.movePlayer()
+    setIsJumping = function(bool){
+        this.isJumping = bool;
     }
 
-    movePlayer = function (){
+    run = function (p5){
+        this.draw(p5,this.physics.position);
+        this.move();
+        this.jump();
+        //Body.setAngularVelocity(this.physics, Vector.create(0,0))
+    }
+
+    move = function (){
         const speed = 5;
 
         if( this.isRight ) Body.setVelocity(this.physics, Vector.create( speed, 0));
         if( this.isLeft ) Body.setVelocity(this.physics, Vector.create( -speed, 0));
     }
+
+    jump = function () {
+        const speed = 10; 
+        
+        if( this.isJumping ) Body.setVelocity(this.physics, Vector.create( 0, -speed))
+     }
 
     draw = function (p5,position)
     {
