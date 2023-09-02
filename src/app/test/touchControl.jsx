@@ -5,25 +5,25 @@ const Sketch = dynamic(() => import("react-p5"), { ssr: false });
 const buttonWidth = 50;
 const buttonHeight = 50;
 
-export default function TouchButton({ name }) {
+export default function TouchControl({ name , player }) {
 
     const setup = (p5, canvasParentRef) => {
-
         p5.createCanvas(buttonWidth, buttonHeight).parent(canvasParentRef)
         p5.ellipseMode(p5.CORNER);
         p5.noStroke();
         drawButtons(p5,name)
-
     }
 
     function touchStart() {
-        console.log(`touch start ${name}`)
-        //Body.setVelocity(player.physics, Vector.create(1, 0))
+        if (name === "left") player.setIsLeft(true)
+        if (name === "right") player.setIsRight(true)
+        if (name === "jump") console.log(`touch start ${name}`)
     }
 
     function touchEnd() {
-        console.log(`touch end ${name}`)
-        //Body.setVelocity(player.physics, Vector.create(-1, 0))
+        if (name === "left") player.setIsLeft(false)
+        if (name === "right") player.setIsRight(false)
+        if (name === "jump") console.log(`touch start ${name}`)
     }
 
     return (
