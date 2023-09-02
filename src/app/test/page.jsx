@@ -18,7 +18,7 @@ var ground;
 let width = 500;
 let height = 500;
 var ground;
-var player;
+var player = new Player(200,100) ;
 var sound = new Howl({
   src: ['/tictoc.mp3']
 });
@@ -34,7 +34,6 @@ export default function Game() {
     engine = Engine.create();
     // create two boxes and a ground
     ground = Bodies.rectangle(250, 500, width, 60, { isStatic: true });
-    player = new Player(200, 100);
     // add all of the bodies to the world
     Composite.add(engine.world, [player.physics, ground]);
     
@@ -55,7 +54,7 @@ export default function Game() {
         <TouchButton name={"left"}/>
         <TouchButton name={"right"}/>
         <TouchButton name={"jump"}/>
-        <KeyboardControl />
+        <KeyboardControl player={player} />
         <Sketch setup={setup} draw={draw} />
       </div>
     </>);

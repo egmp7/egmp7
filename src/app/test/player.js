@@ -1,4 +1,4 @@
-import {Bodies} from "matter-js";
+import {Bodies, Body, Vector} from "matter-js";
 
 export class Player
 {
@@ -42,6 +42,14 @@ export class Player
 
     run = function (p5){
         this.draw(p5,this.physics.position)
+        this.movePlayer()
+    }
+
+    movePlayer = function (){
+        const speed = 5;
+
+        if( this.isRight ) Body.setVelocity(this.physics, Vector.create( speed, 0));
+        if( this.isLeft ) Body.setVelocity(this.physics, Vector.create( -speed, 0));
     }
 
     draw = function (p5,position)
