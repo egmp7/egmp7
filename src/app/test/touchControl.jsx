@@ -17,13 +17,13 @@ export default function TouchControl({ name , player }) {
     function touchStart() {
         if (name === "left") player.setIsLeft(true)
         if (name === "right") player.setIsRight(true)
-        if (name === "jump") console.log(`touch start ${name}`)
+        if (name === "jump") player.setIsJumping(true)
     }
 
     function touchEnd() {
         if (name === "left") player.setIsLeft(false)
         if (name === "right") player.setIsRight(false)
-        if (name === "jump") console.log(`touch start ${name}`)
+        if (name === "jump") player.setIsJumping(false)
     }
 
     return (
