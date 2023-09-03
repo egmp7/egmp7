@@ -49,20 +49,19 @@ export class Player
         this.draw(p5,this.physics.position);
         this.move();
         this.jump();
-        //Body.setAngularVelocity(this.physics, Vector.create(0,0))
     }
 
     move = function (){
         const speed = 5;
 
-        if( this.isRight ) Body.setVelocity(this.physics, Vector.create( speed, 0));
-        if( this.isLeft ) Body.setVelocity(this.physics, Vector.create( -speed, 0));
+        if( this.isRight ) Body.setVelocity(this.physics, Vector.create( speed, this.physics.velocity.y));
+        if( this.isLeft ) Body.setVelocity(this.physics, Vector.create( -speed, this.physics.velocity.y));
     }
 
     jump = function () {
         const speed = 10; 
         
-        if( this.isJumping ) Body.setVelocity(this.physics, Vector.create( 0, -speed))
+        if( this.isJumping ) Body.setVelocity(this.physics, Vector.create( this.physics.velocity.x, -speed))
      }
 
     draw = function (p5,position)
@@ -111,31 +110,37 @@ export class Player
             ellipse(position.x+3,position.y-37,5,7);
             
         }
+        // Move left
         else if( this.isLeft )
         {
-            // add your walking left code
+            p5.push();
+            p5.translate(position.x,position.y);
             //body
             p5.fill(0,0,200)
-            p5.triangle(position.x-7,position.y-40,position.x+7,position.y-40,position.x,position.y-50);
-            p5.rect(position.x-7,position.y-40,14,30);
-            p5.ellipse(position.x-3,position.y-10,4,6);
-            p5.ellipse(position.x+5,position.y-10,4,6);
+            p5.triangle(-7,-15,+7,-15,0,-25);
+            p5.rect(-7,-15,14,30);
+            p5.ellipse(-3,15,4,6);
+            p5.ellipse(+5,15,4,6);
             //eyes
             p5.fill(255,255,102)
-            p5.ellipse(position.x-3,position.y-37,5,7)
+            p5.ellipse(-3,-12,5,7)
+            p5.pop();
         }
+        // Move right
         else if( this.isRight )
         {
-            // add your walking right code
+            p5.push();
+            p5.translate(position.x,position.y);
             //body
             p5.fill(0,0,200)
-            p5.triangle(position.x-7,position.y-40,position.x+7,position.y-40,position.x,position.y-50);
-            p5.rect(position.x-7,position.y-40,14,30);
-            p5.ellipse(position.x-3,position.y-10,4,6);
-            p5.ellipse(position.x+5,position.y-10,4,6);
+            p5.triangle(-7, -15,+7, -15,0, -25);
+            p5.rect(-7, -15,14,30);
+            p5.ellipse(-3, 15,4,6);
+            p5.ellipse(+5, 15,4,6);
             //eyes
             p5.fill(255,255,102)
-            p5.ellipse(position.x+3,position.y-37,5,7)
+            p5.ellipse(+3, -12,5,7);
+            p5.pop();
             
         }
         else if( this.isFalling || this.isPlummeting)
