@@ -6,6 +6,7 @@ import {
   Engine,
   Bodies,
   Composite,
+  Collision,
 } from "matter-js";
 import { Player } from './player.js'
 import TouchControl from './touchControl.jsx';
@@ -46,6 +47,7 @@ export default function Game() {
     drawVertices(p5, player.physics.vertices)
     drawVertices(p5, ground.vertices)
     player.run(p5)
+    if(Collision.collides(player.physics,ground)) console.log("ground collision")
   };
 
   return (
