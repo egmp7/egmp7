@@ -1,4 +1,5 @@
 import {Bodies, Body, Vector} from "matter-js";
+import { drawVertices } from "./utilities";
 
 export class Player
 {
@@ -12,7 +13,7 @@ export class Player
         this.isFalling = false;
         this.isPlummeting = false;
         this.isJumping = false;   
-        this.physics = Bodies.rectangle(x, y, 20, 50,{inertia: Infinity});
+        this.matter = Bodies.rectangle(x, y, 20, 50,{inertia: Infinity});
 
     }
 
@@ -46,7 +47,8 @@ export class Player
     }
 
     run = function (p5){
-        this.draw(p5,this.physics.position);
+        drawVertices(p5, this.matter.vertices)
+        this.draw(p5,this.matter.position);
         this.move();
         this.jump();
     }
@@ -54,14 +56,14 @@ export class Player
     move = function (){
         const speed = 5;
 
-        if( this.isRight ) Body.setVelocity(this.physics, Vector.create( speed, this.physics.velocity.y));
-        if( this.isLeft ) Body.setVelocity(this.physics, Vector.create( -speed, this.physics.velocity.y));
+        if( this.isRight ) Body.setVelocity(this.matter, Vector.create( speed, this.matter.velocity.y));
+        if( this.isLeft ) Body.setVelocity(this.matter, Vector.create( -speed, this.matter.velocity.y));
     }
 
     jump = function () {
         const speed = 10; 
         
-        if( this.isJumping ) Body.setVelocity(this.physics, Vector.create( this.physics.velocity.x, -speed))
+        if( this.isJumping ) Body.setVelocity(this.matter, Vector.create( this.matter.velocity.x, -speed))
      }
 
     draw = function (p5,position)

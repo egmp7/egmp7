@@ -1,53 +1,31 @@
 'use client';
-
 import dynamic from 'next/dynamic'
-import { Howl, Howler } from 'howler';
-import {
-  Engine,
-  Bodies,
-  Composite,
-  Collision,
-} from "matter-js";
+import { Engine,Composite,Collision, } from "matter-js";
 import { Player } from './player.js'
+import { Ground } from './ground.js';
 import TouchControl from './touchControl.jsx';
-import { drawVertices } from './utilities.js';
 import KeyboardControl from './keyboardControl.jsx'
 const Sketch = dynamic(() => import("react-p5"), { ssr: false });
 
-var engine;
-var ground;
-let width = 500;
-let height = 500;
-var ground;
-var player = new Player(200,100) ;
-var sound = new Howl({
-  src: ['/tictoc.mp3']
-});
+const engine = Engine.create();
+let canvasWidth = 500;
+let canvasHeight = 500;
+const ground = new Ground(250,500,canvasWidth,60);
+const player = new Player(200,100) ;
+Composite.add(engine.world, [player.matter, ground.matter]);
 
 export default function Game() {
 
   const setup = (p5, canvasParentRef) => {
-
-    // CANVAS
-    p5.createCanvas(width, height).parent(canvasParentRef)
-    // MATTER
-    // create an engine
-    engine = Engine.create();
-    // create two boxes and a ground
-    ground = Bodies.rectangle(250, 500, width, 60, { isStatic: true });
-    // add all of the bodies to the world
-    Composite.add(engine.world, [player.physics, ground]);
-    
+    p5.createCanvas(canvasWidth, canvasHeight).parent(canvasParentRef)
   }
 
   const draw = (p5) => {
-    p5.background(255, 130, 20)
+    p5.background(255);
     Engine.update(engine);
-
-    drawVertices(p5, player.physics.vertices)
-    drawVertices(p5, ground.vertices)
     player.run(p5)
-    if(Collision.collides(player.physics,ground)) console.log("ground collision")
+    ground.run(p5)
+    if(Collision.collides(player.matter,ground.matter)) console.log("ground collision")
   };
 
   return (
