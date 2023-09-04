@@ -1,5 +1,5 @@
 import { Bodies } from "matter-js";
-import { drawVertices } from "./utilities";
+import { drawVertices } from "../resources/utilities";
 
 export class Ground{
     constructor(x,y,width,height){

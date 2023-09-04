@@ -1,7 +1,7 @@
 'use client';
 import dynamic from 'next/dynamic'
-import TouchControl from './touchControl.jsx';
-import KeyboardControl from './keyboardControl.jsx'
+import TouchControl from './controllers/touchControl.jsx';
+import KeyboardControl from './controllers/keyboardControl.jsx'
 import { Game } from './game.js';
 const Sketch = dynamic(() => import("react-p5"), { ssr: false });
 

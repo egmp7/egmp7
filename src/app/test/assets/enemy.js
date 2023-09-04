@@ -1,4 +1,4 @@
-import { drawVertices } from "./utilities";
+import { drawVertices } from "../resources/utilities";
 import { Bodies, Body, Vector } from "matter-js";
 
 export class Enemy {

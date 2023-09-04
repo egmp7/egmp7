@@ -1,5 +1,5 @@
-import { Player } from "./player"
-import { Ground } from "./ground"
+import { Player } from "./assets/player"
+import { Ground } from "./assets/ground"
 
 export const level1 ={
     player : new Player(200, 100),

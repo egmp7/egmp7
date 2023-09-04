@@ -1,5 +1,5 @@
 import {Bodies, Body, Vector} from "matter-js";
-import { drawVertices } from "./utilities";
+import { drawVertices } from "../resources/utilities";
 
 export class Player
 {
