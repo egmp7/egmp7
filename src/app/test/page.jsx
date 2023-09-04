@@ -3,6 +3,7 @@ import dynamic from 'next/dynamic'
 import { Engine,Composite,Collision, } from "matter-js";
 import { Player } from './player.js'
 import { Ground } from './ground.js';
+import {Enemy} from './enemy.js'
 import TouchControl from './touchControl.jsx';
 import KeyboardControl from './keyboardControl.jsx'
 const Sketch = dynamic(() => import("react-p5"), { ssr: false });
@@ -11,8 +12,9 @@ const engine = Engine.create();
 let canvasWidth = 500;
 let canvasHeight = 500;
 const ground = new Ground(250,500,canvasWidth,60);
-const player = new Player(200,100) ;
-Composite.add(engine.world, [player.matter, ground.matter]);
+const player = new Player(200,100);
+const enemy1 = new Enemy(300,400,150, engine.gravity);
+Composite.add(engine.world, [player.matter, ground.matter, enemy1.body]);
 
 export default function Game() {
 
@@ -25,6 +27,7 @@ export default function Game() {
     Engine.update(engine);
     player.run(p5)
     ground.run(p5)
+    enemy1.run(p5)
     if(Collision.collides(player.matter,ground.matter)) console.log("ground collision")
   };
 
