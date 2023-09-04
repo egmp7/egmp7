@@ -3,6 +3,8 @@ import dynamic from 'next/dynamic'
 import TouchControl from './controllers/touchControl.jsx';
 import KeyboardControl from './controllers/keyboardControl.jsx'
 import { Game } from './game.js';
+import Control from "./controllers/control.js"
+
 const Sketch = dynamic(() => import("react-p5"), { ssr: false });
 
 const game = new Game();
@@ -23,10 +25,10 @@ export default function GameSketch() {
   return (
     <>
       <div className="relative">
-        <TouchControl name={"left"} player={game.player} />
-        <TouchControl name={"right"} player={game.player} />
-        <TouchControl name={"jump"} player={game.player} />
-        <KeyboardControl player={game.player} />
+        <TouchControl name={"left"}  />
+        <TouchControl name={"right"}  />
+        <TouchControl name={"jump"}  />
+        <KeyboardControl />
         <Sketch setup={setup} draw={draw} />
       </div>
     </>);

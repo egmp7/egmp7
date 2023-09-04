@@ -1,5 +1,6 @@
 import dynamic from 'next/dynamic'
 import { classNames } from '../resources/utilities.js';
+import control from './control.js';
 const Sketch = dynamic(() => import("react-p5"), { ssr: false });
 
 const buttonWidth = 50;
@@ -15,15 +16,15 @@ export default function TouchControl({ name , player }) {
     }
 
     function touchStart() {
-        if (name === "left") player.setIsLeft(true)
-        if (name === "right") player.setIsRight(true)
-        if (name === "jump") player.setIsJumping(true)
+        if (name === "left") control.setLeft(true)
+        if (name === "right") control.setRight(true)
+        if (name === "jump") control.setJump(true)
     }
 
     function touchEnd() {
-        if (name === "left") player.setIsLeft(false)
-        if (name === "right") player.setIsRight(false)
-        if (name === "jump") player.setIsJumping(false)
+        if (name === "left") control.setLeft(false)
+        if (name === "right") control.setRight(false)
+        if (name === "jump") control.setJump(false)
     }
 
     return (

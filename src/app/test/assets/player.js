@@ -1,5 +1,6 @@
 import {Bodies, Body, Vector} from "matter-js";
 import { drawVertices } from "../resources/utilities";
+import control from "../controllers/control";
 
 export default class Player
 {
@@ -56,14 +57,14 @@ export default class Player
     move = function (){
         const speed = 5;
 
-        if( this.isRight ) Body.setVelocity(this.body, Vector.create( speed, this.body.velocity.y));
-        if( this.isLeft ) Body.setVelocity(this.body, Vector.create( -speed, this.body.velocity.y));
+        if( control.right ) Body.setVelocity(this.body, Vector.create( speed, this.body.velocity.y));
+        if( control.left ) Body.setVelocity(this.body, Vector.create( -speed, this.body.velocity.y));
     }
 
     jump = function () {
         const speed = 10; 
         
-        if( this.isJumping ) Body.setVelocity(this.body, Vector.create( this.body.velocity.x, -speed))
+        if( control.jump ) Body.setVelocity(this.body, Vector.create( this.body.velocity.x, -speed))
      }
 
     draw = function (p5,position)
