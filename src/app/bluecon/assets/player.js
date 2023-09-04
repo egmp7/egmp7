@@ -1,6 +1,6 @@
 import {Bodies, Body, Vector} from "matter-js";
 import { drawVertices } from "../resources/utilities";
-import control from "../controllers/control";
+import control from "../globals/control";
 
 export default class Player
 {

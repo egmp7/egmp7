@@ -1,6 +1,6 @@
 import { drawVertices } from "../resources/utilities";
 import { Bodies, Body, Vector } from "matter-js";
-import  Matter  from "../physics";
+import  Matter  from "../globals/physics";
 
 export default class Enemy {
     constructor(body, range) {

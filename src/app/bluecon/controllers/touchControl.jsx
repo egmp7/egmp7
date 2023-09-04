@@ -1,6 +1,6 @@
 import dynamic from 'next/dynamic'
 import { classNames } from '../resources/utilities.js';
-import control from './control.js';
+import control from '../globals/control.js';
 const Sketch = dynamic(() => import("react-p5"), { ssr: false });
 
 const buttonWidth = 50;

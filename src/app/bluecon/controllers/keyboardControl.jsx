@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import control from './control';
+import control from '../globals/control';
 
 export default function KeyboardControl() {
     useEffect(() => {
