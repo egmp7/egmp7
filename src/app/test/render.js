@@ -11,7 +11,7 @@ class Render {
 
     /**
      * Add elements for rendering with p5
-     * @param {Array or single Matter.Body} elements 
+     * @param {[]Matter.Body} elements 
      * @param {string} name 
      */
     add(elements, name) {

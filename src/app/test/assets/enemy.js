@@ -6,7 +6,6 @@ export default class Enemy {
     constructor(body, range) {
         this.body = body;
         this.x = body.position.x;
-        this.y = body.position.y;
         this.range = range;
         this.currentX = body.position.x;
         this.inc = 1;

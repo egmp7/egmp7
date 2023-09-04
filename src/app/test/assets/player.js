@@ -18,35 +18,6 @@ export default class Player
 
     }
 
-    setX = function ( value )
-    {
-        this.x = value;
-    }
-
-    setY = function ( value )
-    {
-        this.y = value;
-    }
-
-    setIsLeft =function(bool)
-    {
-        this.isLeft = bool;
-    }
-
-    setIsRight = function (bool)
-    {
-        this.isRight = bool;
-    }
-
-    setIsFalling =function(bool)
-    {
-        this.isFalling = bool;
-    }
-
-    setIsJumping = function(bool){
-        this.isJumping = bool;
-    }
-
     run = function (p5){
         drawVertices(p5, this.body.vertices)
         this.draw(p5,this.body.position);
@@ -69,9 +40,6 @@ export default class Player
 
     draw = function (p5,position)
     {
-        // this.isLeft = PLAYER_CONTROLLER.getMoveLeft()
-        // this.isRight = PLAYER_CONTROLLER.getMoveRight()
-        // this.isFalling = PLAYER_CONTROLLER.checkIfJumping()
 
         if( this.isLeft && this.isFalling )
         {
@@ -114,7 +82,7 @@ export default class Player
             
         }
         // Move left
-        else if( this.isLeft )
+        else if( control.left )
         {
             p5.push();
             p5.translate(position.x,position.y);
@@ -130,7 +98,7 @@ export default class Player
             p5.pop();
         }
         // Move right
-        else if( this.isRight )
+        else if( control.right )
         {
             p5.push();
             p5.translate(position.x,position.y);

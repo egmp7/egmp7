@@ -14,7 +14,8 @@ const LevelOne ={
 
     enemies : [
        
-        Bodies.rectangle(270, 300, 20, 44, enemiesOptions )
+        Bodies.rectangle(270, 300, 20, 44, enemiesOptions ),
+        Bodies.rectangle(40, 300, 20, 44, enemiesOptions )
     ]
 
 } 
