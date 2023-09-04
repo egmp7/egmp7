@@ -1,19 +1,19 @@
 import {Bodies, Body, Vector} from "matter-js";
 import { drawVertices } from "../resources/utilities";
 
-export class Player
+export default class Player
 {
-    constructor(x,y)
+    constructor(body)
 
     {
-        this.x=x;
-        this.y=y;
+        this.x=0;
+        this.y=0;
         this.isLeft = false;
         this.isRight = false;
         this.isFalling = false;
         this.isPlummeting = false;
         this.isJumping = false;   
-        this.matter = Bodies.rectangle(x, y, 20, 50,{inertia: Infinity});
+        this.body = body
 
     }
 
@@ -47,8 +47,8 @@ export class Player
     }
 
     run = function (p5){
-        drawVertices(p5, this.matter.vertices)
-        this.draw(p5,this.matter.position);
+        drawVertices(p5, this.body.vertices)
+        this.draw(p5,this.body.position);
         this.move();
         this.jump();
     }
@@ -56,14 +56,14 @@ export class Player
     move = function (){
         const speed = 5;
 
-        if( this.isRight ) Body.setVelocity(this.matter, Vector.create( speed, this.matter.velocity.y));
-        if( this.isLeft ) Body.setVelocity(this.matter, Vector.create( -speed, this.matter.velocity.y));
+        if( this.isRight ) Body.setVelocity(this.body, Vector.create( speed, this.body.velocity.y));
+        if( this.isLeft ) Body.setVelocity(this.body, Vector.create( -speed, this.body.velocity.y));
     }
 
     jump = function () {
         const speed = 10; 
         
-        if( this.isJumping ) Body.setVelocity(this.matter, Vector.create( this.matter.velocity.x, -speed))
+        if( this.isJumping ) Body.setVelocity(this.body, Vector.create( this.body.velocity.x, -speed))
      }
 
     draw = function (p5,position)

@@ -1,20 +1,21 @@
 import { drawVertices } from "../resources/utilities";
 import { Bodies, Body, Vector } from "matter-js";
+import  Matter  from "../physics";
 
-export class Enemy {
-    constructor(x, y, range, gravity) {
-        this.x = x;
-        this.y = y;
+export default class Enemy {
+    constructor(body, range) {
+        this.body = body;
+        this.x = body.position.x;
+        this.y = body.position.y;
         this.range = range;
-        this.currentX = x;
+        this.currentX = body.position.x;
         this.inc = 1;
-        this.body = Bodies.rectangle(x, y, 20, 44, { inertia: Infinity, density: 1 });
-        this.gravity = gravity;
+        
     }
 
     run(p5) {
         drawVertices(p5, this.body.vertices)
-        this.reverseGravity(this.gravity,this.body)
+        this.reverseGravity( Matter.engine.gravity , this.body )
         this.updateEnemyPosition(
             this.body, 
             this.currentX, 

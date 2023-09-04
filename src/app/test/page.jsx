@@ -17,7 +17,6 @@ export default function GameSketch() {
   }
 
   const draw = (p5) => {
-    p5.background(255);
     game.run(p5)
   };
 
