@@ -1,8 +1,7 @@
-import { Composite, Bodies, Collision } from "matter-js";
+import { Composite, Engine, Collision } from "matter-js";
 import Physics from "./physics";
 import Render from "./render"
 import LevelOne from "./levelOne";
-import { drawVertices } from "./resources/utilities";
 
 export class Game {
     constructor() {
@@ -19,6 +18,7 @@ export class Game {
 
     run(p5) {
         p5.background(255);
+        Engine.update(Physics.engine)
         Render.run(p5);
 
 
