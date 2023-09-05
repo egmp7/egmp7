@@ -1,12 +1,16 @@
 import {Bodies, Body, Vector} from "matter-js";
 import { drawVertices } from "../resources/utilities";
 import control from "../globals/control";
+import display from "../globals/display";
 
 export default class Player
 {
     constructor(body)
 
     {
+        this.body = body
+        display.scaleBodies(body)
+        Body.setInertia(body, Infinity)
         this.x=0;
         this.y=0;
         this.isLeft = false;
@@ -14,13 +18,11 @@ export default class Player
         this.isFalling = false;
         this.isPlummeting = false;
         this.isJumping = false;   
-        this.body = body
-
     }
 
     run = function (p5){
         drawVertices(p5, this.body.vertices)
-        this.draw(p5,this.body.position);
+        //this.draw(p5,this.body.position);
         this.move();
         this.jump();
     }
