@@ -1,20 +1,22 @@
 import { drawVertices } from "../resources/utilities";
-import { Bodies, Body, Vector } from "matter-js";
-import  Matter  from "../globals/physics";
+import { Body, Vector } from "matter-js";
+import display from "../globals/display";
+import  physics  from "../globals/physics";
 
 export default class Enemy {
     constructor(body, range) {
         this.body = body;
+        display.scaleBodies(body);
+        Body.setInertia(body, Infinity)
         this.x = body.position.x;
         this.range = range;
         this.currentX = body.position.x;
         this.inc = 1;
-        
     }
 
     run(p5) {
         drawVertices(p5, this.body.vertices)
-        this.reverseGravity( Matter.engine.gravity , this.body )
+        this.reverseGravity( physics.engine.gravity , this.body )
         this.updateEnemyPosition(
             this.body, 
             this.currentX, 
@@ -22,7 +24,7 @@ export default class Enemy {
             this.range, 
             this.inc);
         
-        this.draw(p5,this.body.position)
+        //this.draw(p5,this.body.position)
     }
 
     /**

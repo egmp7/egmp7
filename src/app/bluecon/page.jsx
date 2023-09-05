@@ -2,6 +2,7 @@
 import dynamic from 'next/dynamic'
 import TouchControl from './controllers/touchControl.jsx';
 import KeyboardControl from './controllers/keyboardControl.jsx'
+import display from "./globals/display.js"
 import Game from './game.js';
 
 const Sketch = dynamic(() => import("react-p5"), { ssr: false });
@@ -10,11 +11,17 @@ const game = new Game();
 
 export default function GameSketch() {
 
-  const canvasWidth = 500;
-  const canvasHeight = 500; 
+  const scale = display.scale;
+  const canvasWidth = 1600 * scale;
+  const canvasHeight = 900 * scale;
 
   const setup = (p5, canvasParentRef) => {
-    p5.createCanvas(canvasWidth, canvasHeight).parent(canvasParentRef)
+    const cnv = p5.createCanvas(canvasWidth, canvasHeight).parent(canvasParentRef);
+    cnv.style("position", "absolute");
+    cnv.style("top", "0");
+    cnv.style("left", "0");
+    cnv.style("width", "100%");
+    cnv.style("height", "100%");
   }
 
   const draw = (p5) => {
@@ -23,12 +30,12 @@ export default function GameSketch() {
 
   return (
     <>
-      <div className="relative">
-        <TouchControl name={"left"}  />
-        <TouchControl name={"right"}  />
-        <TouchControl name={"jump"}  />
-        <KeyboardControl />
+      <div className="relative pb-[56.25%] max-m-[43.75%] h-0">
         <Sketch setup={setup} draw={draw} />
+        <TouchControl name={"left"} />
+        <TouchControl name={"right"} />
+        <TouchControl name={"jump"} />
+        <KeyboardControl />
       </div>
     </>);
 }
