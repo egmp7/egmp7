@@ -10,11 +10,17 @@ const game = new Game();
 
 export default function GameSketch() {
 
-  const canvasWidth = 500;
-  const canvasHeight = 500; 
+  const scale = 1;
+  const canvasWidth = 1600 * scale;
+  const canvasHeight = 900 * scale;
 
   const setup = (p5, canvasParentRef) => {
-    p5.createCanvas(canvasWidth, canvasHeight).parent(canvasParentRef)
+    const cnv = p5.createCanvas(canvasWidth, canvasHeight).parent(canvasParentRef);
+    cnv.style("position", "absolute");
+    cnv.style("top", "0");
+    cnv.style("left", "0");
+    cnv.style("width", "100%");
+    cnv.style("height", "100%");
   }
 
   const draw = (p5) => {
@@ -23,12 +29,12 @@ export default function GameSketch() {
 
   return (
     <>
-      <div className="relative">
-        <TouchControl name={"left"}  />
-        <TouchControl name={"right"}  />
-        <TouchControl name={"jump"}  />
-        <KeyboardControl />
+      <div className="relative pb-[56.25%] max-m-[43.75%] h-0">
         <Sketch setup={setup} draw={draw} />
+        <TouchControl name={"left"} />
+        <TouchControl name={"right"} />
+        <TouchControl name={"jump"} />
+        <KeyboardControl />
       </div>
     </>);
 }

@@ -30,9 +30,9 @@ export default function TouchControl({ name , player }) {
     return (
         <button
             className={classNames(
-                name === "left" ? "top-[400px] left-[30px]" :
-                name === "right" ? "top-[400px] left-[100px]" :
-                name === "jump" ? "top-[400px] left-[250px]" :
+                name === "left" ? "bottom-[40px] left-[30px]" :
+                name === "right" ? "bottom-[40px] left-[100px]" :
+                name === "jump" ? "bottom-[40px] right-[30px]" :
                 "", `absolute rounded-full w-[${buttonWidth}px] h-[${buttonHeight}px] `)}
             onTouchStart={e => touchStart()}
             onTouchEnd={e => touchEnd()}
