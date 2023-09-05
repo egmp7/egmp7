@@ -2,6 +2,7 @@
 import dynamic from 'next/dynamic'
 import TouchControl from './controllers/touchControl.jsx';
 import KeyboardControl from './controllers/keyboardControl.jsx'
+import display from "./globals/display.js"
 import Game from './game.js';
 
 const Sketch = dynamic(() => import("react-p5"), { ssr: false });
@@ -10,7 +11,7 @@ const game = new Game();
 
 export default function GameSketch() {
 
-  const scale = 1;
+  const scale = display.scale;
   const canvasWidth = 1600 * scale;
   const canvasHeight = 900 * scale;
 
