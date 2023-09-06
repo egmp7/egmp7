@@ -1,3 +1,4 @@
+'use client'
 import dynamic from 'next/dynamic'
 import { classNames } from '../resources/utilities.js';
 import control from '../globals/control.js';
