@@ -1,7 +1,7 @@
 'use client';
 import dynamic from 'next/dynamic'
-import TouchControl from './controllers/touchControl.jsx';
-import KeyboardControl from './controllers/keyboardControl.jsx'
+import TouchControl from './components/touchControl.jsx';
+import KeyboardControl from './components/keyboardControl.jsx'
 import display from "./globals/display.js"
 import Game from './game.js';
 
