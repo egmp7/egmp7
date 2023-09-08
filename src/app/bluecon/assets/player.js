@@ -2,6 +2,10 @@ import { Bodies, Body, Vector } from "matter-js";
 import { drawVertices } from "../resources/utilities";
 import control from "../globals/control";
 import display from "../globals/display";
+import frontAnimation from "./animations/player/front"
+import leftAnimation from "./animations/player/left"
+import rightAnimation from "./animations/player/right"
+
 
 export default class Player {
     constructor(body) {
@@ -49,17 +53,10 @@ export default class Player {
         p5.translate(position.x, position.y + yOffset * display.scale)
         p5.scale(1.7 * display.scale)
 
-        // body
-        p5.fill(0, 0, 200)
-        p5.triangle(-10, -15, 10, -15, 0, -25);
-        p5.rect(-10, -15, 20, 30);
-        // legs
-        p5.rect(-6, 15, 4, 10);
-        p5.rect(+2, 15, 4, 10);
-        // eyes
-        p5.fill(255, 255, 102)
-        p5.ellipse(-3, -13, 5, 7)
-        p5.ellipse(+3, -13, 5, 7)
+        if (control.left) leftAnimation(p5)
+        else if (control.right) rightAnimation(p5)
+        
+        else frontAnimation(p5)
         p5.pop()
 
         // if( this.isLeft && this.isFalling )
