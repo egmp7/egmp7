@@ -20,6 +20,6 @@ export default class Game {
     run(p5) {
         Engine.update(physics.engine)
         render.run(p5);
-        physics.checkGroundCollisions(LevelOneBodies.player, LevelOneBodies.grounds)
+        physics.checkGroundCollisions(LevelOneBodies.player.parts[2], LevelOneBodies.grounds)
     }
 }

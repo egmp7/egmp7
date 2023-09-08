@@ -21,7 +21,7 @@ export default class Player {
     run = function (p5) {
         //drawVertices(p5, this.body.vertices);
         this.draw(p5, this.body.position);
-        drawVertices(p5, this.body.vertices);
+        //drawVertices(p5, this.body.parts[2].vertices);
         this.moveSides();
         this.jump();
     }
@@ -35,8 +35,9 @@ export default class Player {
     }
 
     jump = function () {
-        const speed = 6;
-        if (control.jump && physics.isPlayerOnGround()) Body.setVelocity(this.body, Vector.create(this.body.velocity.x, -speed))
+        const force = (-0.013 * this.body.mass) ;
+        if (control.jump && physics.isPlayerOnGround())
+            Body.applyForce(this.body, this.body.position, {x:0, y:force})
     }
 
     draw = function (p5, position) {
