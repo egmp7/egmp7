@@ -22,10 +22,12 @@ export default class Player {
     canDoubleJump = { isInAir: false, isFirstJump: false };
 
     run = function (p5) {
+
         //drawVertices(p5, this.body.vertices);
         this.draw(p5, this.body.position);
         // drawVertices(p5, this.body.parts[3].vertices);
         // drawVertices(p5, this.body.parts[4].vertices);
+
         this.moveSides();
         this.jump();
         this.doubleJump();
