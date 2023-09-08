@@ -11,7 +11,6 @@ class Render {
         else elements.forEach(element => {this.elements.push(element)});
     }
     run(p5) {
-        p5.background(255);
         this.elements.forEach(element => {
             element.run(p5)
         });

@@ -20,13 +20,6 @@ export default class Game {
     run(p5) {
         Engine.update(physics.engine)
         render.run(p5);
-
-        // this.checkCollisions()
-    }
-
-    checkCollisions() {
-        // this.grounds.forEach(ground => {
-        //     if (Collision.collides(this.player.matter, ground.matter)) console.log("ground collision")
-        // });
+        physics.checkGroundCollisions(LevelOneBodies.player, LevelOneBodies.grounds)
     }
 }
