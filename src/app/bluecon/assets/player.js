@@ -12,11 +12,14 @@ import physics from "../globals/physics";
 
 
 export default class Player {
+
     constructor(body) {
         this.body = body
         display.scaleBodies(body)
         Body.setInertia(body, Infinity)
     }
+
+    canDoubleJump={isInAir: false, isFirstJump: false};
 
     run = function (p5) {
         //drawVertices(p5, this.body.vertices);
@@ -24,6 +27,7 @@ export default class Player {
         //drawVertices(p5, this.body.parts[2].vertices);
         this.moveSides();
         this.jump();
+        this.doubleJump();
     }
 
     moveSides = function () {
@@ -37,7 +41,30 @@ export default class Player {
     jump = function () {
         const force = (-0.013 * this.body.mass) ;
         if (control.jump && physics.isPlayerOnGround())
-            Body.applyForce(this.body, this.body.position, {x:0, y:force})
+            Body.applyForce(this.body, this    .body.position, {x:0, y:force})
+    }
+
+    doubleJump= function(){
+        
+        // calc velocity
+        var velocity;
+        if(this.body.velocity.y < 0) velocity = Vector.create(this.body.velocity.x, this.body.velocity.y);
+        else velocity = Vector.create(this.body.velocity.x, - this.body.velocity.y);
+        
+        // double jump
+        if (control.jump && this.canDoubleJump.isInAir && this.canDoubleJump.isFirstJump){
+            Body.setVelocity(this.body, velocity);
+            this.canDoubleJump.isFirstJump = false;
+        }
+        
+        // check if player is in the air
+        this.canDoubleJump.isInAir = false;
+        if (!control.jump && !physics.isPlayerOnGround())
+            this.canDoubleJump.isInAir = true;
+
+        // check if it is the first jump
+        if(control.jump && physics.isPlayerOnGround())
+            this.canDoubleJump.isFirstJump = true;
     }
 
     draw = function (p5, position) {
