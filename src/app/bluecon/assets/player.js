@@ -19,15 +19,17 @@ export default class Player {
         Body.setInertia(body, Infinity)
     }
 
-    canDoubleJump={isInAir: false, isFirstJump: false};
+    canDoubleJump = { isInAir: false, isFirstJump: false };
 
     run = function (p5) {
         //drawVertices(p5, this.body.vertices);
         this.draw(p5, this.body.position);
-        //drawVertices(p5, this.body.parts[2].vertices);
+        // drawVertices(p5, this.body.parts[3].vertices);
+        // drawVertices(p5, this.body.parts[4].vertices);
         this.moveSides();
         this.jump();
         this.doubleJump();
+        this.noSideFriction();
     }
 
     moveSides = function () {
@@ -39,33 +41,41 @@ export default class Player {
     }
 
     jump = function () {
-        const force = (-0.013 * this.body.mass) ;
+        const force = (-0.013 * this.body.mass);
         if (control.jump && physics.isPlayerOnGround())
-            Body.applyForce(this.body, this    .body.position, {x:0, y:force})
+            Body.applyForce(this.body, this.body.position, { x: 0, y: force })
     }
 
-    doubleJump= function(){
-        
+    doubleJump = function () {
+
         // calc velocity
         const speed = - 2;
         var velocity;
-        if(this.body.velocity.y < 0) velocity = Vector.create(this.body.velocity.x, this.body.velocity.y + speed);
+        if (this.body.velocity.y < 0) velocity = Vector.create(this.body.velocity.x, this.body.velocity.y + speed);
         else velocity = Vector.create(this.body.velocity.x, - this.body.velocity.y);
-        
+
         // double jump
-        if (control.jump && this.canDoubleJump.isInAir && this.canDoubleJump.isFirstJump){
+        if (control.jump && this.canDoubleJump.isInAir && this.canDoubleJump.isFirstJump) {
             Body.setVelocity(this.body, velocity);
             this.canDoubleJump.isFirstJump = false;
         }
-        
+
         // check if player is in the air
         this.canDoubleJump.isInAir = false;
         if (!control.jump && !physics.isPlayerOnGround())
             this.canDoubleJump.isInAir = true;
 
         // check if it is the first jump
-        if(control.jump && physics.isPlayerOnGround())
+        if (control.jump && physics.isPlayerOnGround())
             this.canDoubleJump.isFirstJump = true;
+    }
+
+    noSideFriction = function () {
+        if (physics.isPlayerCollidingLeft())
+            Body.setPosition(this.body, { x: this.body.position.x + 2, y: this.body.position.y })
+
+        if (physics.isPlayerCollidingRight())
+            Body.setPosition(this.body, { x: this.body.position.x - 2, y: this.body.position.y })
     }
 
     draw = function (p5, position) {

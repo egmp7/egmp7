@@ -4,7 +4,9 @@ class Physics {
     constructor() {
         this.engine = Engine.create();
         this.collisions = {
-            ground: false
+            ground: false,
+            left: false,
+            right: false
         }
     }
 
@@ -17,6 +19,28 @@ class Physics {
 
     isPlayerOnGround(){
         return this.collisions.ground;
+    }
+
+    checkLeftCollisions( player,  grounds ) {
+        this.collisions.left = false
+        grounds.forEach(ground => {
+            if (Collision.collides( player, ground )) this.collisions.left = true
+        });
+    }
+
+    checkRightCollisions( player,  grounds ) {
+        this.collisions.right = false
+        grounds.forEach(ground => {
+            if (Collision.collides( player, ground )) this.collisions.right = true
+        });
+    }
+
+    isPlayerCollidingLeft(){
+        return this.collisions.left;
+    }
+
+    isPlayerCollidingRight(){
+        return this.collisions.right;
     }
 }
 
