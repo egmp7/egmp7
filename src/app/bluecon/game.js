@@ -11,9 +11,9 @@ export default class Game {
         Composite.add(physics.engine.world,LevelOneBodies.grounds)
         Composite.add(physics.engine.world,LevelOneBodies.enemies)
         
-        render.add(LevelOneAssets.player)
         render.add(LevelOneAssets.grounds)
         render.add(LevelOneAssets.enemies)
+        render.add(LevelOneAssets.player)
         
     }
 

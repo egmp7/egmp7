@@ -7,7 +7,7 @@ const enemies = {
 
 const LevelOneBodies = {
     player:
-        Bodies.rectangle(0, 200, 20, 50),
+        Bodies.rectangle(0, 200, 36, 82),
     grounds: [
         Bodies.rectangle(100, 800, 500, 200),
         Bodies.rectangle(1050, 800, 800, 200)
