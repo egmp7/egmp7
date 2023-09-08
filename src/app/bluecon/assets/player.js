@@ -19,9 +19,9 @@ export default class Player {
     }
 
     run = function (p5) {
-        //drawVertices(p5, this.body.vertices);
-        this.draw(p5, this.body.position);
         drawVertices(p5, this.body.vertices);
+        this.draw(p5, this.body.position);
+        //drawVertices(p5, this.body.vertices);
         this.moveSides();
         this.jump();
     }
