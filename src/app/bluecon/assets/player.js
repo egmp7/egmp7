@@ -47,8 +47,9 @@ export default class Player {
     doubleJump= function(){
         
         // calc velocity
+        const speed = - 2;
         var velocity;
-        if(this.body.velocity.y < 0) velocity = Vector.create(this.body.velocity.x, this.body.velocity.y);
+        if(this.body.velocity.y < 0) velocity = Vector.create(this.body.velocity.x, this.body.velocity.y + speed);
         else velocity = Vector.create(this.body.velocity.x, - this.body.velocity.y);
         
         // double jump
