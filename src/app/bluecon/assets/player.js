@@ -1,15 +1,15 @@
-import { Bodies, Body, Vector } from "matter-js";
 import { drawVertices } from "../resources/utilities";
+import { Body, Vector } from "matter-js";
 import control from "../globals/control";
 import display from "../globals/display";
-import frontAnimation from "./animations/player/front"
-import leftAnimation from "./animations/player/left"
-import rightAnimation from "./animations/player/right"
-import leftFallingAnimation from "./animations/player/leftFalling"
-import rightFallingAnimation from "./animations/player/rightFalling"
-import fallingAnimation from "./animations/player/falling"
 import physics from "../globals/physics";
-
+import { 
+    frontAnimation, 
+    leftFallingAnimation,
+    rightFallingAnimation,
+    leftAnimation,
+    rightAnimation,
+    fallingAnimation } from "./animations/player"
 
 export default class Player {
 
