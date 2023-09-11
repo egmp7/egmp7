@@ -3,19 +3,20 @@ import { Body, Vector } from "matter-js";
 import control from "../globals/control";
 import display from "../globals/display";
 import physics from "../globals/physics";
-import { 
-    frontAnimation, 
+import Asset from "../asset"
+import {
+    frontAnimation,
     leftFallingAnimation,
     rightFallingAnimation,
     leftAnimation,
     rightAnimation,
-    fallingAnimation } from "./animations/player"
+    fallingAnimation
+} from "./animations/player"
 
-export default class Player {
+export default class Player extends Asset {
 
     constructor(body) {
-        this.body = body
-        display.scaleBodies(body)
+        super(body)
         Body.setInertia(body, Infinity)
     }
 
