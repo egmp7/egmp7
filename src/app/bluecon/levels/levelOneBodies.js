@@ -1,46 +1,39 @@
 import { Bodies, Body } from "matter-js"
 
-const enemies = {
-    width: 20,
-    height: 44    
-}
-
-const playerPosition = {x:50,y:200}
-const playerHeight = 82;
-const playerWidth = 36;
+const playerRectangle = { x: 50, y: 200, w: 36, h: 82 }
 
 const playerBody = Bodies.rectangle(
-    playerPosition.x, 
-    playerPosition.y, 
-    playerWidth, 
-    playerHeight);
+    playerRectangle.x,
+    playerRectangle.y,
+    playerRectangle.w,
+    playerRectangle.h);
+
 const playerFloorSensor = Bodies.circle(
-    playerPosition.x,
-    playerPosition.y + playerHeight/2 ,
-    2,
-    {isSensor: true});
-const playerLeftSensor = Bodies.circle(
-    playerPosition.x - playerWidth/2,
-    playerPosition.y + playerHeight/2 - 4,
-    2,
-    {isSensor: true});
-const playerRightSensor = Bodies.circle(
-    playerPosition.x + playerWidth/2,
-    playerPosition.y + playerHeight/2 - 4,
-    2,
-    {isSensor: true});
+    playerRectangle.x,
+    playerRectangle.y + playerRectangle.h / 2,
+    2,  // radius
+    { isSensor: true });
+
+const enemies = {
+    width: 20,
+    height: 44
+}
 
 const LevelOneBodies = {
-    player:Body.create({parts: [playerBody, playerFloorSensor,playerLeftSensor,playerRightSensor]}),
+    player: Body.create({
+        parts: [playerBody, playerFloorSensor],
+        friction: 0,
+        inertia: Infinity
+    }),
     grounds: [
-        Bodies.rectangle(100, 800, 500, 200),
-        Bodies.rectangle(1050, 800, 800, 200),
-        Bodies.rectangle(1250, 700, 800, 200)
+        Bodies.rectangle(100, 600, 500, 200),
+        Bodies.rectangle(1050, 600, 800, 200),
+        Bodies.rectangle(1250, 400, 800, 200)
     ],
     enemies: [
 
         Bodies.rectangle(270, 300, enemies.width, enemies.height),
-        Bodies.rectangle( 40, 300, enemies.width, enemies.height)
+        Bodies.rectangle(40, 300, enemies.width, enemies.height)
     ]
 }
 

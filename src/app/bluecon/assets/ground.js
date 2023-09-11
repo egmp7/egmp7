@@ -1,11 +1,10 @@
 import { Body } from "matter-js";
 import { drawVertices } from "../resources/utilities";
-import display from "../globals/display";
+
 
 export default class Ground{
     constructor(body){
-        this.body = body
-        display.scaleBodies(body);
+        this.body = body;
         Body.setStatic(body,true);
     }
 

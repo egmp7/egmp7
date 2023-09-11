@@ -1,22 +1,20 @@
-import { Bodies, Body, Vector } from "matter-js";
 import { drawVertices } from "../resources/utilities";
+import { Body, Vector } from "matter-js";
 import control from "../globals/control";
-import display from "../globals/display";
-import frontAnimation from "./animations/player/front"
-import leftAnimation from "./animations/player/left"
-import rightAnimation from "./animations/player/right"
-import leftFallingAnimation from "./animations/player/leftFalling"
-import rightFallingAnimation from "./animations/player/rightFalling"
-import fallingAnimation from "./animations/player/falling"
 import physics from "../globals/physics";
-
+import {
+    frontAnimation,
+    leftFallingAnimation,
+    rightFallingAnimation,
+    leftAnimation,
+    rightAnimation,
+    fallingAnimation
+} from "./animations/player"
 
 export default class Player {
 
     constructor(body) {
         this.body = body
-        display.scaleBodies(body)
-        Body.setInertia(body, Infinity)
     }
 
     canDoubleJump = { isInAir: false, isFirstJump: false };
@@ -25,13 +23,9 @@ export default class Player {
 
         //drawVertices(p5, this.body.vertices);
         this.draw(p5, this.body.position);
-        // drawVertices(p5, this.body.parts[3].vertices);
-        // drawVertices(p5, this.body.parts[4].vertices);
-
         this.moveSides();
         this.jump();
         this.doubleJump();
-        this.noSideFriction();
     }
 
     moveSides = function () {
@@ -39,7 +33,8 @@ export default class Player {
         const velocityRight = Vector.create(speed, this.body.velocity.y)
         const velocityLeft = Vector.create(-speed, this.body.velocity.y)
         if (control.right) Body.setVelocity(this.body, velocityRight);
-        if (control.left) Body.setVelocity(this.body, velocityLeft);
+        else if (control.left) Body.setVelocity(this.body, velocityLeft);
+        else Body.setVelocity(this.body, {x:0,y:this.body.velocity.y});
     }
 
     jump = function () {
@@ -72,19 +67,11 @@ export default class Player {
             this.canDoubleJump.isFirstJump = true;
     }
 
-    noSideFriction = function () {
-        if (physics.isPlayerCollidingLeft())
-            Body.setPosition(this.body, { x: this.body.position.x + 2, y: this.body.position.y })
-
-        if (physics.isPlayerCollidingRight())
-            Body.setPosition(this.body, { x: this.body.position.x - 2, y: this.body.position.y })
-    }
-
     draw = function (p5, position) {
         const yOffset = -3
         p5.push()
-        p5.translate(position.x, position.y + yOffset * display.scale)
-        p5.scale(1.7 * display.scale)
+        p5.translate(position.x, position.y + yOffset)
+        p5.scale(1.7)
 
         if (control.left && !physics.isPlayerOnGround()) leftFallingAnimation(p5)
         else if (control.right && !physics.isPlayerOnGround()) rightFallingAnimation(p5)

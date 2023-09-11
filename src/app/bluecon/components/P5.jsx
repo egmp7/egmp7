@@ -1,15 +1,13 @@
 'use client';
 import dynamic from 'next/dynamic'
-import display from "../globals/display"
 import Game from '../game';
 
 const Sketch = dynamic(() => import("react-p5"), { ssr: false });
 
 export default function P5() {
   const game = new Game();
-  const scale = display.scale;
-  const canvasWidth = 1600 * scale;
-  const canvasHeight = 900 * scale;
+  const canvasWidth = 960;
+  const canvasHeight = 540;
 
   const setup = (p5, canvasParentRef) => {
     const cnv = p5.createCanvas(canvasWidth, canvasHeight).parent(canvasParentRef);
@@ -21,8 +19,11 @@ export default function P5() {
   }
 
   const draw = (p5) => {
-    p5.background(255);
+    // background
+    p5.fill(255)
+    p5.rect(0,0,p5.width,p5.height)
     p5.noStroke()
+    // run game
     game.run(p5)
   };
 
