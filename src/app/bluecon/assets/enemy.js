@@ -1,12 +1,11 @@
 import { drawVertices } from "../resources/utilities";
 import { Body, Vector } from "matter-js";
-import display from "../globals/display";
 import  physics  from "../globals/physics";
 
 export default class Enemy {
     constructor(body, range) {
         this.body = body;
-        display.scaleBodies(body);
+        
         Body.setInertia(body, Infinity)
         this.x = body.position.x;
         this.range = range;

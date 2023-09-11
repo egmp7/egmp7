@@ -1,11 +1,10 @@
 import { Body } from "matter-js";
 import { drawVertices } from "../resources/utilities";
-import Asset from "../asset"
-import display from "../globals/display";
 
-export default class Ground extends Asset{
+
+export default class Ground{
     constructor(body){
-        super(body)
+        this.body = body;
         Body.setStatic(body,true);
     }
 

@@ -7,10 +7,12 @@ import physics from "./globals/physics";
 export default class Game {
     constructor() {
         
+        // Add bodies to matter physic engine
         Composite.add(physics.engine.world,LevelOneBodies.player)
         Composite.add(physics.engine.world,LevelOneBodies.grounds)
         Composite.add(physics.engine.world,LevelOneBodies.enemies)
         
+        // Add assets to render class
         render.add(LevelOneAssets.grounds)
         render.add(LevelOneAssets.enemies)
         render.add(LevelOneAssets.player)

@@ -1,9 +1,7 @@
 import { drawVertices } from "../resources/utilities";
 import { Body, Vector } from "matter-js";
 import control from "../globals/control";
-import display from "../globals/display";
 import physics from "../globals/physics";
-import Asset from "../asset"
 import {
     frontAnimation,
     leftFallingAnimation,
@@ -13,11 +11,10 @@ import {
     fallingAnimation
 } from "./animations/player"
 
-export default class Player extends Asset {
+export default class Player {
 
     constructor(body) {
-        super(body)
-        Body.setInertia(body, Infinity)
+        this.body = body
     }
 
     canDoubleJump = { isInAir: false, isFirstJump: false };
@@ -73,8 +70,8 @@ export default class Player extends Asset {
     draw = function (p5, position) {
         const yOffset = -3
         p5.push()
-        p5.translate(position.x, position.y + yOffset * display.scale)
-        p5.scale(1.7 * display.scale)
+        p5.translate(position.x, position.y + yOffset)
+        p5.scale(1.7)
 
         if (control.left && !physics.isPlayerOnGround()) leftFallingAnimation(p5)
         else if (control.right && !physics.isPlayerOnGround()) rightFallingAnimation(p5)
