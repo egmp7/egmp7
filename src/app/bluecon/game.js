@@ -21,7 +21,5 @@ export default class Game {
         Engine.update(physics.engine)
         render.run(p5);
         physics.checkGroundCollisions(LevelOneBodies.player.parts[2], LevelOneBodies.grounds)
-        physics.checkLeftCollisions(LevelOneBodies.player.parts[3], LevelOneBodies.grounds)
-        physics.checkRightCollisions(LevelOneBodies.player.parts[4], LevelOneBodies.grounds)
     }
 }

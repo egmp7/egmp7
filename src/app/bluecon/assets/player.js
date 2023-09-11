@@ -25,12 +25,10 @@ export default class Player extends Asset {
     run = function (p5) {
         //drawVertices(p5, this.body.vertices);
         this.draw(p5, this.body.position);
-        // drawVertices(p5, this.body.parts[3].vertices);
-        // drawVertices(p5, this.body.parts[4].vertices);
+        //drawVertices(p5, this.body.vertices);
         this.moveSides();
         this.jump();
         this.doubleJump();
-        this.noSideFriction();
     }
 
     moveSides = function () {
@@ -38,7 +36,8 @@ export default class Player extends Asset {
         const velocityRight = Vector.create(speed, this.body.velocity.y)
         const velocityLeft = Vector.create(-speed, this.body.velocity.y)
         if (control.right) Body.setVelocity(this.body, velocityRight);
-        if (control.left) Body.setVelocity(this.body, velocityLeft);
+        else if (control.left) Body.setVelocity(this.body, velocityLeft);
+        else Body.setVelocity(this.body, {x:0,y:this.body.velocity.y});
     }
 
     jump = function () {
@@ -69,14 +68,6 @@ export default class Player extends Asset {
         // check if it is the first jump
         if (control.jump && physics.isPlayerOnGround())
             this.canDoubleJump.isFirstJump = true;
-    }
-
-    noSideFriction = function () {
-        if (physics.isPlayerCollidingLeft())
-            Body.setPosition(this.body, { x: this.body.position.x + 2, y: this.body.position.y })
-
-        if (physics.isPlayerCollidingRight())
-            Body.setPosition(this.body, { x: this.body.position.x - 2, y: this.body.position.y })
     }
 
     draw = function (p5, position) {
