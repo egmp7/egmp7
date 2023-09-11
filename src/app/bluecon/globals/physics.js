@@ -1,23 +1,28 @@
 import { Engine, Collision } from "matter-js";
+import LevelOneBodies from "../levels/levelOneBodies";
+import player from "../assets/playerBody"
 
 class Physics {
     constructor() {
         this.engine = Engine.create();
         this.collisions = {
-            ground: false,
-            left: false,
-            right: false
+            ground: false
         }
     }
 
-    checkGroundCollisions( player,  grounds ) {
+    run() {
+        this.groundCollisions(player.floorSensor, LevelOneBodies.grounds)
+    }
+
+    groundCollisions(floorSensor, grounds) {
         this.collisions.ground = false
         grounds.forEach(ground => {
-            if (Collision.collides( player, ground )) this.collisions.ground = true
+            if (Collision.collides(floorSensor, ground))
+                this.collisions.ground = true
         });
     }
 
-    isPlayerOnGround(){
+    isPlayerOnGround() {
         return this.collisions.ground;
     }
 }
