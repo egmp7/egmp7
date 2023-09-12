@@ -2,33 +2,26 @@ import { Composite, Engine } from "matter-js";
 import LevelOneBodies from "./levels/levelOneBodies";
 import LevelOneAssets from "./levels/levelOneAssets";
 import player from "./assets/playerBody"
-import Render from "./globals/render"
 import physics from "./globals/physics";
-import Rules from "./globals/rules";
 import scrollPos from "./globals/scrollPos";
+import Render from "./globals/render"
+import Rules from "./globals/rules";
 
 export default class Game {
     rules = new Rules;
     render = new Render;
 
     constructor() {
-
-        // Add bodies to matter physic engine
-        Composite.add(physics.engine.world, player.main);
-        Composite.add(physics.engine.world, LevelOneBodies.grounds);
-        Composite.add(physics.engine.world, LevelOneBodies.enemies);
-        Composite.add(physics.engine.world, LevelOneBodies.platforms);
-
-        // Add assets to render class
-        this.render.add(LevelOneAssets.background);
-        this.render.add(LevelOneAssets.clouds);
-        this.render.add(LevelOneAssets.grounds);
-        this.render.add(LevelOneAssets.platforms);
-        this.render.add(LevelOneAssets.enemies);
-        this.render.add(LevelOneAssets.player);
-
+         // Add bodies to matter physic engine
+         Composite.add(physics.engine.world, player.main);
+         for (const bodies in LevelOneBodies) {
+             Composite.add(physics.engine.world, LevelOneBodies[bodies])
+         }
+         // Add assets to render class
+         for (const assets in LevelOneAssets) {
+            this.render.add(LevelOneAssets[assets]);
+        }
     }
-
     run(p5) {
         Engine.update(physics.engine);
         this.render.run(p5);
