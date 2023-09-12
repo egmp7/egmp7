@@ -19,9 +19,6 @@ export default function P5() {
   }
 
   const draw = (p5) => {
-    // background
-    p5.fill(255)
-    p5.rect(0,0,p5.width,p5.height)
     p5.noStroke()
     // run game
     game.run(p5)

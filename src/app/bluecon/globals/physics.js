@@ -7,14 +7,15 @@ class Physics {
         this.engine = Engine.create();
         this.collisions = {
             ground: false,
-            enemy: false
+            enemy: false,
+            platform: false,
         }
     }
 
     run() {
         this.groundCollision(player.floorSensor, LevelOneBodies.grounds)
+        this.platformCollision(player.floorSensor, LevelOneBodies.platforms)
         this.enemyCollision(player.body, LevelOneBodies.enemies)
-
     }
 
     groundCollision(playerFloorSensor, grounds) {
@@ -22,6 +23,14 @@ class Physics {
         grounds.forEach(ground => {
             if (Collision.collides(playerFloorSensor, ground))
                 this.collisions.ground = true
+        });
+    }
+
+    platformCollision(playerFloorSensor, platforms) {
+        this.collisions.platform = false
+        platforms.forEach(platform => {
+            if (Collision.collides(playerFloorSensor, platform))
+                this.collisions.platform = true
         });
     }
 
@@ -34,7 +43,7 @@ class Physics {
     }
 
     isPlayerOnGround() {
-        return this.collisions.ground;
+        return this.collisions.ground || this.collisions.platform;
     }
 
     isEnemyCollision() {
