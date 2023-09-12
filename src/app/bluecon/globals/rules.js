@@ -1,5 +1,6 @@
 import player from "../assets/playerBody"
 import physics from "./physics"
+import scrollPos from "./scrollPos"
 import { Body } from "matter-js"
 
 class Rules {
@@ -8,22 +9,26 @@ class Rules {
         this.playerInitPosition = {
             x: 100,
             y: 200
-        }
+        };
     }
 
     run() {
-        this.checkOffLimits()
-        this.checkEnemyCollision()
+        this.checkOffLimits();
+        this.checkEnemyCollision();
     }
 
     checkOffLimits() {
         const yLimit = 580;
-        if (player.main.position.y > yLimit)
-            Body.setPosition(player.main, this.playerInitPosition)
+        if (player.main.position.y > yLimit) this.restart();
+            
     }
     checkEnemyCollision() {
-        if (physics.isEnemyCollision())
-            Body.setPosition(player.main, this.playerInitPosition)
+        if (physics.isEnemyCollision()) this.restart();
+    }
+
+    restart(){
+        scrollPos.resetBodies();
+        Body.setPosition(player.main, this.playerInitPosition);
     }
 }
 

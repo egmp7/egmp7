@@ -5,11 +5,10 @@ import player from "./assets/playerBody"
 import render from "./globals/render"
 import physics from "./globals/physics";
 import Rules from "./globals/rules";
-import ScrollPos from "./globals/scrollPos";
+import scrollPos from "./globals/scrollPos";
 
 export default class Game {
     rules = new Rules;
-    scrollPos = new ScrollPos;
 
     constructor() {
 
@@ -30,6 +29,6 @@ export default class Game {
         render.run(p5);
         physics.run();
         this.rules.run();
-        this.scrollPos.run();
+        scrollPos.run();
     }
 }
