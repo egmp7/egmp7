@@ -1,10 +1,11 @@
 import LevelOneBodies from "./levelOneBodies"
+import player from "../assets/playerBody"
 import Player from "../assets/player"
 import Ground from "../assets/ground"
 import Enemy from "../assets/enemy"
 
 const LevelOneAssets ={
-    player : new Player(LevelOneBodies.player),
+    player : new Player(player.main),
     grounds : [
         new Ground(LevelOneBodies.grounds[0]),
         new Ground(LevelOneBodies.grounds[1]),
