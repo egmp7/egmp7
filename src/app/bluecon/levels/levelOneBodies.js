@@ -1,5 +1,4 @@
 import { Bodies } from "matter-js"
-import player from "../assets/playerBody"
 
 const enemies = {
     width: 20,
@@ -7,7 +6,6 @@ const enemies = {
 }
 
 const LevelOneBodies = {
-    player: player.main,
     grounds: [
         Bodies.rectangle(100, 600, 500, 200),
         Bodies.rectangle(1050, 600, 800, 200),

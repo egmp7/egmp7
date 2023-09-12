@@ -7,10 +7,10 @@ class ScrollPos {
         this.position={x:0,y:0}
     }
     run(){
-        this.checkPosition(player.main.position,this.position)
+        this.scroll(player.main.position,this.position)
     }
 
-    checkPosition(playerPosition,scrollPos){
+    scroll(playerPosition,scrollPos){
         const xRightLimit = 400;
         const xLeftLimit = 50;
         const speed = 6;
