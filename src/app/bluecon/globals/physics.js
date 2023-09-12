@@ -26,11 +26,10 @@ class Physics {
     }
 
     enemyCollision(playerBody, enemies) {
-        this.collisions.enemy = true
+        this.collisions.enemy = false
         enemies.forEach(enemy => {
             if (Collision.collides(playerBody, enemy))
-                //this.collisions.enemy = true
-                console.log("enemy collision")
+                this.collisions.enemy = true
         });
     }
 
@@ -38,7 +37,7 @@ class Physics {
         return this.collisions.ground;
     }
 
-    isEnemyCollision(){
+    isEnemyCollision() {
         return this.collisions.enemy;
     }
 }

@@ -3,8 +3,11 @@ import LevelOneBodies from "./levels/levelOneBodies";
 import LevelOneAssets from "./levels/levelOneAssets";
 import render from "./globals/render"
 import physics from "./globals/physics";
+import Rules from "./globals/rules"
 
 export default class Game {
+    rules = new Rules;
+
     constructor() {
 
         // Add bodies to matter physic engine
@@ -23,5 +26,6 @@ export default class Game {
         Engine.update(physics.engine)
         render.run(p5);
         physics.run();
+        this.rules.run();
     }
 }
