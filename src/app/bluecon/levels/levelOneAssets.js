@@ -1,11 +1,11 @@
-import LevelOneBodies from "./levelOneBodies"
-import player from "../assets/playerBody"
-import Player from "../assets/player"
-import Ground from "../assets/ground"
-import Enemy from "../assets/enemy"
+import LevelOneBodies from "./levelOneBodies";
+import Player from "../assets/player";
+import Ground from "../assets/ground";
+import Enemy from "../assets/enemy";
+import Cloud from "../assets/cloud";
 
 const LevelOneAssets ={
-    player : new Player(player.main),
+    player : new Player(),
     grounds : [
         new Ground(LevelOneBodies.grounds[0]),
         new Ground(LevelOneBodies.grounds[1]),
@@ -14,6 +14,9 @@ const LevelOneAssets ={
     enemies: [
         new Enemy(LevelOneBodies.enemies[0],50),
         new Enemy(LevelOneBodies.enemies[1],20)
+    ],
+    clouds:[
+        new Cloud(200,300,40)
     ]
 }
 

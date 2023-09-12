@@ -2,6 +2,8 @@ import { drawVertices } from "../resources/utilities";
 import { Body, Vector } from "matter-js";
 import control from "../globals/control";
 import physics from "../globals/physics";
+import player from "./playerBody";
+
 import {
     frontAnimation,
     leftFallingAnimation,
@@ -14,7 +16,7 @@ import {
 export default class Player {
 
     constructor(body) {
-        this.body = body
+        this.body = player.main;
     }
 
     canDoubleJump = { isInAir: false, isFirstJump: false };

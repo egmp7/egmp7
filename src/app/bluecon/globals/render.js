@@ -1,4 +1,4 @@
-class Render {
+export default class Render {
     constructor() {
         this.elements = []
     }
@@ -16,5 +16,3 @@ class Render {
         });
     }
 }
-
-export default new Render
