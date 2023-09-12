@@ -17,11 +17,13 @@ export default class Game {
         Composite.add(physics.engine.world, player.main);
         Composite.add(physics.engine.world, LevelOneBodies.grounds);
         Composite.add(physics.engine.world, LevelOneBodies.enemies);
+        Composite.add(physics.engine.world, LevelOneBodies.platforms);
 
         // Add assets to render class
         this.render.add(LevelOneAssets.background);
         this.render.add(LevelOneAssets.clouds);
         this.render.add(LevelOneAssets.grounds);
+        this.render.add(LevelOneAssets.platforms);
         this.render.add(LevelOneAssets.enemies);
         this.render.add(LevelOneAssets.player);
 

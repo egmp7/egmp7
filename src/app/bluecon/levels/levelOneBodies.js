@@ -5,6 +5,8 @@ const enemies = {
     height: 44
 }
 
+const platformHeight = 10
+
 const LevelOneBodies = {
     grounds: [
         Bodies.rectangle(100, 600, 500, 200),
@@ -14,8 +16,12 @@ const LevelOneBodies = {
     enemies: [
 
         Bodies.rectangle(270, 300, enemies.width, enemies.height),
-        Bodies.rectangle(40, 300, enemies.width, enemies.height)
-    ]
+        Bodies.rectangle(40, 300, enemies.width, enemies.height),
+    ],
+    platforms: [
+        Bodies.rectangle(500, 500, 100, platformHeight),
+        Bodies.rectangle(800, 400, 100, platformHeight)
+    ],
 }
 
 export default LevelOneBodies;
