@@ -19,6 +19,7 @@ export default class Game {
         Composite.add(physics.engine.world, LevelOneBodies.enemies);
 
         // Add assets to render class
+        this.render.add(LevelOneAssets.background);
         this.render.add(LevelOneAssets.clouds);
         this.render.add(LevelOneAssets.grounds);
         this.render.add(LevelOneAssets.enemies);
@@ -28,9 +29,9 @@ export default class Game {
 
     run(p5) {
         Engine.update(physics.engine);
-        physics.run();
-        scrollPos.run();
         this.render.run(p5);
         this.rules.run();
+        scrollPos.run();
+        physics.run();
     }
 }

@@ -3,6 +3,7 @@ import Player from "../assets/player";
 import Ground from "../assets/ground";
 import Enemy from "../assets/enemy";
 import Cloud from "../assets/cloud";
+import Background from "../assets/background"
 
 const LevelOneAssets ={
     player : new Player(),
@@ -17,6 +18,9 @@ const LevelOneAssets ={
     ],
     clouds:[
         new Cloud(200,300,40)
+    ],
+    background:[
+        new Background()
     ]
 }
 
