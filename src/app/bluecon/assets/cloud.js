@@ -1,4 +1,5 @@
 import scrollPos from "../globals/scrollPos";
+import { drawCloud } from "./animations/cloud"
 
 export default class Cloud {
     constructor(x, y, size) {
@@ -17,10 +18,7 @@ export default class Cloud {
         p5.translate(
             position.x + scrollPos,
             position.y + p5.sin(p5.frameCount / 70) * 15)
-        p5.fill(255);
-        p5.ellipse(0, 0, size, size);
-        p5.ellipse(- size / 2, 0, size / 3 * 2, size / 3 * 2);
-        p5.ellipse(+ size / 2, 0, size / 3 * 2, size / 3 * 2);
+        drawCloud(p5, size)
         p5.pop()
     }
 
