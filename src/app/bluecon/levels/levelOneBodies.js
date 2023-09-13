@@ -1,11 +1,14 @@
 import { Bodies } from "matter-js"
 
-const enemies = {
-    width: 20,
-    height: 44
+const properties = {
+    enemy: {
+        width: 20,
+        height: 44
+    },
+    platform: {
+        height: 10
+    }
 }
-
-const platformHeight = 10
 
 const LevelOneBodies = {
     grounds: [
@@ -15,12 +18,12 @@ const LevelOneBodies = {
     ],
     enemies: [
 
-        Bodies.rectangle(270, 300, enemies.width, enemies.height),
-        Bodies.rectangle(40, 300, enemies.width, enemies.height),
+        Bodies.rectangle(270, 300, properties.enemy.width, properties.enemy.height),
+        Bodies.rectangle(40, 300, properties.enemy.width, properties.enemy.height),
     ],
     platforms: [
-        Bodies.rectangle(500, 500, 100, platformHeight),
-        Bodies.rectangle(800, 400, 100, platformHeight)
+        Bodies.rectangle(500, 500, 100, properties.platform.height),
+        Bodies.rectangle(800, 400, 100, properties.platform.height)
     ],
 }
 

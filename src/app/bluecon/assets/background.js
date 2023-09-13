@@ -1,3 +1,5 @@
+import { drawBackground } from "./sprites/background"
+
 export default class Background {
     constructor() {
     }
@@ -5,7 +7,6 @@ export default class Background {
         this.draw(p5);
     }
     draw(p5) {
-        p5.fill(100,155,255)
-        p5.rect(0,0,p5.width,p5.height)
+        drawBackground(p5);
     }
 }

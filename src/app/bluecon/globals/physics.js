@@ -2,6 +2,9 @@ import { Engine, Collision } from "matter-js";
 import LevelOneBodies from "../levels/levelOneBodies";
 import player from "../assets/playerBody"
 
+/**
+ * Controls collisions and has access to the main engine from MatterJS
+ */
 class Physics {
     constructor() {
         this.engine = Engine.create();
@@ -13,39 +16,47 @@ class Physics {
     }
 
     run() {
-        this.groundCollision(player.floorSensor, LevelOneBodies.grounds)
-        this.platformCollision(player.floorSensor, LevelOneBodies.platforms)
-        this.enemyCollision(player.body, LevelOneBodies.enemies)
+
+        if (this.checkCollision(player.floorSensor, LevelOneBodies.grounds))
+            this.collisions.ground = true;
+        else this.collisions.ground = false;
+
+        if (this.checkCollision(player.floorSensor, LevelOneBodies.platforms))
+            this.collisions.platform = true;
+        else this.collisions.platform = false;
+
+        if (this.checkCollision(player.body, LevelOneBodies.enemies))
+            this.collisions.enemy = true;
+        else this.collisions.enemy = false;
+
     }
 
-    groundCollision(playerFloorSensor, grounds) {
-        this.collisions.ground = false
-        grounds.forEach(ground => {
-            if (Collision.collides(playerFloorSensor, ground))
-                this.collisions.ground = true
-        });
+    /**
+     * Checks for body collisions
+     * @param {Body} player 
+     * @param {Array<Body>} bodies 
+     * @returns Boolean
+     */
+    checkCollision(player, bodies) {
+        for (let i = 0; i < bodies.length; i++) {
+            if (Collision.collides(player, bodies[i])) 
+            return true;
+        }
+        return false;
     }
 
-    platformCollision(playerFloorSensor, platforms) {
-        this.collisions.platform = false
-        platforms.forEach(platform => {
-            if (Collision.collides(playerFloorSensor, platform))
-                this.collisions.platform = true
-        });
-    }
-
-    enemyCollision(playerBody, enemies) {
-        this.collisions.enemy = false
-        enemies.forEach(enemy => {
-            if (Collision.collides(playerBody, enemy))
-                this.collisions.enemy = true
-        });
-    }
-
+    /**
+     * Returns true when the player is on ground or a platform
+     * @returns Boolean 
+     */
     isPlayerOnGround() {
         return this.collisions.ground || this.collisions.platform;
     }
 
+    /**
+     * Returns true when the player collides with an enemy
+     * @returns Boolean
+     */
     isEnemyCollision() {
         return this.collisions.enemy;
     }
