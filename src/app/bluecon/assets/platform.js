@@ -1,4 +1,4 @@
-import { drawPlatform } from "./animations/platform"
+import { drawPlatform } from "./sprites/platform"
 import { Body } from "matter-js";
 
 export default class Platform {

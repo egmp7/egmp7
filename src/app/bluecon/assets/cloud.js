@@ -1,5 +1,5 @@
 import scrollPos from "../globals/scrollPos";
-import { drawCloud } from "./animations/cloud"
+import { drawCloud } from "./sprites/cloud"
 
 export default class Cloud {
     constructor(x, y, size) {

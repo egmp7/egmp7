@@ -1,5 +1,5 @@
 import { Body } from "matter-js";
-import { drawGround } from "./animations/ground"
+import { drawGround } from "./sprites/ground"
 
 export default class Ground {
     constructor(body) {

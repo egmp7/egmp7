@@ -1,4 +1,4 @@
-import { drawBackground } from "./animations/background"
+import { drawBackground } from "./sprites/background"
 
 export default class Background {
     constructor() {

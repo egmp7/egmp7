@@ -10,7 +10,7 @@ import {
     leftAnimation,
     rightAnimation,
     fallingAnimation
-} from "./animations/player"
+} from "./sprites/player"
 
 export default class Player {
 
