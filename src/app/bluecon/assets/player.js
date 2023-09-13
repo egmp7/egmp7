@@ -3,7 +3,6 @@ import { Body, Vector } from "matter-js";
 import control from "../globals/control";
 import physics from "../globals/physics";
 import player from "./playerBody";
-
 import {
     frontAnimation,
     leftFallingAnimation,
@@ -74,14 +73,12 @@ export default class Player {
         p5.push()
         p5.translate(position.x, position.y + yOffset)
         p5.scale(1.7)
-
         if (control.left && !physics.isPlayerOnGround()) leftFallingAnimation(p5)
         else if (control.right && !physics.isPlayerOnGround()) rightFallingAnimation(p5)
         else if (control.left) leftAnimation(p5)
         else if (control.right) rightAnimation(p5)
         else if (!physics.isPlayerOnGround()) fallingAnimation(p5)
         else frontAnimation(p5)
-
         p5.pop()
     }
 }

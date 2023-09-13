@@ -1,5 +1,9 @@
 import { sinMinusOneToOne, sinZeroToOne } from "../../resources/utilities";
 
+/**
+ * Draws player animation
+ * @param {P5} p5 
+ */
 export function fallingAnimation(p5) {
     //body
     p5.fill(0, 0, 200)
@@ -20,6 +24,10 @@ export function fallingAnimation(p5) {
     p5.ellipse(+ 3, - 13, 5, 7)
 }
 
+/**
+ * Draws player animation
+ * @param {P5} p5 
+ */
 export function frontAnimation(p5) {
     p5.push()
     p5.translate(0, sinMinusOneToOne(p5, 2, 10))
@@ -38,6 +46,10 @@ export function frontAnimation(p5) {
     p5.pop()
 }
 
+/**
+ * Draws player animation
+ * @param {P5} p5 
+ */
 export function leftAnimation(p5) {
     p5.push()
     p5.translate(0, sinMinusOneToOne(p5, 2, 4))
@@ -53,6 +65,10 @@ export function leftAnimation(p5) {
     p5.pop()
 }
 
+/**
+ * Draws player animation
+ * @param {P5} p5 
+ */
 export function leftFallingAnimation(p5) {
     //body
     p5.fill(0, 0, 200)
@@ -71,6 +87,10 @@ export function leftFallingAnimation(p5) {
     p5.ellipse(- 3, - 12, 5, 7);
 }
 
+/**
+ * Draws player animation
+ * @param {P5} p5 
+ */
 export function rightAnimation(p5) {
     p5.push()
     p5.translate(0, sinMinusOneToOne(p5, 2, 4))
@@ -86,6 +106,10 @@ export function rightAnimation(p5) {
     p5.pop()
 }
 
+/**
+ * Draws player animation
+ * @param {P5} p5 
+ */
 export function rightFallingAnimation(p5) {
     //body
     p5.fill(0, 0, 200)
