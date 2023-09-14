@@ -1,12 +1,12 @@
 import { drawVertices } from "../resources/utilities";
 import { Body, Vector } from "matter-js";
 import { drawEnemyRight, drawEnemyLeft } from "./sprites/enemy"
-import  physics  from "../globals/physics";
+import physics from "../globals/physics";
 
 export default class Enemy {
     constructor(body, range) {
         this.body = body;
-        
+
         Body.setInertia(body, Infinity)
         this.x = body.position.x;
         this.range = range;
@@ -16,15 +16,15 @@ export default class Enemy {
 
     run(p5) {
         drawVertices(p5, this.body.vertices)
-        this.reverseGravity( physics.engine.gravity , this.body )
+        this.reverseGravity(physics.engine.gravity, this.body)
         this.updateEnemyPosition(
-            this.body, 
-            this.currentX, 
-            this.x, 
-            this.range, 
+            this.body,
+            this.currentX,
+            this.x,
+            this.range,
             this.inc);
-        
-        this.draw(p5,this.body.position)
+
+        this.draw(p5, this.body.position)
     }
 
     /**
@@ -32,14 +32,12 @@ export default class Enemy {
      * @param {Engine.gravity} gravity 
      * @param {Matter.body} body 
      */
-    reverseGravity( gravity, body ) {
-        const negativeGravity = Vector.create(
-            -gravity.x * gravity.scale * body.mass,
-            -gravity.y * gravity.scale * body.mass)
-        Body.applyForce(
-            body,
-            body.position,
-            negativeGravity)
+    reverseGravity(gravity, body) {
+        const negativeGravity = {
+            x: -gravity.x * gravity.scale * body.mass,
+            y: -gravity.y * gravity.scale * body.mass
+        }
+        Body.applyForce(body, body.position, negativeGravity)
     }
 
     /**
@@ -52,7 +50,7 @@ export default class Enemy {
      */
     updateEnemyPosition = function (body, currentX, x, range, inc) {
         const speed = 2;
-        this.setCurrentX (currentX + inc);
+        this.setCurrentX(currentX + inc);
 
         if (currentX >= x + range) {
             Body.setVelocity(body, Vector.create(-speed, 0));
@@ -68,14 +66,14 @@ export default class Enemy {
      * Set Increment value
      * @param {number} value 
      */
-    setInc(value){
+    setInc(value) {
         this.inc = value;
     }
     /**
      * Set current x value
      * @param {number} value 
      */
-    setCurrentX(value){
+    setCurrentX(value) {
         this.currentX = value;
     }
 
@@ -84,12 +82,12 @@ export default class Enemy {
      * @param {SketchProps.p5} p5 
      * @param {Matter.Vector} position 
      */
-    draw = function (p5,position) {
+    draw = function (p5, position) {
 
         const yOffset = 3;
 
         p5.push();
-        p5.translate(position.x,position.y + yOffset);
+        p5.translate(position.x, position.y + yOffset);
         if (this.inc < 0) drawEnemyLeft(p5)
         else drawEnemyRight(p5)
         p5.pop()
