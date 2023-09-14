@@ -1,5 +1,6 @@
 import { drawVertices } from "../resources/utilities";
 import { Body, Vector } from "matter-js";
+import { drawEnemyRight, drawEnemyLeft } from "./sprites/enemy"
 import  physics  from "../globals/physics";
 
 export default class Enemy {
@@ -23,7 +24,7 @@ export default class Enemy {
             this.range, 
             this.inc);
         
-        //this.draw(p5,this.body.position)
+        this.draw(p5,this.body.position)
     }
 
     /**
@@ -87,34 +88,10 @@ export default class Enemy {
 
         const yOffset = 3;
 
-        p5.noStroke();
         p5.push();
         p5.translate(position.x,position.y + yOffset);
-
-        if (this.inc > 0) {
-            //body
-            p5.fill(255, 0, 0);
-            p5.triangle( - 7,  - 15,  + 7,  - 15,0 ,  - 25);
-            p5.rect( - 7,  - 15, 14, 30);
-            p5.ellipse( - 3,   15, 4, 6);
-            p5.ellipse( + 5,   15, 4, 6);
-            //eyes
-            p5.fill(255, 255, 102)
-            p5.ellipse( + 3,  - 12, 5, 7)
-        }
-
-        else {
-            //body
-            p5.fill(255, 0, 0);
-            p5.triangle( - 7,  - 15,  + 7,  - 15, 0,  - 25);
-            p5.rect( - 7,  - 15, 14, 30);
-            p5.ellipse( - 3,  15, 4, 6);
-            p5.ellipse( + 5,  15, 4, 6);
-            //eyes
-            p5.fill(255, 255, 102)
-            p5.ellipse( - 3,  - 12, 5, 7)
-        }
-
+        if (this.inc < 0) drawEnemyLeft(p5)
+        else drawEnemyRight(p5)
         p5.pop()
     }
 }
