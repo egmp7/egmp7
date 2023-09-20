@@ -14,8 +14,8 @@ export default class Enemy extends Asset {
     run(p5) {
         drawVertices(p5, this.body.vertices)
         this.reverseGravity(this.getEngineGravity(), this.body)
-        this.switchVelocity(this.initPosition.x, this.range, this.body.position.x, this.speed);
-        this.updateInitPosition();
+        this.switchVelocity(this.relativeInitPosition.x, this.range, this.body.position.x, this.speed);
+        this.updateRelativeInitPosition();
         this.draw(p5, this.body.position, this.body.velocity)
     }
 

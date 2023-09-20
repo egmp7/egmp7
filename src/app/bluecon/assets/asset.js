@@ -3,20 +3,47 @@ import physics from "../globals/physics";
 import { Body } from "matter-js"
 
 export default class Asset {
-    constructor(body) {
-        this.body = body;
-        this.initPosition = {
-            x: body.position.x,
-            y: body.position.y
+    /**
+     * @param {Matter.Body} body 
+     * @param {Vector} position 
+     */
+    constructor(body, position) {
+        // Asset is a Body
+        if (body != undefined) {
+            this.body = body;
+            this.initPosition = {
+                x: body.position.x,
+                y: body.position.y
+            };
+            this.relativeInitPosition = {
+                x: body.position.x,
+                y: body.position.y
+            };
+        }
+        // Asset is a P5 element
+        else {
+            this.position = {
+                x: position.x,
+                y: position.y
+            };
+            this.relativePosition = position;
         }
     }
 
     /**
      * Updates the initial position of the body by adding the scroll position
      */
-    updateInitPosition() {
-        this.initPosition.x -= scroll.position.x
-        this.initPosition.y -= scroll.position.y
+    updateRelativeInitPosition() {
+        this.relativeInitPosition.x = this.initPosition.x - scroll.position.x
+        this.relativeInitPosition.y = this.initPosition.y - scroll.position.y
+    }
+
+    /**
+     * Updates position of the body by adding the scroll position
+     */
+    updateRelativePosition() {
+        this.relativePosition.x = this.position.x - scroll.position.x;
+        this.relativePosition.y = this.position.y - scroll.position.y;
     }
 
     /**
