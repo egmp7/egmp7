@@ -1,11 +1,11 @@
 import { drawVertices } from "../resources/utilities";
-import { Body, Vector } from "matter-js";
+import { Body } from "matter-js";
 import { drawEnemyRight, drawEnemyLeft } from "./sprites/enemy"
-import physics from "../globals/physics";
+import Asset from "./asset"
 
-export default class Enemy {
+export default class Enemy extends Asset {
     constructor(body, range) {
-        this.body = body;
+        super(body)
         this.xInit = body.position.x;
         this.range = range;
         this.speed = 2;
@@ -15,8 +15,8 @@ export default class Enemy {
 
     run(p5) {
         drawVertices(p5, this.body.vertices)
-        this.reverseGravity(physics.engine.gravity, this.body)
-        this.switchVelocity(this.xInit, this.range, this.body.position.x, this.speed);
+        this.reverseGravity(this.getEngineGravity(), this.body)
+        this.switchVelocity(this.initPlusScrollPosition().x, this.range, this.body.position.x, this.speed);
         this.draw(p5, this.body.position, this.body.velocity)
     }
 
@@ -34,12 +34,12 @@ export default class Enemy {
     }
 
     /**
-         * Switches the speed when the enemy passes a threshold
-         * @param {number} xEnemyInit 
-         * @param {number} range 
-         * @param {number} xEnemyCurrent
-         * @param {number} speed 
-         */
+     * Switches the speed when the enemy passes a threshold
+     * @param {number} xEnemyInit 
+     * @param {number} range 
+     * @param {number} xEnemyCurrent
+     * @param {number} speed 
+     */
     switchVelocity(xEnemyInit, range, xEnemyCurrent, speed) {
         if (range < 0) throw "error: range must not be less than 0";
         if (xEnemyCurrent > xEnemyInit + range)
