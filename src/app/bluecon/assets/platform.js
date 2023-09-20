@@ -1,10 +1,10 @@
+import Asset from "./asset";
 import { drawPlatform } from "./sprites/platform"
-import { Body } from "matter-js";
 
-export default class Platform {
+export default class Platform extends Asset {
     constructor(body) {
-        this.body = body;
-        Body.setStatic(body, true);
+        super(body);
+        this.setStatic(true);
     }
     run(p5) {
         this.draw(p5, this.body.vertices)

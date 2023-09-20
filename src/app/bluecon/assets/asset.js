@@ -44,6 +44,14 @@ export default class Asset {
     }
 
     /**
+     * Set static body
+     * @param {boolean} bool 
+     */
+    setStatic(bool) {
+        Body.setStatic(this.body, bool);
+    }
+
+    /**
      * Apply a force to body
      * @param {Vector} force 
      */
