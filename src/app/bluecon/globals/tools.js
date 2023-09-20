@@ -1,5 +1,5 @@
 import Physics from "./physics";
-import Scroll from "./scrollPos";
+import Scroll from "./scroll";
 import Rules from "./rules";
 import Render from "./render";
 import Control from "./control";

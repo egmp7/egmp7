@@ -9,6 +9,8 @@ export default class Game {
         tools.render.setAssets(LevelOneAssets);
         tools.collisions.setAssets(LevelOneBodies);
         tools.collisions.setPlayer(player);
+        tools.scroll.setBodies(LevelOneBodies);
+        tools.scroll.setPlayer(player);
     }
     run(p5) {
         tools.run(p5);
