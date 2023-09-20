@@ -16,7 +16,7 @@ export default class Player extends Structure {
         super(player.main);
         this.xSpeed = 5;
         this.jumpForce = { x: 0, y: (-0.013 * this.body.mass) };
-
+        this.doubleJumpSpeed = 2;
     }
 
     canDoubleJump = { isInAir: false, isFirstJump: false };
@@ -27,7 +27,7 @@ export default class Player extends Structure {
         this.draw(p5, this.body.position, this.control, this.isPlayerOnGround());
         this.moveSides({ x: this.xSpeed, y: this.body.velocity.y }, this.control);
         this.jump(this.jumpForce, this.control.jump, this.isPlayerOnGround());
-        this.doubleJump();
+        this.doubleJump(this.control.jump, this.canDoubleJump.isInAir, this.canDoubleJump.isFirstJump);
     }
 
     /**
@@ -54,29 +54,44 @@ export default class Player extends Structure {
         if (isJump && isOnGround) this.applyForce(force)
     }
 
-    doubleJump = function () {
-
+    /**
+     * Calculates the velocity for the double jump
+     * @returns Vector
+     */
+    calcDoubleJumpVelocity() {
         // calc velocity
-        const speed = - 2;
-        var velocity;
-        if (this.body.velocity.y < 0)
-            velocity = { x: this.body.velocity.x, y: this.body.velocity.y + speed };
-        else velocity = { x: this.body.velocity.x, y: - this.body.velocity.y };
+        const speed = this.doubleJumpSpeed;
+        const bodyVelocity = this.body.velocity;
+
+        if (bodyVelocity.y < 0)
+            return { x: bodyVelocity.x, y: bodyVelocity.y - speed };
+        else return { x: bodyVelocity.x, y: - bodyVelocity.y };
+    }
+
+    doubleJump = function (isJumping, isInAir, isFirstJump) {
 
         // double jump
-        if (this.control.jump && this.canDoubleJump.isInAir && this.canDoubleJump.isFirstJump) {
-            this.setVelocity(velocity);
-            this.canDoubleJump.isFirstJump = false;
+        if (isJumping && isInAir && isFirstJump) {
+            this.setVelocity(this.calcDoubleJumpVelocity());
+            this.setIsFirstJump(false)
         }
 
         // check if player is in the air
-        this.canDoubleJump.isInAir = false;
-        if (!this.control.jump && !this.isPlayerOnGround())
-            this.canDoubleJump.isInAir = true;
+        this.setIsInAir(false)
+        if (!isJumping && !this.isPlayerOnGround())
+            this.setIsInAir(true);
 
         // check if it is the first jump
-        if (this.control.jump && this.isPlayerOnGround())
-            this.canDoubleJump.isFirstJump = true;
+        if (isJumping && this.isPlayerOnGround())
+            this.setIsFirstJump(true)
+    }
+
+    setIsInAir(bool) {
+        this.canDoubleJump.isInAir = bool;
+    }
+
+    setIsFirstJump(bool) {
+        this.canDoubleJump.isFirstJump = bool;
     }
 
     /**
