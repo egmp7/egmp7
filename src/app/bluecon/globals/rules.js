@@ -1,11 +1,12 @@
 import player from "../assets/playerBody"
-import physics from "./physics"
-import scrollPos from "./scrollPos"
+//import physics from "./physics"
+//import scrollPos from "./scrollPos"
 import { Body } from "matter-js"
 
-class Rules {
-    constructor() {
-
+export default class Rules {
+    constructor(physics,scroll) {
+        this.physics = physics;
+        this.scroll = scroll;
         this.playerInitPosition = {
             x: 100,
             y: 200
@@ -13,6 +14,7 @@ class Rules {
     }
 
     run() {
+        console.log('rules')
         this.checkOffLimits();
         this.checkEnemyCollision();
     }
@@ -20,16 +22,14 @@ class Rules {
     checkOffLimits() {
         const yLimit = 580;
         if (player.main.position.y > yLimit) this.restart();
-            
     }
+
     checkEnemyCollision() {
-        if (physics.isEnemyCollision()) this.restart();
+        if (this.physics.isEnemyCollision()) this.restart();
     }
 
     restart(){
-        scrollPos.resetBodies();
+        this.scroll.resetBodies();
         Body.setPosition(player.main, this.playerInitPosition);
     }
 }
-
-export default Rules

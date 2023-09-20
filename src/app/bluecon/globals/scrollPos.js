@@ -6,7 +6,7 @@ import { Body } from "matter-js"
  * Global, controls animation movement of player and all bodies
  * the position property is used to update the position of the assets
  */
-class ScrollPos {
+export default class Scroll {
     constructor() {
         this.position = { x: 0, y: 0 }
     }
@@ -80,5 +80,3 @@ class ScrollPos {
         }
     }
 }
-
-export default new ScrollPos;

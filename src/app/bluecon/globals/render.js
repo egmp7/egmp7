@@ -1,6 +1,13 @@
+import LevelOneAssets from "../levels/levelOneAssets";
+
 export default class Render {
     constructor() {
         this.elements = []
+        // Add assets to render class
+        // for (const assets in LevelOneAssets) {
+        //     this.add(LevelOneAssets[assets]);
+        // }
+        
     }
     /**
      * Add elements for rendering with p5

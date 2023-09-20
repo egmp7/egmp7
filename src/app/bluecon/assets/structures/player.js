@@ -16,15 +16,12 @@ export default class Player extends Structure {
         super(player.main);
         this.xSpeed = 5;
         this.jumpForce = { x: 0, y: (-0.013 * this.body.mass) };
-        this.doubleJumpSpeed = 2;
         this.doubleJumpProps = {
             speed: 4,
             jumpReset: false,
             isFirstJump: false
         }
     }
-
-    canDoubleJump = { isInAir: false, isFirstJump: false };
 
     run (p5) {
 

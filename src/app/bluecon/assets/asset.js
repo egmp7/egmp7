@@ -1,12 +1,11 @@
-import scroll from "../globals/scrollPos";
-import physics from "../globals/physics";
+import tools from "../globals/tools";
 import control from "../globals/control";
 
 export default class Asset {
     constructor() {
-        this.scrollPosition = scroll.position;
-        this.engineGravity = physics.engine.gravity;
-        this.collisions = physics.collisions;
+        this.scrollPosition = tools.scroll.position;
+        this.engineGravity = tools.physics.engine.gravity;
+        this.collisions = tools.physics.collisions;
         this.control = control
     }
 }

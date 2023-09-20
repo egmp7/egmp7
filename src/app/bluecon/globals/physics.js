@@ -5,7 +5,7 @@ import player from "../assets/playerBody"
 /**
  * Controls collisions and has access to the main engine from MatterJS
  */
-class Physics {
+export default class Physics {
     constructor() {
         this.engine = Engine.create();
         this.collisions = {
@@ -46,14 +46,6 @@ class Physics {
     }
 
     /**
-     * Returns true when the player is on ground or a platform
-     * @returns Boolean 
-     */
-    isPlayerOnGround() {
-        return this.collisions.ground || this.collisions.platform;
-    }
-
-    /**
      * Returns true when the player collides with an enemy
      * @returns Boolean
      */
@@ -61,5 +53,3 @@ class Physics {
         return this.collisions.enemy;
     }
 }
-
-export default (new Physics)
