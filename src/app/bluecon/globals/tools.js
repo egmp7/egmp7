@@ -12,7 +12,7 @@ class Tools {
         this.render = new Render();
         this.control = new Control();
         this.collisions = new Collisions();
-        this.rules = new Rules(this.physics, this.scroll);
+        this.rules = new Rules(this.collisions, this.scroll);
     }
     run(p5) {
         this.physics.run();

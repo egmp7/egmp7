@@ -1,12 +1,11 @@
-import player from "../assets/playerBody"
-//import physics from "./physics"
-//import scrollPos from "./scrollPos"
 import { Body } from "matter-js"
 
 export default class Rules {
-    constructor(physics,scroll) {
-        this.physics = physics;
+    constructor(collisions,scroll) {
+        this.player;
+        this.collisions = collisions;
         this.scroll = scroll;
+        this.yLimit = 580;
         this.playerInitPosition = {
             x: 100,
             y: 200
@@ -14,22 +13,40 @@ export default class Rules {
     }
 
     run() {
-        //console.log('rules')
-        this.checkOffLimits();
-        this.checkEnemyCollision();
+        this.checkOffLimits(this.yLimit,this.player.main.position);
+        this.checkEnemyCollision(this.collisions.isEnemyCollision());
     }
 
-    checkOffLimits() {
-        const yLimit = 580;
-        if (player.main.position.y > yLimit) this.restart();
+    /**
+     * Checks if player passed height of window
+     * @param {number*} yLimit 
+     * @param {Vector} playerPosition 
+     */
+    checkOffLimits(yLimit, playerPosition) {
+        if (playerPosition.y > yLimit) this.restart();
     }
 
-    checkEnemyCollision() {
-        if (this.physics.isEnemyCollision()) this.restart();
+    /**
+     * Restarts the game if player collides with enemy
+     * @param {Boolean*} collision 
+     */
+    checkEnemyCollision(collision) {
+        if (collision) this.restart();
     }
 
+    /**
+     * Restarts the game
+     */
     restart(){
-        this.scroll.resetBodies();
-        Body.setPosition(player.main, this.playerInitPosition);
+        this.scroll.resetBodies();  // move bodies to initial position
+        Body.setPosition(this.player.main, this.playerInitPosition); // mode player to initial position
+    }
+
+    /**
+     * Sets the player object
+     * @param {Object} playerBody 
+     */
+    setPlayer(playerBody){
+        this.player = playerBody;
     }
 }

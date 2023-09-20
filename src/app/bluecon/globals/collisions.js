@@ -7,30 +7,30 @@ export default class Collisions {
             enemy: false,
             platform: false,
         }
-        this.assets;
+        this.bodies;
         this.player;
     }
 
     run() {
 
         // Player -> Grounds Collisions
-        if (this.checkCollision(this.player.floorSensor, this.assets.grounds))
+        if (this.checkCollision(this.player.floorSensor, this.bodies.grounds))
             this.collisions.ground = true;
         else this.collisions.ground = false;
 
         // player -> Platforms Collisions
-        if (this.checkCollision(this.player.floorSensor, this.assets.platforms))
+        if (this.checkCollision(this.player.floorSensor, this.bodies.platforms))
             this.collisions.platform = true;
         else this.collisions.platform = false;
 
         // Player -> Enemies Collisions
-        if (this.checkCollision(this.player.body, this.assets.enemies))
+        if (this.checkCollision(this.player.body, this.bodies.enemies))
             this.collisions.enemy = true;
         else this.collisions.enemy = false;
     }
 
-    setAssets(assets) {
-        this.assets = assets;
+    setBodies(bodies) {
+        this.bodies = bodies;
     }
 
     setPlayer(playerBody) {

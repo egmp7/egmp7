@@ -1,62 +1,31 @@
-import { Engine, Collision, Composite } from "matter-js";
-import LevelOneBodies from "../levels/levelOneBodies";
-import player from "../assets/playerBody"
+import { Engine, Composite } from "matter-js";
 
 /**
- * Controls collisions and has access to the main engine from MatterJS
+ * Access to the main engine from MatterJS
  */
 export default class Physics {
     constructor() {
         this.engine = Engine.create();
-        this.collisions = {
-            ground: false,
-            enemy: false,
-            platform: false,
-        }
+        this.bodies;
+        this.player;
+    }
 
-        Composite.add(this.engine.world, player.main);
-         for (const bodies in LevelOneBodies) {
-             Composite.add(this.engine.world, LevelOneBodies[bodies])
-         }
+    addElementsToWorld() {
+        Composite.add(this.engine.world, this.player.main);
+        for (const bodies in this.bodies) {
+            Composite.add(this.engine.world, this.bodies[bodies])
+        }
     }
 
     run() {
-
         Engine.update(this.engine);
-
-        if (this.checkCollision(player.floorSensor, LevelOneBodies.grounds))
-            this.collisions.ground = true;
-        else this.collisions.ground = false;
-
-        if (this.checkCollision(player.floorSensor, LevelOneBodies.platforms))
-            this.collisions.platform = true;
-        else this.collisions.platform = false;
-
-        if (this.checkCollision(player.body, LevelOneBodies.enemies))
-            this.collisions.enemy = true;
-        else this.collisions.enemy = false;
-
     }
 
-    /**
-     * Checks for body collisions
-     * @param {Body} player 
-     * @param {Array<Body>} bodies 
-     * @returns Boolean
-     */
-    checkCollision(player, bodies) {
-        for (let i = 0; i < bodies.length; i++) {
-            if (Collision.collides(player, bodies[i])) 
-            return true;
-        }
-        return false;
+    setBodies(bodies) {
+        this.bodies = bodies;
     }
 
-    /**
-     * Returns true when the player collides with an enemy
-     * @returns Boolean
-     */
-    isEnemyCollision() {
-        return this.collisions.enemy;
+    setPlayer(player) {
+        this.player = player;
     }
 }
