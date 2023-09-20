@@ -17,17 +17,22 @@ export default class Player extends Structure {
         this.xSpeed = 5;
         this.jumpForce = { x: 0, y: (-0.013 * this.body.mass) };
         this.doubleJumpSpeed = 2;
+        this.doubleJumpProps = {
+            speed: 4,
+            jumpReset: false,
+            isFirstJump: false
+        }
     }
 
     canDoubleJump = { isInAir: false, isFirstJump: false };
 
-    run = function (p5) {
+    run (p5) {
 
         //drawVertices(p5, this.body.vertices);
         this.draw(p5, this.body.position, this.control, this.isPlayerOnGround());
         this.moveSides({ x: this.xSpeed, y: this.body.velocity.y }, this.control);
         this.jump(this.jumpForce, this.control.jump, this.isPlayerOnGround());
-        this.doubleJump(this.control.jump, this.canDoubleJump.isInAir, this.canDoubleJump.isFirstJump);
+        this.doubleJump(this.control.jump, !this.isPlayerOnGround(), this.doubleJumpProps.isFirstJump, this.doubleJumpProps.jumpReset);
     }
 
     /**
@@ -35,7 +40,7 @@ export default class Player extends Structure {
      * @param {Vector} velocity 
      * @param {Control.Object} control 
      */
-    moveSides = function (velocity, control) {
+    moveSides (velocity, control) {
         const velocityRight = { x: velocity.x, y: velocity.y }
         const velocityLeft = { x: -velocity.x, y: velocity.y }
         const velocityCenter = { x: 0, y: velocity.y }
@@ -50,7 +55,7 @@ export default class Player extends Structure {
      * @param {Boolean} isJump 
      * @param {Boolean} isOnGround 
      */
-    jump = function (force, isJump, isOnGround) {
+    jump (force, isJump, isOnGround) {
         if (isJump && isOnGround) this.applyForce(force)
     }
 
@@ -60,7 +65,7 @@ export default class Player extends Structure {
      */
     calcDoubleJumpVelocity() {
         // calc velocity
-        const speed = this.doubleJumpSpeed;
+        const speed = this.doubleJumpProps.speed;
         const bodyVelocity = this.body.velocity;
 
         if (bodyVelocity.y < 0)
@@ -68,30 +73,29 @@ export default class Player extends Structure {
         else return { x: bodyVelocity.x, y: - bodyVelocity.y };
     }
 
-    doubleJump = function (isJumping, isInAir, isFirstJump) {
+    /**
+     * Double Jump function
+     * @param {Boolean*} isJumping 
+     * @param {Boolean} isInAir 
+     * @param {Boolean} isFirstJump 
+     * @param {Boolean} jumpReset 
+     */
+    doubleJump(isJumping, isInAir, isFirstJump, jumpReset) {
+
+        // check if it is the first jump
+        if (isJumping && !isInAir)
+            this.setIsFirstJump(true)
+
+        // reset jump button
+        if (!isJumping && isInAir)
+            this.setJumpReset(true);
+        else this.setJumpReset(false)
 
         // double jump
-        if (isJumping && isInAir && isFirstJump) {
+        if (isJumping && isInAir && isFirstJump && jumpReset) {
             this.setVelocity(this.calcDoubleJumpVelocity());
             this.setIsFirstJump(false)
         }
-
-        // check if player is in the air
-        this.setIsInAir(false)
-        if (!isJumping && !this.isPlayerOnGround())
-            this.setIsInAir(true);
-
-        // check if it is the first jump
-        if (isJumping && this.isPlayerOnGround())
-            this.setIsFirstJump(true)
-    }
-
-    setIsInAir(bool) {
-        this.canDoubleJump.isInAir = bool;
-    }
-
-    setIsFirstJump(bool) {
-        this.canDoubleJump.isFirstJump = bool;
     }
 
     /**
@@ -113,5 +117,13 @@ export default class Player extends Structure {
         else if (!isOnGround) fallingAnimation(p5)
         else frontAnimation(p5)
         p5.pop()
+    }
+
+    setJumpReset(bool) {
+        this.doubleJumpProps.jumpReset = bool;
+    }
+
+    setIsFirstJump(bool) {
+        this.doubleJumpProps.isFirstJump = bool;
     }
 }
