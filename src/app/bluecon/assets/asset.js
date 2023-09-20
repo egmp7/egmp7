@@ -1,5 +1,6 @@
-import scrollPos from "../globals/scrollPos";
+import scroll from "../globals/scrollPos";
 import physics from "../globals/physics";
+import { Body } from "matter-js"
 
 export default class Asset {
     constructor(body) {
@@ -11,14 +12,11 @@ export default class Asset {
     }
 
     /**
-     * Vector sum of initial body position and scroll position 
-     * @returns number
+     * Updates the initial position of the body by adding the scroll position
      */
-    initPlusScrollPosition() {
-        return {
-            x: this.initPosition.x - scrollPos.position.x,
-            y: this.initPosition.y - scrollPos.position.y
-        }
+    updateInitPosition() {
+        this.initPosition.x -= scroll.position.x
+        this.initPosition.y -= scroll.position.y
     }
 
     /**
@@ -27,5 +25,29 @@ export default class Asset {
      */
     getEngineGravity() {
         return physics.engine.gravity
+    }
+
+    /**
+     * Set Inertia of body
+     * @param {number} value 
+     */
+    setInertia(value) {
+        Body.setInertia(this.body, value);
+    }
+
+    /**
+     * Set Velocity of body
+     * @param {Vector} velocity 
+     */
+    setVelocity(velocity) {
+        Body.setVelocity(this.body, velocity);
+    }
+
+    /**
+     * Apply a force to body
+     * @param {Vector} force 
+     */
+    applyForce(force) {
+        Body.applyForce(this.body, this.body.position, force)
     }
 }
