@@ -14,7 +14,7 @@ export default class Rules {
     }
 
     run() {
-        console.log('rules')
+        //console.log('rules')
         this.checkOffLimits();
         this.checkEnemyCollision();
     }

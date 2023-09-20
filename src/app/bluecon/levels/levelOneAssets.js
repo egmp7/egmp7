@@ -27,7 +27,7 @@ const LevelOneAssets ={
         new Enemy(LevelOneBodies.enemies[0],50),
         new Enemy(LevelOneBodies.enemies[1],20)
     ],
-    player : new Player(),
+    player : [new Player()],
 }
 
 export default LevelOneAssets

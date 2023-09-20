@@ -1,4 +1,4 @@
-import { Engine, Collision } from "matter-js";
+import { Engine, Collision, Composite } from "matter-js";
 import LevelOneBodies from "../levels/levelOneBodies";
 import player from "../assets/playerBody"
 
@@ -13,9 +13,16 @@ export default class Physics {
             enemy: false,
             platform: false,
         }
+
+        Composite.add(this.engine.world, player.main);
+         for (const bodies in LevelOneBodies) {
+             Composite.add(this.engine.world, LevelOneBodies[bodies])
+         }
     }
 
     run() {
+
+        Engine.update(this.engine);
 
         if (this.checkCollision(player.floorSensor, LevelOneBodies.grounds))
             this.collisions.ground = true;
