@@ -25,7 +25,7 @@ export default class Player extends Structure {
 
     run (p5) {
 
-        drawVertices(p5, this.body.vertices);
+        drawVertices(p5, this.body.parts[1].vertices);
         this.draw(p5, this.body.position, this.control, this.isPlayerOnGround());
         this.moveSides({ x: this.xSpeed, y: this.body.velocity.y }, this.control);
         this.jump(this.jumpForce, this.control.jump, this.isPlayerOnGround());
