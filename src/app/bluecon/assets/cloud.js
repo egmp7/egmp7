@@ -1,11 +1,9 @@
-import scrollPos from "../globals/scrollPos";
+import Drawing from "./drawing";
 import { drawCloud } from "./sprites/cloud";
-import Asset from "./asset";
 
-
-export default class Cloud extends Asset{
+export default class Cloud extends Drawing {
     constructor(x, y, size) {
-        super(undefined, { x: x, y: y } )
+        super({ x: x, y: y })
         this.speed = { x: -0.1, y: 0 };
         this.size = size;
     }

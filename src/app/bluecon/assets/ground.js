@@ -1,7 +1,7 @@
-import Asset from "./asset";
+import Structure from "./structure";
 import { drawGround } from "./sprites/ground"
 
-export default class Ground extends Asset {
+export default class Ground extends Structure {
     constructor(body) {
         super(body);
         this.setStatic(true);

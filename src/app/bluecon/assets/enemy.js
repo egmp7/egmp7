@@ -1,8 +1,8 @@
 import { drawVertices } from "../resources/utilities";
 import { drawEnemyRight, drawEnemyLeft } from "./sprites/enemy"
-import Asset from "./asset"
+import Structure from "./structure"
 
-export default class Enemy extends Asset {
+export default class Enemy extends Structure {
     constructor(body, range) {
         super(body)
         this.range = range;
@@ -13,7 +13,7 @@ export default class Enemy extends Asset {
 
     run(p5) {
         drawVertices(p5, this.body.vertices)
-        this.reverseGravity(this.getEngineGravity(), this.body)
+        this.reverseGravity(this.engineGravity, this.body)
         this.switchVelocity(this.relativeInitPosition.x, this.range, this.body.position.x, this.speed);
         this.updateRelativeInitPosition();
         this.draw(p5, this.body.position, this.body.velocity)

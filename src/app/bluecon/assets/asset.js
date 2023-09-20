@@ -1,34 +1,39 @@
 import scroll from "../globals/scrollPos";
 import physics from "../globals/physics";
-import { Body } from "matter-js"
+import { Body } from "matter-js";
 
 export default class Asset {
     /**
      * @param {Matter.Body} body 
      * @param {Vector} position 
      */
-    constructor(body, position) {
-        // Asset is a Body
-        if (body != undefined) {
-            this.body = body;
-            this.initPosition = {
-                x: body.position.x,
-                y: body.position.y
-            };
-            this.relativeInitPosition = {
-                x: body.position.x,
-                y: body.position.y
-            };
-        }
-        // Asset is a P5 element
-        else {
-            this.position = {
-                x: position.x,
-                y: position.y
-            };
-            this.relativePosition = position;
-        }
+    constructor(){
+        this.scrollPosition = scroll.position;
+        this.engineGravity = physics.engine.gravity;
     }
+
+    // constructor(body, position) {
+    //     // Asset is a Body
+    //     if (body != undefined) {
+    //         this.body = body;
+    //         this.initPosition = {
+    //             x: body.position.x,
+    //             y: body.position.y
+    //         };
+    //         this.relativeInitPosition = {
+    //             x: body.position.x,
+    //             y: body.position.y
+    //         };
+    //     }
+    //     // Asset is a P5 element
+    //     else {
+    //         this.position = {
+    //             x: position.x,
+    //             y: position.y
+    //         };
+    //         this.relativePosition = position;
+    //     }
+    // }
 
     /**
      * Updates the initial position of the body by adding the scroll position
