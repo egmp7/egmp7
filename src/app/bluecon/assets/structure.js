@@ -55,4 +55,12 @@ export default class Structure extends Asset {
     applyForce(force) {
         Body.applyForce(this.body, this.body.position, force)
     }
+
+    /**
+     * Returns true when the player is on ground or a platform
+     * @returns Boolean 
+     */
+    isPlayerOnGround() {
+        return this.collisions.ground || this.collisions.platform;
+    }
 }
