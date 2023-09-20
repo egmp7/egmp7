@@ -1,6 +1,6 @@
-import { drawVertices } from "../resources/utilities";
-import { drawEnemyRight, drawEnemyLeft } from "./sprites/enemy"
-import Structure from "./structure"
+import { drawVertices } from "../../resources/utilities";
+import { drawEnemyRight, drawEnemyLeft } from "../sprites/enemy"
+import Structure from "../structure"
 
 export default class Enemy extends Structure {
     constructor(body, range) {

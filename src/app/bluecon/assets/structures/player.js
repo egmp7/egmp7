@@ -1,8 +1,8 @@
-import { drawVertices } from "../resources/utilities";
+import { drawVertices } from "../../resources/utilities";
 import { Body, Vector } from "matter-js";
-import control from "../globals/control";
-import physics from "../globals/physics";
-import player from "./playerBody";
+import control from "../../globals/control";
+import physics from "../../globals/physics";
+import player from "../playerBody";
 import {
     frontAnimation,
     leftFallingAnimation,
@@ -10,7 +10,7 @@ import {
     leftAnimation,
     rightAnimation,
     fallingAnimation
-} from "./sprites/player"
+} from "../sprites/player"
 
 export default class Player {
 

@@ -1,5 +1,5 @@
-import Structure from "./structure";
-import { drawPlatform } from "./sprites/platform"
+import Structure from "../structure";
+import { drawPlatform } from "../sprites/platform"
 
 export default class Platform extends Structure {
     constructor(body) {

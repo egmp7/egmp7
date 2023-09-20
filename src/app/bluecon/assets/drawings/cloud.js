@@ -1,5 +1,5 @@
-import Drawing from "./drawing";
-import { drawCloud } from "./sprites/cloud";
+import Drawing from "../drawing";
+import { drawCloud } from "../sprites/cloud";
 
 export default class Cloud extends Drawing {
     constructor(x, y, size) {
