@@ -1,9 +1,15 @@
 import { drawVertices } from "../../resources/utilities";
 import { drawEnemyRight, drawEnemyLeft } from "../sprites/enemy"
 import Structure from "../structure"
+import type Matter from "matter-js";
+import type P5 from "p5";
 
 export default class Enemy extends Structure {
-    constructor(body, range) {
+
+    range: number;
+    speed: number;
+
+    constructor(body: Matter.Body, range: number) {
         super(body)
         this.range = range;
         this.speed = 2;
@@ -11,7 +17,7 @@ export default class Enemy extends Structure {
         this.setVelocity({ x: this.speed, y: this.body.velocity.y })
     }
 
-    run(p5) {
+    run(p5: P5) {
         drawVertices(p5, this.body.vertices)
         this.reverseGravity(this.engineGravity, this.body)
         this.switchVelocity(this.relativeInitPosition.x, this.range, this.body.position.x, this.speed);
@@ -24,7 +30,7 @@ export default class Enemy extends Structure {
      * @param {Engine.gravity} gravity 
      * @param {Matter.body} body 
      */
-    reverseGravity(gravity, body) {
+    reverseGravity(gravity: Matter.Gravity, body: Matter.Body) {
         const negativeGravity = {
             x: -gravity.x * gravity.scale * body.mass,
             y: -gravity.y * gravity.scale * body.mass
@@ -39,7 +45,7 @@ export default class Enemy extends Structure {
      * @param {number} xEnemyCurrent
      * @param {number} speed 
      */
-    switchVelocity(xEnemyInit, range, xEnemyCurrent, speed) {
+    switchVelocity(xEnemyInit: number, range: number, xEnemyCurrent: number, speed: number) {
         if (range < 0) throw "error: range must not be less than 0";
         if (xEnemyCurrent > xEnemyInit + range)
             this.setVelocity({ x: -speed, y: this.body.velocity.y })
@@ -53,7 +59,7 @@ export default class Enemy extends Structure {
      * @param {Matter.Vector} position
      * @param {Matter.Vector} velocity 
      */
-    draw = function (p5, position, velocity) {
+    draw = function (p5: P5, position: Matter.Vector, velocity: Matter.Vector) {
 
         const yOffset = 3;
 

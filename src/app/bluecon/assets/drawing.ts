@@ -1,7 +1,11 @@
 import Asset from "./asset";
+import type Matter from "matter-js";
 
 export default class Drawing extends Asset {
-    constructor(position) {
+    position: Matter.Vector;
+    relativePosition: Matter.Vector;
+
+    constructor(position: Matter.Vector) {
         super();
         this.position = {
             x: position.x,

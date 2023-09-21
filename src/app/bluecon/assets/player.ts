@@ -23,7 +23,7 @@ const playerMain = Body.create({
 const player = {
     main: playerMain,
     body: playerBody,
-    floorSensor:playerFloorSensor
+    floorSensor: playerFloorSensor
 };
 
 export default player;

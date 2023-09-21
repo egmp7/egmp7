@@ -1,10 +1,11 @@
 import { sinMinusOneToOne, sinZeroToOne } from "../../resources/utilities";
+import type P5 from "p5"
 
 /**
  * Draws player animation
  * @param {P5} p5 
  */
-export function fallingAnimation(p5) {
+export function fallingAnimation(p5: P5) {
     //body
     p5.fill(0, 0, 200)
     p5.triangle(- 10, - 15, + 10, - 15, 0, - 25);
@@ -28,7 +29,7 @@ export function fallingAnimation(p5) {
  * Draws player animation
  * @param {P5} p5 
  */
-export function frontAnimation(p5) {
+export function frontAnimation(p5: P5) {
     p5.push()
     p5.translate(0, sinMinusOneToOne(p5, 2, 10))
     // body
@@ -50,7 +51,7 @@ export function frontAnimation(p5) {
  * Draws player animation
  * @param {P5} p5 
  */
-export function leftAnimation(p5) {
+export function leftAnimation(p5: P5) {
     p5.push()
     p5.translate(0, sinMinusOneToOne(p5, 2, 4))
     //body
@@ -69,7 +70,7 @@ export function leftAnimation(p5) {
  * Draws player animation
  * @param {P5} p5 
  */
-export function leftFallingAnimation(p5) {
+export function leftFallingAnimation(p5: P5) {
     //body
     p5.fill(0, 0, 200)
     p5.triangle(- 7, - 15, + 7, - 15, 0, - 25);
@@ -91,7 +92,7 @@ export function leftFallingAnimation(p5) {
  * Draws player animation
  * @param {P5} p5 
  */
-export function rightAnimation(p5) {
+export function rightAnimation(p5: P5) {
     p5.push()
     p5.translate(0, sinMinusOneToOne(p5, 2, 4))
     //body
@@ -110,7 +111,7 @@ export function rightAnimation(p5) {
  * Draws player animation
  * @param {P5} p5 
  */
-export function rightFallingAnimation(p5) {
+export function rightFallingAnimation(p5: P5) {
     //body
     p5.fill(0, 0, 200)
     p5.triangle(- 7, - 14, + 7, - 15, 0, - 25);

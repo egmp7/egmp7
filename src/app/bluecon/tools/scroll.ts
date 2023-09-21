@@ -1,16 +1,24 @@
 import { Body } from "matter-js"
+import type Matter from "matter-js";
+import type Bodies from "../types/bodies"
+import type Player from "../types/player";
 
 /**
  * Global, controls animation movement of player and all bodies
  * the position property is used to update the position of the assets
  */
 export default class Scroll {
+    position: Matter.Vector;
+    bodies: Bodies | null
+    player: Player | null
     constructor() {
         this.position = { x: 0, y: 0 }
-        this.bodies;
-        this.player;
+        this.bodies = null;
+        this.player = null;
     }
     run() {
+        if (!this.player) return;
+        
         this.checkScroll(this.player.main);
     }
 
@@ -19,7 +27,7 @@ export default class Scroll {
      * and scrolls if needs it
      * @param {Vector} playerPosition 
      */
-    checkScroll(player) {
+    checkScroll(player: Matter.Body) {
         const xRightLimit = 400;
         const xLeftLimit = 50;
         const x = 6;
@@ -38,7 +46,9 @@ export default class Scroll {
      * @param {number} limit 
      * @param {number} x 
      */
-    scroll(limit, x, player) {
+    scroll(limit: number, x: number, player: Matter.Body) {
+
+        if (!this.bodies) return;
 
         // update scrolling position
         this.position.x -= x
@@ -58,6 +68,8 @@ export default class Scroll {
      */
     resetBodies() {
 
+        if (!this.bodies) return;
+
         // reset all bodies position
         this.scrollBodies(this.bodies, this.position.x)
         // reset scroll position
@@ -69,9 +81,9 @@ export default class Scroll {
      * @param {Object} bodies 
      * @param {number} x 
      */
-    scrollBodies(bodies, x) {
+    scrollBodies(bodies: Bodies, x: number) {
         for (const property in bodies) {
-            bodies[property].forEach(body => {
+            bodies[property as keyof Bodies].forEach(body => {
                 Body.setPosition(body, {
                     x: body.position.x + x,
                     y: body.position.y
@@ -80,11 +92,11 @@ export default class Scroll {
         }
     }
 
-    setBodies(bodies) {
+    setBodies(bodies: Bodies) {
         this.bodies = bodies;
     }
 
-    setPlayer(playerBody) {
-        this.player = playerBody
+    setPlayer(player: Player) {
+        this.player = player
     }
 }

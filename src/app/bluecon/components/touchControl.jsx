@@ -1,13 +1,13 @@
 'use client'
 import dynamic from 'next/dynamic'
-import { classNames } from '../resources/utilities.js';
-import tools from '../tools.js';
+import { classNames } from '../resources/utilities';
+import tools from '../tools';
 const Sketch = dynamic(() => import("react-p5"), { ssr: false });
 
 const buttonWidth = 50;
 const buttonHeight = 50;
 
-export default function TouchControl({ name , player }) {
+export default function TouchControl({ name }) {
 
     const setup = (p5, canvasParentRef) => {
         p5.createCanvas(buttonWidth, buttonHeight).parent(canvasParentRef)

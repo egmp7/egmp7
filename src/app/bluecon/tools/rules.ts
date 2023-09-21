@@ -1,8 +1,18 @@
 import { Body } from "matter-js"
+import type Player from "../types/player";
+import type Collisions from "./collisions";
+import type Scroll from "./scroll";
+import type Matter from "matter-js";
 
 export default class Rules {
-    constructor(collisions,scroll) {
-        this.player;
+    player: Player | null;
+    collisions: Collisions;
+    scroll: Scroll;
+    yLimit: number;
+    playerInitPosition: Matter.Vector;
+
+    constructor(collisions: Collisions, scroll: Scroll) {
+        this.player = null;
         this.collisions = collisions;
         this.scroll = scroll;
         this.yLimit = 580;
@@ -13,40 +23,42 @@ export default class Rules {
     }
 
     run() {
-        this.checkOffLimits(this.yLimit,this.player.main.position);
+        if (!this.player) return;
+        this.checkOffLimits(this.yLimit, this.player.main.position);
         this.checkEnemyCollision(this.collisions.isEnemyCollision());
     }
 
     /**
      * Checks if player passed height of window
-     * @param {number*} yLimit 
-     * @param {Vector} playerPosition 
+     * @param {number} yLimit 
+     * @param {Matter.Vector} playerPosition 
      */
-    checkOffLimits(yLimit, playerPosition) {
+    checkOffLimits(yLimit: number, playerPosition: Matter.Vector) {
         if (playerPosition.y > yLimit) this.restart();
     }
 
     /**
      * Restarts the game if player collides with enemy
-     * @param {Boolean*} collision 
+     * @param {Boolean} collision 
      */
-    checkEnemyCollision(collision) {
+    checkEnemyCollision(collision: Boolean) {
         if (collision) this.restart();
     }
 
     /**
      * Restarts the game
      */
-    restart(){
+    restart() {
+        if (!this.player) return;
         this.scroll.resetBodies();  // move bodies to initial position
         Body.setPosition(this.player.main, this.playerInitPosition); // mode player to initial position
     }
 
     /**
      * Sets the player object
-     * @param {Object} playerBody 
+     * @param {Player} playerBody 
      */
-    setPlayer(playerBody){
-        this.player = playerBody;
+    setPlayer(player: Player) {
+        this.player = player;
     }
 }
