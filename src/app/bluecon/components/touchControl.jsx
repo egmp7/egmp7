@@ -1,7 +1,7 @@
 'use client'
 import dynamic from 'next/dynamic'
 import { classNames } from '../resources/utilities.js';
-import control from '../globals/control.js';
+import tools from '../tools.js';
 const Sketch = dynamic(() => import("react-p5"), { ssr: false });
 
 const buttonWidth = 50;
@@ -17,15 +17,15 @@ export default function TouchControl({ name , player }) {
     }
 
     function touchStart() {
-        if (name === "left") control.setLeft(true)
-        if (name === "right") control.setRight(true)
-        if (name === "jump") control.setJump(true)
+        if (name === "left") tools.control.setLeft(true)
+        if (name === "right") tools.control.setRight(true)
+        if (name === "jump") tools.control.setJump(true)
     }
 
     function touchEnd() {
-        if (name === "left") control.setLeft(false)
-        if (name === "right") control.setRight(false)
-        if (name === "jump") control.setJump(false)
+        if (name === "left") tools.control.setLeft(false)
+        if (name === "right") tools.control.setRight(false)
+        if (name === "jump") tools.control.setJump(false)
     }
 
     return (

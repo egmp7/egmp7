@@ -1,84 +1,30 @@
-import { drawVertices } from "../resources/utilities";
-import { Body, Vector } from "matter-js";
-import control from "../globals/control";
-import physics from "../globals/physics";
-import player from "./playerBody";
-import {
-    frontAnimation,
-    leftFallingAnimation,
-    rightFallingAnimation,
-    leftAnimation,
-    rightAnimation,
-    fallingAnimation
-} from "./sprites/player"
+import { Bodies, Body } from "matter-js"
 
-export default class Player {
+const playerRectangle = { x: 50, y: 200, w: 36, h: 82 }
 
-    constructor(body) {
-        this.body = player.main;
-    }
+const playerBody = Bodies.rectangle(
+    playerRectangle.x,
+    playerRectangle.y,
+    playerRectangle.w,
+    playerRectangle.h);
 
-    canDoubleJump = { isInAir: false, isFirstJump: false };
+const playerFloorSensor = Bodies.circle(
+    playerRectangle.x,
+    playerRectangle.y + playerRectangle.h / 2,
+    2,  // radius
+    { isSensor: true });
 
-    run = function (p5) {
+const playerMain = Body.create({
+    parts: [playerBody, playerFloorSensor],
+    friction: 0,
+    inertia: Infinity
+});
 
-        //drawVertices(p5, this.body.vertices);
-        this.draw(p5, this.body.position);
-        this.moveSides();
-        this.jump();
-        this.doubleJump();
-    }
+const player = {
+    main: playerMain,
+    body: playerBody,
+    floorSensor:playerFloorSensor
+};
 
-    moveSides = function () {
-        const speed = 5;
-        const velocityRight = Vector.create(speed, this.body.velocity.y)
-        const velocityLeft = Vector.create(-speed, this.body.velocity.y)
-        if (control.right) Body.setVelocity(this.body, velocityRight);
-        else if (control.left) Body.setVelocity(this.body, velocityLeft);
-        else Body.setVelocity(this.body, {x:0,y:this.body.velocity.y});
-    }
+export default player;
 
-    jump = function () {
-        const force = (-0.013 * this.body.mass);
-        if (control.jump && physics.isPlayerOnGround())
-            Body.applyForce(this.body, this.body.position, { x: 0, y: force })
-    }
-
-    doubleJump = function () {
-
-        // calc velocity
-        const speed = - 2;
-        var velocity;
-        if (this.body.velocity.y < 0) velocity = Vector.create(this.body.velocity.x, this.body.velocity.y + speed);
-        else velocity = Vector.create(this.body.velocity.x, - this.body.velocity.y);
-
-        // double jump
-        if (control.jump && this.canDoubleJump.isInAir && this.canDoubleJump.isFirstJump) {
-            Body.setVelocity(this.body, velocity);
-            this.canDoubleJump.isFirstJump = false;
-        }
-
-        // check if player is in the air
-        this.canDoubleJump.isInAir = false;
-        if (!control.jump && !physics.isPlayerOnGround())
-            this.canDoubleJump.isInAir = true;
-
-        // check if it is the first jump
-        if (control.jump && physics.isPlayerOnGround())
-            this.canDoubleJump.isFirstJump = true;
-    }
-
-    draw = function (p5, position) {
-        const yOffset = -3
-        p5.push()
-        p5.translate(position.x, position.y + yOffset)
-        p5.scale(1.7)
-        if (control.left && !physics.isPlayerOnGround()) leftFallingAnimation(p5)
-        else if (control.right && !physics.isPlayerOnGround()) rightFallingAnimation(p5)
-        else if (control.left) leftAnimation(p5)
-        else if (control.right) rightAnimation(p5)
-        else if (!physics.isPlayerOnGround()) fallingAnimation(p5)
-        else frontAnimation(p5)
-        p5.pop()
-    }
-}

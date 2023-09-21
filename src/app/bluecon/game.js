@@ -1,32 +1,22 @@
-import { Composite, Engine } from "matter-js";
-import LevelOneBodies from "./levels/levelOneBodies";
+import player from "./assets/player";
+import tools from "./tools";
 import LevelOneAssets from "./levels/levelOneAssets";
-import player from "./assets/playerBody"
-import physics from "./globals/physics";
-import scrollPos from "./globals/scrollPos";
-import Render from "./globals/render"
-import Rules from "./globals/rules";
+import LevelOneBodies from "./levels/levelOneBodies";
 
 export default class Game {
-    rules = new Rules;
-    render = new Render;
-
+    
     constructor() {
-         // Add bodies to matter physic engine
-         Composite.add(physics.engine.world, player.main);
-         for (const bodies in LevelOneBodies) {
-             Composite.add(physics.engine.world, LevelOneBodies[bodies])
-         }
-         // Add assets to render class
-         for (const assets in LevelOneAssets) {
-            this.render.add(LevelOneAssets[assets]);
-        }
+        tools.render.setAssets(LevelOneAssets);
+        tools.collisions.setBodies(LevelOneBodies);
+        tools.collisions.setPlayer(player);
+        tools.scroll.setBodies(LevelOneBodies);
+        tools.scroll.setPlayer(player);
+        tools.rules.setPlayer(player);
+        tools.physics.setBodies(LevelOneBodies);
+        tools.physics.setPlayer(player);
+        tools.physics.addElementsToWorld();
     }
     run(p5) {
-        Engine.update(physics.engine);
-        this.render.run(p5);
-        this.rules.run();
-        scrollPos.run();
-        physics.run();
+        tools.run(p5);
     }
 }

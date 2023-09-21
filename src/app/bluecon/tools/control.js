@@ -1,4 +1,4 @@
-class Control{
+export default class Control{
     constructor(){
         this.left = false;
         this.right = false;
@@ -17,5 +17,3 @@ class Control{
         this.jump = bool
     }
 }
-
-export default new Control

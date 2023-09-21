@@ -1,17 +1,17 @@
-import player from "../assets/playerBody"
-import LevelOneBodies from "../levels/levelOneBodies"
 import { Body } from "matter-js"
 
 /**
  * Global, controls animation movement of player and all bodies
  * the position property is used to update the position of the assets
  */
-class ScrollPos {
+export default class Scroll {
     constructor() {
         this.position = { x: 0, y: 0 }
+        this.bodies;
+        this.player;
     }
     run() {
-        this.checkScroll(player.main.position);
+        this.checkScroll(this.player.main);
     }
 
     /**
@@ -19,16 +19,16 @@ class ScrollPos {
      * and scrolls if needs it
      * @param {Vector} playerPosition 
      */
-    checkScroll(playerPosition) {
+    checkScroll(player) {
         const xRightLimit = 400;
         const xLeftLimit = 50;
         const x = 6;
         // left canvas limit
-        if (playerPosition.x < xLeftLimit)
-            this.scroll(xLeftLimit, +x);
+        if (player.position.x < xLeftLimit)
+            this.scroll(xLeftLimit, +x, player);
         // right canvas limit
-        if (playerPosition.x > xRightLimit)
-            this.scroll(xRightLimit, -x);
+        if (player.position.x > xRightLimit)
+            this.scroll(xRightLimit, -x, player);
     }
 
     /**
@@ -38,19 +38,19 @@ class ScrollPos {
      * @param {number} limit 
      * @param {number} x 
      */
-    scroll(limit, x) {
+    scroll(limit, x, player) {
 
         // update scrolling position
         this.position.x -= x
 
         // set player position 
-        Body.setPosition(player.main, {
+        Body.setPosition(player, {
             x: limit,
-            y: player.main.position.y
+            y: player.position.y
         })
 
         // move all bodies
-        this.scrollBodies(LevelOneBodies, x)
+        this.scrollBodies(this.bodies, x)
     }
 
     /**
@@ -59,7 +59,7 @@ class ScrollPos {
     resetBodies() {
 
         // reset all bodies position
-        this.scrollBodies(LevelOneBodies, this.position.x)
+        this.scrollBodies(this.bodies, this.position.x)
         // reset scroll position
         this.position.x = 0;
     }
@@ -79,6 +79,12 @@ class ScrollPos {
             });
         }
     }
-}
 
-export default new ScrollPos;
+    setBodies(bodies) {
+        this.bodies = bodies;
+    }
+
+    setPlayer(playerBody) {
+        this.player = playerBody
+    }
+}

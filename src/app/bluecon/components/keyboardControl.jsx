@@ -1,6 +1,6 @@
 'use client';
 import { useEffect } from 'react';
-import control from '../globals/control';
+import tools from '../tools';
 
 export default function KeyboardControl() {
     useEffect(() => {
@@ -9,14 +9,14 @@ export default function KeyboardControl() {
     }, [])
 
     const detectKeyDown = (e) => {
-        if (e.keyCode === 37 ) control.setLeft(true)
-        if (e.keyCode === 39 ) control.setRight(true)
-        if (e.keyCode === 32 ) control.setJump(true)
+        if (e.keyCode === 37 ) tools.control.setLeft(true)
+        if (e.keyCode === 39 ) tools.control.setRight(true)
+        if (e.keyCode === 32 ) tools.control.setJump(true)
         
     }
     const detectKeyUp = (e) => {
-        if (e.keyCode === 37 ) control.setLeft(false)
-        if (e.keyCode === 39 ) control.setRight(false)
-        if (e.keyCode === 32 ) control.setJump(false)
+        if (e.keyCode === 37 ) tools.control.setLeft(false)
+        if (e.keyCode === 39 ) tools.control.setRight(false)
+        if (e.keyCode === 32 ) tools.control.setJump(false)
     }
 }

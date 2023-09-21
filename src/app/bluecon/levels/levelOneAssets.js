@@ -1,10 +1,11 @@
 import LevelOneBodies from "./levelOneBodies";
-import Player from "../assets/player";
-import Ground from "../assets/ground";
-import Enemy from "../assets/enemy";
-import Cloud from "../assets/cloud";
-import Background from "../assets/background"
-import Platform from "../assets/platform"
+import Player from "../assets/structures/player";
+import Ground from "../assets/structures/ground";
+import Enemy from "../assets/structures/enemy";
+import Cloud from "../assets/drawings/cloud";
+import Background from "../assets/drawings/background"
+import Platform from "../assets/structures/platform"
+import player from "../assets/player"
 
 const LevelOneAssets ={
     
@@ -27,7 +28,7 @@ const LevelOneAssets ={
         new Enemy(LevelOneBodies.enemies[0],50),
         new Enemy(LevelOneBodies.enemies[1],20)
     ],
-    player : new Player(),
+    player : [new Player(player.main)],
 }
 
 export default LevelOneAssets
