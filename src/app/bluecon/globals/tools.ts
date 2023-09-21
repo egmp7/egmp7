@@ -23,7 +23,7 @@ class Tools {
         this.control = new Control();
         this.collisions = new Collisions();
         this.menu = new Menu();
-        this.rules = new Rules(this.collisions, this.scroll, this.control, this.menu);
+        this.rules = new Rules(this.collisions, this.scroll, this.control, this.menu, this.render);
     }
     run() {
         this.physics.run();

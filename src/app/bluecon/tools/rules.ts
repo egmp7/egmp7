@@ -6,6 +6,7 @@ import type Collisions from "./collisions";
 import type Scroll from "./scroll";
 import type Control from "./control";
 import type Menu from "./menu"
+import type Render from "./render";
 //////////////////////////////////////////////////
 export default class Rules {
     player: Player | null;
@@ -15,13 +16,15 @@ export default class Rules {
     playerInitPosition: Matter.Vector;
     control: Control;
     menu: Menu;
+    render: Render;
 
-    constructor(collisions: Collisions, scroll: Scroll, control:Control, menu: Menu) {
+    constructor(collisions: Collisions, scroll: Scroll, control: Control, menu: Menu, render: Render) {
         this.player = null;
         this.collisions = collisions;
         this.scroll = scroll;
         this.control = control
         this.menu = menu;
+        this.render = render;
         this.yLimit = 580;
         this.playerInitPosition = {
             x: 100,
@@ -36,7 +39,7 @@ export default class Rules {
         this.checkControl();
     }
 
-    checkControl(){
+    checkControl() {
         console.log(this.menu.isVisible)
         if (this.control.jump) this.menu.setIsVisible(false)
     }
