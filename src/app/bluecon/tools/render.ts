@@ -1,5 +1,4 @@
 import type Assets from "../types/assets";
-import type P5 from "p5"
 
 export default class Render {
     assets: Assets | null;
@@ -7,15 +6,15 @@ export default class Render {
     constructor() {
         this.assets = null;
     }
-    run(p5: P5) {
+    run() {
         if (!this.assets) return;
-        this.runAssets(p5, this.assets)
+        this.runAssets(this.assets)
     }
 
-    runAssets(p5: P5, assets: Assets) {
+    runAssets(assets: Assets) {
         for (const groupAsset in assets) {
-            assets[groupAsset as keyof Assets ].forEach((asset) => {
-                if (asset.isVisible) asset.run(p5)
+            assets[groupAsset as keyof Assets].forEach((asset) => {
+                if (asset.isVisible) asset.run()
             })
         }
     }

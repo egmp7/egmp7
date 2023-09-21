@@ -1,7 +1,7 @@
 import Structure from "../structure";
-import { drawPlatform } from "../sprites/platform"
-import type Matter from "matter-js"
-import type P5 from "p5"
+import { drawPlatform } from "../sprites/platform";
+import type Matter from "matter-js";
+import { globalP5 as p5 } from "../../globals/p5";
 
 export default class Platform extends Structure {
     
@@ -11,10 +11,11 @@ export default class Platform extends Structure {
         super(body);
         this.setStatic(true);
     }
-    run(p5: P5) {
-        this.draw(p5, this.body.vertices)
+    run() {
+        this.draw(this.body.vertices)
     }
-    draw(p5: P5, vertices: Matter.Vector[]) {
+    draw(vertices: Matter.Vector[]) {
+        if (!p5) return;
         drawPlatform(p5, vertices)
     }
 }

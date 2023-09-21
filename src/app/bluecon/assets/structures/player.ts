@@ -1,5 +1,6 @@
 import { drawVertices } from "../../resources/utilities";
 import Structure from "../structure";
+import { globalP5 as p5 } from "../../globals/p5";
 import {
     frontAnimation,
     leftFallingAnimation,
@@ -10,7 +11,6 @@ import {
 } from "../sprites/player"
 import type Matter from "matter-js";
 import type Control from "../../tools/control";
-import type P5 from "p5"
 
 interface DoubleJump {
     speed: number;
@@ -37,10 +37,10 @@ export default class Player extends Structure {
         }
     }
 
-    run(p5: P5) {
+    run() {
 
-        drawVertices(p5, this.body.parts[1].vertices);
-        this.draw(p5, this.body.position, this.control, this.collisions.isPlayerOnGround());
+        drawVertices(this.body.parts[1].vertices);
+        this.draw(this.body.position, this.control, this.collisions.isPlayerOnGround());
         this.moveSides({ x: this.xSpeed, y: this.body.velocity.y }, this.control);
         this.jump(this.jumpForce, this.control.jump, this.collisions.isPlayerOnGround());
         this.doubleJump(this.control.jump, !this.collisions.isPlayerOnGround(), this.doubleJumpProps.isFirstJump, this.doubleJumpProps.jumpReset);
@@ -116,8 +116,10 @@ export default class Player extends Structure {
      * @param {Control} control 
      * @param {Boolean} isOnGround 
      */
-    draw = function (p5: P5, position: Matter.Vector, control: Control, isOnGround: boolean) {
+    draw(position: Matter.Vector, control: Control, isOnGround: boolean): void {
+        if (!p5) return;
         const yOffset = -3
+
         p5.push()
         p5.translate(position.x, position.y + yOffset)
         p5.scale(1.7)

@@ -2,7 +2,7 @@ import { drawVertices } from "../../resources/utilities";
 import { drawEnemyRight, drawEnemyLeft } from "../sprites/enemy"
 import Structure from "../structure"
 import type Matter from "matter-js";
-import type P5 from "p5";
+import { globalP5 as p5 } from "../../globals/p5";
 
 export default class Enemy extends Structure {
 
@@ -19,12 +19,13 @@ export default class Enemy extends Structure {
         this.isVisible = false;
     }
 
-    run(p5: P5) {
-        drawVertices(p5, this.body.vertices)
+    run() {
+        //drawVertices(this.body.vertices)
         this.reverseGravity(this.engineGravity, this.body)
         this.switchVelocity(this.relativeInitPosition.x, this.range, this.body.position.x, this.speed);
         this.updateRelativeInitPosition();
-        this.draw(p5, this.body.position, this.body.velocity)
+        this.draw(this.body.position, this.body.velocity)
+        
     }
 
     /**
@@ -61,8 +62,8 @@ export default class Enemy extends Structure {
      * @param {Matter.Vector} position
      * @param {Matter.Vector} velocity 
      */
-    draw = function (p5: P5, position: Matter.Vector, velocity: Matter.Vector) {
-
+    draw (position: Matter.Vector, velocity: Matter.Vector) {
+        if (!p5) return;
         const yOffset = 3;
 
         p5.push();

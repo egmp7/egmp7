@@ -1,6 +1,7 @@
 'use client';
 import dynamic from 'next/dynamic'
 import Game from '../game';
+import {setGlobalP5} from '../globals/p5';
 
 const Sketch = dynamic(() => import("react-p5"), { ssr: false });
 
@@ -16,12 +17,13 @@ export default function P5() {
     cnv.style("left", "0");
     cnv.style("width", "100%");
     cnv.style("height", "100%");
+    setGlobalP5(p5);
   }
 
   const draw = (p5) => {
-    p5.noStroke()
+    p5.noStroke();
     // run game
-    game.run(p5)
+    game.run();
   };
 
   return (<Sketch setup={setup} draw={draw} />)

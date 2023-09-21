@@ -8,6 +8,7 @@ export default abstract class Graph {
     engineGravity: Matter.Gravity
     control: Control;
     collisions: Collisions;
+
     abstract isVisible: boolean;
 
     constructor() {
@@ -17,11 +18,9 @@ export default abstract class Graph {
         this.collisions = tools.collisions;
     }
 
-    setIsVisible(bool: boolean) {
-        this.isVisible = bool;
-    }
+    abstract run(): void;
 
-    getIsVisible(): boolean {
-        return this.isVisible;
+    setIsVisible(bool: boolean):void {
+        this.isVisible = bool;
     }
 }
