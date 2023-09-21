@@ -1,5 +1,5 @@
-import player from "./assets/playerBody";
-import tools from "./globals/tools";
+import player from "./assets/player";
+import tools from "./tools";
 import LevelOneAssets from "./levels/levelOneAssets";
 import LevelOneBodies from "./levels/levelOneBodies";
 

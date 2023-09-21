@@ -1,6 +1,5 @@
 import { drawVertices } from "../../resources/utilities";
 import Structure from "../structure";
-import player from "../playerBody";
 import {
     frontAnimation,
     leftFallingAnimation,
@@ -12,8 +11,8 @@ import {
 
 export default class Player extends Structure {
 
-    constructor() {
-        super(player.main);
+    constructor(body) {
+        super(body);
         this.xSpeed = 5;
         this.jumpForce = { x: 0, y: (-0.013 * this.body.mass) };
         this.doubleJumpProps = {

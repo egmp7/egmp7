@@ -1,9 +1,9 @@
-import Physics from "./physics";
-import Scroll from "./scroll";
-import Rules from "./rules";
-import Render from "./render";
-import Control from "./control";
-import Collisions from "./collisions"
+import Physics from "./tools/physics";
+import Scroll from "./tools/scroll";
+import Rules from "./tools/rules";
+import Render from "./tools/render";
+import Control from "./tools/control";
+import Collisions from "./tools/collisions"
 
 class Tools {
     constructor() {

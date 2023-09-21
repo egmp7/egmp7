@@ -1,6 +1,6 @@
 'use client';
 import { useEffect } from 'react';
-import tools from '../globals/tools';
+import tools from '../tools';
 
 export default function KeyboardControl() {
     useEffect(() => {

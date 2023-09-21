@@ -1,4 +1,4 @@
-import tools from "../globals/tools";
+import tools from "../tools";
 
 export default class Asset {
     constructor() {
