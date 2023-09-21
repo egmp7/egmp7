@@ -1,7 +1,8 @@
-import Graph from "./graph";
+import Asset from "../asset";
+//////////////////////////////////////////////////////
 import type Matter from "matter-js";
-
-export default abstract class Drawing extends Graph {
+//////////////////////////////////////////////////////
+export default abstract class Drawing extends Asset {
     position: Matter.Vector;
     relativePosition: Matter.Vector;
 

@@ -1,9 +1,9 @@
-import Structure from "../structure";
-import { drawGround } from "../sprites/ground"
-import type Matter from "matter-js";
 import { globalP5 as p5 } from "../../globals/p5";
-
-
+import Structure from "./structure";
+import { drawGround } from "./sprites/ground"
+//////////////////////////////////////////////////////
+import type Matter from "matter-js";
+//////////////////////////////////////////////////////
 export default class Ground extends Structure {
 
     public isVisible: boolean = true;

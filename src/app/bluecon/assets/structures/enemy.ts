@@ -1,9 +1,10 @@
 import { drawVertices } from "../../resources/utilities";
-import { drawEnemyRight, drawEnemyLeft } from "../sprites/enemy"
-import Structure from "../structure"
-import type Matter from "matter-js";
 import { globalP5 as p5 } from "../../globals/p5";
-
+import { drawEnemyRight, drawEnemyLeft } from "./sprites/enemy"
+import Structure from "./structure"
+//////////////////////////////////////////////////////
+import type Matter from "matter-js";
+//////////////////////////////////////////////////////
 export default class Enemy extends Structure {
 
     public isVisible: boolean = false;

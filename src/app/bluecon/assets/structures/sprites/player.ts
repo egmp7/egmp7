@@ -1,4 +1,4 @@
-import { sinMinusOneToOne, sinZeroToOne } from "../../resources/utilities";
+import { sinMinusOneToOne, sinZeroToOne } from "../../../resources/utilities";
 import type P5 from "p5"
 
 /**

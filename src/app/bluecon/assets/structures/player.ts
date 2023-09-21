@@ -1,6 +1,6 @@
 import { drawVertices } from "../../resources/utilities";
-import Structure from "../structure";
 import { globalP5 as p5 } from "../../globals/p5";
+import Structure from "./structure";
 import {
     frontAnimation,
     leftFallingAnimation,
@@ -8,16 +8,17 @@ import {
     leftAnimation,
     rightAnimation,
     fallingAnimation
-} from "../sprites/player"
+} from "./sprites/player"
+//////////////////////////////////////////////////////
 import type Matter from "matter-js";
 import type Control from "../../tools/control";
-
+//////////////////////////////////////////////////////
 interface DoubleJump {
     speed: number;
     jumpReset: boolean;
     isFirstJump: boolean;
 }
-
+//////////////////////////////////////////////////////
 export default class Player extends Structure {
 
     public isVisible: boolean = false;

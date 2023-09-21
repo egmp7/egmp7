@@ -1,8 +1,8 @@
-import Graph from "../graph";
-import { drawBackground } from "../sprites/background";
 import { globalP5 as p5 } from "../../globals/p5";
-
-export default class Background extends Graph {
+import Asset from "../asset";
+import { drawBackground } from "./sprites/background";
+//////////////////////////////////////////////////////
+export default class Background extends Asset {
     public isVisible: boolean = true;
 
     constructor() {
