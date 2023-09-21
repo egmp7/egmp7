@@ -1,10 +1,10 @@
-import Physics from "./tools/physics";
-import Scroll from "./tools/scroll";
-import Rules from "./tools/rules";
-import Render from "./tools/render";
-import Control from "./tools/control";
-import Collisions from "./tools/collisions"
-import Menu from "./tools/menu";
+import Physics from "../tools/physics";
+import Scroll from "../tools/scroll";
+import Rules from "../tools/rules";
+import Render from "../tools/render";
+import Control from "../tools/control";
+import Collisions from "../tools/collisions"
+import Menu from "../tools/menu";
 
 class Tools {
 
