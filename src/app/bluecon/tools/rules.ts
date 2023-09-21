@@ -1,20 +1,27 @@
 import { Body } from "matter-js"
+//////////////////////////////////////////////////
+import type Matter from "matter-js";
 import type Player from "../types/player";
 import type Collisions from "./collisions";
 import type Scroll from "./scroll";
-import type Matter from "matter-js";
-
+import type Control from "./control";
+import type Menu from "./menu"
+//////////////////////////////////////////////////
 export default class Rules {
     player: Player | null;
     collisions: Collisions;
     scroll: Scroll;
     yLimit: number;
     playerInitPosition: Matter.Vector;
+    control: Control;
+    menu: Menu;
 
-    constructor(collisions: Collisions, scroll: Scroll) {
+    constructor(collisions: Collisions, scroll: Scroll, control:Control, menu: Menu) {
         this.player = null;
         this.collisions = collisions;
         this.scroll = scroll;
+        this.control = control
+        this.menu = menu;
         this.yLimit = 580;
         this.playerInitPosition = {
             x: 100,
@@ -22,10 +29,16 @@ export default class Rules {
         };
     }
 
-    run() {
+    run(): void {
         if (!this.player) return;
         this.checkOffLimits(this.yLimit, this.player.main.position);
         this.checkEnemyCollision(this.collisions.isEnemyCollision());
+        this.checkControl();
+    }
+
+    checkControl(){
+        console.log(this.menu.isVisible)
+        if (this.control.jump) this.menu.setIsVisible(false)
     }
 
     /**
@@ -33,7 +46,7 @@ export default class Rules {
      * @param {number} yLimit 
      * @param {Matter.Vector} playerPosition 
      */
-    checkOffLimits(yLimit: number, playerPosition: Matter.Vector) {
+    checkOffLimits(yLimit: number, playerPosition: Matter.Vector): void {
         if (playerPosition.y > yLimit) this.restart();
     }
 

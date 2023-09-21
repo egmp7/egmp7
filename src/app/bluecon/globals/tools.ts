@@ -22,8 +22,8 @@ class Tools {
         this.render = new Render();
         this.control = new Control();
         this.collisions = new Collisions();
-        this.rules = new Rules(this.collisions, this.scroll);
         this.menu = new Menu();
+        this.rules = new Rules(this.collisions, this.scroll, this.control, this.menu);
     }
     run() {
         this.physics.run();

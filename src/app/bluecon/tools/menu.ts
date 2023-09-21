@@ -1,19 +1,24 @@
-//import { p5Object as p5 } from "../globals/p5";
-import type P5 from "p5"
+import Graph from "../globals/graph";
+import { globalP5 as p5 } from "../globals/p5";
 
-export default class Menu {
-    //isVisible: boolean = true;
+export default class Menu extends Graph {
+
     position: Matter.Vector
+    isVisible: boolean = true;
+
     constructor() {
-        this.position = { x: 10, y: 0 };
+        super();
+        this.position = { x: 10, y: 10 };
     }
-    run() {
+
+    run(): void {
         this.draw(this.position);
     }
 
-    draw(position: Matter.Vector) {
-        // if (!p5) return;
-        // p5.fill(200,0,200)
-        // p5.rect(position.x,position.y,200,300)
+    draw(position: Matter.Vector): void {
+        if (!p5) return;
+        if (!this.isVisible) return;
+        p5.fill(200, 0, 200)
+        p5.rect(position.x, position.y, 200, 300)
     }
 }
