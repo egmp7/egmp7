@@ -31,7 +31,6 @@ class Tools {
         this.rules.run();
         this.render.run();
         this.collisions.run();
-        this.menu.run();
     }
 }
 

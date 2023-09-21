@@ -1,25 +1,31 @@
-import type Assets from "../types/assets";
+import type Graph from "../globals/graph";
 
+/**
+ * Runner for the elements of the class Graph
+ */
 export default class Render {
-    assets: Assets | null;
+    graphs: Graph[];
 
     constructor() {
-        this.assets = null;
+        this.graphs =[];
     }
-    run() {
-        if (!this.assets) return;
-        this.runAssets(this.assets)
+    run(): void {
+        this.runAssets(this.graphs)
     }
 
-    runAssets(assets: Assets) {
-        for (const groupAsset in assets) {
-            assets[groupAsset as keyof Assets].forEach((asset) => {
-                if (asset.isVisible) asset.run()
+    runAssets(graphs: Graph[]): void {
+
+        graphs.forEach((graph: Graph)=>{
+            if (graph.isVisible) graph.run()
+        })
+    }
+
+    addGraphs(groupGraphs: any[]): void{
+        groupGraphs.forEach((graphs:Graph[])=>{
+            graphs.forEach((graph : Graph)=>{
+                this.graphs.push(graph)
             })
-        }
-    }
-
-    setAssets(assets: Assets) {
-        this.assets = assets;
+            
+        })
     }
 }

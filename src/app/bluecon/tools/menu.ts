@@ -17,7 +17,6 @@ export default class Menu extends Graph {
 
     draw(position: Matter.Vector): void {
         if (!p5) return;
-        if (!this.isVisible) return;
         p5.fill(200, 0, 200)
         p5.rect(position.x, position.y, 200, 300)
     }
