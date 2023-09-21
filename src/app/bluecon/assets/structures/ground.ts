@@ -4,6 +4,8 @@ import type Matter from "matter-js";
 import type P5 from "p5"
 
 export default class Ground extends Structure {
+
+    public isVisible: boolean = true;
     constructor(body: Matter.Body) {
         super(body);
         this.setStatic(true);

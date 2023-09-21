@@ -6,6 +6,7 @@ import type P5 from "p5";
 
 export default class Enemy extends Structure {
 
+    public isVisible: boolean = false;
     range: number;
     speed: number;
 
@@ -15,6 +16,7 @@ export default class Enemy extends Structure {
         this.speed = 2;
         this.setInertia(Infinity);
         this.setVelocity({ x: this.speed, y: this.body.velocity.y })
+        this.isVisible = false;
     }
 
     run(p5: P5) {

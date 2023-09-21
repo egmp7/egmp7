@@ -15,7 +15,7 @@ export default class Render {
     runAssets(p5: P5, assets: Assets) {
         for (const groupAsset in assets) {
             assets[groupAsset as keyof Assets ].forEach((asset) => {
-                asset.run(p5)
+                if (asset.isVisible) asset.run(p5)
             })
         }
     }

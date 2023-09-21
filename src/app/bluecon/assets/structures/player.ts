@@ -20,6 +20,8 @@ interface DoubleJump {
 
 export default class Player extends Structure {
 
+    public isVisible: boolean = false;
+
     xSpeed: number;
     jumpForce: Matter.Vector;
     doubleJumpProps: DoubleJump;
@@ -84,7 +86,7 @@ export default class Player extends Structure {
 
     /**
      * Double Jump function
-     * @param {Boolean*} isJumping 
+     * @param {Boolean} isJumping 
      * @param {Boolean} isInAir 
      * @param {Boolean} isFirstJump 
      * @param {Boolean} jumpReset 

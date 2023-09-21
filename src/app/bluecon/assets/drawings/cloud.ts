@@ -5,6 +5,8 @@ import type P5 from "p5"
 
 export default class Cloud extends Drawing {
 
+    public isVisible: boolean = true;
+
     size:number;
     speed: Vector;
 

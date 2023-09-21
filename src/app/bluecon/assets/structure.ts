@@ -1,9 +1,9 @@
 import { Body } from "matter-js";
-import Asset from "./asset";
+import Graph from "./graph";
 import type Matter from "matter-js";
 
 
-export default class Structure extends Asset {
+export default abstract class Structure extends Graph {
 
     body: Matter.Body;
     initPosition: Matter.Vector;
