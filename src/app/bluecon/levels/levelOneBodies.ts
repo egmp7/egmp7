@@ -8,7 +8,7 @@ const properties = {
     platform: {
         height: 10
     }
-}
+};
 
 const LevelOneBodies = {
     grounds: [
@@ -25,7 +25,7 @@ const LevelOneBodies = {
         Bodies.rectangle(500, 500, 100, properties.platform.height),
         Bodies.rectangle(800, 400, 100, properties.platform.height)
     ],
-}
+};
 
 export default LevelOneBodies;
 

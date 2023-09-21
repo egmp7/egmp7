@@ -1,9 +1,12 @@
+import type P5 from "p5"
+import type Matter from "matter-js";
+
 /**
  * Draws a platform
  * @param {P5} p5 
- * @param {Array<Body.vertices>} vertices 
+ * @param {Matter.Vector[]} vertices 
  */
-export function drawPlatform(p5, vertices) {
+export function drawPlatform(p5: P5, vertices: Matter.Vector[]) {
     //red rectangle
     p5.push()
     p5.fill(255, 155, 0)

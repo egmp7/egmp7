@@ -1,9 +1,12 @@
+import type P5 from "p5"
+import type Matter from "matter-js";
+
 /**
  * Draws ground
  * @param {P5} p5 
- * @param {Array<Body.vertices>} vertices 
+ * @param {Matter.Vector[]} vertices 
  */
-export function drawGround(p5, vertices) {
+export function drawGround(p5: P5, vertices: Matter.Vector[]) {
     // green main rectangle
     p5.fill(0, 155, 0)
     p5.beginShape();

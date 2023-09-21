@@ -1,4 +1,7 @@
-export function drawVertices(p5, vertices) {
+import type P5 from "p5";
+import type Matter from "matter-js";
+
+export function drawVertices(p5: P5, vertices: Matter.Vector[]) {
     p5.fill(255, 0, 255)
     p5.beginShape();
     for (var i = 0; i < vertices.length; i++) {
@@ -7,7 +10,7 @@ export function drawVertices(p5, vertices) {
     p5.endShape();
 }
 
-export function classNames(...classes) {
+export function classNames(...classes: any[]) {
     return classes.filter(Boolean).join(' ')
 }
 
@@ -18,7 +21,7 @@ export function classNames(...classes) {
  * @param {number} speed 
  * @returns 
  */
-export function sinZeroToOne(p5, magnitude, speed) {
+export function sinZeroToOne(p5: P5, magnitude: number, speed: number) {
     return magnitude * (p5.sin(p5.frameCount / speed) + 1) / 2;
 }
 
@@ -29,6 +32,6 @@ export function sinZeroToOne(p5, magnitude, speed) {
  * @param {number} speed 
  * @returns 
  */
-export function sinMinusOneToOne(p5, magnitude, speed) {
+export function sinMinusOneToOne(p5: P5, magnitude: number, speed: number) {
     return magnitude * p5.sin(p5.frameCount / speed);
 }

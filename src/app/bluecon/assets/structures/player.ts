@@ -8,10 +8,23 @@ import {
     rightAnimation,
     fallingAnimation
 } from "../sprites/player"
+import type Matter from "matter-js";
+import type Control from "../../tools/control";
+import type P5 from "p5"
+
+interface DoubleJump {
+    speed: number;
+    jumpReset: boolean;
+    isFirstJump: boolean;
+}
 
 export default class Player extends Structure {
 
-    constructor(body) {
+    xSpeed: number;
+    jumpForce: Matter.Vector;
+    doubleJumpProps: DoubleJump;
+
+    constructor(body: Matter.Body) {
         super(body);
         this.xSpeed = 5;
         this.jumpForce = { x: 0, y: (-0.013 * this.body.mass) };
@@ -22,7 +35,7 @@ export default class Player extends Structure {
         }
     }
 
-    run (p5) {
+    run(p5: P5) {
 
         drawVertices(p5, this.body.parts[1].vertices);
         this.draw(p5, this.body.position, this.control, this.collisions.isPlayerOnGround());
@@ -36,7 +49,7 @@ export default class Player extends Structure {
      * @param {Vector} velocity 
      * @param {Control.Object} control 
      */
-    moveSides (velocity, control) {
+    moveSides(velocity: Matter.Vector, control: Control) {
         const velocityRight = { x: velocity.x, y: velocity.y }
         const velocityLeft = { x: -velocity.x, y: velocity.y }
         const velocityCenter = { x: 0, y: velocity.y }
@@ -51,7 +64,7 @@ export default class Player extends Structure {
      * @param {Boolean} isJump 
      * @param {Boolean} isOnGround 
      */
-    jump (force, isJump, isOnGround) {
+    jump(force: Matter.Vector, isJump: boolean, isOnGround: boolean) {
         if (isJump && isOnGround) this.applyForce(force)
     }
 
@@ -76,7 +89,7 @@ export default class Player extends Structure {
      * @param {Boolean} isFirstJump 
      * @param {Boolean} jumpReset 
      */
-    doubleJump(isJumping, isInAir, isFirstJump, jumpReset) {
+    doubleJump(isJumping: boolean, isInAir: boolean, isFirstJump: boolean, jumpReset: boolean) {
 
         // check if it is the first jump
         if (isJumping && !isInAir)
@@ -98,10 +111,10 @@ export default class Player extends Structure {
      * 
      * @param {P5} p5 
      * @param {Vector} position 
-     * @param {Control.Object} control 
+     * @param {Control} control 
      * @param {Boolean} isOnGround 
      */
-    draw = function (p5, position, control, isOnGround) {
+    draw = function (p5: P5, position: Matter.Vector, control: Control, isOnGround: boolean) {
         const yOffset = -3
         p5.push()
         p5.translate(position.x, position.y + yOffset)
@@ -115,11 +128,11 @@ export default class Player extends Structure {
         p5.pop()
     }
 
-    setJumpReset(bool) {
+    setJumpReset(bool: boolean) {
         this.doubleJumpProps.jumpReset = bool;
     }
 
-    setIsFirstJump(bool) {
+    setIsFirstJump(bool: boolean) {
         this.doubleJumpProps.isFirstJump = bool;
     }
 }
