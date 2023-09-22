@@ -24,8 +24,8 @@ class Tools {
         this.render = new Render();
         this.control = new Control();
         this.collisions = new Collisions();
-        this.menu = new Menu();
         this.status = new Status;
+        this.menu = new Menu(this.status);
         this.rules = new Rules(this.collisions, this.scroll, this.control, this.menu, this.render, this.status);
     }
     run() {
