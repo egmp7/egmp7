@@ -40,8 +40,12 @@ export default class Rules {
     }
 
     checkControl() {
-        console.log(this.menu.isVisible)
-        if (this.control.jump) this.menu.setIsVisible(false)
+        if (!this.render.graphs) return;
+        if (this.control.jump) {
+            this.render.hideGroup(this.render.graphs.menu)
+            this.render.showGroup(this.render.graphs.player)
+            this.render.showGroup(this.render.graphs.enemies)
+        }
     }
 
     /**

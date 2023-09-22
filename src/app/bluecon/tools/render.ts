@@ -1,13 +1,23 @@
 import type Graph from "../globals/graph";
 
+interface Graphs{
+    player: Graph[],
+    background: Graph[]
+    menu: Graph[],
+    enemies: Graph[],
+    grounds: Graph[],
+    clouds: Graph[],
+    platforms: Graph[],
+}
+
 /**
  * Runner for the elements of the class Graph
  */
 export default class Render {
-    graphs: any;
+    graphs: Graphs | null;
 
     constructor() {
-        this.graphs = {};
+        this.graphs = null;
     }
     run(): void {
         this.runGraphs(this.graphs)
@@ -24,5 +34,25 @@ export default class Render {
 
     addGraphs(group: any): void {
         this.graphs = { ...this.graphs, ...group }
+    }
+
+    /**
+     * Shows and runs a group of graphs
+     * @param group 
+     */
+    showGroup(group: Graph[]): void {
+        group.forEach((graph: Graph)=>{
+            graph.setIsVisible(true);
+        })
+    }
+
+    /**
+     * Hides and stops running a group of graphs
+     * @param group 
+     */
+    hideGroup(group: Graph[]): void {
+        group.forEach((graph: Graph)=>{
+            graph.setIsVisible(false);
+        })
     }
 }
