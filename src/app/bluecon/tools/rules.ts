@@ -8,6 +8,7 @@ import type Control from "./control";
 import type Menu from "./menu"
 import type Render from "./render";
 import type Structure from "../assets/structures/structure";
+import type Status from "./status";
 //////////////////////////////////////////////////
 export default class Rules {
     player: Player | null;
@@ -18,15 +19,17 @@ export default class Rules {
     control: Control;
     menu: Menu;
     render: Render;
+    status: Status;
     isGamePlaying: boolean;
 
-    constructor(collisions: Collisions, scroll: Scroll, control: Control, menu: Menu, render: Render) {
+    constructor(collisions: Collisions, scroll: Scroll, control: Control, menu: Menu, render: Render, status: Status) {
         this.player = null;
         this.collisions = collisions;
         this.scroll = scroll;
         this.control = control
         this.menu = menu;
         this.render = render;
+        this.status = status;
         this.yLimit = 580;
         this.isGamePlaying = false;
         this.playerInitPosition = {
@@ -42,7 +45,9 @@ export default class Rules {
         // player collide with an enemy
         if (this.collisions.isEnemyCollision()) this.restart();
         // check if user starts the game
-        if (this.checkControl()) this.initGame(this.render,this.render.graphs);
+        if (this.checkControl()) this.initGame(this.render, this.render.graphs);
+        // check if game over
+        if (this.checkGameOver(this.status.lives)) this.gameOver(this.render, this.render.graphs);
     }
 
     /**
@@ -64,9 +69,24 @@ export default class Rules {
         render.hideGroup(graphs.menu);
         render.showGroup(graphs.player);
         render.showGroup(graphs.enemies);
+        render.showGroup(graphs.status);
         this.startGroup(graphs.player as Structure[]);
         this.startGroup(graphs.enemies as Structure[]);
         this.setIsGamePlaying(true);
+    }
+
+    /**
+     * Game over
+     * @param render 
+     * @param graphs 
+     */
+    gameOver(render: Render, graphs: any){
+        render.showGroup(graphs.menu);
+        render.hideGroup(graphs.player);
+        render.hideGroup(graphs.enemies);
+        render.hideGroup(graphs.status);
+        this.status.setLives(3);
+        this.setIsGamePlaying(false);
     }
 
     /**
@@ -94,8 +114,19 @@ export default class Rules {
      */
     restart(): void {
         if (!this.player) return;
+        this.status.setLives(this.status.lives - 1);
         this.scroll.resetBodies();  // move bodies to initial position
         Body.setPosition(this.player.main, this.playerInitPosition); // mode player to initial position
+    }
+
+    /**
+     * Checks the number of lives
+     * @param lives 
+     * @returns 
+     */
+    checkGameOver(lives: number): boolean {
+        if (lives < 0) return true;
+        return false;
     }
 
     /**

@@ -8,6 +8,7 @@ interface Graphs{
     grounds: Graph[],
     clouds: Graph[],
     platforms: Graph[],
+    status: Graph[],
 }
 
 /**
