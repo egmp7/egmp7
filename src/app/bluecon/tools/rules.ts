@@ -7,6 +7,7 @@ import type Scroll from "./scroll";
 import type Control from "./control";
 import type Menu from "./menu"
 import type Render from "./render";
+import type Structure from "../assets/structures/structure";
 //////////////////////////////////////////////////
 export default class Rules {
     player: Player | null;
@@ -17,6 +18,7 @@ export default class Rules {
     control: Control;
     menu: Menu;
     render: Render;
+    isGamePlaying: boolean;
 
     constructor(collisions: Collisions, scroll: Scroll, control: Control, menu: Menu, render: Render) {
         this.player = null;
@@ -26,6 +28,7 @@ export default class Rules {
         this.menu = menu;
         this.render = render;
         this.yLimit = 580;
+        this.isGamePlaying = false;
         this.playerInitPosition = {
             x: 100,
             y: 200
@@ -34,18 +37,46 @@ export default class Rules {
 
     run(): void {
         if (!this.player) return;
-        this.checkOffLimits(this.yLimit, this.player.main.position);
-        this.checkEnemyCollision(this.collisions.isEnemyCollision());
-        this.checkControl();
+        // player passed limits
+        if (this.checkOffLimits(this.yLimit, this.player.main.position)) this.restart();
+        // player collide with an enemy
+        if (this.collisions.isEnemyCollision()) this.restart();
+        // check if user starts the game
+        if (this.checkControl()) this.initGame(this.render,this.render.graphs);
     }
 
-    checkControl() {
-        if (!this.render.graphs) return;
-        if (this.control.jump) {
-            this.render.hideGroup(this.render.graphs.menu)
-            this.render.showGroup(this.render.graphs.player)
-            this.render.showGroup(this.render.graphs.enemies)
-        }
+    /**
+     * Checks if user presses jump to start the game
+     * @returns 
+     */
+    checkControl(): boolean {
+        if (!this.render.graphs) return false;
+        if (this.control.jump && !this.isGamePlaying) return true;
+        return false;
+    }
+
+    /**
+     * Game initializer 
+     * @returns void
+     */
+    initGame(render: Render, graphs: any) {
+
+        render.hideGroup(graphs.menu);
+        render.showGroup(graphs.player);
+        render.showGroup(graphs.enemies);
+        this.startGroup(graphs.player as Structure[]);
+        this.startGroup(graphs.enemies as Structure[]);
+        this.setIsGamePlaying(true);
+    }
+
+    /**
+     * Structure initializer
+     * @param group 
+     */
+    startGroup(group: Structure[]): void {
+        group.forEach((structure: Structure) => {
+            structure.initBody();
+        })
     }
 
     /**
@@ -53,22 +84,15 @@ export default class Rules {
      * @param {number} yLimit 
      * @param {Matter.Vector} playerPosition 
      */
-    checkOffLimits(yLimit: number, playerPosition: Matter.Vector): void {
-        if (playerPosition.y > yLimit) this.restart();
-    }
-
-    /**
-     * Restarts the game if player collides with enemy
-     * @param {Boolean} collision 
-     */
-    checkEnemyCollision(collision: Boolean) {
-        if (collision) this.restart();
+    checkOffLimits(yLimit: number, playerPosition: Matter.Vector): boolean {
+        if (playerPosition.y > yLimit) return true
+        return false;
     }
 
     /**
      * Restarts the game
      */
-    restart() {
+    restart(): void {
         if (!this.player) return;
         this.scroll.resetBodies();  // move bodies to initial position
         Body.setPosition(this.player.main, this.playerInitPosition); // mode player to initial position
@@ -78,7 +102,15 @@ export default class Rules {
      * Sets the player object
      * @param {Player} playerBody 
      */
-    setPlayer(player: Player) {
+    setPlayer(player: Player): void {
         this.player = player;
+    }
+
+    /**
+     * Sets is Game Playing attribute
+     * @param bool 
+     */
+    setIsGamePlaying(bool: boolean): void {
+        this.isGamePlaying = bool;
     }
 }

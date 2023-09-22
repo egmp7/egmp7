@@ -11,12 +11,11 @@ export default class Enemy extends Structure {
     range: number;
     speed: number;
 
-    constructor(body: Matter.Body, range: number) {
-        super(body)
+    constructor(body: Matter.Body, range: number, speed: number) {
+        super(body,{x:speed,y:body.velocity.y})
         this.range = range;
-        this.speed = 2;
+        this.speed = speed;
         this.setInertia(Infinity);
-        this.setVelocity({ x: this.speed, y: this.body.velocity.y })
         this.isVisible = false;
     }
 
@@ -26,7 +25,6 @@ export default class Enemy extends Structure {
         this.switchVelocity(this.relativeInitPosition.x, this.range, this.body.position.x, this.speed);
         this.updateRelativeInitPosition();
         this.draw(this.body.position, this.body.velocity)
-        
     }
 
     /**
