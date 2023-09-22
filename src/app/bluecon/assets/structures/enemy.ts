@@ -1,28 +1,30 @@
 import { drawVertices } from "../../resources/utilities";
-import { drawEnemyRight, drawEnemyLeft } from "../sprites/enemy"
-import Structure from "../structure"
+import { globalP5 as p5 } from "../../globals/p5";
+import { drawEnemyRight, drawEnemyLeft } from "./sprites/enemy"
+import Structure from "./structure"
+//////////////////////////////////////////////////////
 import type Matter from "matter-js";
-import type P5 from "p5";
-
+//////////////////////////////////////////////////////
 export default class Enemy extends Structure {
 
+    public isVisible: boolean = false;
     range: number;
     speed: number;
 
-    constructor(body: Matter.Body, range: number) {
-        super(body)
+    constructor(body: Matter.Body, range: number, speed: number) {
+        super(body,{x:speed,y:body.velocity.y})
         this.range = range;
-        this.speed = 2;
+        this.speed = speed;
         this.setInertia(Infinity);
-        this.setVelocity({ x: this.speed, y: this.body.velocity.y })
+        this.isVisible = false;
     }
 
-    run(p5: P5) {
-        drawVertices(p5, this.body.vertices)
+    run() {
+        //drawVertices(this.body.vertices)
         this.reverseGravity(this.engineGravity, this.body)
         this.switchVelocity(this.relativeInitPosition.x, this.range, this.body.position.x, this.speed);
         this.updateRelativeInitPosition();
-        this.draw(p5, this.body.position, this.body.velocity)
+        this.draw(this.body.position, this.body.velocity)
     }
 
     /**
@@ -59,8 +61,8 @@ export default class Enemy extends Structure {
      * @param {Matter.Vector} position
      * @param {Matter.Vector} velocity 
      */
-    draw = function (p5: P5, position: Matter.Vector, velocity: Matter.Vector) {
-
+    draw (position: Matter.Vector, velocity: Matter.Vector) {
+        if (!p5) return;
         const yOffset = 3;
 
         p5.push();

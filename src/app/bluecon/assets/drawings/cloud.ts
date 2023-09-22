@@ -1,11 +1,14 @@
-import Drawing from "../drawing";
-import { drawCloud } from "../sprites/cloud";
+import { globalP5 as p5 } from "../../globals/p5";
+import Drawing from "./drawing";
+import { drawCloud } from "./sprites/cloud";
+//////////////////////////////////////////////////////
 import type { Vector } from "matter-js";
-import type P5 from "p5"
-
+//////////////////////////////////////////////////////
 export default class Cloud extends Drawing {
 
-    size:number;
+    public isVisible: boolean = true;
+
+    size: number;
     speed: Vector;
 
     constructor(x: number, y: number, size: number) {
@@ -14,13 +17,15 @@ export default class Cloud extends Drawing {
         this.size = size;
     }
 
-    run(p5:P5) {
-        this.draw(p5, this.relativePosition, this.size);
+    run(): void {
+        this.draw(this.relativePosition, this.size);
         this.updateRelativePosition()
         //this.move();
     }
 
-    draw(p5: P5, position: Vector, size: number) {
+    draw(position: Vector, size: number): void {
+        if (!p5) return;
+
         p5.push()
         p5.translate(
             position.x,
@@ -29,7 +34,7 @@ export default class Cloud extends Drawing {
         p5.pop()
     }
 
-    move() {
+    move(): void {
         this.position.x += this.speed.x
     }
 }

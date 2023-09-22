@@ -1,26 +1,58 @@
-import type Assets from "../types/assets";
-import type P5 from "p5"
+import type Graph from "../globals/graph";
 
+interface Graphs{
+    player: Graph[],
+    background: Graph[]
+    menu: Graph[],
+    enemies: Graph[],
+    grounds: Graph[],
+    clouds: Graph[],
+    platforms: Graph[],
+}
+
+/**
+ * Runner for the elements of the class Graph
+ */
 export default class Render {
-    assets: Assets | null;
+    graphs: Graphs | null;
 
     constructor() {
-        this.assets = null;
+        this.graphs = null;
     }
-    run(p5: P5) {
-        if (!this.assets) return;
-        this.runAssets(p5, this.assets)
+    run(): void {
+        this.runGraphs(this.graphs)
     }
 
-    runAssets(p5: P5, assets: Assets) {
-        for (const groupAsset in assets) {
-            assets[groupAsset as keyof Assets ].forEach((asset) => {
-                asset.run(p5)
+    runGraphs(graphs: any): void {
+
+        for (const group in graphs) {
+            graphs[group as keyof Graph[]].forEach((graph: Graph) => {
+                if (graph.isVisible) graph.run()
             })
         }
     }
 
-    setAssets(assets: Assets) {
-        this.assets = assets;
+    addGraphs(group: any): void {
+        this.graphs = { ...this.graphs, ...group }
+    }
+
+    /**
+     * Shows and runs a group of graphs
+     * @param group 
+     */
+    showGroup(group: Graph[]): void {
+        group.forEach((graph: Graph)=>{
+            graph.setIsVisible(true);
+        })
+    }
+
+    /**
+     * Hides and stops running a group of graphs
+     * @param group 
+     */
+    hideGroup(group: Graph[]): void {
+        group.forEach((graph: Graph)=>{
+            graph.setIsVisible(false);
+        })
     }
 }

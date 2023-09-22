@@ -18,7 +18,7 @@ export default class Scroll {
     }
     run() {
         if (!this.player) return;
-        
+
         this.checkScroll(this.player.main);
     }
 

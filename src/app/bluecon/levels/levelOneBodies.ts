@@ -10,6 +10,12 @@ const properties = {
     }
 };
 
+const options = {
+    enemy: {
+        isSensor: true
+    }
+}
+
 const LevelOneBodies = {
     grounds: [
         Bodies.rectangle(100, 600, 500, 200),
@@ -18,8 +24,8 @@ const LevelOneBodies = {
     ],
     enemies: [
 
-        Bodies.rectangle(270, 300, properties.enemy.width, properties.enemy.height),
-        Bodies.rectangle(40, 300, properties.enemy.width, properties.enemy.height),
+        Bodies.rectangle(270, 300, properties.enemy.width, properties.enemy.height, options.enemy),
+        Bodies.rectangle(40, 300, properties.enemy.width, properties.enemy.height, options.enemy),
     ],
     platforms: [
         Bodies.rectangle(500, 500, 100, properties.platform.height),

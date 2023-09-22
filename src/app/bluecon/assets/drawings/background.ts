@@ -1,13 +1,18 @@
-import { drawBackground } from "../sprites/background"
-import type P5 from "p5"
+import { globalP5 as p5 } from "../../globals/p5";
+import Asset from "../asset";
+import { drawBackground } from "./sprites/background";
+//////////////////////////////////////////////////////
+export default class Background extends Asset {
+    public isVisible: boolean = true;
 
-export default class Background {
     constructor() {
+        super();
     }
-    run(p5:P5) {
-        this.draw(p5);
+    run() {
+        this.draw();
     }
-    draw(p5:P5) {
+    draw() {
+        if (!p5) return;
         drawBackground(p5);
     }
 }

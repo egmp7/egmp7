@@ -1,7 +1,7 @@
 'use client'
 import dynamic from 'next/dynamic'
 import { classNames } from '../resources/utilities';
-import tools from '../tools';
+import tools from '../globals/tools';
 const Sketch = dynamic(() => import("react-p5"), { ssr: false });
 
 const buttonWidth = 50;

@@ -1,10 +1,10 @@
-import Physics from "./tools/physics";
-import Scroll from "./tools/scroll";
-import Rules from "./tools/rules";
-import Render from "./tools/render";
-import Control from "./tools/control";
-import Collisions from "./tools/collisions"
-import type P5 from "p5";
+import Physics from "../tools/physics";
+import Scroll from "../tools/scroll";
+import Rules from "../tools/rules";
+import Render from "../tools/render";
+import Control from "../tools/control";
+import Collisions from "../tools/collisions"
+import Menu from "../tools/menu";
 
 class Tools {
 
@@ -14,6 +14,7 @@ class Tools {
     control: Control;
     collisions: Collisions;
     rules: Rules;
+    menu: Menu;
 
     constructor() {
         this.physics = new Physics();
@@ -21,13 +22,14 @@ class Tools {
         this.render = new Render();
         this.control = new Control();
         this.collisions = new Collisions();
-        this.rules = new Rules(this.collisions, this.scroll);
+        this.menu = new Menu();
+        this.rules = new Rules(this.collisions, this.scroll, this.control, this.menu, this.render);
     }
-    run(p5: P5) {
+    run() {
         this.physics.run();
         this.scroll.run();
         this.rules.run();
-        this.render.run(p5);
+        this.render.run();
         this.collisions.run();
     }
 }

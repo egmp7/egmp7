@@ -1,15 +1,16 @@
 import { Body } from "matter-js";
-import Asset from "./asset";
+import Asset from "../asset";
+//////////////////////////////////////////////////////
 import type Matter from "matter-js";
-
-
-export default class Structure extends Asset {
+//////////////////////////////////////////////////////
+export default abstract class Structure extends Asset {
 
     body: Matter.Body;
     initPosition: Matter.Vector;
     relativeInitPosition: Matter.Vector;
+    initVelocity: Matter.Vector | undefined;
 
-    constructor(body: Matter.Body) {
+    constructor(body: Matter.Body, velocity?: Matter.Vector) {
         super();
         this.body = body;
         this.initPosition = {
@@ -20,6 +21,14 @@ export default class Structure extends Asset {
             x: body.position.x,
             y: body.position.y
         };
+
+        this.initVelocity = velocity;
+    }
+
+    /* Initializes a body when game starts */
+    initBody() {
+        this.setPosition(this.initPosition);
+        if (this.initVelocity) this.setVelocity(this.initVelocity)
     }
 
     /**
@@ -60,5 +69,13 @@ export default class Structure extends Asset {
      */
     applyForce(force: Matter.Vector) {
         Body.applyForce(this.body, this.body.position, force)
+    }
+
+    /**
+     * Sets the position of a body
+     * @param position 
+     */
+    setPosition(position: Matter.Vector): void {
+        Body.setPosition(this.body, position);
     }
 }
