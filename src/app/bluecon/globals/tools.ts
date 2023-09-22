@@ -5,6 +5,7 @@ import Render from "../tools/render";
 import Control from "../tools/control";
 import Collisions from "../tools/collisions"
 import Menu from "../tools/menu";
+import Status from "../tools/status";
 
 class Tools {
 
@@ -15,6 +16,7 @@ class Tools {
     collisions: Collisions;
     rules: Rules;
     menu: Menu;
+    status: Status;
 
     constructor() {
         this.physics = new Physics();
@@ -23,6 +25,7 @@ class Tools {
         this.control = new Control();
         this.collisions = new Collisions();
         this.menu = new Menu();
+        this.status = new Status;
         this.rules = new Rules(this.collisions, this.scroll, this.control, this.menu, this.render);
     }
     run() {

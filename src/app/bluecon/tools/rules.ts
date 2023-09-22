@@ -64,6 +64,7 @@ export default class Rules {
         render.hideGroup(graphs.menu);
         render.showGroup(graphs.player);
         render.showGroup(graphs.enemies);
+        render.showGroup(graphs.status);
         this.startGroup(graphs.player as Structure[]);
         this.startGroup(graphs.enemies as Structure[]);
         this.setIsGamePlaying(true);

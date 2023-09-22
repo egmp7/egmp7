@@ -7,8 +7,9 @@ export default class Game {
 
     constructor() {
 
-        tools.render.addGraphs(LevelOneAssets)
-        tools.render.addGraphs({menu:[tools.menu]});
+        tools.render.addGraphs(LevelOneAssets);
+        tools.render.addGraphs({ menu: [tools.menu] });
+        tools.render.addGraphs({ status: [tools.status] });
         tools.collisions.setBodies(LevelOneBodies);
         tools.collisions.setPlayer(player);
         tools.scroll.setBodies(LevelOneBodies);
