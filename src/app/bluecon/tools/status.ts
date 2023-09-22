@@ -36,4 +36,20 @@ export default class Status extends Graph {
             p5.triangle(x + 8, y + 5, x + 12, y + 5, x + 10, y + 15);
         }
     }
+
+    /**
+     * Set the number of lives
+     * @param value 
+     */
+    setLives(value:number){
+        this.lives = value;
+    }
+
+    /**
+     * 
+     * @param value Set the score
+     */
+    setScore(value:number){
+        this.score = value;
+    }
 }
