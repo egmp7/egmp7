@@ -3,22 +3,32 @@ import type Graph from "../globals/graph";
 namespace Render {
 
     // Private
-    let graphs: Graph[];
+    let graphs: Graph[] = [];
 
-    /** Executes the run method from a Graph if visible */
-    function displayGraphs(): void {
-        graphs.forEach((graph: Graph) => {
+    /**
+     * Executes the run method from a Graph if visible
+     * @param graphsArray 
+     */
+    function displayGraphs(graphsArray: Graph[]): void {
+        graphsArray.forEach((graph: Graph) => {
             if (graph.isVisible) graph.run()
         })
     }
 
     // Public
-    export function addGraphs(graph: Graph): void {
-        graphs.push(graph);
+    /**
+     * Pushes Graph elements from graphsArray attribute to graph Array private variable
+     * @param graphsArray 
+     */
+    export function addGraphs(graphsArray: Graph[]): void {
+        graphsArray.forEach((graph) => {
+            graphs.push(graph);
+        })
+
     }
 
     export function run(): void {
-        displayGraphs();
+        displayGraphs(graphs);
     }
 
 }
