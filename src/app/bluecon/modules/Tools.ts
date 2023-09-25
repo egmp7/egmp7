@@ -1,21 +1,16 @@
-import Render from "../tools/render";
+import Render from "./Render";
 
 namespace Tools {
   // Private
-  let render = new Render;
 
-  // function privateFunction(): void {
-  //   console.log("This is a private function");
-  // }
 
   // Public 
-  export let publicVariable: string = "I'm public";
 
   export function addGraphsToRender(group:any): void {
-    render.addGraphs(group);
+    Render.addGraphs(group);
   }
   export function run():void{
-    render.run();
+    Render.run();
   }
 }
 
