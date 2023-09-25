@@ -1,5 +1,5 @@
 import { drawVertices } from "../../resources/utilities";
-import { globalP5 as p5 } from "../../globals/p5";
+import { p5 } from "../../components/Sketch2";
 import Structure from "./structure";
 import {
     frontAnimation,
@@ -21,7 +21,7 @@ interface DoubleJump {
 //////////////////////////////////////////////////////
 export default class Player extends Structure {
 
-    public isVisible: boolean = false;
+    public isVisible: boolean = true;
 
     xSpeed: number;
     jumpForce: Matter.Vector;
@@ -118,7 +118,6 @@ export default class Player extends Structure {
      * @param {Boolean} isOnGround 
      */
     draw(position: Matter.Vector, control: Control, isOnGround: boolean): void {
-        if (!p5) return;
         const yOffset = -3
 
         p5.push()

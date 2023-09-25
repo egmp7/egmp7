@@ -1,20 +1,21 @@
 import player from "../assets/player";
 //import tools from "./globals/tools";
 import Tools from "./Tools";
+import Render from "./Render";
 import LevelOneAssets from "../levels/levelOneAssets";
 import LevelOneBodies from "../levels/levelOneBodies";
 
 namespace Game {
-    function load(): void {
-        Tools.addGraphsToRender(LevelOneAssets.background);
-    }
 
     export function init(): void {
-        load();
+        Render.addGraphs(LevelOneAssets.background);
+        Render.addGraphs(LevelOneAssets.clouds);
+        Render.addGraphs(LevelOneAssets.grounds);
+        Render.addGraphs(LevelOneAssets.player);
     }
 
     export function run():void{
-        Tools.run();
+        Render.run();
     }
 }
 

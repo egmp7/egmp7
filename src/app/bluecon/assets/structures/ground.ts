@@ -1,4 +1,4 @@
-import { globalP5 as p5 } from "../../globals/p5";
+import { p5 } from "../../components/Sketch2"
 import Structure from "./structure";
 import { drawGround } from "./sprites/ground"
 //////////////////////////////////////////////////////
@@ -15,7 +15,6 @@ export default class Ground extends Structure {
         this.draw(this.body.vertices);
     }
     draw(vertices: Matter.Vector[]): void {
-        if (!p5) return;
         drawGround(p5, vertices)
     }
 }

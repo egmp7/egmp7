@@ -1,4 +1,4 @@
-import { globalP5 as p5 } from "../../globals/p5";
+import { p5 } from "../../components/Sketch2";
 import Drawing from "./drawing";
 import { drawCloud } from "./sprites/cloud";
 //////////////////////////////////////////////////////
@@ -24,8 +24,6 @@ export default class Cloud extends Drawing {
     }
 
     draw(position: Vector, size: number): void {
-        if (!p5) return;
-
         p5.push()
         p5.translate(
             position.x,

@@ -23,6 +23,7 @@ export default function Sketch2(props: any) {
                 cnv.style("left", "0");
                 cnv.style("width", "100%");
                 cnv.style("height", "100%");
+                p.noStroke();
 
                 Game.init();
 
