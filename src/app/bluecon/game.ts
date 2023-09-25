@@ -1,5 +1,6 @@
 import player from "./assets/player";
-import tools from "./globals/tools";
+//import tools from "./globals/tools";
+import tools from "./modules/Tools";
 import LevelOneAssets from "./levels/levelOneAssets";
 import LevelOneBodies from "./levels/levelOneBodies";
 
@@ -7,7 +8,7 @@ export default class Game {
 
     constructor() {
 
-        tools.render.addGraphs(LevelOneAssets);
+        tools.addGraphsToRender(LevelOneAssets);
         // tools.render.addGraphs({ menu: [tools.menu] });
         // tools.render.addGraphs({ status: [tools.status] });
         // tools.collisions.setBodies(LevelOneBodies);
