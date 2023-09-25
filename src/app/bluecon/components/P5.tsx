@@ -1,18 +1,20 @@
 'use client';
 import dynamic from 'next/dynamic'
 import Game from '../game';
-import {setGlobalP5, P5Globals , canvas} from '../globals/p5';
+import { setGlobalP5 } from '../globals/p5';
+import Events from "../events/events"
+import type P5Types from "p5";
 
 const Sketch = dynamic(() => import("react-p5"), { ssr: false });
 
 export default function P5() {
-  
+
   const canvasWidth = 960;
   const canvasHeight = 540;
-  var p5Globals;
-  var game;
+  var events;
+  var game: Game;
 
-  const setup = (p5, canvasParentRef) => {
+  const setup = (p5: P5Types, canvasParentRef: Element) => {
     const cnv = p5.createCanvas(canvasWidth, canvasHeight).parent(canvasParentRef);
     cnv.style("position", "absolute");
     cnv.style("top", "0");
@@ -22,12 +24,11 @@ export default function P5() {
     setGlobalP5(p5);
 
     game = new Game();
-    p5Globals = new P5Globals(cnv);
-    
-    
+    events = new Events(cnv, p5);
+
   }
 
-  const draw = (p5) => {
+  const draw = (p5: P5Types) => {
     p5.noStroke();
     // run game
     game.run();

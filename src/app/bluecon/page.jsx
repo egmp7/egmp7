@@ -1,6 +1,6 @@
 import TouchControl from './components/touchControl';
 import KeyboardControl from './components/keyboardControl';
-import P5 from './components/P5.jsx';
+import P5 from './components/P5';
 
 
 export default function GameSketch() {
@@ -15,7 +15,6 @@ export default function GameSketch() {
               <TouchControl name={"left"} />
               <TouchControl name={"right"} />
               <TouchControl name={"jump"} />
-              <KeyboardControl />
             </div>
           </div>
         </div>
