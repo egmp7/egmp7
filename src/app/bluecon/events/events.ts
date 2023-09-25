@@ -1,5 +1,7 @@
 import type P5 from "p5"
 import tools from "../globals/tools";
+import Buttons from "./buttons";
+import LeftButton from "./buttons/left";
 
 export default class Events {
     constructor(canvas: P5.Renderer, p5: P5) {
@@ -32,7 +34,14 @@ export default class Events {
         }
 
         p5.touchStarted = function () {
-            console.log(p5.touches)
+            const touch = p5.touches[0];
+
+
+            //if (tools.leftButton.isPressed) tools.control.setLeft(true);
+
+
+            //if (Buttons.checkIfPressed(p5,leftButton.position,touch,leftButton.radius))
+            //leftButton.click()
         }
     }
 }

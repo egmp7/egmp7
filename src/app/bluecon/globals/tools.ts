@@ -6,6 +6,8 @@ import Control from "../tools/control";
 import Collisions from "../tools/collisions"
 import Menu from "../tools/menu";
 import Status from "../tools/status";
+import { globalP5 } from "./p5";
+import LeftButton from "../events/buttons/left";
 
 class Tools {
 
@@ -17,6 +19,7 @@ class Tools {
     rules: Rules;
     menu: Menu;
     status: Status;
+    leftButton: LeftButton | undefined;
 
     constructor() {
         this.physics = new Physics();
@@ -27,6 +30,13 @@ class Tools {
         this.status = new Status;
         this.menu = new Menu(this.status);
         this.rules = new Rules(this.collisions, this.scroll, this.control, this.menu, this.render, this.status);
+        
+        
+        const p5 = globalP5;
+        if (!p5) return;
+        const midY = (p5.height / 24 * 19) + (p5.height - (p5.height / 24 * 19)) / 2
+        this.leftButton = new LeftButton(p5, { x: 60, y: midY });
+        
     }
     run() {
         this.physics.run();
