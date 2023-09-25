@@ -2,13 +2,12 @@
 
 import { useEffect, useRef } from "react";
 import P5 from "p5";
-import Game from "../game";
+import Game from "../modules/Game";
 
 export let p5: P5;
 
 const canvasWidth = 960;
 const canvasHeight = 540;
-var game: Game;
 
 export default function Sketch2(props: any) {
 
@@ -25,7 +24,7 @@ export default function Sketch2(props: any) {
                 cnv.style("width", "100%");
                 cnv.style("height", "100%");
 
-                game = new Game()
+                Game.init();
 
                 cnv.mousePressed(() => {
                     console.log("Clicked on the canvas. Event:", p.keyCode)
@@ -39,7 +38,7 @@ export default function Sketch2(props: any) {
             };
 
             p.draw = () => {
-                game.run();
+                Game.run();
             };
         });
 
