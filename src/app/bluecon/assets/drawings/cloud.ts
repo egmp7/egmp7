@@ -1,6 +1,7 @@
 import { p5 } from "../../components/Sketch2";
 import Drawing from "./drawing";
 import { drawCloud } from "./sprites/cloud";
+import Utilities from "../../resources/utilities";
 //////////////////////////////////////////////////////
 import type { Vector } from "matter-js";
 //////////////////////////////////////////////////////
@@ -27,7 +28,7 @@ export default class Cloud extends Drawing {
         p5.push()
         p5.translate(
             position.x,
-            position.y + p5.sin(p5.frameCount / 70) * 15)
+            position.y + Utilities.sinMinusOneToOne(15, 70, p5.frameCount))
         drawCloud(p5, size)
         p5.pop()
     }

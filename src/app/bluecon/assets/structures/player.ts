@@ -1,4 +1,4 @@
-import { drawVertices } from "../../resources/utilities";
+import Utilities from "../../resources/utilities";
 import { p5 } from "../../components/Sketch2";
 import Structure from "./structure";
 import { Bodies, Body } from "matter-js";
@@ -66,7 +66,7 @@ export default class Player extends Structure {
 
     run() {
 
-        //drawVertices(this.body.vertices);
+        Utilities.drawVertices(p5, this.body.vertices);
         this.draw(this.body.position, this.control, this.collisions.isPlayerOnGround());
         this.moveSides({ x: this.xSpeed, y: this.body.velocity.y }, this.control);
         this.jump(this.jumpForce, this.control.jump, this.collisions.isPlayerOnGround());
