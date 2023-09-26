@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import P5 from "p5";
 import Game from "../modules/Game";
+import Events from "../modules/Events";
 
 export let p5: P5;
 
@@ -32,9 +33,15 @@ export default function Sketch2(props: any) {
                 })
 
                 p.keyPressed = function () {
-
-                    console.log(p.keyCode)
-        
+                    if (p.keyCode === Events.keys.left) Events.setControlLeft(true);
+                    if (p.keyCode === Events.keys.right) Events.setControlRight(true);
+                    if (p.keyCode === Events.keys.space) Events.setControlJump(true);
+                }
+                
+                p.keyReleased = function (){
+                    if (p.keyCode === Events.keys.left) Events.setControlLeft(false);
+                    if (p.keyCode === Events.keys.right) Events.setControlRight(false);
+                    if (p.keyCode === Events.keys.space) Events.setControlJump(false);
                 }
             };
 

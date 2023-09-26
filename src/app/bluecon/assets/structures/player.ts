@@ -1,19 +1,12 @@
 import Utilities from "../../resources/utilities";
 import Collisions from "../../modules/Collisions";
+import Events from "../../modules/Events";
 import Structure from "./structure";
 import { p5 } from "../../components/Sketch2";
 import { Bodies, Body } from "matter-js";
-import {
-    frontAnimation,
-    leftFallingAnimation,
-    rightFallingAnimation,
-    leftAnimation,
-    rightAnimation,
-    fallingAnimation
-} from "./sprites/player"
+import { frontAnimation, leftFallingAnimation, rightFallingAnimation, leftAnimation, rightAnimation, fallingAnimation } from "./sprites/player"
 //////////////////////////////////////////////////////
 import type Matter from "matter-js";
-import type Control from "../../tools/control";
 import type { Area } from "./structure";
 //////////////////////////////////////////////////////
 interface DoubleJump {
@@ -68,10 +61,10 @@ export default class Player extends Structure {
     run() {
 
         Utilities.drawVertices(p5, this.body.vertices);
-        this.draw(this.body.position, this.control, Collisions.isPlayerOnGround());
-        this.moveSides({ x: this.xSpeed, y: this.body.velocity.y }, this.control);
-        this.jump(this.jumpForce, this.control.jump, Collisions.isPlayerOnGround());
-        this.doubleJump(this.control.jump, !Collisions.isPlayerOnGround(), this.doubleJumpProps.isFirstJump, this.doubleJumpProps.jumpReset);
+        this.draw(this.body.position, Collisions.isPlayerOnGround(), Events.control.right, Events.control.left);
+        this.moveSides({ x: this.xSpeed, y: this.body.velocity.y }, Events.control.right, Events.control.left);
+        this.jump(this.jumpForce, Events.control.jump, Collisions.isPlayerOnGround());
+        this.doubleJump(Events.control.jump, !Collisions.isPlayerOnGround(), this.doubleJumpProps.isFirstJump, this.doubleJumpProps.jumpReset);
     }
 
     /**
@@ -79,12 +72,12 @@ export default class Player extends Structure {
      * @param {Vector} velocity 
      * @param {Control.Object} control 
      */
-    moveSides(velocity: Matter.Vector, control: Control) {
+    moveSides(velocity: Matter.Vector, isRight: boolean, isLeft: boolean) {
         const velocityRight = { x: velocity.x, y: velocity.y }
         const velocityLeft = { x: -velocity.x, y: velocity.y }
         const velocityCenter = { x: 0, y: velocity.y }
-        if (control.right) this.setVelocity(velocityRight);
-        else if (control.left) this.setVelocity(velocityLeft);
+        if (isRight) this.setVelocity(velocityRight);
+        else if (isLeft) this.setVelocity(velocityLeft);
         else this.setVelocity(velocityCenter);
     }
 
@@ -144,16 +137,16 @@ export default class Player extends Structure {
      * @param {Control} control 
      * @param {Boolean} isOnGround 
      */
-    draw(position: Matter.Vector, control: Control, isOnGround: boolean): void {
+    draw(position: Matter.Vector, isOnGround: boolean, isRight: boolean, isLeft: boolean): void {
         const yOffset = -3
 
         p5.push()
         p5.translate(position.x, position.y + yOffset)
         p5.scale(1.7)
-        if (control.left && !isOnGround) leftFallingAnimation(p5)
-        else if (control.right && !isOnGround) rightFallingAnimation(p5)
-        else if (control.left) leftAnimation(p5)
-        else if (control.right) rightAnimation(p5)
+        if (isLeft && !isOnGround) leftFallingAnimation(p5)
+        else if (isRight && !isOnGround) rightFallingAnimation(p5)
+        else if (isLeft) leftAnimation(p5)
+        else if (isRight) rightAnimation(p5)
         else if (!isOnGround) fallingAnimation(p5)
         else frontAnimation(p5)
         p5.pop()
