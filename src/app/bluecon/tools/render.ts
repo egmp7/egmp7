@@ -1,4 +1,4 @@
-import type Graph from "../globals/graph";
+import type Graph from "../abstract/graph";
 
 interface Graphs{
     player: Graph[],

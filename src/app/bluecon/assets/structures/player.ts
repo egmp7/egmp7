@@ -1,13 +1,13 @@
 import Utilities from "../../resources/utilities";
 import Collisions from "../../modules/Collisions";
 import Events from "../../modules/Events";
-import Structure from "./structure";
+import Structure from "../../abstract/structure";
 import { p5 } from "../../components/Sketch2";
 import { Bodies, Body } from "matter-js";
 import { frontAnimation, leftFallingAnimation, rightFallingAnimation, leftAnimation, rightAnimation, fallingAnimation } from "./sprites/player"
 //////////////////////////////////////////////////////
 import type Matter from "matter-js";
-import type { Area } from "./structure";
+import type { Area } from "../../abstract/structure";
 //////////////////////////////////////////////////////
 interface DoubleJump {
     speed: number;

@@ -1,9 +1,9 @@
 import { p5 } from "../../components/Sketch2"
-import Structure from "./structure";
+import Structure from "../../abstract/structure";
 import { drawGround } from "./sprites/ground"
 import { Bodies } from "matter-js";
 //////////////////////////////////////////////////////
-import type { Area } from "./structure";
+import type { Area } from "../../abstract/structure";
 import type Matter from "matter-js";
 //////////////////////////////////////////////////////
 export default class Ground extends Structure {

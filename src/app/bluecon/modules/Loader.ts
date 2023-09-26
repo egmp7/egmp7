@@ -1,5 +1,5 @@
-import type Structure from "../assets/structures/structure";
-import type Graph from "../globals/graph";
+import type Structure from "../abstract/structure";
+import type Graph from "../abstract/graph";
 import type Matter from "matter-js";
 
 interface Graphs {

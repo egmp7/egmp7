@@ -1,4 +1,4 @@
-import type Graph from "../globals/graph";
+import type Graph from "../abstract/graph";
 
 namespace Render {
 

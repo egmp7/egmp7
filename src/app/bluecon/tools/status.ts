@@ -1,5 +1,5 @@
 import { globalP5 as p5 } from "../globals/p5";
-import Graph from "../globals/graph";
+import Graph from "../abstract/graph";
 
 export default class Status extends Graph {
     isVisible: boolean = false;

@@ -1,4 +1,4 @@
-import Graph from "../globals/graph";
+import Graph from "../abstract/graph";
 import Status from "./status";
 import { globalP5 as p5 } from "../globals/p5";
 

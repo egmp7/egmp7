@@ -1,6 +1,6 @@
 import type P5 from "p5"
 import tools from "../globals/tools";
-import Buttons from "./buttons";
+import Buttons from "../abstract/buttons";
 import LeftButton from "./buttons/left";
 
 export default class Events {

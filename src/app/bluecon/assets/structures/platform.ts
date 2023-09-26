@@ -1,5 +1,5 @@
 //import { globalP5 as p5 } from "../../globals/p5";
-import Structure from "./structure";
+import Structure from "../../abstract/structure";
 import { drawPlatform } from "./sprites/platform";
 //////////////////////////////////////////////////////
 import type Matter from "matter-js";

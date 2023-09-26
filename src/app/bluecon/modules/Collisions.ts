@@ -1,4 +1,4 @@
-import type Structure from "../assets/structures/structure";
+import type Structure from "../abstract/structure";
 import Loader, { type Structures } from "./Loader";
 import { Collision, Pairs } from "matter-js";
 
@@ -40,7 +40,7 @@ namespace Collisions {
     export function run(): void {
 
         // Player -> Grounds Collisions
-        if (checkCollision(player.body, structures.grounds as Structure[]))
+        if (checkCollision(player.body.parts[2], structures.grounds as Structure[]))
             playerCollision.ground = true;
         else playerCollision.ground = false;
 

@@ -1,7 +1,7 @@
 import { drawVertices } from "../../resources/utilities";
 //import { globalP5 as p5 } from "../../globals/p5";
 import { drawEnemyRight, drawEnemyLeft } from "./sprites/enemy"
-import Structure from "./structure"
+import Structure from "../../abstract/structure"
 //////////////////////////////////////////////////////
 import type Matter from "matter-js";
 //////////////////////////////////////////////////////

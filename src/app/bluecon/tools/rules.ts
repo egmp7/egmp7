@@ -7,7 +7,7 @@ import type Scroll from "./scroll";
 import type Control from "./control";
 import type Menu from "./menu"
 import type Render from "./render";
-import type Structure from "../assets/structures/structure";
+import type Structure from "../abstract/structure";
 import type Status from "./status";
 //////////////////////////////////////////////////
 export default class Rules {

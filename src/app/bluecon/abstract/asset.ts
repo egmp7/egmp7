@@ -1,5 +1,5 @@
 import tools from "../globals/tools";
-import Graph from "../globals/graph";
+import Graph from "./graph";
 //////////////////////////////////////////////////////
 import type Matter from "matter-js"
 import type Control from "../tools/control";

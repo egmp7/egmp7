@@ -1,4 +1,4 @@
-import Buttons from "../buttons";
+import Buttons from "../../abstract/buttons";
 import type P5 from "p5";
 import type Matter from "matter-js";
 

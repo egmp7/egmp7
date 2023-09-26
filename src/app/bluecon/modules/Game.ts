@@ -7,7 +7,7 @@ import Loader, { Structures } from "./Loader";
 import LevelOneAssets from "../levels/levelOneAssets";
 import Collisions from "./Collisions";
 import LevelOneBodies from "../levels/levelOneBodies";
-import Graph from "../globals/graph";
+import Graph from "../abstract/graph";
 import { Drawings } from "./Loader";
 
 namespace Game {
