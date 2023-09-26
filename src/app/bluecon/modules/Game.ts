@@ -2,6 +2,7 @@ import player from "../assets/player";
 //import tools from "./globals/tools";
 import Tools from "./Tools";
 import Render from "./Render";
+import Physics from "./Physics";
 import LevelOneAssets from "../levels/levelOneAssets";
 import LevelOneBodies from "../levels/levelOneBodies";
 
@@ -12,10 +13,14 @@ namespace Game {
         Render.addGraphs(LevelOneAssets.clouds);
         Render.addGraphs(LevelOneAssets.grounds);
         Render.addGraphs(LevelOneAssets.player);
+
+        Physics.addBodies(LevelOneBodies.grounds);
+        Physics.addBodies([player.main])
     }
 
     export function run():void{
         Render.run();
+        Physics.run();
     }
 }
 
