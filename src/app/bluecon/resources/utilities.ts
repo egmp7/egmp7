@@ -1,4 +1,4 @@
-import { globalP5 as p5 } from "../globals/p5";
+import { p5 } from "../components/Sketch2";
 import type Matter from "matter-js";
 
 /**

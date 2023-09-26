@@ -11,12 +11,12 @@ export default abstract class Structure extends Asset {
 
     abstract body: Matter.Body;
     position: Matter.Vector;
-    area: Area | undefined;
+    area: Area;
     initPosition: Matter.Vector;
     relativeInitPosition: Matter.Vector;
     initVelocity: Matter.Vector | undefined;
 
-    constructor(position: Matter.Vector, area?: Area, velocity?: Matter.Vector) {
+    constructor(position: Matter.Vector, area:Area, velocity?: Matter.Vector) {
         super();
         this.position = position;
         this.area = area;

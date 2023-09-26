@@ -1,4 +1,6 @@
-import Graph from "../globals/graph";
+import type Structure from "../assets/structures/structure";
+import type Graph from "../globals/graph";
+import type Matter from "matter-js";
 
 interface Graphs {
     structures: Structures,
@@ -9,6 +11,7 @@ interface Graphs {
 
 export interface Structures {
     grounds: Graph[],
+    player:Graph[],
 }
 
 export interface Drawings {
@@ -18,7 +21,7 @@ export interface Drawings {
 
 namespace Loader {
     let drawings: Drawings;
-    let structures : Structures;
+    let structures: Structures;
     let status: Graph;
     let menu: Graph;
 
@@ -51,6 +54,19 @@ namespace Loader {
         //g.push(menu);
 
         return g;
+    }
+
+    export function getAllBodies(): Matter.Body[] {
+        let b: Matter.Body[] = [];
+
+        for (const key in structures) {
+            const structuresArray = (structures[key as keyof Structures] as Structure[])
+            structuresArray.forEach((structure) => {
+                b.push(structure.body)
+            })
+        }
+
+        return b;
     }
 
     export function getDrawings(): Drawings {

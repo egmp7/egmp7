@@ -1,5 +1,5 @@
 import { drawVertices } from "../../resources/utilities";
-import { globalP5 as p5 } from "../../globals/p5";
+//import { globalP5 as p5 } from "../../globals/p5";
 import { drawEnemyRight, drawEnemyLeft } from "./sprites/enemy"
 import Structure from "./structure"
 //////////////////////////////////////////////////////

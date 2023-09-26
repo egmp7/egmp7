@@ -1,4 +1,4 @@
-import { globalP5 as p5 } from "../../globals/p5";
+//import { globalP5 as p5 } from "../../globals/p5";
 import Structure from "./structure";
 import { drawPlatform } from "./sprites/platform";
 //////////////////////////////////////////////////////

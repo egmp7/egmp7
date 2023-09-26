@@ -7,6 +7,7 @@ namespace Physics {
     export let engineGravity = engine.gravity;
 
     export function addBodies(bodies: Matter.Body[]) {
+        console.log(bodies);
         Matter.Composite.add(engine.world, bodies);
     }
 

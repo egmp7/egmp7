@@ -10,14 +10,20 @@ export default class Ground extends Structure {
 
     public isVisible: boolean = true;
     public body: Matter.Body = this.createBody();
+    area: Area;
 
     constructor(position: Matter.Vector, area: Area) {
         super(position, area);
+        this.area = area;
         this.setStatic(true);
     }
 
     createBody(): Matter.Body {
-        return Bodies.rectangle(this.position.x, this.position.y, 50, 50)
+        return Bodies.rectangle(
+            this.position.x,
+            this.position.y,
+            this.area.w,
+            this.area.h)
     }
 
     run(): void {

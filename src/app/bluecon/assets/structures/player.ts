@@ -13,6 +13,7 @@ import {
 //////////////////////////////////////////////////////
 import type Matter from "matter-js";
 import type Control from "../../tools/control";
+import type { Area } from "./structure";
 //////////////////////////////////////////////////////
 interface DoubleJump {
     speed: number;
@@ -29,8 +30,8 @@ export default class Player extends Structure {
     jumpForce: Matter.Vector;
     doubleJumpProps: DoubleJump;
 
-    constructor(position: Matter.Vector) {
-        super(position);
+    constructor(position: Matter.Vector, area: Area) {
+        super(position, area);
         this.xSpeed = 5;
         this.jumpForce = { x: 0, y: (-0.013 * this.body.mass) };
         this.doubleJumpProps = {
@@ -41,17 +42,16 @@ export default class Player extends Structure {
     }
 
     createBody(): Matter.Body {
-        const area = { w: 36, h: 82 }
 
         const body = Bodies.rectangle(
             this.position.x,
             this.position.y,
-            area.w,
-            area.h);
+            this.area.w,
+            this.area.h);
 
         const floorSensor = Bodies.circle(
             this.position.x,
-            this.position.y + area.h / 2,
+            this.position.y + this.area.h / 2,
             2,  // radius
             { isSensor: true });
 
@@ -66,7 +66,7 @@ export default class Player extends Structure {
 
     run() {
 
-        drawVertices(this.body.parts[1].vertices);
+        //drawVertices(this.body.vertices);
         this.draw(this.body.position, this.control, this.collisions.isPlayerOnGround());
         this.moveSides({ x: this.xSpeed, y: this.body.velocity.y }, this.control);
         this.jump(this.jumpForce, this.control.jump, this.collisions.isPlayerOnGround());
