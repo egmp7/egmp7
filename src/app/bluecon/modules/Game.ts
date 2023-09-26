@@ -3,22 +3,36 @@ import player from "../assets/player";
 import Tools from "./Tools";
 import Render from "./Render";
 import Physics from "./Physics";
+import Loader, { Structures } from "./Loader";
 import LevelOneAssets from "../levels/levelOneAssets";
 import LevelOneBodies from "../levels/levelOneBodies";
+import Graph from "../globals/graph";
+import { Drawings } from "./Loader";
 
 namespace Game {
 
     export function init(): void {
-        Render.addGraphs(LevelOneAssets.background);
-        Render.addGraphs(LevelOneAssets.clouds);
-        Render.addGraphs(LevelOneAssets.grounds);
-        Render.addGraphs(LevelOneAssets.player);
+        // Render.addGraphs(LevelOneAssets.background);
+        // Render.addGraphs(LevelOneAssets.clouds);
+        // Render.addGraphs(LevelOneAssets.grounds);
+        // Render.addGraphs(LevelOneAssets.player);
+
+        Loader.addDrawings({ background: LevelOneAssets.background as Graph[] } as Drawings);
+        Loader.addDrawings({ clouds: LevelOneAssets.clouds as Graph[] } as Drawings);
+        
+        Loader.addStructures({ grounds: LevelOneAssets.grounds as Graph[] } as Structures)
+        console.log(Loader.getDrawings());
+        console.log(Loader.getStructures());
+        console.log(Loader.getAllGraphs());
+
+        Render.addGraphs(Loader.getAllGraphs());
+
 
         Physics.addBodies(LevelOneBodies.grounds);
         Physics.addBodies([player.main])
     }
 
-    export function run():void{
+    export function run(): void {
         Render.run();
         Physics.run();
     }

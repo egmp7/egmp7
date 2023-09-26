@@ -1,0 +1,81 @@
+import Graph from "../globals/graph";
+
+interface Graphs {
+    structures: Structures,
+    drawings: Drawings,
+    status: Graph,
+    menu: Graph
+}
+
+export interface Structures {
+    grounds: Graph[],
+}
+
+export interface Drawings {
+    background: Graph[],
+    clouds: Graph[]
+}
+
+namespace Loader {
+    let drawings: Drawings;
+    let structures : Structures;
+    let status: Graph;
+    let menu: Graph;
+
+    /**
+     * Get all graphs in Loader 
+     * @returns Graph[]
+     */
+    export function getAllGraphs(): Graph[] {
+        let g: Graph[] = [];
+
+        // add drawings
+
+        for (const key in drawings) {
+            drawings[key as keyof Drawings].forEach(drawing => {
+                g.push(drawing);
+            });
+        }
+
+        // add structures
+        for (const key in structures) {
+            structures[key as keyof Structures].forEach(structure => {
+                g.push(structure);
+            });
+        }
+
+        // add status
+        //g.push(status);
+
+        // add menu
+        //g.push(menu);
+
+        return g;
+    }
+
+    export function getDrawings(): Drawings {
+        return drawings;
+    }
+
+    export function getStructures(): Structures {
+        return structures;
+    }
+
+    export function addDrawings(d: Drawings): void {
+        drawings = { ...drawings, ...d };
+    }
+
+    export function addStructures(s: Structures): void {
+        structures = { ...structures, ...s };
+    }
+
+    export function addMenu(m: Graph): void {
+        menu = m;
+    }
+    export function addStatus(s: Graph): void {
+        status = s;
+    }
+
+}
+
+export default Loader;
