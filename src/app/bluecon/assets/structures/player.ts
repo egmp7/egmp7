@@ -1,6 +1,7 @@
 import Utilities from "../../resources/utilities";
-import { p5 } from "../../components/Sketch2";
+import Collisions from "../../modules/Collisions";
 import Structure from "./structure";
+import { p5 } from "../../components/Sketch2";
 import { Bodies, Body } from "matter-js";
 import {
     frontAnimation,
@@ -67,10 +68,10 @@ export default class Player extends Structure {
     run() {
 
         Utilities.drawVertices(p5, this.body.vertices);
-        this.draw(this.body.position, this.control, this.collisions.isPlayerOnGround());
+        this.draw(this.body.position, this.control, Collisions.isPlayerOnGround());
         this.moveSides({ x: this.xSpeed, y: this.body.velocity.y }, this.control);
-        this.jump(this.jumpForce, this.control.jump, this.collisions.isPlayerOnGround());
-        this.doubleJump(this.control.jump, !this.collisions.isPlayerOnGround(), this.doubleJumpProps.isFirstJump, this.doubleJumpProps.jumpReset);
+        this.jump(this.jumpForce, this.control.jump, Collisions.isPlayerOnGround());
+        this.doubleJump(this.control.jump, !Collisions.isPlayerOnGround(), this.doubleJumpProps.isFirstJump, this.doubleJumpProps.jumpReset);
     }
 
     /**

@@ -92,6 +92,11 @@ namespace Loader {
         status = s;
     }
 
+    export function getPlayerStructure():Structure{
+        console.log(structures);
+        return structures.player[0] as Structure;
+    }
+
 }
 
 export default Loader;

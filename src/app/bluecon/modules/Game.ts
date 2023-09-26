@@ -5,6 +5,7 @@ import Render from "./Render";
 import Physics from "./Physics";
 import Loader, { Structures } from "./Loader";
 import LevelOneAssets from "../levels/levelOneAssets";
+import Collisions from "./Collisions";
 import LevelOneBodies from "../levels/levelOneBodies";
 import Graph from "../globals/graph";
 import { Drawings } from "./Loader";
@@ -31,11 +32,13 @@ namespace Game {
 
 
         Physics.addBodies(Loader.getAllBodies());
+        Collisions.setCollisionElements();
     }
 
     export function run(): void {
         Render.run();
         Physics.run();
+        Collisions.run();
     }
 }
 
