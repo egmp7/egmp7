@@ -7,7 +7,7 @@ import Collisions from "../tools/collisions"
 import Menu from "../tools/menu";
 import Status from "../tools/status";
 import { globalP5 } from "./p5";
-import LeftButton from "../events/buttons/left";
+import LeftButton from "../buttons/left";
 
 class Tools {
 
@@ -35,7 +35,7 @@ class Tools {
         const p5 = globalP5;
         if (!p5) return;
         const midY = (p5.height / 24 * 19) + (p5.height - (p5.height / 24 * 19)) / 2
-        this.leftButton = new LeftButton(p5, { x: 60, y: midY });
+        //this.leftButton = new LeftButton(p5, { x: 60, y: midY });
         
     }
     run() {

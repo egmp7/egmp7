@@ -1,55 +1,54 @@
+import Utilities from "../resources/utilities";
+import { p5 } from "../components/Sketch2";
 import type Matter from "matter-js";
-import type P5 from "p5";
 
 export default abstract class Buttons {
+    abstract isPressed: boolean;
     position: Matter.Vector;
-    name: string;
-    radius: number = 50;
-    isPressed: boolean = false;
-    p5: P5
+    radius: number;
 
-    constructor(p5: P5, position: Matter.Vector, name: string) {
-
+    constructor(position: Matter.Vector, radius: number) {
         this.position = position;
-        this.name = name;
-        this.p5 = p5;
+        this.radius = radius;
     }
 
-    abstract run(): void;
+     run(): void{
+        //this.checkIfPressed()
+     }
 
-    // draw = function () {
-    // this.checkIfPressed()
-    // fill(0)
-    // ellipse(this.x, this.y, this.radius * 2, this.radius * 2)
+    draw(position: Matter.Vector, radius: number) {
+        p5.translate(position.x,position.y)
+        p5.fill(100);
+        p5.ellipse(0, 0, radius * 2, radius * 2)
+    }
+
+    // click() {
+    //     //const p5 = this.p5;
+    //     const position = this.position;
+    //     const radius = this.radius;
+
+    //     p5.touches.forEach((touch: any) => {
+    //         if (p5.dist(position.x, position.y, touch.x, touch.y) < radius)
+    //             this.setIsPressed(true);
+    //     })
+
+    // }
+    // release() {
+    //     this.setIsPressed(false);
+    //     //const p5 = this.p5;
+    //     const position = this.position;
+    //     const radius = this.radius;
+
+    //     p5.touches.forEach((touch: any) => {
+    //         if (p5.dist(position.x, position.y, touch.x, touch.y) < radius)
+    //             this.setIsPressed(true);
+
+    //     })
     // }
 
-    click() {
-        const p5 = this.p5;
-        const position = this.position;
-        const radius = this.radius;
-
-        p5.touches.forEach((touch: any) => {
-            if (p5.dist(position.x, position.y, touch.x, touch.y) < radius)
-                this.setIsPressed(true);
-        })
-
-    }
-    release() {
-        this.setIsPressed(false);
-        const p5 = this.p5;
-        const position = this.position;
-        const radius = this.radius;
-
-        p5.touches.forEach((touch: any) => {
-            if (p5.dist(position.x, position.y, touch.x, touch.y) < radius)
-                this.setIsPressed(true);
-
-        })
-    }
-
-    setIsPressed(bool: boolean) {
-        this.isPressed = bool;
-    }
+    // setIsPressed(bool: boolean) {
+    //     this.isPressed = bool;
+    // }
 
 
     /**
@@ -60,9 +59,8 @@ export default abstract class Buttons {
      * @param radius 
      * @returns boolean
      */
-    static checkIfPressed(p5: P5, position: Matter.Vector, touch: any, radius: number): boolean {
-        if (p5.dist(position.x, position.y, touch.x, touch.y) < radius)
-            return true
+    checkIfPressed(p1: Matter.Vector, p2: Matter.Vector, radius: number): boolean {
+        if (Utilities.calculateDistance(p1.x, p1.y, p2.x, p2.y) < radius) return true
         return false;
     }
 }

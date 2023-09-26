@@ -1,11 +1,13 @@
-import Buttons from "../../abstract/buttons";
-import type P5 from "p5";
+import Buttons from "../abstract/buttons";
+import { p5 } from "../components/Sketch2";
 import type Matter from "matter-js";
 
-export default class LeftButton extends Buttons {
+export default class Left extends Buttons {
 
-    constructor(p5: P5, position: Matter.Vector) {
-        super(p5, position, "left")
+    isPressed: boolean = false;
+
+    constructor(position: Matter.Vector, radius: number) {
+        super(position, radius)
     }
 
     run(): void {
@@ -14,8 +16,7 @@ export default class LeftButton extends Buttons {
     }
 
     draw(position: Matter.Vector, radius: number): void {
-        const p5 = this.p5;
-
+    
         p5.fill('rgba(255,255,255, 0.25)');
         p5.translate(position.x, position.y);
 

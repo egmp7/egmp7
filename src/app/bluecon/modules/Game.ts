@@ -7,6 +7,7 @@ import Loader, { Structures } from "./Loader";
 import LevelOneAssets from "../levels/levelOneAssets";
 import Collisions from "./Collisions";
 import LevelOneBodies from "../levels/levelOneBodies";
+import Events from "./Events";
 import Graph from "../abstract/graph";
 import { Drawings } from "./Loader";
 
@@ -39,6 +40,7 @@ namespace Game {
         Render.run();
         Physics.run();
         Collisions.run();
+        Events.run();
     }
 }
 

@@ -18,9 +18,9 @@ export default function GameSketch() {
             <div className="relative pb-[56.25%] max-m-[43.75%] h-0">
               {/* <P5 /> */}
               <Sketch2 />
-              <TouchControl name={"left"} />
+              {/* <TouchControl name={"left"} />
               <TouchControl name={"right"} />
-              <TouchControl name={"jump"} />
+              <TouchControl name={"jump"} /> */}
             </div>
           </div>
         </div>

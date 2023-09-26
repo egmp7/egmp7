@@ -1,8 +1,8 @@
 import type Matter from "matter-js";
 import type P5 from "p5";
 
-export default class Utilities{
-    static drawVertices(p5:P5, vertices: Matter.Vector[]): void {
+export default class Utilities {
+    static drawVertices(p5: P5, vertices: Matter.Vector[]): void {
 
         p5.fill(255, 0, 255)
         p5.beginShape();
@@ -19,7 +19,7 @@ export default class Utilities{
      * @param frameCount 
      * @returns 
      */
-    static sinZeroToOne(magnitude: number, speed: number, frameCount:number): number {
+    static sinZeroToOne(magnitude: number, speed: number, frameCount: number): number {
         return magnitude * (Math.sin(frameCount / speed) + 1) / 2;
     }
 
@@ -30,8 +30,12 @@ export default class Utilities{
      * @param frameCount 
      * @returns 
      */
-    static sinMinusOneToOne(magnitude: number, speed: number, frameCount:number): number {
+    static sinMinusOneToOne(magnitude: number, speed: number, frameCount: number): number {
         return magnitude * Math.sin(frameCount / speed);
+    }
+
+    static calculateDistance(x1: number, y1: number, x2: number, y2: number) {
+        return Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2);
     }
 }
 

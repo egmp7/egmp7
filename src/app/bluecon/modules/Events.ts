@@ -1,3 +1,5 @@
+import Left from "../buttons/left"
+
 namespace Events {
 
     export const keys ={
@@ -13,6 +15,10 @@ namespace Events {
         jump: false,
     }
 
+    export const buttons={
+        left: new Left({x:60,y:400},50)
+    }
+
     export function setControlLeft(bool: boolean):void{
         control.left = bool;
     }
@@ -23,6 +29,10 @@ namespace Events {
 
     export function setControlJump(bool: boolean):void{
         control.jump = bool;
+    }
+
+    export function run(){
+        buttons.left.run()
     }
 
 

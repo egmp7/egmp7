@@ -1,7 +1,7 @@
 import type P5 from "p5"
 import tools from "../globals/tools";
 import Buttons from "../abstract/buttons";
-import LeftButton from "./buttons/left";
+import LeftButton from "../buttons/left";
 
 export default class Events {
     constructor(canvas: P5.Renderer, p5: P5) {
