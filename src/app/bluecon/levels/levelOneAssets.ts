@@ -16,9 +16,9 @@ const LevelOneAssets = {
         new Cloud(200, 300, 40)
     ],
     grounds: [
-        new Ground(LevelOneBodies.grounds[0]),
-        new Ground(LevelOneBodies.grounds[1]),
-        new Ground(LevelOneBodies.grounds[2]),
+        new Ground({ x: 100,  y: 600 }, { w: 500, h: 200 }),
+        new Ground({ x: 1050, y: 600 }, { w: 800, h: 200 }),
+        new Ground({ x: 1250, y: 400 }, { w: 800, h: 200 }),
     ],
     // platforms: [
     //     new Platform(LevelOneBodies.platforms[0]),
@@ -28,7 +28,7 @@ const LevelOneAssets = {
     //     new Enemy(LevelOneBodies.enemies[0], 50, 1),
     //     new Enemy(LevelOneBodies.enemies[1], 20, 3)
     // ],
-    player: [new Player(player.main)],
+    //player: [new Player(player.main)],
 }
 
 export default LevelOneAssets

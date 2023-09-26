@@ -12,6 +12,8 @@ export default class Enemy extends Structure {
     speed: number;
 
     constructor(body: Matter.Body, range: number, speed: number) {
+        
+        
         super(body,{x:speed,y:body.velocity.y})
         this.range = range;
         this.speed = speed;

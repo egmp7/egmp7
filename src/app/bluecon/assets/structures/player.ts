@@ -1,6 +1,7 @@
 import { drawVertices } from "../../resources/utilities";
 import { p5 } from "../../components/Sketch2";
 import Structure from "./structure";
+import { Bodies, Body } from "matter-js";
 import {
     frontAnimation,
     leftFallingAnimation,
@@ -22,13 +23,14 @@ interface DoubleJump {
 export default class Player extends Structure {
 
     public isVisible: boolean = true;
+    public body: Body = this.createBody();
 
     xSpeed: number;
     jumpForce: Matter.Vector;
     doubleJumpProps: DoubleJump;
 
-    constructor(body: Matter.Body) {
-        super(body);
+    constructor(position: Matter.Vector) {
+        super(position);
         this.xSpeed = 5;
         this.jumpForce = { x: 0, y: (-0.013 * this.body.mass) };
         this.doubleJumpProps = {
@@ -36,6 +38,30 @@ export default class Player extends Structure {
             jumpReset: false,
             isFirstJump: false
         }
+    }
+
+    createBody(): Matter.Body {
+        const area = { w: 36, h: 82 }
+
+        const body = Bodies.rectangle(
+            this.position.x,
+            this.position.y,
+            area.w,
+            area.h);
+
+        const floorSensor = Bodies.circle(
+            this.position.x,
+            this.position.y + area.h / 2,
+            2,  // radius
+            { isSensor: true });
+
+        const main = Body.create({
+            parts: [body, floorSensor],
+            friction: 0,
+            inertia: Infinity
+        });
+
+        return main;
     }
 
     run() {

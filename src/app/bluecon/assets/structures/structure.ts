@@ -3,27 +3,36 @@ import Asset from "../asset";
 //////////////////////////////////////////////////////
 import type Matter from "matter-js";
 //////////////////////////////////////////////////////
+export interface Area { w: number, h: number };
+//////////////////////////////////////////////////////
 export default abstract class Structure extends Asset {
 
-    body: Matter.Body;
+
+
+    abstract body: Matter.Body;
+    position: Matter.Vector;
+    area: Area | undefined;
     initPosition: Matter.Vector;
     relativeInitPosition: Matter.Vector;
     initVelocity: Matter.Vector | undefined;
 
-    constructor(body: Matter.Body, velocity?: Matter.Vector) {
+    constructor(position: Matter.Vector, area?: Area, velocity?: Matter.Vector) {
         super();
-        this.body = body;
+        this.position = position;
+        this.area = area;
         this.initPosition = {
-            x: body.position.x,
-            y: body.position.y
+            x: position.x,
+            y: position.y
         };
         this.relativeInitPosition = {
-            x: body.position.x,
-            y: body.position.y
+            x: position.x,
+            y: position.y
         };
 
         this.initVelocity = velocity;
     }
+
+    abstract createBody(): Body
 
     /* Initializes a body when game starts */
     initBody() {
