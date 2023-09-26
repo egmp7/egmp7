@@ -23,11 +23,13 @@ export default class Player extends Structure {
     xSpeed: number;
     jumpForce: Matter.Vector;
     doubleJumpProps: DoubleJump;
+    floorSensor: Body;
 
     constructor(position: Matter.Vector, area: Area) {
         super(position, area);
         this.xSpeed = 5;
         this.jumpForce = { x: 0, y: (-0.013 * this.body.mass) };
+        this.floorSensor = this.body.parts[2];
         this.doubleJumpProps = {
             speed: 4,
             jumpReset: false,

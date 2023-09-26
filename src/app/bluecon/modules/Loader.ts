@@ -1,4 +1,5 @@
 import type Structure from "../abstract/structure";
+import type Player from "../assets/structures/player";
 import type Graph from "../abstract/graph";
 import type Matter from "matter-js";
 
@@ -92,9 +93,8 @@ namespace Loader {
         status = s;
     }
 
-    export function getPlayerStructure():Structure{
-        console.log(structures);
-        return structures.player[0] as Structure;
+    export function getPlayerStructure():Player{
+        return structures.player[0] as Player;
     }
 
 }

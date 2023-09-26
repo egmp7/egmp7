@@ -1,6 +1,7 @@
-import type Structure from "../abstract/structure";
 import Loader, { type Structures } from "./Loader";
 import { Collision, Pairs } from "matter-js";
+import type Structure from "../abstract/structure";
+import type Player from "../assets/structures/player";
 
 interface PlayerCollision {
     ground: boolean;
@@ -16,7 +17,7 @@ namespace Collisions {
         enemy: false
     };
     let structures: Structures;
-    let player: Structure;
+    let player: Player;
 
     /**
      * Checks for body collisions
@@ -40,7 +41,7 @@ namespace Collisions {
     export function run(): void {
 
         // Player -> Grounds Collisions
-        if (checkCollision(player.body.parts[2], structures.grounds as Structure[]))
+        if (checkCollision(player.floorSensor, structures.grounds as Structure[]))
             playerCollision.ground = true;
         else playerCollision.ground = false;
 
