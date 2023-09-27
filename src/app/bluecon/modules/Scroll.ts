@@ -6,7 +6,7 @@ import type Structure from "../abstract/structure";
 import type Drawing from "../abstract/drawing";
 //////////////////////////////////////////////////////////
 namespace Scroll {
-    let position: Matter.Vector = { x: 0, y: 0 };
+    let offset: Matter.Vector = { x: 0, y: 0 };
     let player: Player;
     let allStructuresNoPlayer: Structure[];
     let allDrawings: Drawing[];
@@ -16,7 +16,7 @@ namespace Scroll {
 
     export function init() {
         allStructuresNoPlayer = Loader.getAllStructuresNoPlayer();
-        allDrawings = Loader.getDrawingsNoBackground();
+        allDrawings = Loader.getDrawingArray();
         player = Loader.getPlayer();
     }
 
@@ -24,28 +24,25 @@ namespace Scroll {
 
         // left canvas limit
         if (player.body.position.x < xLeftLimit) {
-            updateScroll(scrollingSpeed);
+            updateScroll(xLeftLimit);
+            scrollStructures(allStructuresNoPlayer, scrollingSpeed);
             player.setPosition({ x: xLeftLimit, y: player.body.position.y });
         }
         // right canvas limit
         if (player.body.position.x > xRightLimit) {
-            updateScroll(- scrollingSpeed);
+            updateScroll(xRightLimit);
+            scrollStructures(allStructuresNoPlayer, - scrollingSpeed);
             player.setPosition({ x: xRightLimit, y: player.body.position.y });
         }
 
-        scrollStructures(allStructuresNoPlayer);
         scrollDrawings(allDrawings);
     }
 
-    export function getPosition(): Matter.Vector {
-        return position;
-    }
-
-    function scrollStructures(structures: Structure[]): void {
+    function scrollStructures(structures: Structure[], speed: number): void {
         structures.forEach((structure) => {
-            structure.setPosition({
-                x: structure.getInitPosition().x + position.x,
-                y: structure.body.position.y
+            structure.translate({
+                x: speed,
+                y: offset.y
             });
         });
     }
@@ -54,14 +51,14 @@ namespace Scroll {
         drawings.forEach((drawing) => {
             const drawingInitPos = drawing.getInitPosition()
             drawing.setRelativePosition({
-                x: drawingInitPos.x + position.x,
+                x: drawingInitPos.x + offset.x,
                 y: drawingInitPos.y
             });
         });
     }
 
-    function updateScroll(speed: number): void {
-        position.x += speed;
+    function updateScroll(limit: number): void {
+        offset.x = player.body.position.x - limit;
     }
 }
 

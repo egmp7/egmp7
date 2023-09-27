@@ -14,7 +14,7 @@ const LevelOneAssets = {
         new Cloud(200, 300, 40)
     ],
     grounds: [
-        new Ground({ x: 100, y: 600 }, { w: 500, h: 200 }),
+        new Ground({ x: 100, y: 600 }, { w: 1100, h: 200 }),
         new Ground({ x: 1050, y: 600 }, { w: 800, h: 200 }),
         new Ground({ x: 1250, y: 400 }, { w: 800, h: 200 }),
     ],

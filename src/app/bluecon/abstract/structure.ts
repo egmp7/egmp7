@@ -5,7 +5,7 @@ import type Matter from "matter-js";
 //////////////////////////////////////////////////////
 export interface Area { w: number, h: number };
 //////////////////////////////////////////////////////
-export default abstract class Structure extends Graph  {
+export default abstract class Structure extends Graph {
 
     abstract body: Matter.Body;
     area: Area;
@@ -67,7 +67,11 @@ export default abstract class Structure extends Graph  {
         Body.setPosition(this.body, position);
     }
 
-    getInitPosition():Matter.Vector{
+    getInitPosition(): Matter.Vector {
         return this.initPosition;
+    }
+
+    translate(offset: Matter.Vector): void {
+        Body.translate(this.body, offset);
     }
 }

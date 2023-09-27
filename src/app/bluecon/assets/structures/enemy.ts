@@ -31,7 +31,7 @@ export default class Enemy extends Structure {
     run() {
         Utilities.drawVertices(p5, this.body.vertices);
         this.reverseGravity(Physics.getEngineGravity(), this.body);
-        console.log(this.body.velocity.x);
+        //console.log(this.body.velocity.x);
         //this.switchVelocity(this.initPosition.x + Scroll.getPosition().x, this.range, this.body.position.x, this.speed);
         //this.updateRelativeInitPosition();
         //this.draw(this.body.position, this.body.velocity)

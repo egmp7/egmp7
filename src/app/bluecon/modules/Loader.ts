@@ -77,7 +77,7 @@ namespace Loader {
         let b: Structure[] = [];
 
         for (const key in structures) {
-            if (key === "player") continue;
+            //if (key === "player") continue;
             const structuresArray = (structures[key as keyof Structures] as Structure[])
             structuresArray.forEach((structure) => {
                 b.push(structure);
@@ -91,7 +91,7 @@ namespace Loader {
         return drawings;
     }
 
-    export function getDrawingsNoBackground(): Drawing[] {
+    export function getDrawingArray(): Drawing[] {
         let d: Drawing[] = [];
 
         for (const key in drawings) {
