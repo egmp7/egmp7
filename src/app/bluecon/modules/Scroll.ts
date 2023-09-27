@@ -8,14 +8,14 @@ import type Drawing from "../abstract/drawing";
 namespace Scroll {
     let offset: Matter.Vector = { x: 0, y: 0 };
     let player: Player;
-    let allStructuresNoPlayer: Structure[];
+    let allStructures: Structure[];
     let allDrawings: Drawing[];
     let scrollingSpeed = 6;
     const xRightLimit = 400;
     const xLeftLimit = 50;
 
     export function init() {
-        allStructuresNoPlayer = Loader.getAllStructuresNoPlayer();
+        allStructures = Loader.getAllStructuresNoPlayer();
         allDrawings = Loader.getDrawingArray();
         player = Loader.getPlayer();
     }
@@ -25,25 +25,25 @@ namespace Scroll {
         // left canvas limit
         if (player.body.position.x < xLeftLimit) {
             updateScroll(scrollingSpeed);
-            scrollStructures(allStructuresNoPlayer, scrollingSpeed);
+            scrollStructures(+ scrollingSpeed);
             player.setPosition({ x: xLeftLimit, y: player.body.position.y });
         }
         // right canvas limit
         if (player.body.position.x > xRightLimit) {
             updateScroll(-scrollingSpeed);
-            scrollStructures(allStructuresNoPlayer, - scrollingSpeed);
-            player.setPosition({ x: xRightLimit, y: player.body.position.y });   
+            scrollStructures(- scrollingSpeed);
+            player.setPosition({ x: xRightLimit, y: player.body.position.y });
         }
 
-        scrollDrawings(allDrawings);   
+        scrollDrawings();
     }
 
-    export function getScrollOffset(): Matter.Vector{
+    export function getScrollOffset(): Matter.Vector {
         return offset;
     }
 
-    function scrollStructures(structures: Structure[], speed: number): void {
-        structures.forEach((structure) => {
+    function scrollStructures(speed: number): void {
+        allStructures.forEach((structure) => {
             structure.translate({
                 x: speed,
                 y: offset.y
@@ -51,14 +51,24 @@ namespace Scroll {
         });
     }
 
-    function scrollDrawings(drawings: Drawing[]): void {
-        drawings.forEach((drawing) => {
+    function scrollDrawings(): void {
+        allDrawings.forEach((drawing) => {
             const drawingInitPos = drawing.getInitPosition()
             drawing.setRelativePosition({
                 x: drawingInitPos.x + offset.x,
                 y: drawingInitPos.y
             });
         });
+    }
+
+    export function restartScroll(): void {
+        allStructures.forEach((structure) => {
+            structure.translate({
+                x: - offset.x,
+                y: - offset.y
+            });
+        });
+        offset = { x: 0, y: 0 }
     }
 
     function updateScroll(speed: number): void {

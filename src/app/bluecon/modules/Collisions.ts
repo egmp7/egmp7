@@ -51,10 +51,10 @@ namespace Collisions {
             playerCollision.platform = true;
         else playerCollision.platform = false;
 
-        // // Player -> Enemies Collisions
-        // if (checkCollision(this.player.body, this.bodies.enemies))
-        //     this.playerCollisions.enemy = true;
-        // else this.playerCollisions.enemy = false;
+        // Player -> Enemies Collisions
+        if (checkCollision(player.body, structures.enemies as Structure[]))
+            playerCollision.enemy = true;
+        else playerCollision.enemy = false;
 
     }
 

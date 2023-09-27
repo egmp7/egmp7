@@ -5,6 +5,7 @@ import LevelOneAssets from "../levels/levelOneAssets";
 import Collisions from "./Collisions";
 import Events from "./Events";
 import Scroll from "./Scroll";
+import Rules from "./Rules";
 //////////////////////////////////////////////////////////
 import type Graph from "../abstract/graph";
 import { type Drawings } from "./Loader";
@@ -28,6 +29,7 @@ namespace Game {
 
         Collisions.init();
         Scroll.init();
+        Rules.init();
     }
 
     export function run(): void {
@@ -36,6 +38,7 @@ namespace Game {
         Collisions.run();
         Events.run();
         Scroll.run();
+        Rules.run();
     }
 }
 
