@@ -14,16 +14,8 @@ export default abstract class Button {
 
     run(): void {
         this.draw(this.position, this.radius);
-        if (p5.touches.length === 0) this.isPressed = false;
-        p5.touches.forEach((touch: any) => {
-            if (
-                this.checkIfPressed(
-                    { x: this.position.x, y: this.position.y },
-                    { x: touch.x, y: touch.y },
-                    this.radius)
-            ) this.isPressed = true; 
-            else this.isPressed = false;
-        })
+        this.checkTouches(this.position, p5.touches, this.radius);
+
     }
 
     draw(position: Matter.Vector, radius: number) {
@@ -35,15 +27,27 @@ export default abstract class Button {
     }
 
     /**
-     * Checks if a touch is close to the position by a radius distance
-     * @param p5 
+     * Checks if a touch is close to the position by a radius distance and sets is pressed
      * @param position 
-     * @param touch 
+     * @param touches 
      * @param radius 
-     * @returns boolean
      */
-    checkIfPressed(p1: Matter.Vector, p2: Matter.Vector, radius: number): boolean {
-        if (Utilities.calculateDistance(p1.x, p1.y, p2.x, p2.y) < radius) return true
-        return false;
+    checkTouches(position: Matter.Vector, touches: any[], radius: number) {
+
+        this.setIsPressed(false);
+        touches.forEach((touch) => {
+
+            if (Utilities.calculateDistance(
+                position.x,
+                position.y,
+                touch.x,
+                touch.y) < radius)
+                this.setIsPressed(true);
+        })
+
+    }
+
+    setIsPressed(bool: boolean): void {
+        this.isPressed = bool;
     }
 }

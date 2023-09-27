@@ -5,9 +5,9 @@ import Jump from "../buttons/jump";
 namespace Events {
 
     const buttons = {
-        left: new Left({ x: 60, y: 400 }, 50),
-        right: new Right({ x: 180, y: 400 }, 50),
-        jump: new Jump({ x: 860, y: 400 }, 50)
+        left: new Left({ x: 60, y: 480 }, 50),
+        right: new Right({ x: 180, y: 480 }, 50),
+        jump: new Jump({ x: 900, y: 480 }, 50)
     }
 
     const keyboardController = {
