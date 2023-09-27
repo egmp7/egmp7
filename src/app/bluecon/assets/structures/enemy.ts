@@ -15,13 +15,13 @@ export default class Enemy extends Structure {
     range: number;
     speed: number;
 
-    constructor(position: Matter.Vector, area: Area, range:number, speed: number) {
+    constructor(position: Matter.Vector, area: Area, range: number, speed: number) {
 
         super(position, area)
         this.range = range;
         this.speed = speed;
         this.setInertia(Infinity);
-        this.setVelocity({x:2,y:this.body.velocity.y})
+        this.setVelocity({ x: 5, y: this.body.velocity.y })
     }
 
     createBody(position: Matter.Vector, area: Area): Matter.Body {
@@ -31,10 +31,8 @@ export default class Enemy extends Structure {
     run() {
         Utilities.drawVertices(p5, this.body.vertices);
         this.reverseGravity(Physics.getEngineGravity(), this.body);
-        //console.log(this.body.velocity.x);
-        //this.switchVelocity(this.initPosition.x + Scroll.getPosition().x, this.range, this.body.position.x, this.speed);
-        //this.updateRelativeInitPosition();
-        //this.draw(this.body.position, this.body.velocity)
+        this.switchVelocity((this.initPosition.x + Scroll.getScrollOffset().x), this.body.position.x, this.range, this.speed);
+        this.draw(this.body.position, this.body.velocity)
     }
 
     /**
@@ -57,7 +55,7 @@ export default class Enemy extends Structure {
      * @param {number} xEnemyCurrent
      * @param {number} speed 
      */
-    switchVelocity(xEnemyInit: number, range: number, xEnemyCurrent: number, speed: number) {
+    switchVelocity(xEnemyInit: number, xEnemyCurrent: number, range: number, speed: number) {
         if (range < 0) throw "error: range must not be less than 0";
         if (xEnemyCurrent > xEnemyInit + range)
             this.setVelocity({ x: -speed, y: this.body.velocity.y })

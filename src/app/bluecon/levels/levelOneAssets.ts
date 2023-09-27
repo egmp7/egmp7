@@ -23,7 +23,7 @@ const LevelOneAssets = {
         new Platform({ x: 800, y: 400 }, { w: 100, h: 10 }),
     ],
     enemies: [
-        new Enemy({x:500, y: 200},{w:20,h:44}, 100, 1),
+        new Enemy({x:500, y: 200},{w:20,h:44}, 100, 3),
         new Enemy({x:700, y: 200},{w:20,h:44}, 30, 1),
     ],
     player: [new Player({ x: 100, y: 300 }, { w: 36, h: 82 })],

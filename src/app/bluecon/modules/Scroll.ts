@@ -38,6 +38,10 @@ namespace Scroll {
         scrollDrawings(allDrawings);   
     }
 
+    export function getScrollOffset(): Matter.Vector{
+        return offset;
+    }
+
     function scrollStructures(structures: Structure[], speed: number): void {
         structures.forEach((structure) => {
             structure.translate({
