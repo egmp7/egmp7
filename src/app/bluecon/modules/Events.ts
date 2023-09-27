@@ -2,37 +2,57 @@ import Left from "../buttons/left"
 
 namespace Events {
 
-    export const keys ={
+    const buttons = {
+        left: new Left({ x: 60, y: 400 }, 50)
+    }
+
+    const keyboardController = {
+        left: false,
+        right: false,
+        jump: false
+    }
+
+    function setControlLeft(bool: boolean): void {
+        control.left = bool;
+    }
+
+    function setControlRight(bool: boolean): void {
+        control.right = bool;
+    }
+
+    function setControlJump(bool: boolean): void {
+        control.jump = bool;
+    }
+
+    export const keys = {
         left: 37,
         right: 39,
         space: 32,
         enter: 13,
     }
 
-    export const control={
+    export const control = {
         left: false,
         right: false,
         jump: false,
     }
 
-    export const buttons={
-        left: new Left({x:60,y:400},50)
-    }
-
-    export function setControlLeft(bool: boolean):void{
-        control.left = bool;
-    }
-
-    export function setControlRight(bool: boolean):void{
-        control.right = bool;
-    }
-
-    export function setControlJump(bool: boolean):void{
-        control.jump = bool;
-    }
-
-    export function run(){
+    export function run() {
         buttons.left.run()
+
+        setControlLeft(buttons.left.isPressed || keyboardController.left)
+    }
+
+    export function setKeyboardControllerLeft(bool: boolean): void {
+        keyboardController.left = bool
+    }
+
+    export function setKeyboardControllerRight(bool: boolean): void {
+        keyboardController.right = bool
+    }
+
+    export function setKeyboardControllerJump(bool: boolean): void {
+        keyboardController.jump = bool
     }
 
 

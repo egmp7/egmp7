@@ -10,11 +10,6 @@ export default class Left extends Buttons {
         super(position, radius)
     }
 
-    run(): void {
-        this.draw(this.position, this.radius);
-        //this.checkIfPressed()
-    }
-
     draw(position: Matter.Vector, radius: number): void {
     
         p5.fill('rgba(255,255,255, 0.25)');
@@ -31,11 +26,4 @@ export default class Left extends Buttons {
             - size + xOffset, 0)
 
     }
-
-    // checkIfPressed = function () {
-    //     if (this.isPressed)
-    //         PLAYER_CONTROLLER.setMoveLeft(true)
-    //     else
-    //         PLAYER_CONTROLLER.setMoveLeft(false)
-    // }
 }

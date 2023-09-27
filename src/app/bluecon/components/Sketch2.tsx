@@ -33,16 +33,24 @@ export default function Sketch2(props: any) {
                 })
 
                 p.keyPressed = function () {
-                    if (p.keyCode === Events.keys.left) Events.setControlLeft(true);
-                    if (p.keyCode === Events.keys.right) Events.setControlRight(true);
-                    if (p.keyCode === Events.keys.space) Events.setControlJump(true);
+                    if (p.keyCode === Events.keys.left) Events.setKeyboardControllerLeft(true);
+                    if (p.keyCode === Events.keys.right) Events.setKeyboardControllerRight(true);
+                    if (p.keyCode === Events.keys.space) Events.setKeyboardControllerJump(true);
                 }
-                
+
                 p.keyReleased = function (){
-                    if (p.keyCode === Events.keys.left) Events.setControlLeft(false);
-                    if (p.keyCode === Events.keys.right) Events.setControlRight(false);
-                    if (p.keyCode === Events.keys.space) Events.setControlJump(false);
+                    if (p.keyCode === Events.keys.left) Events.setKeyboardControllerLeft(false);
+                    if (p.keyCode === Events.keys.right) Events.setKeyboardControllerRight(false);
+                    if (p.keyCode === Events.keys.space) Events.setKeyboardControllerJump(false);
                 }
+
+                // p.touchStarted = function (){
+                //     Events.setControlLeft(Events.getLeftButtonState())
+                // }
+
+                // p.touchEnded = function (){
+                //     Events.setControlLeft(Events.getLeftButtonState())
+                // }
             };
 
             p.draw = () => {
