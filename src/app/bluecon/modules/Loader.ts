@@ -13,8 +13,9 @@ interface Graphs {
 
 export interface Structures {
     grounds: Graph[],
-    platforms:Graph[],
-    player:Graph[],
+    platforms: Graph[],
+    enemies: Graph[],
+    player: Graph[],
 }
 
 export interface Drawings {
@@ -72,7 +73,7 @@ namespace Loader {
         return b;
     }
 
-    export function getAllStructuresNoPlayer(): Structure[]{
+    export function getAllStructuresNoPlayer(): Structure[] {
         let b: Structure[] = [];
 
         for (const key in structures) {
@@ -90,7 +91,7 @@ namespace Loader {
         return drawings;
     }
 
-    export function getDrawingsNoBackground(): Drawing[]{
+    export function getDrawingsNoBackground(): Drawing[] {
         let d: Drawing[] = [];
 
         for (const key in drawings) {
@@ -123,7 +124,7 @@ namespace Loader {
         status = s;
     }
 
-    export function getPlayer():Player{
+    export function getPlayer(): Player {
         return structures.player[0] as Player;
     }
 

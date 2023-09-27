@@ -37,6 +37,10 @@ namespace Scroll {
         scrollDrawings(allDrawings);
     }
 
+    export function getPosition(): Matter.Vector {
+        return position;
+    }
+
     function scrollStructures(structures: Structure[]): void {
         structures.forEach((structure) => {
             structure.setPosition({

@@ -17,14 +17,13 @@ namespace Game {
         Loader.addDrawings({ clouds: LevelOneAssets.clouds as Graph[] } as Drawings);
         
         Loader.addStructures({ grounds: LevelOneAssets.grounds as Graph[] } as Structures);
+        Loader.addStructures({ platforms: LevelOneAssets.platforms as Graph[] } as Structures);
+        Loader.addStructures({ enemies: LevelOneAssets.enemies as Graph[] } as Structures);
         Loader.addStructures({ player: LevelOneAssets.player as Graph[] } as Structures);
-        Loader.addStructures({ platforms: LevelOneAssets.platforms as Graph[] } as Structures)
 
-        console.log(Loader.getDrawings());
-        console.log(Loader.getStructures());
         console.log(Loader.getAllGraphs());
-
         Render.addGraphs(Loader.getAllGraphs());
+        console.log(Loader.getAllBodies());
         Physics.addBodies(Loader.getAllBodies());
 
         Collisions.init();

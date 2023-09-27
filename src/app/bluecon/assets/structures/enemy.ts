@@ -1,32 +1,40 @@
-import { drawVertices } from "../../resources/utilities";
-//import { globalP5 as p5 } from "../../globals/p5";
+import Utilities from "../../resources/utilities";
+import { p5 } from "../../components/Sketch2";
+import { Bodies } from "matter-js";
 import { drawEnemyRight, drawEnemyLeft } from "./sprites/enemy"
-import Structure from "../../abstract/structure"
+import Structure, { Area } from "../../abstract/structure"
+import Physics from "../../modules/Physics";
+import Scroll from "../../modules/Scroll";
 //////////////////////////////////////////////////////
 import type Matter from "matter-js";
 //////////////////////////////////////////////////////
 export default class Enemy extends Structure {
 
-    public isVisible: boolean = false;
+    public isVisible: boolean = true;
+    public body: Matter.Body = this.createBody(this.initPosition, this.area);
     range: number;
     speed: number;
 
-    constructor(body: Matter.Body, range: number, speed: number) {
-        
-        
-        super(body,{x:speed,y:body.velocity.y})
+    constructor(position: Matter.Vector, area: Area, range:number, speed: number) {
+
+        super(position, area)
         this.range = range;
         this.speed = speed;
         this.setInertia(Infinity);
-        this.isVisible = false;
+        this.setVelocity({x:2,y:this.body.velocity.y})
+    }
+
+    createBody(position: Matter.Vector, area: Area): Matter.Body {
+        return Bodies.rectangle(position.x, position.y, area.w, area.h, { isSensor: true })
     }
 
     run() {
-        //drawVertices(this.body.vertices)
-        this.reverseGravity(this.engineGravity, this.body)
-        this.switchVelocity(this.relativeInitPosition.x, this.range, this.body.position.x, this.speed);
-        this.updateRelativeInitPosition();
-        this.draw(this.body.position, this.body.velocity)
+        Utilities.drawVertices(p5, this.body.vertices);
+        this.reverseGravity(Physics.getEngineGravity(), this.body);
+        console.log(this.body.velocity.x);
+        //this.switchVelocity(this.initPosition.x + Scroll.getPosition().x, this.range, this.body.position.x, this.speed);
+        //this.updateRelativeInitPosition();
+        //this.draw(this.body.position, this.body.velocity)
     }
 
     /**
@@ -63,8 +71,7 @@ export default class Enemy extends Structure {
      * @param {Matter.Vector} position
      * @param {Matter.Vector} velocity 
      */
-    draw (position: Matter.Vector, velocity: Matter.Vector) {
-        if (!p5) return;
+    draw(position: Matter.Vector, velocity: Matter.Vector) {
         const yOffset = 3;
 
         p5.push();
