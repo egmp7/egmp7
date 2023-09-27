@@ -18,6 +18,10 @@ export default abstract class Drawing extends Asset {
         };
     }
 
+    setRelativePosition(position:Matter.Vector){
+        this.relativePosition = position;
+    }
+
     /**
  * Updates position of the body by adding the scroll position
  */

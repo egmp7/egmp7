@@ -1,4 +1,5 @@
 import type Structure from "../abstract/structure";
+import type Drawing from "../abstract/drawing";
 import type Player from "../assets/structures/player";
 import type Graph from "../abstract/graph";
 import type Matter from "matter-js";
@@ -64,9 +65,9 @@ namespace Loader {
         for (const key in structures) {
             const structuresArray = (structures[key as keyof Structures] as Structure[])
             structuresArray.forEach((structure) => {
-                b.push(structure.body)
-            })
-        }
+                b.push(structure.body);
+            });
+        };
 
         return b;
     }
@@ -78,15 +79,29 @@ namespace Loader {
             if (key === "player") continue;
             const structuresArray = (structures[key as keyof Structures] as Structure[])
             structuresArray.forEach((structure) => {
-                b.push(structure)
-            })
-        }
+                b.push(structure);
+            });
+        };
 
         return b;
     }
 
     export function getDrawings(): Drawings {
         return drawings;
+    }
+
+    export function getDrawingsNoBackground(): Drawing[]{
+        let d: Drawing[] = [];
+
+        for (const key in drawings) {
+            if (key === "background") continue;
+            const drawingsArray = (drawings[key as keyof Drawings] as Drawing[])
+            drawingsArray.forEach((drawing) => {
+                d.push(drawing);
+            });
+        };
+
+        return d;
     }
 
     export function getStructures(): Structures {
