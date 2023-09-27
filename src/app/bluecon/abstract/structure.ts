@@ -1,32 +1,21 @@
 import { Body } from "matter-js";
-import Asset from "./asset";
+import Graph from "./graph";
 //////////////////////////////////////////////////////
 import type Matter from "matter-js";
 //////////////////////////////////////////////////////
 export interface Area { w: number, h: number };
 //////////////////////////////////////////////////////
-export default abstract class Structure extends Asset {
+export default abstract class Structure extends Graph  {
 
     abstract body: Matter.Body;
-    position: Matter.Vector;
     area: Area;
     initPosition: Matter.Vector;
-    relativeInitPosition: Matter.Vector;
     initVelocity: Matter.Vector | undefined;
 
     constructor(position: Matter.Vector, area: Area, velocity?: Matter.Vector) {
         super();
-        this.position = position;
+        this.initPosition = position;
         this.area = area;
-        this.initPosition = {
-            x: position.x,
-            y: position.y
-        };
-        this.relativeInitPosition = {
-            x: position.x,
-            y: position.y
-        };
-
         this.initVelocity = velocity;
     }
 
@@ -36,14 +25,6 @@ export default abstract class Structure extends Asset {
     initBody() {
         this.setPosition(this.initPosition);
         if (this.initVelocity) this.setVelocity(this.initVelocity)
-    }
-
-    /**
-     * Updates the initial position of the body by adding the scroll position
-     */
-    updateRelativeInitPosition() {
-        this.relativeInitPosition.x = this.initPosition.x - this.scrollPosition.x
-        this.relativeInitPosition.y = this.initPosition.y - this.scrollPosition.y
     }
 
     /**
@@ -84,5 +65,9 @@ export default abstract class Structure extends Asset {
      */
     setPosition(position: Matter.Vector): void {
         Body.setPosition(this.body, position);
+    }
+
+    getInitPosition():Matter.Vector{
+        return this.initPosition;
     }
 }

@@ -40,18 +40,18 @@ namespace Scroll {
     function scrollStructures(structures: Structure[]): void {
         structures.forEach((structure) => {
             structure.setPosition({
-                x: structure.position.x + position.x,
+                x: structure.getInitPosition().x + position.x,
                 y: structure.body.position.y
             });
         });
     }
 
     function scrollDrawings(drawings: Drawing[]): void {
-
         drawings.forEach((drawing) => {
+            const drawingInitPos = drawing.getInitPosition()
             drawing.setRelativePosition({
-                x: drawing.position.x + position.x,
-                y: drawing.position.y
+                x: drawingInitPos.x + position.x,
+                y: drawingInitPos.y
             });
         });
     }

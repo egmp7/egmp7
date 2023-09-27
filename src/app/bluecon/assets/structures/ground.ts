@@ -8,7 +8,7 @@ import type Matter from "matter-js";
 export default class Ground extends Structure {
 
     public isVisible: boolean = true;
-    public body: Matter.Body = this.createBody(this.position, this.area);
+    public body: Matter.Body = this.createBody(this.initPosition, this.area);
     area: Area;
 
     constructor(position: Matter.Vector, area: Area) {

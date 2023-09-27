@@ -1,8 +1,8 @@
 import { p5 } from "../../components/Sketch2";
-import Asset from "../../abstract/asset";
+import Graph from "../../abstract/graph";
 import { drawBackground } from "./sprites/background";
 //////////////////////////////////////////////////////
-export default class Background extends Asset {
+export default class Background extends Graph {
     public isVisible: boolean = true;
 
     constructor() {

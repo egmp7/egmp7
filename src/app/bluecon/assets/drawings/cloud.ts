@@ -20,7 +20,6 @@ export default class Cloud extends Drawing {
 
     run(): void {
         this.draw(this.relativePosition, this.size);
-        this.updateRelativePosition()
         //this.move();
     }
 
@@ -33,7 +32,7 @@ export default class Cloud extends Drawing {
         p5.pop()
     }
 
-    move(): void {
-        this.position.x += this.speed.x
-    }
+    // move(): void {
+    //     this.position.x += this.speed.x
+    // }
 }

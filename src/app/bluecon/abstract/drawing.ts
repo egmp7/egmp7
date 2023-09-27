@@ -1,32 +1,21 @@
-import Asset from "./asset";
-//////////////////////////////////////////////////////
+import Graph from "./graph";//////////////////////////////////////////////////////
 import type Matter from "matter-js";
 //////////////////////////////////////////////////////
-export default abstract class Drawing extends Asset {
-    position: Matter.Vector;
+export default abstract class Drawing extends Graph {
+    initPosition: Matter.Vector;
     relativePosition: Matter.Vector;
 
     constructor(position: Matter.Vector) {
         super();
-        this.position = {
-            x: position.x,
-            y: position.y
-        };
-        this.relativePosition = {
-            x: position.x,
-            y: position.y
-        };
+        this.initPosition = position;
+        this.relativePosition = position;
     }
 
     setRelativePosition(position:Matter.Vector){
         this.relativePosition = position;
     }
 
-    /**
- * Updates position of the body by adding the scroll position
- */
-    updateRelativePosition() {
-        this.relativePosition.x = this.position.x - this.scrollPosition.x;
-        this.relativePosition.y = this.position.y - this.scrollPosition.y;
+    getInitPosition(): Matter.Vector{
+        return this.initPosition;
     }
 }
