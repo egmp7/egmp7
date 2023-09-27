@@ -7,8 +7,6 @@ export interface Area { w: number, h: number };
 //////////////////////////////////////////////////////
 export default abstract class Structure extends Asset {
 
-
-
     abstract body: Matter.Body;
     position: Matter.Vector;
     area: Area;
@@ -16,7 +14,7 @@ export default abstract class Structure extends Asset {
     relativeInitPosition: Matter.Vector;
     initVelocity: Matter.Vector | undefined;
 
-    constructor(position: Matter.Vector, area:Area, velocity?: Matter.Vector) {
+    constructor(position: Matter.Vector, area: Area, velocity?: Matter.Vector) {
         super();
         this.position = position;
         this.area = area;
@@ -32,7 +30,7 @@ export default abstract class Structure extends Asset {
         this.initVelocity = velocity;
     }
 
-    abstract createBody(): Body
+    abstract createBody(position: Matter.Vector, area: Area): Body
 
     /* Initializes a body when game starts */
     initBody() {

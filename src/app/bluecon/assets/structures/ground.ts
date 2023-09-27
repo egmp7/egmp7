@@ -1,15 +1,14 @@
 import { p5 } from "../../components/Sketch2"
-import Structure from "../../abstract/structure";
+import Structure, { type Area } from "../../abstract/structure";
 import { drawGround } from "./sprites/ground"
 import { Bodies } from "matter-js";
 //////////////////////////////////////////////////////
-import type { Area } from "../../abstract/structure";
 import type Matter from "matter-js";
 //////////////////////////////////////////////////////
 export default class Ground extends Structure {
 
     public isVisible: boolean = true;
-    public body: Matter.Body = this.createBody();
+    public body: Matter.Body = this.createBody(this.position, this.area);
     area: Area;
 
     constructor(position: Matter.Vector, area: Area) {
@@ -18,12 +17,12 @@ export default class Ground extends Structure {
         this.setStatic(true);
     }
 
-    createBody(): Matter.Body {
+    createBody(position: Matter.Vector, area: Area): Matter.Body {
         return Bodies.rectangle(
-            this.position.x,
-            this.position.y,
-            this.area.w,
-            this.area.h)
+            position.x,
+            position.y,
+            area.w,
+            area.h)
     }
 
     run(): void {

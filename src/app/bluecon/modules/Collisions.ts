@@ -45,10 +45,10 @@ namespace Collisions {
             playerCollision.ground = true;
         else playerCollision.ground = false;
 
-        // // player -> Platforms Collisions
-        // if (checkCollision(this.player.floorSensor, this.bodies.platforms))
-        //     this.playerCollisions.platform = true;
-        // else this.playerCollisions.platform = false;
+        // player -> Platforms Collisions
+        if (checkCollision(player.floorSensor, structures.platforms as Structure[]))
+            playerCollision.platform = true;
+        else playerCollision.platform = false;
 
         // // Player -> Enemies Collisions
         // if (checkCollision(this.player.body, this.bodies.enemies))

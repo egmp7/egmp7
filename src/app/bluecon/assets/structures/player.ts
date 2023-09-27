@@ -18,7 +18,7 @@ interface DoubleJump {
 export default class Player extends Structure {
 
     public isVisible: boolean = true;
-    public body: Body = this.createBody();
+    public body: Body = this.createBody(this.position,this.area);
 
     xSpeed: number;
     jumpForce: Matter.Vector;
@@ -37,17 +37,16 @@ export default class Player extends Structure {
         }
     }
 
-    createBody(): Matter.Body {
-
+    createBody(position: Matter.Vector, area: Area): Body {
         const body = Bodies.rectangle(
-            this.position.x,
-            this.position.y,
-            this.area.w,
-            this.area.h);
+            position.x,
+            position.y,
+            area.w,
+            area.h);
 
         const floorSensor = Bodies.circle(
-            this.position.x,
-            this.position.y + this.area.h / 2,
+            position.x,
+            position.y + area.h / 2,
             2,  // radius
             { isSensor: true });
 

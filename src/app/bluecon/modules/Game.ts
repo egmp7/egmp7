@@ -22,8 +22,9 @@ namespace Game {
         Loader.addDrawings({ background: LevelOneAssets.background as Graph[] } as Drawings);
         Loader.addDrawings({ clouds: LevelOneAssets.clouds as Graph[] } as Drawings);
         
-        Loader.addStructures({ grounds: LevelOneAssets.grounds as Graph[] } as Structures)
-        Loader.addStructures({ player: LevelOneAssets.player as Graph[] } as Structures)
+        Loader.addStructures({ grounds: LevelOneAssets.grounds as Graph[] } as Structures);
+        Loader.addStructures({ player: LevelOneAssets.player as Graph[] } as Structures);
+        Loader.addStructures({ platforms: LevelOneAssets.platforms as Graph[] } as Structures)
 
         console.log(Loader.getDrawings());
         console.log(Loader.getStructures());

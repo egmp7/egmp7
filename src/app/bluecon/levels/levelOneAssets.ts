@@ -20,10 +20,10 @@ const LevelOneAssets = {
         new Ground({ x: 1050, y: 600 }, { w: 800, h: 200 }),
         new Ground({ x: 1250, y: 400 }, { w: 800, h: 200 }),
     ],
-    // platforms: [
-    //     new Platform(LevelOneBodies.platforms[0]),
-    //     new Platform(LevelOneBodies.platforms[1])
-    // ],
+    platforms: [
+        new Platform({ x: 500, y: 500 }, { w: 100, h: 10 }),
+        new Platform({ x: 800, y: 400 }, { w: 100, h: 10 }),
+    ],
     // enemies: [
     //     new Enemy(LevelOneBodies.enemies[0], 50, 1),
     //     new Enemy(LevelOneBodies.enemies[1], 20, 3)

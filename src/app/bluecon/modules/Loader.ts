@@ -12,6 +12,7 @@ interface Graphs {
 
 export interface Structures {
     grounds: Graph[],
+    platforms:Graph[],
     player:Graph[],
 }
 
