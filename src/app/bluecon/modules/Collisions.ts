@@ -1,14 +1,15 @@
 import Loader, { type Structures } from "./Loader";
 import { Collision, Pairs } from "matter-js";
+//////////////////////////////////////////////////////////
 import type Structure from "../abstract/structure";
 import type Player from "../assets/structures/player";
-
+//////////////////////////////////////////////////////////
 interface PlayerCollision {
     ground: boolean;
     platform: boolean;
     enemy: boolean;
 }
-
+//////////////////////////////////////////////////////////
 namespace Collisions {
 
     let playerCollision: PlayerCollision = {
@@ -33,9 +34,9 @@ namespace Collisions {
         return false;
     }
 
-    export function setCollisionElements(): void {
+    export function init(): void {
         structures = Loader.getStructures();
-        player = Loader.getPlayerStructure();
+        player = Loader.getPlayer();
     }
 
     export function run(): void {

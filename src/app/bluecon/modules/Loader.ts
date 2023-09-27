@@ -71,6 +71,20 @@ namespace Loader {
         return b;
     }
 
+    export function getAllStructuresNoPlayer(): Structure[]{
+        let b: Structure[] = [];
+
+        for (const key in structures) {
+            if (key === "player") continue;
+            const structuresArray = (structures[key as keyof Structures] as Structure[])
+            structuresArray.forEach((structure) => {
+                b.push(structure)
+            })
+        }
+
+        return b;
+    }
+
     export function getDrawings(): Drawings {
         return drawings;
     }
@@ -87,14 +101,14 @@ namespace Loader {
         structures = { ...structures, ...s };
     }
 
-    export function addMenu(m: Graph): void {
+    export function setMenu(m: Graph): void {
         menu = m;
     }
-    export function addStatus(s: Graph): void {
+    export function setStatus(s: Graph): void {
         status = s;
     }
 
-    export function getPlayerStructure():Player{
+    export function getPlayer():Player{
         return structures.player[0] as Player;
     }
 

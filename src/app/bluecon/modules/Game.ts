@@ -1,23 +1,17 @@
-import player from "../assets/player";
-//import tools from "./globals/tools";
-import Tools from "./Tools";
+import Loader, { type Structures } from "./Loader";
 import Render from "./Render";
 import Physics from "./Physics";
-import Loader, { Structures } from "./Loader";
 import LevelOneAssets from "../levels/levelOneAssets";
 import Collisions from "./Collisions";
-import LevelOneBodies from "../levels/levelOneBodies";
 import Events from "./Events";
-import Graph from "../abstract/graph";
-import { Drawings } from "./Loader";
-
+import Scroll from "./Scroll";
+//////////////////////////////////////////////////////////
+import type Graph from "../abstract/graph";
+import { type Drawings } from "./Loader";
+//////////////////////////////////////////////////////////
 namespace Game {
 
     export function init(): void {
-        // Render.addGraphs(LevelOneAssets.background);
-        // Render.addGraphs(LevelOneAssets.clouds);
-        // Render.addGraphs(LevelOneAssets.grounds);
-        // Render.addGraphs(LevelOneAssets.player);
 
         Loader.addDrawings({ background: LevelOneAssets.background as Graph[] } as Drawings);
         Loader.addDrawings({ clouds: LevelOneAssets.clouds as Graph[] } as Drawings);
@@ -31,10 +25,10 @@ namespace Game {
         console.log(Loader.getAllGraphs());
 
         Render.addGraphs(Loader.getAllGraphs());
-
-
         Physics.addBodies(Loader.getAllBodies());
-        Collisions.setCollisionElements();
+
+        Collisions.init();
+        Scroll.init();
     }
 
     export function run(): void {
@@ -42,28 +36,8 @@ namespace Game {
         Physics.run();
         Collisions.run();
         Events.run();
+        Scroll.run();
     }
 }
 
 export default Game;
-
-// export default class Game {
-
-//     constructor() {
-
-//         tools.addGraphsToRender(LevelOneAssets);
-//         // tools.render.addGraphs({ menu: [tools.menu] });
-//         // tools.render.addGraphs({ status: [tools.status] });
-//         // tools.collisions.setBodies(LevelOneBodies);
-//         // tools.collisions.setPlayer(player);
-//         // tools.scroll.setBodies(LevelOneBodies);
-//         // tools.scroll.setPlayer(player);
-//         // tools.rules.setPlayer(player);
-//         // tools.physics.setBodies(LevelOneBodies);
-//         // tools.physics.setPlayer(player);
-//         // tools.physics.addElementsToWorld();
-//     }
-//     run() {
-//         tools.run();
-//     }
-// }
