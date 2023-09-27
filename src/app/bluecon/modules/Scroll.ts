@@ -24,18 +24,18 @@ namespace Scroll {
 
         // left canvas limit
         if (player.body.position.x < xLeftLimit) {
-            updateScroll(xLeftLimit);
+            updateScroll(scrollingSpeed);
             scrollStructures(allStructuresNoPlayer, scrollingSpeed);
             player.setPosition({ x: xLeftLimit, y: player.body.position.y });
         }
         // right canvas limit
         if (player.body.position.x > xRightLimit) {
-            updateScroll(xRightLimit);
+            updateScroll(-scrollingSpeed);
             scrollStructures(allStructuresNoPlayer, - scrollingSpeed);
-            player.setPosition({ x: xRightLimit, y: player.body.position.y });
+            player.setPosition({ x: xRightLimit, y: player.body.position.y });   
         }
 
-        scrollDrawings(allDrawings);
+        scrollDrawings(allDrawings);   
     }
 
     function scrollStructures(structures: Structure[], speed: number): void {
@@ -57,8 +57,8 @@ namespace Scroll {
         });
     }
 
-    function updateScroll(limit: number): void {
-        offset.x = player.body.position.x - limit;
+    function updateScroll(speed: number): void {
+        offset.x += speed;
     }
 }
 
