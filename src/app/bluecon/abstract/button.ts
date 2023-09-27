@@ -1,41 +1,38 @@
 import Utilities from "../resources/utilities";
-//import { p5 } from "../components/Sketch2";
+import { p5 } from "../components/Sketch2";
 import type Matter from "matter-js";
-import type P5 from "p5";
 
 export default abstract class Button {
     abstract isPressed: boolean;
     position: Matter.Vector;
     radius: number;
-    p5: P5;
 
-    constructor(p5: P5, position: Matter.Vector, radius: number) {
+    constructor(position: Matter.Vector, radius: number) {
         this.position = position;
         this.radius = radius;
-        this.p5 = p5;
     }
 
     run(): void {
-        const p5 = this.p5;
-        //this.draw(this.p5, this.position, this.radius);
-
+        this.draw(this.position, this.radius);
         if (p5.touches.length === 0) this.isPressed = false;
-        else p5.touches.forEach((touch: any) => {
+        p5.touches.forEach((touch: any) => {
             if (
                 this.checkIfPressed(
                     { x: this.position.x, y: this.position.y },
                     { x: touch.x, y: touch.y },
                     this.radius)
-            ) this.isPressed = true;
+            ) this.isPressed = true; 
             else this.isPressed = false;
         })
     }
 
-    // draw(p5: P5, position: Matter.Vector, radius: number) {
-    //     p5.translate(position.x, position.y)
-    //     p5.fill(100);
-    //     p5.ellipse(0, 0, radius * 2, radius * 2)
-    // }
+    draw(position: Matter.Vector, radius: number) {
+        p5.push();
+        p5.translate(position.x, position.y);
+        p5.fill(100);
+        p5.ellipse(0, 0, radius * 2, radius * 2);
+        p5.pop();
+    }
 
     /**
      * Checks if a touch is close to the position by a radius distance

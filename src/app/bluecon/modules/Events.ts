@@ -1,9 +1,13 @@
-import Left from "../buttons/left"
+import Left from "../buttons/left";
+import Right from "../buttons/right";
+import Jump from "../buttons/jump";
 
 namespace Events {
 
     const buttons = {
-        left: new Left({ x: 60, y: 400 }, 50)
+        left: new Left({ x: 60, y: 400 }, 50),
+        right: new Right({ x: 180, y: 400 }, 50),
+        jump: new Jump({ x: 860, y: 400 }, 50)
     }
 
     const keyboardController = {
@@ -38,9 +42,14 @@ namespace Events {
     }
 
     export function run() {
-        buttons.left.run()
+        buttons.left.run();
+        buttons.right.run();
+        buttons.jump.run();
 
-        setControlLeft(buttons.left.isPressed || keyboardController.left)
+        setControlLeft(buttons.left.isPressed || keyboardController.left);
+        setControlRight(buttons.right.isPressed || keyboardController.right);
+        setControlJump(buttons.jump.isPressed || keyboardController.jump);
+
     }
 
     export function setKeyboardControllerLeft(bool: boolean): void {
