@@ -1,13 +1,13 @@
-import { globalP5 as p5 } from "../globals/p5";
+import { p5 } from "../components/Sketch2";
 import Graph from "../abstract/graph";
 
 export default class Status extends Graph {
-    isVisible: boolean = false;
+    isVisible: boolean = true;
     score: number;
     lives: number;
     constructor() {
         super();
-        this.score = 0;
+        this.score = 100;
         this.lives = 3;
     }
 
@@ -16,7 +16,7 @@ export default class Status extends Graph {
     }
 
     draw(score: number, lives: number): void {
-        if (!p5) return;
+        
         // Draw Score
         p5.fill(250);
         p5.textSize(20);

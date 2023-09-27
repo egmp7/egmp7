@@ -5,10 +5,10 @@ import type Player from "../types/player";
 import type Collisions from "./collisions";
 import type Scroll from "./scroll";
 import type Control from "./control";
-import type Menu from "./menu"
+import type Menu from "../graphs/menu"
 import type Render from "./render";
 import type Structure from "../abstract/structure";
-import type Status from "./status";
+import type Status from "../graphs/status";
 //////////////////////////////////////////////////
 export default class Rules {
     player: Player | null;

@@ -4,8 +4,8 @@ import Rules from "../tools/rules";
 import Render from "../tools/render";
 import Control from "../tools/control";
 import Collisions from "../tools/collisions"
-import Menu from "../tools/menu";
-import Status from "../tools/status";
+import Menu from "../graphs/menu";
+import Status from "../graphs/status";
 import { globalP5 } from "./p5";
 import LeftButton from "../buttons/left";
 

@@ -6,6 +6,8 @@ import Collisions from "./Collisions";
 import Events from "./Events";
 import Scroll from "./Scroll";
 import Rules from "./Rules";
+import Menu from "../graphs/menu";
+import Status from "../graphs/status";
 //////////////////////////////////////////////////////////
 import type Graph from "../abstract/graph";
 import { type Drawings } from "./Loader";
@@ -22,9 +24,14 @@ namespace Game {
         Loader.addStructures({ enemies: LevelOneAssets.enemies as Graph[] } as Structures);
         Loader.addStructures({ player: LevelOneAssets.player as Graph[] } as Structures);
 
+        Loader.setStatus(new Status())
+        Loader.setMenu(new Menu())
+
+        // testing
         console.log(Loader.getAllGraphs());
-        Render.addGraphs(Loader.getAllGraphs());
         console.log(Loader.getAllBodies());
+
+        Render.addGraphs(Loader.getAllGraphs());
         Physics.addBodies(Loader.getAllBodies());
 
         Collisions.init();

@@ -3,6 +3,7 @@ import type Drawing from "../abstract/drawing";
 import type Player from "../assets/structures/player";
 import type Graph from "../abstract/graph";
 import type Matter from "matter-js";
+import type Status from "../graphs/status";
 
 interface Graphs {
     structures: Structures,
@@ -52,10 +53,10 @@ namespace Loader {
         }
 
         // add status
-        //g.push(status);
+        g.push(status);
 
         // add menu
-        //g.push(menu);
+        g.push(menu);
 
         return g;
     }
@@ -73,11 +74,10 @@ namespace Loader {
         return b;
     }
 
-    export function getAllStructuresNoPlayer(): Structure[] {
+    export function getAllStructures(): Structure[] {
         let b: Structure[] = [];
 
         for (const key in structures) {
-            //if (key === "player") continue;
             const structuresArray = (structures[key as keyof Structures] as Structure[])
             structuresArray.forEach((structure) => {
                 b.push(structure);
@@ -108,25 +108,24 @@ namespace Loader {
     export function getStructures(): Structures {
         return structures;
     }
-
     export function addDrawings(d: Drawings): void {
         drawings = { ...drawings, ...d };
     }
-
     export function addStructures(s: Structures): void {
         structures = { ...structures, ...s };
     }
-
     export function setMenu(m: Graph): void {
         menu = m;
     }
     export function setStatus(s: Graph): void {
         status = s;
     }
-
     export function getPlayer(): Player {
         return structures.player[0] as Player;
     }
+    export function getStatus(): Status {
+        return status as Status;
+    } 
 
 }
 
