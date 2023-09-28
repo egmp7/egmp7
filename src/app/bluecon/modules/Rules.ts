@@ -41,6 +41,9 @@ namespace Rules {
         document.addEventListener('keydown', (event) => {
             if ((gameState === GameState.Init || gameState === GameState.Over) && event.code === "Enter") runGame();
         });
+        document.addEventListener('touchstart', (event) => {
+            if ((gameState === GameState.Init || gameState === GameState.Over)) runGame();
+        });
     }
 
     export function run(): void {
