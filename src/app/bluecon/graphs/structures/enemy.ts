@@ -29,7 +29,7 @@ export default class Enemy extends Structure {
     }
 
     run() {
-        Utilities.drawVertices(p5, this.body.vertices);
+        //Utilities.drawVertices(p5, this.body.vertices);
         this.reverseGravity(Physics.getEngineGravity(), this.body);
         this.switchVelocity((this.initPosition.x + Scroll.getScrollOffset().x), this.body.position.x, this.range, this.speed);
         this.draw(this.body.position, this.body.velocity)

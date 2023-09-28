@@ -28,7 +28,7 @@ export default class Player extends Structure {
     constructor(position: Matter.Vector, area: Area) {
         super(position, area);
         this.xSpeed = 5;
-        this.jumpForce = { x: 0, y: (-0.013 * this.body.mass) };
+        this.jumpForce = { x: 0, y: (-0.028 * this.body.mass) };
         this.floorSensor = this.body.parts[2];
         this.doubleJumpProps = {
             speed: 4,
@@ -61,7 +61,7 @@ export default class Player extends Structure {
 
     run() {
 
-        Utilities.drawVertices(p5, this.body.vertices);
+        //Utilities.drawVertices(p5, this.body.vertices);
         this.draw(this.body.position, Collisions.isPlayerOnGround(), Events.control.right, Events.control.left);
         this.moveSides({ x: this.xSpeed, y: this.body.velocity.y }, Events.control.right, Events.control.left);
         this.jump(this.jumpForce, Events.control.jump, Collisions.isPlayerOnGround());

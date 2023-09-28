@@ -27,7 +27,7 @@ namespace Rules {
     let structures: Structures;
     let drawings: Drawings
     let gameState: GameState;
-    let loopFlag = false;
+    let loopFlag:boolean = false;
 
     export function init(): void {
         player = Loader.getPlayer();
@@ -39,15 +39,17 @@ namespace Rules {
 
         initializeGraphs();
         document.addEventListener('keydown', (event) => {
-            if (gameState === GameState.Init || gameState === GameState.Over && event.code === "Enter") runGame();
+            if ((gameState === GameState.Init || gameState === GameState.Over) && event.code === "Enter") runGame();
         });
     }
 
     export function run(): void {
-        if (loopFlag) p5.noLoop();
+        if (gameState !== GameState.Running) loopFlag = true;
+        else loopFlag = false;
         if (checkOffLimits(700, player.body.position)) restartGame();
         if (Collisions.isEnemyCollision()) restartGame();
         if (status.lives < 0) gameOver();
+        if (loopFlag) p5.noLoop();
     }
 
     /**
@@ -70,7 +72,6 @@ namespace Rules {
     }
 
     function initializeGraphs(): void {
-        
         Render.setVisible(drawings.background, true);
         Render.setVisible(drawings.clouds, true);
         Render.setVisible(structures.grounds, true);
@@ -78,7 +79,6 @@ namespace Rules {
         Render.setVisible(menu, true);
         menu.setType(MenuType.Init)
         gameState = GameState.Init;
-        loopFlag = true;
     }
 
     function runGame(): void {
@@ -88,7 +88,6 @@ namespace Rules {
         Render.setVisible(buttons, true);
         Render.setVisible(structures.enemies, true);
         gameState = GameState.Running;
-        loopFlag = false;
         p5.loop();
     }
 
@@ -101,7 +100,6 @@ namespace Rules {
         menu.setType(MenuType.GameOver);
         status.setLives(3);
         gameState = GameState.Over;
-        loopFlag = true;
     }
 }
 

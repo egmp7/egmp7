@@ -18,7 +18,7 @@ const LevelOneAssets: Assets = {
 
     structures:{
         grounds: [
-            new Ground({ x: 100, y: 600 }, { w: 1100, h: 200 }),
+            new Ground({ x: 100, y: 600 }, { w: 600, h: 200 }),
             new Ground({ x: 1050, y: 600 }, { w: 800, h: 200 }),
             new Ground({ x: 1250, y: 400 }, { w: 800, h: 200 }),
         ],
