@@ -1,4 +1,4 @@
-import { p5 } from "../components/Sketch2";
+import { p5 } from "../components/Sketch";
 import Graph from "../abstract/graph";
 
 export default class Status extends Graph {

@@ -1,9 +1,9 @@
-import Player from "../assets/structures/player";
-import Ground from "../assets/structures/ground";
-import Enemy from "../assets/structures/enemy";
-import Cloud from "../assets/drawings/cloud";
-import Background from "../assets/drawings/background";
-import Platform from "../assets/structures/platform";
+import Player from "../graphs/structures/player";
+import Ground from "../graphs/structures/ground";
+import Enemy from "../graphs/structures/enemy";
+import Cloud from "../graphs/drawings/cloud";
+import Background from "../graphs/drawings/background";
+import Platform from "../graphs/structures/platform";
 //////////////////////////////////////////////////////
 import { Assets } from "./assetTypes"
 

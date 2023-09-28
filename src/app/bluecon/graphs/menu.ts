@@ -1,7 +1,7 @@
 import Graph from "../abstract/graph";
 import Status from "./status";
 import Loader from "../modules/Loader";
-import { p5 } from "../components/Sketch2";
+import { p5 } from "../components/Sketch";
 
 enum MenuType {
     Init,

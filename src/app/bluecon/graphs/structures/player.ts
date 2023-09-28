@@ -2,7 +2,7 @@ import Utilities from "../../resources/utilities";
 import Collisions from "../../modules/Collisions";
 import Events from "../../modules/Events";
 import Structure from "../../abstract/structure";
-import { p5 } from "../../components/Sketch2";
+import { p5 } from "../../components/Sketch";
 import { Bodies, Body } from "matter-js";
 import { frontAnimation, leftFallingAnimation, rightFallingAnimation, leftAnimation, rightAnimation, fallingAnimation } from "./sprites/player"
 //////////////////////////////////////////////////////

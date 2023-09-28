@@ -1,4 +1,4 @@
-import { p5 } from "../../components/Sketch2";
+import { p5 } from "../../components/Sketch";
 import Drawing from "../../abstract/drawing";
 import { drawCloud } from "./sprites/cloud";
 import Utilities from "../../resources/utilities";

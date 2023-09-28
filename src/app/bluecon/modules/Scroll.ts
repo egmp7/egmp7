@@ -1,7 +1,7 @@
 import Loader from "./Loader";
 //////////////////////////////////////////////////////////
 import type Matter from "matter-js";
-import type Player from "../assets/structures/player";
+import type Player from "../graphs/structures/player";
 import type Structure from "../abstract/structure";
 import type Drawing from "../abstract/drawing";
 //////////////////////////////////////////////////////////

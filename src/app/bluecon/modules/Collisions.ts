@@ -2,7 +2,7 @@ import Loader from "./Loader";
 import { Collision, Pairs } from "matter-js";
 //////////////////////////////////////////////////////////
 import type Structure from "../abstract/structure";
-import type Player from "../assets/structures/player";
+import type Player from "../graphs/structures/player";
 import { type Structures } from "../constants/assetTypes";
 //////////////////////////////////////////////////////////
 interface PlayerCollision {

@@ -1,5 +1,5 @@
 import Utilities from "../../resources/utilities";
-import { p5 } from "../../components/Sketch2";
+import { p5 } from "../../components/Sketch";
 import { Bodies } from "matter-js";
 import { drawEnemyRight, drawEnemyLeft } from "./sprites/enemy"
 import Structure, { Area } from "../../abstract/structure"

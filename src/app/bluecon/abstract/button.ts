@@ -1,5 +1,5 @@
 import Utilities from "../resources/utilities";
-import { p5 } from "../components/Sketch2";
+import { p5 } from "../components/Sketch";
 import Graph from "./graph";
 import type Matter from "matter-js";
 

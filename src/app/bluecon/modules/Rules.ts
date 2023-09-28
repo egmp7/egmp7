@@ -1,8 +1,8 @@
-import { p5 } from "../components/Sketch2";
+import { p5 } from "../components/Sketch";
 import Loader from "./Loader";
 import Scroll from "./Scroll";
 import Collisions from "./Collisions";
-import type Player from "../assets/structures/player";
+import type Player from "../graphs/structures/player";
 
 namespace Rules {
 

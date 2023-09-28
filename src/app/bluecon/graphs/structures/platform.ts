@@ -1,34 +1,29 @@
-import { p5 } from "../../components/Sketch2"
+//import { globalP5 as p5 } from "../../globals/p5";
 import Structure, { type Area } from "../../abstract/structure";
-import { drawGround } from "./sprites/ground"
+import { drawPlatform } from "./sprites/platform";
 import { Bodies } from "matter-js";
+import { p5 } from "../../components/Sketch";
 //////////////////////////////////////////////////////
 import type Matter from "matter-js";
 //////////////////////////////////////////////////////
-export default class Ground extends Structure {
+export default class Platform extends Structure {
 
     public isVisible: boolean = true;
     public body: Matter.Body = this.createBody(this.initPosition, this.area);
-    area: Area;
 
     constructor(position: Matter.Vector, area: Area) {
         super(position, area);
-        this.area = area;
         this.setStatic(true);
     }
 
     createBody(position: Matter.Vector, area: Area): Matter.Body {
-        return Bodies.rectangle(
-            position.x,
-            position.y,
-            area.w,
-            area.h)
+        return Bodies.rectangle(position.x, position.y, area.w, area.h);
     }
 
-    run(): void {
-        this.draw(this.body.vertices);
+    run() {
+        this.draw(this.body.vertices)
     }
-    draw(vertices: Matter.Vector[]): void {
-        drawGround(p5, vertices)
+    draw(vertices: Matter.Vector[]) {
+        drawPlatform(p5, vertices)
     }
 }

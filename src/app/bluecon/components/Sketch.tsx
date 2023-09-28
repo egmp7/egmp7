@@ -1,5 +1,4 @@
 "use client";
-
 import { useEffect, useRef } from "react";
 import P5 from "p5";
 import Game from "../modules/Game";
@@ -10,7 +9,7 @@ export let p5: P5;
 const canvasWidth = 960;
 const canvasHeight = 540;
 
-export default function Sketch2(props: any) {
+export default function Sketch() {
 
     const canvasRef = useRef<HTMLDivElement | null>(null);
 
@@ -29,7 +28,6 @@ export default function Sketch2(props: any) {
                 Game.init();
 
                 cnv.mousePressed(() => {
-                    console.log("Clicked on the canvas. Event:", p.keyCode)
                 })
 
                 p.keyPressed = function () {
@@ -43,14 +41,6 @@ export default function Sketch2(props: any) {
                     if (p.keyCode === Events.keys.right) Events.setKeyboardControllerRight(false);
                     if (p.keyCode === Events.keys.space) Events.setKeyboardControllerJump(false);
                 }
-
-                // p.touchStarted = function (){
-                //     Events.setControlLeft(Events.getLeftButtonState())
-                // }
-
-                // p.touchEnded = function (){
-                //     Events.setControlLeft(Events.getLeftButtonState())
-                // }
             };
 
             p.draw = () => {
@@ -64,5 +54,4 @@ export default function Sketch2(props: any) {
     }, []);
 
     return <div ref={canvasRef}></div>;
-
 }

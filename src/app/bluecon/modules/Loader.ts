@@ -1,6 +1,6 @@
 import type Structure from "../abstract/structure";
 import type Drawing from "../abstract/drawing";
-import type Player from "../assets/structures/player";
+import type Player from "../graphs/structures/player";
 import type Graph from "../abstract/graph";
 import type Matter from "matter-js";
 import type Status from "../graphs/status";

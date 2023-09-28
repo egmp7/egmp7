@@ -1,5 +1,5 @@
 import Button from "../../abstract/button";
-import { p5 } from "../../components/Sketch2";
+import { p5 } from "../../components/Sketch";
 import type Matter from "matter-js";
 
 export default class Left extends Button {
