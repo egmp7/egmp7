@@ -3,7 +3,7 @@ import Status from "./status";
 import Loader from "../modules/Loader";
 import { p5 } from "../components/Sketch";
 
-enum MenuType {
+export enum MenuType {
     Init,
     GameOver,
     Completed
@@ -61,5 +61,9 @@ export default class Menu extends Graph {
             p5.textSize(24);
             p5.text("Tap 📱 or Press Enter 💻 to continue.", p5.width / 2, p5.height / 2 + 16 + offsetY);
         }
+    }
+
+    setType(type: MenuType) {
+        this.type = type;
     }
 }
