@@ -5,7 +5,7 @@ import type Matter from "matter-js";
 export default class Left extends Button {
 
     isPressed: boolean = false;
-    isVisible: boolean = true;
+    isVisible: boolean = false;
 
     constructor(position: Matter.Vector, radius: number) {
         super(position, radius)

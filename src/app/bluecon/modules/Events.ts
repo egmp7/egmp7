@@ -1,61 +1,52 @@
 import Loader from "./Loader";
 import type { Buttons } from "../constants/buttons";
 
+interface Keyboard {
+    left: boolean,
+    right: boolean,
+    jump: boolean,
+}
+
 namespace Events {
-    
+
     let buttons: Buttons
-    
-    const keyboardController = {
+
+    const keyboard: Keyboard = {
         left: false,
         right: false,
-        jump: false
+        jump: false,
     }
-    
+
     export const control = {
         left: false,
         right: false,
         jump: false,
     }
 
-    export const keys = {
-        left: 37,
-        right: 39,
-        space: 32,
-        enter: 13,
-    }
-
     export function init() {
         buttons = Loader.getButtons();
+
+        document.addEventListener('keydown', (event) => {
+            if (event.code === "ArrowLeft") updateProperty(keyboard, "left", true);
+            if (event.code === "ArrowRight") updateProperty(keyboard, "right", true);
+            if (event.code === "Space") updateProperty(keyboard, "jump", true);
+
+        });
+        document.addEventListener('keyup', (event) => {
+            if (event.code === "ArrowLeft") updateProperty(keyboard, "left", false);
+            if (event.code === "ArrowRight") updateProperty(keyboard, "right", false);
+            if (event.code === "Space") updateProperty(keyboard, "jump", false);
+        });
     }
 
     export function run() {
-        setControlLeft(buttons.left.isPressed || keyboardController.left);
-        setControlRight(buttons.right.isPressed || keyboardController.right);
-        setControlJump(buttons.jump.isPressed || keyboardController.jump);
+        updateProperty(control, "left", buttons.left.isPressed || keyboard.left);
+        updateProperty(control, "right", buttons.right.isPressed || keyboard.right);
+        updateProperty(control, "jump", buttons.jump.isPressed || keyboard.jump);
     }
 
-    function setControlLeft(bool: boolean): void {
-        control.left = bool;
-    }
-
-    function setControlRight(bool: boolean): void {
-        control.right = bool;
-    }
-
-    function setControlJump(bool: boolean): void {
-        control.jump = bool;
-    }
-
-    export function setKeyboardControllerLeft(bool: boolean): void {
-        keyboardController.left = bool
-    }
-
-    export function setKeyboardControllerRight(bool: boolean): void {
-        keyboardController.right = bool
-    }
-
-    export function setKeyboardControllerJump(bool: boolean): void {
-        keyboardController.jump = bool
+    function updateProperty<T, K extends keyof T>(obj: T, property: K, value: T[K]): void {
+        obj[property] = value;
     }
 }
 
