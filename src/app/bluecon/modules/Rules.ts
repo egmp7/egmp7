@@ -4,7 +4,6 @@ import Scroll from "./Scroll";
 import Collisions from "./Collisions";
 import type Player from "../assets/structures/player";
 
-
 namespace Rules {
 
     let player: Player;

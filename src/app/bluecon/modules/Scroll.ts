@@ -15,8 +15,8 @@ namespace Scroll {
     const xLeftLimit = 50;
 
     export function init() {
-        allStructures = Loader.getAllStructures();
-        allDrawings = Loader.getDrawingArray();
+        allStructures = Loader.getStructuresArray();
+        allDrawings = Loader.getDrawingsArrayNoBackground();
         player = Loader.getPlayer();
     }
 

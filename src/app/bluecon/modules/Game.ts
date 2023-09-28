@@ -1,4 +1,4 @@
-import Loader, { type Structures } from "./Loader";
+import Loader from "./Loader";
 import Render from "./Render";
 import Physics from "./Physics";
 import Collisions from "./Collisions";
@@ -9,25 +9,15 @@ import Rules from "./Rules";
 import Menu from "../graphs/menu";
 import Status from "../graphs/status";
 import buttons from "../constants/buttons";
-import LevelOneAssets from "../constants/levelOneAssets";
-//////////////////////////////////////////////////////////
-import type Graph from "../abstract/graph";
-import { type Drawings } from "./Loader";
+import levelOneAssets from "../constants/levelOneAssets";
 //////////////////////////////////////////////////////////
 namespace Game {
 
     export function init(): void {
 
-        Loader.addDrawings({ background: LevelOneAssets.background as Graph[] } as Drawings);
-        Loader.addDrawings({ clouds: LevelOneAssets.clouds as Graph[] } as Drawings);
-        
-        Loader.addStructures({ grounds: LevelOneAssets.grounds as Graph[] } as Structures);
-        Loader.addStructures({ platforms: LevelOneAssets.platforms as Graph[] } as Structures);
-        Loader.addStructures({ enemies: LevelOneAssets.enemies as Graph[] } as Structures);
-        Loader.addStructures({ player: LevelOneAssets.player as Graph[] } as Structures);
-
+        Loader.addDrawings(levelOneAssets.drawings);
+        Loader.addStructures(levelOneAssets.structures);
         Loader.addButtons(buttons);
-
         Loader.setStatus(new Status())
         Loader.setMenu(new Menu())
 

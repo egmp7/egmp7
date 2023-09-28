@@ -6,18 +6,7 @@ import type Matter from "matter-js";
 import type Status from "../graphs/status";
 import { type Buttons } from "../constants/buttons";
 import type Menu from "../graphs/menu";
-
-export interface Structures {
-    grounds: Graph[],
-    platforms: Graph[],
-    enemies: Graph[],
-    player: Graph[],
-}
-
-export interface Drawings {
-    background: Graph[],
-    clouds: Graph[]
-}
+import { type Drawings, type Structures } from "../constants/assetTypes";
 
 namespace Loader {
     let drawings: Drawings;
@@ -27,10 +16,7 @@ namespace Loader {
     let menu: Menu;
 
     ////////////////////////////////////////////////////////////////
-    /**
-     * Get all graphs in Loader 
-     * @returns Graph[]
-     */
+
     export function getAllGraphs(): Graph[] {
         let g: Graph[] = [];
 
@@ -51,7 +37,7 @@ namespace Loader {
 
         // add buttons
         for (const key in buttons) {
-            g.push(buttons[key as keyof Buttons] as Graph);
+            g.push(buttons[key as keyof Buttons]);
         }
 
         // add status
@@ -67,7 +53,7 @@ namespace Loader {
         let b: Matter.Body[] = [];
 
         for (const key in structures) {
-            const structuresArray = (structures[key as keyof Structures] as Structure[])
+            const structuresArray = (structures[key as keyof Structures])
             structuresArray.forEach((structure) => {
                 b.push(structure.body);
             });
@@ -76,11 +62,11 @@ namespace Loader {
         return b;
     }
 
-    export function getAllStructures(): Structure[] {
+    export function getStructuresArray(): Structure[] {
         let b: Structure[] = [];
 
         for (const key in structures) {
-            const structuresArray = (structures[key as keyof Structures] as Structure[])
+            const structuresArray = (structures[key as keyof Structures])
             structuresArray.forEach((structure) => {
                 b.push(structure);
             });
@@ -89,11 +75,8 @@ namespace Loader {
         return b;
     }
 
-    export function getDrawings(): Drawings {
-        return drawings;
-    }
 
-    export function getDrawingArray(): Drawing[] {
+    export function getDrawingsArrayNoBackground(): Drawing[] {
         let d: Drawing[] = [];
 
         for (const key in drawings) {
@@ -107,20 +90,27 @@ namespace Loader {
         return d;
     }
 
-    export function getStructures(): Structures {
-        return structures;
-    }
     export function getPlayer(): Player {
         return structures.player[0] as Player;
     }
-    export function getStatus(): Status {
-        return status as Status;
+    export function getDrawings(): Drawings {
+        return drawings;
     }
-    export function getButtons(): Buttons{
+    export function getStructures(): Structures {
+        return structures;
+    }
+    export function getStatus(): Status {
+        return status;
+    }
+    export function getButtons(): Buttons {
         return buttons;
+    }
+    export function getMenu(): Menu {
+        return menu;
     }
 
     ////////////////////////////////////////////////////////////////
+
     export function addDrawings(d: Drawings): void {
         drawings = { ...drawings, ...d };
     }
