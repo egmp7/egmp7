@@ -1,44 +1,44 @@
-import { globalP5 as p5 } from "../globals/p5";
 import type Matter from "matter-js";
+import type P5 from "p5";
 
-/**
- * 
- * @param vertices 
- * @returns 
- */
-export function drawVertices(vertices: Matter.Vector[]): void {
-    if (!p5) return;
+export default class Utilities {
+    static drawVertices(p5: P5, vertices: Matter.Vector[]): void {
 
-    p5.fill(255, 0, 255)
-    p5.beginShape();
-    for (var i = 0; i < vertices.length; i++) {
-        p5.vertex(vertices[i].x, vertices[i].y);
+        p5.fill(255, 0, 255)
+        p5.beginShape();
+        for (var i = 0; i < vertices.length; i++) {
+            p5.vertex(vertices[i].x, vertices[i].y);
+        }
+        p5.endShape();
     }
-    p5.endShape();
+
+    /**
+     * Sin function to retrieve values between 0 to 1 times the magnitude
+     * @param magnitude 
+     * @param speed 
+     * @param frameCount 
+     * @returns 
+     */
+    static sinZeroToOne(magnitude: number, speed: number, frameCount: number): number {
+        return magnitude * (Math.sin(frameCount / speed) + 1) / 2;
+    }
+
+    /**
+     * Sin function to retrieve values between -1 to 1 times the magnitude
+     * @param magnitude 
+     * @param speed 
+     * @param frameCount 
+     * @returns 
+     */
+    static sinMinusOneToOne(magnitude: number, speed: number, frameCount: number): number {
+        return magnitude * Math.sin(frameCount / speed);
+    }
+
+    static calculateDistance(x1: number, y1: number, x2: number, y2: number) {
+        return Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2);
+    }
 }
 
 export function classNames(...classes: any[]): string {
     return classes.filter(Boolean).join(' ')
-}
-
-/**
- * Sin function to retrieve values between 0 to 1 times the magnitude
- * @param {number} magnitude 
- * @param {number} speed 
- * @returns 
- */
-export function sinZeroToOne(magnitude: number, speed: number): number {
-    if (!p5) return 0;
-    return magnitude * (p5.sin(p5.frameCount / speed) + 1) / 2;
-}
-
-/**
- * Sin function to retrieve values between -1 to 1 times the magnitude
- * @param {number} magnitude 
- * @param {number} speed 
- * @returns 
- */
-export function sinMinusOneToOne(magnitude: number, speed: number): number {
-    if (!p5) return 0;
-    return magnitude * p5.sin(p5.frameCount / speed);
 }
