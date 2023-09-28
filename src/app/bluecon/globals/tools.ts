@@ -7,7 +7,7 @@ import Collisions from "../tools/collisions"
 import Menu from "../graphs/menu";
 import Status from "../graphs/status";
 import { globalP5 } from "./p5";
-import LeftButton from "../buttons/left";
+import LeftButton from "../graphs/buttons/left";
 
 class Tools {
 

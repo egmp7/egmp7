@@ -4,13 +4,8 @@ import type Player from "../assets/structures/player";
 import type Graph from "../abstract/graph";
 import type Matter from "matter-js";
 import type Status from "../graphs/status";
-
-interface Graphs {
-    structures: Structures,
-    drawings: Drawings,
-    status: Graph,
-    menu: Graph
-}
+import { type Buttons } from "../constants/buttons";
+import type Menu from "../graphs/menu";
 
 export interface Structures {
     grounds: Graph[],
@@ -27,9 +22,11 @@ export interface Drawings {
 namespace Loader {
     let drawings: Drawings;
     let structures: Structures;
-    let status: Graph;
-    let menu: Graph;
+    let buttons: Buttons;
+    let status: Status;
+    let menu: Menu;
 
+    ////////////////////////////////////////////////////////////////
     /**
      * Get all graphs in Loader 
      * @returns Graph[]
@@ -50,6 +47,11 @@ namespace Loader {
             structures[key as keyof Structures].forEach(structure => {
                 g.push(structure);
             });
+        }
+
+        // add buttons
+        for (const key in buttons) {
+            g.push(buttons[key as keyof Buttons] as Graph);
         }
 
         // add status
@@ -108,25 +110,32 @@ namespace Loader {
     export function getStructures(): Structures {
         return structures;
     }
+    export function getPlayer(): Player {
+        return structures.player[0] as Player;
+    }
+    export function getStatus(): Status {
+        return status as Status;
+    }
+    export function getButtons(): Buttons{
+        return buttons;
+    }
+
+    ////////////////////////////////////////////////////////////////
     export function addDrawings(d: Drawings): void {
         drawings = { ...drawings, ...d };
     }
     export function addStructures(s: Structures): void {
         structures = { ...structures, ...s };
     }
-    export function setMenu(m: Graph): void {
+    export function addButtons(b: Buttons): void {
+        buttons = { ...buttons, ...b };
+    }
+    export function setMenu(m: Menu): void {
         menu = m;
     }
-    export function setStatus(s: Graph): void {
+    export function setStatus(s: Status): void {
         status = s;
     }
-    export function getPlayer(): Player {
-        return structures.player[0] as Player;
-    }
-    export function getStatus(): Status {
-        return status as Status;
-    } 
-
 }
 
 export default Loader;

@@ -1,19 +1,37 @@
-import Left from "../buttons/left";
-import Right from "../buttons/right";
-import Jump from "../buttons/jump";
+import Loader from "./Loader";
+import type { Buttons } from "../constants/buttons";
 
 namespace Events {
-
-    const buttons = {
-        left: new Left({ x: 60, y: 480 }, 50),
-        right: new Right({ x: 180, y: 480 }, 50),
-        jump: new Jump({ x: 900, y: 480 }, 50)
-    }
-
+    
+    let buttons: Buttons
+    
     const keyboardController = {
         left: false,
         right: false,
         jump: false
+    }
+    
+    export const control = {
+        left: false,
+        right: false,
+        jump: false,
+    }
+
+    export const keys = {
+        left: 37,
+        right: 39,
+        space: 32,
+        enter: 13,
+    }
+
+    export function init() {
+        buttons = Loader.getButtons();
+    }
+
+    export function run() {
+        setControlLeft(buttons.left.isPressed || keyboardController.left);
+        setControlRight(buttons.right.isPressed || keyboardController.right);
+        setControlJump(buttons.jump.isPressed || keyboardController.jump);
     }
 
     function setControlLeft(bool: boolean): void {
@@ -28,30 +46,6 @@ namespace Events {
         control.jump = bool;
     }
 
-    export const keys = {
-        left: 37,
-        right: 39,
-        space: 32,
-        enter: 13,
-    }
-
-    export const control = {
-        left: false,
-        right: false,
-        jump: false,
-    }
-
-    export function run() {
-        buttons.left.run();
-        buttons.right.run();
-        buttons.jump.run();
-
-        setControlLeft(buttons.left.isPressed || keyboardController.left);
-        setControlRight(buttons.right.isPressed || keyboardController.right);
-        setControlJump(buttons.jump.isPressed || keyboardController.jump);
-
-    }
-
     export function setKeyboardControllerLeft(bool: boolean): void {
         keyboardController.left = bool
     }
@@ -63,8 +57,6 @@ namespace Events {
     export function setKeyboardControllerJump(bool: boolean): void {
         keyboardController.jump = bool
     }
-
-
 }
 
 export default Events;

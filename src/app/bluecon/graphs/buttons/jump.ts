@@ -1,10 +1,11 @@
-import Button from "../abstract/button";
-import { p5 } from "../components/Sketch2";
+import Button from "../../abstract/button";
+import { p5 } from "../../components/Sketch2";
 import type Matter from "matter-js";
 
 export default class Left extends Button {
 
     isPressed: boolean = false;
+    isVisible: boolean = true;
 
     constructor(position: Matter.Vector, radius: number) {
         super(position, radius)

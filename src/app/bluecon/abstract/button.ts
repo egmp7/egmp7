@@ -1,13 +1,15 @@
 import Utilities from "../resources/utilities";
 import { p5 } from "../components/Sketch2";
+import Graph from "./graph";
 import type Matter from "matter-js";
 
-export default abstract class Button {
+export default abstract class Button extends Graph {
     abstract isPressed: boolean;
     position: Matter.Vector;
     radius: number;
 
     constructor(position: Matter.Vector, radius: number) {
+        super()
         this.position = position;
         this.radius = radius;
     }
