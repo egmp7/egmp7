@@ -7,7 +7,7 @@ import type { Vector } from "matter-js";
 //////////////////////////////////////////////////////
 export default class Cloud extends Drawing {
 
-    public isVisible: boolean = true;
+    public isVisible: boolean = false;
 
     size: number;
     speed: Vector;

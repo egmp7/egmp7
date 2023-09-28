@@ -12,7 +12,7 @@ enum MenuType {
 export default class Menu extends Graph {
 
     position: Matter.Vector
-    isVisible: boolean = true;
+    isVisible: boolean = false;
     type: MenuType;
     status: Status;
 

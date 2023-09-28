@@ -10,7 +10,7 @@ import type Matter from "matter-js";
 //////////////////////////////////////////////////////
 export default class Enemy extends Structure {
 
-    public isVisible: boolean = true;
+    public isVisible: boolean = false;
     public body: Matter.Body = this.createBody(this.initPosition, this.area);
     range: number;
     speed: number;

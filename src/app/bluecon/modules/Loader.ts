@@ -4,8 +4,9 @@ import type Player from "../graphs/structures/player";
 import type Graph from "../abstract/graph";
 import type Matter from "matter-js";
 import type Status from "../graphs/status";
-import { type Buttons } from "../constants/buttons";
 import type Menu from "../graphs/menu";
+import type Button from "../abstract/button";
+import { type Buttons } from "../constants/buttons";
 import { type Drawings, type Structures } from "../constants/assetTypes";
 
 namespace Loader {
@@ -88,6 +89,16 @@ namespace Loader {
         };
 
         return d;
+    }
+
+    export function getButtonsArray(): Button[]{
+        let b: Button[] = [];
+
+        for (const key in buttons) {
+            b.push(buttons[key as keyof Buttons])
+        };
+
+        return b;
     }
 
     export function getPlayer(): Player {

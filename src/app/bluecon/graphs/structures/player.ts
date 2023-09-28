@@ -17,7 +17,7 @@ interface DoubleJump {
 //////////////////////////////////////////////////////
 export default class Player extends Structure {
 
-    public isVisible: boolean = true;
+    public isVisible: boolean = false;
     public body: Body = this.createBody(this.initPosition,this.area);
 
     xSpeed: number;

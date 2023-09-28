@@ -2,7 +2,7 @@ import { p5 } from "../components/Sketch";
 import Graph from "../abstract/graph";
 
 export default class Status extends Graph {
-    isVisible: boolean = true;
+    isVisible: boolean = false;
     score: number;
     lives: number;
     constructor() {

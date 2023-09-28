@@ -1,4 +1,4 @@
-import type Graph from "../abstract/graph";
+import Graph from "../abstract/graph";
 
 namespace Render {
 
@@ -29,6 +29,16 @@ namespace Render {
 
     export function run(): void {
         displayGraphs(graphs);
+    }
+
+    export function setVisible(graphs: Graph[] | Graph, bool: boolean) {
+
+        if (Array.isArray(graphs)) {
+            graphs.forEach((graph) => {
+                graph.setIsVisible(bool);
+            });
+        }
+        else graphs.setIsVisible(bool);
     }
 
 }
