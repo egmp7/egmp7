@@ -41,22 +41,13 @@ namespace Events {
 
         }, { passive: false });
 
-        document.addEventListener('DOMContentLoaded', function () {
-            var isScrolling = false;
+        document.addEventListener('touchstart', function (e) {
+        });
 
-            document.addEventListener('touchstart', function (e) {
-                if (!isScrolling) {
-                    e.preventDefault();
-                }
-            });
+        document.addEventListener('touchmove', function () {
+        });
 
-            document.addEventListener('touchmove', function () {
-                isScrolling = true;
-            });
-
-            document.addEventListener('touchend', function () {
-                isScrolling = false;
-            });
+        document.addEventListener('touchend', function () {
         });
 
     }

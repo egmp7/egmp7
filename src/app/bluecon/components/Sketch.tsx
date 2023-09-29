@@ -5,9 +5,6 @@ import Game from "../modules/Game";
 
 export let p5: P5;
 
-const canvasWidth = 960;
-const canvasHeight = 540;
-
 export default function Sketch() {
 
     const canvasRef = useRef<HTMLDivElement | null>(null);
@@ -16,7 +13,7 @@ export default function Sketch() {
 
         p5 = new P5((p) => {
             p.setup = () => {
-                const cnv = p.createCanvas(canvasWidth, canvasHeight).parent(canvasRef.current);
+                const cnv = p.createCanvas(960, 540).parent(canvasRef.current);
                 cnv.style("position", "absolute");
                 cnv.style("top", "0");
                 cnv.style("left", "0");
@@ -31,5 +28,5 @@ export default function Sketch() {
         return () => { p5.remove(); };
     }, []);
 
-    return <div ref={canvasRef}></div>;
+    return <div ref={canvasRef} className="relative max-h-full pb-[56.25%] max-m-[43.75%]" ></div>;
 }
