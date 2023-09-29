@@ -28,5 +28,5 @@ export default function Sketch() {
         return () => { p5.remove(); };
     }, []);
 
-    return <div ref={canvasRef} className="relative pb-[56.25%] max-m-[43.75%] h-0" ></div>;
+    return <div ref={canvasRef} className="relative max-h-full pb-[56.25%] max-m-[43.75%]" ></div>;
 }

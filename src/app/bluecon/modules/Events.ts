@@ -10,7 +10,6 @@ interface Keyboard {
 namespace Events {
 
     let buttons: Buttons
-    let touchTimer:any;
 
     const keyboard: Keyboard = {
         left: false,
@@ -43,18 +42,12 @@ namespace Events {
         }, { passive: false });
 
         document.addEventListener('touchstart', function (e) {
-            touchTimer = setTimeout(function() {
-                // This code executes after a long hold (adjust the duration as needed)
-                e.preventDefault();
-                // Add your custom long hold handling code here
-              }, 1000); // Adjust the duration (in milliseconds) as needed
         });
 
         document.addEventListener('touchmove', function () {
         });
 
         document.addEventListener('touchend', function () {
-            clearTimeout(touchTimer);
         });
 
     }
