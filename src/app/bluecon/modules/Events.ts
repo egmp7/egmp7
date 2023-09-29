@@ -9,6 +9,8 @@ interface Keyboard {
 
 namespace Events {
 
+    let initialTouchY: any = null;
+
     let buttons: Buttons
 
     const keyboard: Keyboard = {
@@ -41,14 +43,28 @@ namespace Events {
 
         }, { passive: false });
 
-        document.addEventListener('touchstart', function (e) {
-        });
+        document.addEventListener('touchstart', function (event) {
+            event.preventDefault()
+            initialTouchY = event.touches[0].clientY;
+        },{ passive: false });
 
-        document.addEventListener('touchmove', function () {
-        });
+        document.addEventListener('touchmove', function (event) {
+            event.preventDefault()
+            if (initialTouchY === null) return;
+
+                const currentTouchY = event.touches[0].clientY;
+                const deltaY = initialTouchY - currentTouchY;
+
+                // Scroll the window
+                window.scrollBy(0, deltaY);
+
+                initialTouchY = currentTouchY;
+            
+        },{ passive: false });
 
         document.addEventListener('touchend', function () {
-        });
+            initialTouchY = null;
+        },{ passive: false });
 
     }
 
