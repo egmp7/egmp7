@@ -41,17 +41,23 @@ namespace Events {
 
         }, { passive: false });
 
-        document.addEventListener('touchstart', function (event) {
-            event.preventDefault();
-        }, { passive: false });
+        document.addEventListener('DOMContentLoaded', function () {
+            var isScrolling = false;
 
-        document.addEventListener('touchmove', function (event) {
-            event.preventDefault();
-        }, { passive: false });
+            document.addEventListener('touchstart', function (e) {
+                if (!isScrolling) {
+                    e.preventDefault();
+                }
+            });
 
-        document.addEventListener('touchend', function (event) {
-            event.preventDefault();
-        }, { passive: false });
+            document.addEventListener('touchmove', function () {
+                isScrolling = true;
+            });
+
+            document.addEventListener('touchend', function () {
+                isScrolling = false;
+            });
+        });
 
     }
 
