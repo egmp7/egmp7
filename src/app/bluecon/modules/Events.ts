@@ -10,6 +10,7 @@ interface Keyboard {
 namespace Events {
 
     let buttons: Buttons
+    let touchTimer:any;
 
     const keyboard: Keyboard = {
         left: false,
@@ -41,22 +42,19 @@ namespace Events {
 
         }, { passive: false });
 
-        document.addEventListener('DOMContentLoaded', function () {
-            var isScrolling = false;
+        document.addEventListener('touchstart', function (e) {
+            touchTimer = setTimeout(function() {
+                // This code executes after a long hold (adjust the duration as needed)
+                e.preventDefault();
+                // Add your custom long hold handling code here
+              }, 1000); // Adjust the duration (in milliseconds) as needed
+        });
 
-            document.addEventListener('touchstart', function (e) {
-                if (!isScrolling) {
-                    e.preventDefault();
-                }
-            });
+        document.addEventListener('touchmove', function () {
+        });
 
-            document.addEventListener('touchmove', function () {
-                isScrolling = true;
-            });
-
-            document.addEventListener('touchend', function () {
-                isScrolling = false;
-            });
+        document.addEventListener('touchend', function () {
+            clearTimeout(touchTimer);
         });
 
     }
