@@ -8,7 +8,7 @@ interface Keyboard {
 }
 
 namespace Events {
-    
+
     let buttons: Buttons
 
     const keyboard: Keyboard = {
@@ -27,19 +27,17 @@ namespace Events {
         buttons = Loader.getButtons();
 
         document.addEventListener('keydown', (event) => {
-            event.preventDefault();
             if (event.code === "ArrowLeft") updateProperty(keyboard, "left", true);
             if (event.code === "ArrowRight") updateProperty(keyboard, "right", true);
             if (event.code === "Space") updateProperty(keyboard, "jump", true);
 
-        }, { passive: false });
+        });
         document.addEventListener('keyup', (event) => {
-            event.preventDefault();
             if (event.code === "ArrowLeft") updateProperty(keyboard, "left", false);
             if (event.code === "ArrowRight") updateProperty(keyboard, "right", false);
             if (event.code === "Space") updateProperty(keyboard, "jump", false);
 
-        }, { passive: false });
+        });
     }
 
     export function run() {
