@@ -1,5 +1,6 @@
 import Loader from "./Loader";
 import type { Buttons } from "../constants/buttons";
+import { p5 } from "../components/Sketch";
 
 interface Keyboard {
     left: boolean,
@@ -38,6 +39,24 @@ namespace Events {
             if (event.code === "Space") updateProperty(keyboard, "jump", false);
 
         });
+
+        p5.mousePressed = () => {
+            if(buttons.left.isClick()) buttons.left.setIsPressed(true);
+            if(buttons.right.isClick()) buttons.right.setIsPressed(true);
+            if(buttons.jump.isClick()) buttons.jump.setIsPressed(true);
+        }
+
+        p5.mouseReleased = () => {
+            if(buttons.left.isClick()) buttons.left.setIsPressed(false);
+            if(buttons.right.isClick()) buttons.right.setIsPressed(false);
+            if(buttons.jump.isClick()) buttons.jump.setIsPressed(false);
+        }
+
+        // p5.touchStarted = () => {
+        //     buttons.left.touchStarted();
+        //     buttons.right.touchStarted();
+        //     buttons.jump.touchStarted();
+        // }
     }
 
     export function run() {

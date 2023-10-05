@@ -9,7 +9,6 @@ import type Status from "../graphs/status";
 import type Button from "../abstract/button";
 import type Menu from "../graphs/menu";
 import { type Drawings, type Structures } from "../constants/assetTypes";
-import AudioPlayer from "./AudioPlayer";
 
 enum GameState {
     Init,
@@ -41,7 +40,6 @@ namespace Rules {
         initializeGraphs();
         document.addEventListener('keydown', (event) => {
             if ((gameState === GameState.Init || gameState === GameState.Over) && event.code === "Enter") runGame();
-            //AudioPlayer.init()
         });
         document.addEventListener('touchstart', (event) => {
             if ((gameState === GameState.Init || gameState === GameState.Over)) runGame();
@@ -93,7 +91,6 @@ namespace Rules {
         Render.setVisible(buttons, true);
         Render.setVisible(structures.enemies, true);
         gameState = GameState.Running;
-        AudioPlayer.init()
         p5.loop();
     }
 
