@@ -2,6 +2,7 @@ import Loader from "./Loader";
 import Scroll from "./Scroll";
 import Collisions from "./Collisions";
 import Render from "./Render";
+import AudioPlayer from "./AudioPlayer";
 import { p5 } from "../components/Sketch";
 import { MenuType } from "../graphs/menu";
 import type Player from "../graphs/structures/player";
@@ -41,7 +42,7 @@ namespace Rules {
         document.addEventListener('keydown', (event) => {
             if ((gameState === GameState.Init || gameState === GameState.Over) && event.code === "Enter") runGame();
         });
-        document.addEventListener('touchstart', (event) => {
+        document.addEventListener('mousedown', (event) => {
             if ((gameState === GameState.Init || gameState === GameState.Over)) runGame();
         });
     }
@@ -90,6 +91,7 @@ namespace Rules {
         Render.setVisible(status, true);
         Render.setVisible(buttons, true);
         Render.setVisible(structures.enemies, true);
+        AudioPlayer.init();
         gameState = GameState.Running;
         p5.loop();
     }
