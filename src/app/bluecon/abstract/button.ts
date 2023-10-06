@@ -66,7 +66,6 @@ export default abstract class Button extends Graph {
             mousePos.y) < radius)
             c = true;
 
-        console.log(c);
         return c;
     }
 
