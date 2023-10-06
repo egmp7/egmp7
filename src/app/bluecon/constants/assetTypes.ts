@@ -11,6 +11,7 @@ export interface Structures {
     grounds: Structure[],
     platforms: Structure[],
     enemies: Structure[],
+    coins: Structure[],
     player: Structure[],
 }
 
