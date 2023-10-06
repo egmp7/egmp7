@@ -2,6 +2,7 @@ import Utilities from "../../resources/utilities";
 import Collisions from "../../modules/Collisions";
 import Events from "../../modules/Events";
 import Structure from "../../abstract/structure";
+import AudioPlayer from "../../modules/AudioPlayer";
 import { p5 } from "../../components/Sketch";
 import { Bodies, Body } from "matter-js";
 import { frontAnimation, leftFallingAnimation, rightFallingAnimation, leftAnimation, rightAnimation, fallingAnimation } from "./sprites/player"
@@ -89,7 +90,12 @@ export default class Player extends Structure {
      * @param {Boolean} isOnGround 
      */
     jump(force: Matter.Vector, isJump: boolean, isOnGround: boolean) {
-        if (isJump && isOnGround) this.applyForce(force)
+        // jump
+        if (isJump && isOnGround) 
+        {
+            this.applyForce(force)
+            AudioPlayer.jumpPlay();
+        }
     }
 
     /**
@@ -117,17 +123,18 @@ export default class Player extends Structure {
 
         // check if it is the first jump
         if (isJumping && !isInAir)
-            this.setIsFirstJump(true)
+            this.setIsFirstJump(true);
 
         // reset jump button
         if (!isJumping && isInAir)
             this.setJumpReset(true);
-        else this.setJumpReset(false)
+        else this.setJumpReset(false);
 
         // double jump
         if (isJumping && isInAir && isFirstJump && jumpReset) {
             this.setVelocity(this.calcDoubleJumpVelocity());
-            this.setIsFirstJump(false)
+            this.setIsFirstJump(false);
+            AudioPlayer.jumpPlay();
         }
     }
 

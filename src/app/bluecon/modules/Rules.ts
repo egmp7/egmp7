@@ -50,8 +50,8 @@ namespace Rules {
     export function run(): void {
         if (gameState !== GameState.Running) loopFlag = true;
         else loopFlag = false;
-        if (checkOffLimits(700, player.body.position)) restartGame();
-        if (Collisions.isEnemyCollision()) restartGame();
+        if (checkOffLimits(700, player.body.position)) deathByFall();
+        if (Collisions.isEnemyCollision()) deathByEnemy();
         if (status.lives < 0) gameOver();
         if (loopFlag) p5.noLoop();
     }
@@ -64,6 +64,16 @@ namespace Rules {
     function checkOffLimits(yLimit: number, playerPosition: Matter.Vector): boolean {
         if (playerPosition.y > yLimit) return true
         return false;
+    }
+
+    function deathByFall(){
+        AudioPlayer.canyonFallPlay();
+        restartGame();
+    }
+
+    function deathByEnemy(){
+        AudioPlayer.enemyPlay();
+        restartGame();
     }
 
     /**
