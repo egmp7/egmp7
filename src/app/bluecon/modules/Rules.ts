@@ -2,6 +2,7 @@ import Loader from "./Loader";
 import Scroll from "./Scroll";
 import Collisions from "./Collisions";
 import Render from "./Render";
+import AudioPlayer from "./AudioPlayer";
 import { p5 } from "../components/Sketch";
 import { MenuType } from "../graphs/menu";
 import type Player from "../graphs/structures/player";
@@ -41,7 +42,7 @@ namespace Rules {
         document.addEventListener('keydown', (event) => {
             if ((gameState === GameState.Init || gameState === GameState.Over) && event.code === "Enter") runGame();
         });
-        document.addEventListener('touchstart', (event) => {
+        document.addEventListener('mousedown', (event) => {
             if ((gameState === GameState.Init || gameState === GameState.Over)) runGame();
         });
     }
@@ -49,8 +50,8 @@ namespace Rules {
     export function run(): void {
         if (gameState !== GameState.Running) loopFlag = true;
         else loopFlag = false;
-        if (checkOffLimits(700, player.body.position)) restartGame();
-        if (Collisions.isEnemyCollision()) restartGame();
+        if (checkOffLimits(700, player.body.position)) deathByFall();
+        if (Collisions.isEnemyCollision()) deathByEnemy();
         if (status.lives < 0) gameOver();
         if (loopFlag) p5.noLoop();
     }
@@ -63,6 +64,16 @@ namespace Rules {
     function checkOffLimits(yLimit: number, playerPosition: Matter.Vector): boolean {
         if (playerPosition.y > yLimit) return true
         return false;
+    }
+
+    function deathByFall(){
+        AudioPlayer.canyonFallPlay();
+        restartGame();
+    }
+
+    function deathByEnemy(){
+        AudioPlayer.enemyPlay();
+        restartGame();
     }
 
     /**
@@ -90,6 +101,7 @@ namespace Rules {
         Render.setVisible(status, true);
         Render.setVisible(buttons, true);
         Render.setVisible(structures.enemies, true);
+        AudioPlayer.init();
         gameState = GameState.Running;
         p5.loop();
     }

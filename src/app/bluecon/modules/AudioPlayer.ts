@@ -1,6 +1,8 @@
 import { Howl } from 'howler';
 
 namespace AudioPlayer {
+    let isInitialized: boolean = false;
+
     let soundtrack: Howl;
     let canyonFall: Howl;
     let coin: Howl;
@@ -9,14 +11,18 @@ namespace AudioPlayer {
     let jump: Howl;
 
     export function init() {
-        soundtrack = new Howl({ src: ['/bluecon/soundtrack.wav'] });
+        if (isInitialized) return;
+
+        soundtrack = new Howl({ src: ['/bluecon/soundtrack.wav'], loop: true, volume: 0.5 });
         canyonFall = new Howl({ src: ['/bluecon/canyonFall.wav'] });
-        coin = new Howl({ src: ['/bluecon/canyonFall.wav'] });
+        coin = new Howl({ src: ['/bluecon/canyonFall.wav'], volume:0.25 });
         enemy = new Howl({ src: ['/bluecon/enemy.wav'] });
         flagPole = new Howl({ src: ['/bluecon/flagPole.wav'] });
-        jump = new Howl({ src: ['/bluecon/jump.wav'] });
+        jump = new Howl({ src: ['/bluecon/jump.wav'], volume:0.4 });
 
-        soundtrack.loop();
+        soundtrack.play();
+        isInitialized = true;
+        //Howler.volume(0);
     }
 
     export function canyonFallPlay() {
