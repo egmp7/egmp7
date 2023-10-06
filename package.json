@@ -26,6 +26,7 @@
     "typescript": "5.2.2"
   },
   "devDependencies": {
+    "@types/howler": "^2.2.9",
     "chai": "^4.3.8",
     "mocha": "^10.2.0"
   }

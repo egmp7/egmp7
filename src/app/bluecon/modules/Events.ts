@@ -1,5 +1,6 @@
 import Loader from "./Loader";
 import type { Buttons } from "../constants/buttons";
+import type P5 from "p5";
 
 interface Keyboard {
     left: boolean,
@@ -25,6 +26,9 @@ namespace Events {
 
     export function init() {
         buttons = Loader.getButtons();
+    }
+
+    export function initEvents(p5: P5) {
 
         document.addEventListener('keydown', (event) => {
             if (event.code === "ArrowLeft") updateProperty(keyboard, "left", true);
@@ -38,6 +42,30 @@ namespace Events {
             if (event.code === "Space") updateProperty(keyboard, "jump", false);
 
         });
+
+        p5.touchStarted = function () {
+            if (buttons.left.isTouch()) buttons.left.setIsPressed(true);
+            if (buttons.right.isTouch()) buttons.right.setIsPressed(true);
+            if (buttons.jump.isTouch()) buttons.jump.setIsPressed(true);
+        }
+        p5.touchEnded = function () {
+            if (!buttons.left.isTouch()) buttons.left.setIsPressed(false);
+            if (!buttons.right.isTouch()) buttons.right.setIsPressed(false);
+            if (!buttons.jump.isTouch()) buttons.jump.setIsPressed(false);
+
+        }
+        p5.mousePressed = function () {
+            if (p5.touches.length > 1 ) return;
+            if (buttons.left.isClick()) buttons.left.setIsPressed(true);
+            if (buttons.right.isClick()) buttons.right.setIsPressed(true);
+            if (buttons.jump.isClick()) buttons.jump.setIsPressed(true);
+        }
+        p5.mouseReleased = function () {
+            if (p5.touches.length > 1 ) return;
+            if (buttons.left.isClick()) buttons.left.setIsPressed(false);
+            if (buttons.right.isClick()) buttons.right.setIsPressed(false);
+            if (buttons.jump.isClick()) buttons.jump.setIsPressed(false);
+        }
     }
 
     export function run() {

@@ -16,8 +16,7 @@ export default abstract class Button extends Graph {
 
     run(): void {
         this.draw(this.position, this.radius);
-        this.checkTouches(this.position, p5.touches, this.radius);
-
+        //this.checkTouches(this.position, p5.touches, this.radius);
     }
 
     draw(position: Matter.Vector, radius: number) {
@@ -34,9 +33,13 @@ export default abstract class Button extends Graph {
      * @param touches 
      * @param radius 
      */
-    checkTouches(position: Matter.Vector, touches: any[], radius: number) {
+    isTouch(): boolean {
 
-        this.setIsPressed(false);
+        const position = this.position;
+        const radius = this.radius;
+        const touches: any[] = p5.touches;
+        let t = false;
+
         touches.forEach((touch) => {
 
             if (Utilities.calculateDistance(
@@ -44,9 +47,26 @@ export default abstract class Button extends Graph {
                 position.y,
                 touch.x,
                 touch.y) < radius)
-                this.setIsPressed(true);
+                t = true;
         })
+        return t;
+    }
 
+    isClick(): boolean {
+        const position = this.position;
+        const radius = this.radius;
+        const mousePos = {x: p5.mouseX, y: p5.mouseY}
+
+        let c = false;
+
+        if (Utilities.calculateDistance(
+            position.x,
+            position.y,
+            mousePos.x,
+            mousePos.y) < radius)
+            c = true;
+
+        return c;
     }
 
     setIsPressed(bool: boolean): void {
