@@ -3,6 +3,7 @@ import { Collision, Pairs } from "matter-js";
 //////////////////////////////////////////////////////////
 import type Structure from "../abstract/structure";
 import type Player from "../graphs/structures/player";
+import type Coin from "../graphs/structures/coin";
 import { type Structures } from "../constants/assetTypes";
 //////////////////////////////////////////////////////////
 interface PlayerCollision {
@@ -35,6 +36,20 @@ namespace Collisions {
         return false;
     }
 
+    /**
+     * Checks collision between a body and an Array of Structures
+     * @param bodyA 
+     * @param bodies 
+     * @returns Structure
+     */
+    function whichCollision(bodyA: Matter.Body, bodies: Structure[]): Structure | null {
+        for (let i = 0; i < bodies.length; i++) {
+            if (Collision.collides(bodyA, bodies[i].body, Pairs.create({})))
+                return bodies[i]
+        }
+        return null;
+    }
+
     export function init(): void {
         structures = Loader.getStructures();
         player = Loader.getPlayer();
@@ -57,6 +72,12 @@ namespace Collisions {
             playerCollision.enemy = true;
         else playerCollision.enemy = false;
 
+        // Player -> Coins Collisions
+        var coin = whichCollision(player.body, structures.coins as Structure[]) as Coin 
+        if (coin !== null ) {
+            coin.setIsPicked(true);
+        }
+        
     }
 
     /**
