@@ -1,5 +1,6 @@
 import Loader from "./Loader";
 import { Collision, Pairs } from "matter-js";
+import AudioPlayer from "./AudioPlayer";
 //////////////////////////////////////////////////////////
 import type Structure from "../abstract/structure";
 import type Player from "../graphs/structures/player";
@@ -78,7 +79,10 @@ namespace Collisions {
         // Player -> Coins Collisions
         var coin = whichCollision(player.body, structures.coins as Structure[]) as Coin 
         if (coin !== null ) {
-            if (!coin.isPicked) status.addCoin();
+            if (!coin.isPicked){
+                status.addCoin();
+                AudioPlayer.coinPlay();
+            } 
             coin.setIsPicked(true);
         }
         
