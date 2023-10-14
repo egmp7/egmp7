@@ -13,9 +13,9 @@ namespace AudioPlayer {
     export function init() {
         if (isInitialized) return;
 
-        soundtrack = new Howl({ src: ['/bluecon/soundtrack.wav'], loop: true, volume: 0.5 });
+        soundtrack = new Howl({ src: ['/bluecon/soundtrack.wav'], loop: true, volume: 0.5, html5: true });
         canyonFall = new Howl({ src: ['/bluecon/canyonFall.wav'] });
-        coin = new Howl({ src: ['/bluecon/canyonFall.wav'], volume:0.25 });
+        coin = new Howl({ src: ['/bluecon/coin.wav'], volume:0.25 });
         enemy = new Howl({ src: ['/bluecon/enemy.wav'] });
         flagPole = new Howl({ src: ['/bluecon/flagPole.wav'] });
         jump = new Howl({ src: ['/bluecon/jump.wav'], volume:0.4 });
