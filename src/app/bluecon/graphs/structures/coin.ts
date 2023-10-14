@@ -8,7 +8,7 @@ export default class Coin extends Structure {
 
     isVisible: boolean = false;
     body: Body = this.createBody(this.initPosition, this.area);
-    private isPicked: boolean = false;
+    isPicked: boolean = false;
 
     constructor(position: Matter.Vector, area: Area) {
         super(position, area)
