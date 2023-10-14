@@ -100,6 +100,7 @@ namespace Rules {
         Render.setVisible(player, true);
         Render.setVisible(status, true);
         Render.setVisible(buttons, true);
+        Render.setVisible(structures.coins, true);
         Render.setVisible(structures.enemies, true);
         AudioPlayer.init();
         gameState = GameState.Running;

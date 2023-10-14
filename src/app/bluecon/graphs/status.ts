@@ -7,7 +7,7 @@ export default class Status extends Graph {
     lives: number;
     constructor() {
         super();
-        this.score = 100;
+        this.score = 0;
         this.lives = 3;
     }
 
@@ -16,7 +16,7 @@ export default class Status extends Graph {
     }
 
     draw(score: number, lives: number): void {
-        
+
         // Draw Score
         p5.fill(250);
         p5.textSize(20);
@@ -41,7 +41,7 @@ export default class Status extends Graph {
      * Set the number of lives
      * @param value 
      */
-    setLives(value:number){
+    setLives(value: number) {
         this.lives = value;
     }
 
@@ -49,7 +49,11 @@ export default class Status extends Graph {
      * 
      * @param value Set the score
      */
-    setScore(value:number){
+    setScore(value: number) {
         this.score = value;
+    }
+
+    addCoin(): void {
+        this.score += 100;
     }
 }
