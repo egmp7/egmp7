@@ -2,6 +2,7 @@ import Utilities from "../../resources/utilities";
 import { Body, Vector } from "matter-js";
 import Structure, { Area } from "../../abstract/structure";
 import Matter from "matter-js";
+import drawCoin from "./sprites/coin";
 import { p5 } from "../../components/Sketch";
 
 export default class Coin extends Structure {
@@ -19,11 +20,18 @@ export default class Coin extends Structure {
     }
 
     run(): void {
-        this.draw(this.isPicked);
+        if (!this.isPicked) this.draw(this.initPosition, this.area);
     }
 
-    draw(isPicked: boolean): void {
-        if (!isPicked) Utilities.drawVertices(p5, this.body.vertices)
+    draw(position: Vector, area: Area): void {
+        //Utilities.drawVertices(p5, this.body.vertices)
+
+        const size = area.w * 2
+        
+        p5.push();
+        p5.translate(position.x, position.y);
+        drawCoin(p5,size);
+        p5.pop();
     }
 
     setIsPicked(bool: boolean) {
