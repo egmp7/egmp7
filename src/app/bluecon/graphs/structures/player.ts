@@ -4,7 +4,7 @@ import Events from "../../modules/Events";
 import Structure from "../../abstract/structure";
 import AudioPlayer from "../../modules/AudioPlayer";
 import { p5 } from "../../components/Sketch";
-import { Bodies, Body } from "matter-js";
+import { Bodies, Body, Vector } from "matter-js";
 import { frontAnimation, leftFallingAnimation, rightFallingAnimation, leftAnimation, rightAnimation, fallingAnimation } from "./sprites/player"
 //////////////////////////////////////////////////////
 import type Matter from "matter-js";
@@ -19,15 +19,15 @@ interface DoubleJump {
 export default class Player extends Structure {
 
     public isVisible: boolean = false;
-    public body: Body = this.createBody(this.initPosition,this.area);
+    public body: Body = this.createBody(this.initPosition, this.area);
+    public floorSensor: Body;
 
-    xSpeed: number;
-    jumpForce: Matter.Vector;
-    doubleJumpProps: DoubleJump;
-    floorSensor: Body;
+    private xSpeed: number;
+    private jumpForce: Matter.Vector;
+    private doubleJumpProps: DoubleJump;
 
-    constructor(position: Matter.Vector, area: Area) {
-        super(position, area);
+    constructor(position: Matter.Vector,) {
+        super(position, { w: 36, h: 82 });
         this.xSpeed = 5;
         this.jumpForce = { x: 0, y: (-0.028 * this.body.mass) };
         this.floorSensor = this.body.parts[2];
@@ -69,12 +69,7 @@ export default class Player extends Structure {
         this.doubleJump(Events.control.jump, !Collisions.isPlayerOnGround(), this.doubleJumpProps.isFirstJump, this.doubleJumpProps.jumpReset);
     }
 
-    /**
-     * Move the player side ways
-     * @param {Vector} velocity 
-     * @param {Control.Object} control 
-     */
-    moveSides(velocity: Matter.Vector, isRight: boolean, isLeft: boolean) {
+    private moveSides(velocity: Matter.Vector, isRight: boolean, isLeft: boolean): void {
         const velocityRight = { x: velocity.x, y: velocity.y }
         const velocityLeft = { x: -velocity.x, y: velocity.y }
         const velocityCenter = { x: 0, y: velocity.y }
@@ -83,26 +78,14 @@ export default class Player extends Structure {
         else this.setVelocity(velocityCenter);
     }
 
-    /**
-     * Makes the player Jump
-     * @param {Vector} force 
-     * @param {Boolean} isJump 
-     * @param {Boolean} isOnGround 
-     */
-    jump(force: Matter.Vector, isJump: boolean, isOnGround: boolean) {
-        // jump
-        if (isJump && isOnGround) 
-        {
+    private jump(force: Matter.Vector, isJump: boolean, isOnGround: boolean): void {
+        if (isJump && isOnGround) {
             this.applyForce(force)
             AudioPlayer.jumpPlay();
         }
     }
 
-    /**
-     * Calculates the velocity for the double jump
-     * @returns Vector
-     */
-    calcDoubleJumpVelocity() {
+    private calcDoubleJumpVelocity(): Vector {
         // calc velocity
         const speed = this.doubleJumpProps.speed;
         const bodyVelocity = this.body.velocity;
@@ -112,14 +95,7 @@ export default class Player extends Structure {
         else return { x: bodyVelocity.x, y: - bodyVelocity.y };
     }
 
-    /**
-     * Double Jump function
-     * @param {Boolean} isJumping 
-     * @param {Boolean} isInAir 
-     * @param {Boolean} isFirstJump 
-     * @param {Boolean} jumpReset 
-     */
-    doubleJump(isJumping: boolean, isInAir: boolean, isFirstJump: boolean, jumpReset: boolean) {
+    private doubleJump(isJumping: boolean, isInAir: boolean, isFirstJump: boolean, jumpReset: boolean): void {
 
         // check if it is the first jump
         if (isJumping && !isInAir)
@@ -138,14 +114,7 @@ export default class Player extends Structure {
         }
     }
 
-    /**
-     * 
-     * @param {P5} p5 
-     * @param {Vector} position 
-     * @param {Control} control 
-     * @param {Boolean} isOnGround 
-     */
-    draw(position: Matter.Vector, isOnGround: boolean, isRight: boolean, isLeft: boolean): void {
+    private draw(position: Matter.Vector, isOnGround: boolean, isRight: boolean, isLeft: boolean): void {
         const yOffset = -3
 
         p5.push()
@@ -160,11 +129,11 @@ export default class Player extends Structure {
         p5.pop()
     }
 
-    setJumpReset(bool: boolean) {
+    private setJumpReset(bool: boolean): void {
         this.doubleJumpProps.jumpReset = bool;
     }
 
-    setIsFirstJump(bool: boolean) {
+    private setIsFirstJump(bool: boolean): void {
         this.doubleJumpProps.isFirstJump = bool;
     }
 }

@@ -5,9 +5,9 @@ import Cloud from "../graphs/drawings/cloud";
 import Background from "../graphs/drawings/background";
 import Platform from "../graphs/structures/platform";
 import Coin from "../graphs/structures/coin";
+import FlagPole from "../graphs/structures/flagPole";
 //////////////////////////////////////////////////////
 import { Assets } from "./assetTypes"
-import flagPole from "../graphs/structures/flagPole";
 
 const LevelOneAssets: Assets = {
 
@@ -36,8 +36,8 @@ const LevelOneAssets: Assets = {
             new Coin({ x: 200, y: 480 }),
             new Coin({ x: 240, y: 480 })
         ],
-        flagPole: [new flagPole({ x: 1400, y: 300 })],
-        player: [new Player({ x: 100, y: 300 }, { w: 36, h: 82 })],
+        flagPole: [new FlagPole({ x: 1400, y: 300 })],
+        player: [new Player({ x: 100, y: 300 })],
     }
 }
 
