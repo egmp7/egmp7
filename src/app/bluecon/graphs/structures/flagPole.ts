@@ -5,22 +5,27 @@ import Structure, { Area } from "../../abstract/structure";
 
 export default class flagPole extends Structure {
 
-    body: Body = this.createBody(this.initPosition,this.area);
+    body: Body = this.createBody(this.initPosition, this.area);
     isVisible: boolean = false;
+    isReached: boolean = false;
 
     constructor(position: Vector) {
-        super(position, { w: 20, h: 10 });
+        super(position, { w: 10, h: 400 });
     }
 
     createBody(position: Vector, area: Area): Body {
-        return Bodies.rectangle(position.x, position.y, area.w, area.h);
+        return Bodies.rectangle(position.x, position.y, area.w, area.h, { isSensor: true, isStatic: true });
     }
 
     run(): void {
-        this.draw();
+        if (!this.isReached) this.draw();
     }
 
-    draw(){
-        Utilities.drawVertices(p5,this.body.vertices);
+    draw() {
+        Utilities.drawVertices(p5, this.body.vertices);
+    }
+
+    setIsReached(bool: boolean) {
+        this.isReached = bool;
     }
 }
