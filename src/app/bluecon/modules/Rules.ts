@@ -9,7 +9,8 @@ import type Player from "../graphs/structures/player";
 import type Status from "../graphs/status";
 import type Button from "../abstract/button";
 import type Menu from "../graphs/menu";
-import type flagPole from "../graphs/structures/flagPole";
+import type FlagPole from "../graphs/structures/flagPole";
+import type Coin from "../graphs/structures/coin";
 import { type Drawings, type Structures } from "../constants/assetTypes";
 
 enum GameState {
@@ -29,8 +30,8 @@ namespace Rules {
     let structures: Structures;
     let drawings: Drawings
     let gameState: GameState;
-    let loopFlag:boolean = false;
-    let flagPole:flagPole;   
+    let loopFlag: boolean = false;
+    let flagPole: FlagPole;
 
     export function init(): void {
         player = Loader.getPlayer();
@@ -39,7 +40,7 @@ namespace Rules {
         buttons = Loader.getButtonsArray();
         structures = Loader.getStructures();
         drawings = Loader.getDrawings();
-        flagPole = structures.flagPole[0] as flagPole;
+        flagPole = structures.flagPole[0] as FlagPole;
 
         initializeGraphs();
         document.addEventListener('keydown', (event) => {
@@ -56,6 +57,8 @@ namespace Rules {
         if (checkOffLimits(700, player.body.position)) deathByFall();
         if (Collisions.isEnemyCollision()) deathByEnemy();
         if (Collisions.isPlayerOnFlagPole()) playerPassedLevel();
+        const coin = Collisions.isPlayerOnCoin();
+        if (coin) addCoin(coin);
         if (status.lives < 0) gameOver();
         if (loopFlag) p5.noLoop();
     }
@@ -70,12 +73,12 @@ namespace Rules {
         return false;
     }
 
-    function deathByFall(){
+    function deathByFall() {
         AudioPlayer.canyonFallPlay();
         restartGame();
     }
 
-    function deathByEnemy(){
+    function deathByEnemy() {
         AudioPlayer.enemyPlay();
         restartGame();
     }
@@ -136,6 +139,14 @@ namespace Rules {
         player.setPosition(player.initPosition);
         menu.setType(MenuType.Completed);
         gameState = GameState.Over;
+    }
+
+    function addCoin(coin: Coin): void {
+        if (!coin.isPicked) {
+            status.addCoin();
+            AudioPlayer.coinPlay();
+        }
+        coin.setIsPicked(true);
     }
 }
 
