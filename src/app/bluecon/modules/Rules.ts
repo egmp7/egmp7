@@ -52,6 +52,7 @@ namespace Rules {
         else loopFlag = false;
         if (checkOffLimits(700, player.body.position)) deathByFall();
         if (Collisions.isEnemyCollision()) deathByEnemy();
+        if (Collisions.isPlayerOnFlagPole()) console.log("collide with flagPole")
         if (status.lives < 0) gameOver();
         if (loopFlag) p5.noLoop();
     }
