@@ -33,8 +33,8 @@ const LevelOneAssets: Assets = {
             new Enemy({ x: 700, y: 200 }, { w: 20, h: 44 }, 30, 1),
         ],
         coins: [
-            new Coin({ x: 200, y: 480 }, { w: 20, h: 20 }),
-            new Coin({ x: 240, y: 480 }, { w: 20, h: 20 })
+            new Coin({ x: 200, y: 480 }),
+            new Coin({ x: 240, y: 480 })
         ],
         flagPole: [new flagPole({ x: 1400, y: 300 })],
         player: [new Player({ x: 100, y: 300 }, { w: 36, h: 82 })],
