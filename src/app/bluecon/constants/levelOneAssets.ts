@@ -7,17 +7,18 @@ import Platform from "../graphs/structures/platform";
 import Coin from "../graphs/structures/coin";
 //////////////////////////////////////////////////////
 import { Assets } from "./assetTypes"
+import flagPole from "../graphs/structures/flagPole";
 
 const LevelOneAssets: Assets = {
 
-    drawings:{
+    drawings: {
         background: [new Background()],
         clouds: [
             new Cloud(200, 300, 40),
         ]
     },
 
-    structures:{
+    structures: {
         grounds: [
             new Ground({ x: 100, y: 600 }, { w: 600, h: 200 }),
             new Ground({ x: 1050, y: 600 }, { w: 800, h: 200 }),
@@ -28,13 +29,14 @@ const LevelOneAssets: Assets = {
             new Platform({ x: 800, y: 400 }, { w: 100, h: 10 }),
         ],
         enemies: [
-            new Enemy({x:500, y: 400},{w:20,h:44}, 100, 3),
-            new Enemy({x:700, y: 200},{w:20,h:44}, 30, 1),
+            new Enemy({ x: 500, y: 400 }, { w: 20, h: 44 }, 100, 3),
+            new Enemy({ x: 700, y: 200 }, { w: 20, h: 44 }, 30, 1),
         ],
-        coins:[
-            new Coin({x:200, y: 480},{w:20,h:20}),
-            new Coin({x:240, y: 480},{w:20,h:20})
+        coins: [
+            new Coin({ x: 200, y: 480 }, { w: 20, h: 20 }),
+            new Coin({ x: 240, y: 480 }, { w: 20, h: 20 })
         ],
+        flagPole: [new flagPole({ x: 300, y: 400 })],
         player: [new Player({ x: 100, y: 300 }, { w: 36, h: 82 })],
     }
 }

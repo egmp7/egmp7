@@ -102,6 +102,7 @@ namespace Rules {
         Render.setVisible(buttons, true);
         Render.setVisible(structures.coins, true);
         Render.setVisible(structures.enemies, true);
+        Render.setVisible(structures.flagPole, true);
         AudioPlayer.init();
         gameState = GameState.Running;
         p5.loop();

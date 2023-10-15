@@ -12,6 +12,7 @@ export interface Structures {
     platforms: Structure[],
     enemies: Structure[],
     coins: Structure[],
+    flagPole: Structure[],
     player: Structure[],
 }
 
