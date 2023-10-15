@@ -11,8 +11,8 @@ export default class Coin extends Structure {
     body: Body = this.createBody(this.initPosition, this.area);
     isPicked: boolean = false;
 
-    constructor(position: Matter.Vector, area: Area) {
-        super(position, area)
+    constructor(position: Matter.Vector) {
+        super(position, { w: 20, h: 20 })
     }
 
     createBody(position: Vector, area: Area): Body {
@@ -20,7 +20,7 @@ export default class Coin extends Structure {
     }
 
     run(): void {
-        if (!this.isPicked) this.draw(this.initPosition, this.area);
+        if (!this.isPicked) this.draw(this.body.position, this.area);
     }
 
     draw(position: Vector, area: Area): void {

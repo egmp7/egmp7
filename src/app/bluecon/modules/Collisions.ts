@@ -1,64 +1,38 @@
 import Loader from "./Loader";
 import { Collision, Pairs } from "matter-js";
-import AudioPlayer from "./AudioPlayer";
 //////////////////////////////////////////////////////////
 import type Structure from "../abstract/structure";
 import type Player from "../graphs/structures/player";
 import type Coin from "../graphs/structures/coin";
 import { type Structures } from "../constants/assetTypes";
-import type Status from "../graphs/status";
 //////////////////////////////////////////////////////////
 interface PlayerCollision {
     ground: boolean;
     platform: boolean;
     enemy: boolean;
     flagPole: boolean;
+    coin: null | Coin;
 }
 //////////////////////////////////////////////////////////
+/**
+ * Module in charge of checking collision between 
+ * the player and other structures
+ */
 namespace Collisions {
 
+    let player: Player;
+    let structures: Structures;
     let playerCollision: PlayerCollision = {
         ground: false,
         platform: false,
         enemy: false,
-        flagPole: false
+        flagPole: false,
+        coin: null,
     };
-    let structures: Structures;
-    let player: Player;
-    let status: Status;
-
-    /**
-     * Checks for body collisions
-     * @param {Matter.Body} player 
-     * @param {Matter.Body[]} bodies 
-     * @returns Boolean
-     */
-    function checkCollision(bodyA: Matter.Body, bodies: Structure[]): boolean {
-        for (let i = 0; i < bodies.length; i++) {
-            if (Collision.collides(bodyA, bodies[i].body, Pairs.create({})))
-                return true;
-        }
-        return false;
-    }
-
-    /**
-     * Checks collision between a body and an Array of Structures
-     * @param bodyA 
-     * @param bodies 
-     * @returns Structure
-     */
-    function whichCollision(bodyA: Matter.Body, bodies: Structure[]): Structure | null {
-        for (let i = 0; i < bodies.length; i++) {
-            if (Collision.collides(bodyA, bodies[i].body, Pairs.create({})))
-                return bodies[i]
-        }
-        return null;
-    }
 
     export function init(): void {
         structures = Loader.getStructures();
         player = Loader.getPlayer();
-        status = Loader.getStatus();
     }
 
     export function run(): void {
@@ -84,42 +58,69 @@ namespace Collisions {
         else playerCollision.flagPole = false;
 
         // Player -> Coins Collisions
-        var coin = whichCollision(player.body, structures.coins as Structure[]) as Coin
-        if (coin !== null) {
-            if (!coin.isPicked) {
-                status.addCoin();
-                AudioPlayer.coinPlay();
-            }
-            coin.setIsPicked(true);
-        }
-
+        playerCollision.coin = whichCollision(player.body, structures.coins as Structure[]) as Coin
     }
 
     /**
-     * Returns true when the player collides with an enemy
-     * @returns Boolean
-     */
+     * Returns the collision state between the player to the enemies
+     * @returns boolean
+    */
     export function isEnemyCollision(): boolean {
         return playerCollision.enemy;
     }
 
-
     /**
-     * Returns true when the player is on ground or a platform
-     * @returns Boolean 
-     */
+     * Returns the collision state between the player to the grounds and the platforms
+     * @returns boolean
+    */
     export function isPlayerOnGround(): boolean {
         return playerCollision.ground || playerCollision.platform;
     }
 
     /**
-     * Returns a boolean value of the collision between the player and the flagPole
-     * @returns Boolean 
-     */
+     * Returns the collision state between the player and the flagPole
+     * @returns boolean
+    */
     export function isPlayerOnFlagPole(): boolean {
         return playerCollision.flagPole;
     }
 
+    /**
+     * Returns a coin if the collision between the player and a coin exists
+     * @returns Coin | null
+    */
+    export function isPlayerOnCoin(): Coin | null {
+        return playerCollision.coin;
+    }
+
+
+    /**
+     * Checks collisions between a body and an array of Structures
+     * @param bodyA 
+     * @param bodies 
+     * @returns 
+     */
+    function checkCollision(bodyA: Matter.Body, bodies: Structure[]): boolean {
+        for (let i = 0; i < bodies.length; i++) {
+            if (Collision.collides(bodyA, bodies[i].body, Pairs.create({})))
+                return true;
+        }
+        return false;
+    }
+
+    /**
+     * Checks collision between a body and an Array of Structures
+     * @param bodyA 
+     * @param bodies 
+     * @returns Structure | null
+     */
+    function whichCollision(bodyA: Matter.Body, bodies: Structure[]): Structure | null {
+        for (let i = 0; i < bodies.length; i++) {
+            if (Collision.collides(bodyA, bodies[i].body, Pairs.create({})))
+                return bodies[i]
+        }
+        return null;
+    }
 }
 
 export default Collisions;
