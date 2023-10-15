@@ -9,6 +9,7 @@ import type Player from "../graphs/structures/player";
 import type Status from "../graphs/status";
 import type Button from "../abstract/button";
 import type Menu from "../graphs/menu";
+import type flagPole from "../graphs/structures/flagPole";
 import { type Drawings, type Structures } from "../constants/assetTypes";
 
 enum GameState {
@@ -29,6 +30,7 @@ namespace Rules {
     let drawings: Drawings
     let gameState: GameState;
     let loopFlag:boolean = false;
+    let flagPole:flagPole;   
 
     export function init(): void {
         player = Loader.getPlayer();
@@ -37,6 +39,7 @@ namespace Rules {
         buttons = Loader.getButtonsArray();
         structures = Loader.getStructures();
         drawings = Loader.getDrawings();
+        flagPole = structures.flagPole[0] as flagPole;
 
         initializeGraphs();
         document.addEventListener('keydown', (event) => {
@@ -52,6 +55,7 @@ namespace Rules {
         else loopFlag = false;
         if (checkOffLimits(700, player.body.position)) deathByFall();
         if (Collisions.isEnemyCollision()) deathByEnemy();
+        if (Collisions.isPlayerOnFlagPole()) playerPassedLevel();
         if (status.lives < 0) gameOver();
         if (loopFlag) p5.noLoop();
     }
@@ -102,7 +106,9 @@ namespace Rules {
         Render.setVisible(buttons, true);
         Render.setVisible(structures.coins, true);
         Render.setVisible(structures.enemies, true);
+        Render.setVisible(structures.flagPole, true);
         AudioPlayer.init();
+        flagPole.setIsReached(false);
         gameState = GameState.Running;
         p5.loop();
     }
@@ -115,6 +121,20 @@ namespace Rules {
         Render.setVisible(structures.enemies, false);
         menu.setType(MenuType.GameOver);
         status.setLives(3);
+        gameState = GameState.Over;
+    }
+
+    function playerPassedLevel(): void {
+        Render.setVisible(menu, true);
+        Render.setVisible(player, false);
+        Render.setVisible(status, false);
+        Render.setVisible(buttons, false);
+        Render.setVisible(structures.enemies, false);
+        Scroll.restartScroll();
+        AudioPlayer.flagPolePlay();
+        flagPole.setIsReached(true);
+        player.setPosition(player.initPosition);
+        menu.setType(MenuType.Completed);
         gameState = GameState.Over;
     }
 }

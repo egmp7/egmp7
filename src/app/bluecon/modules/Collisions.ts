@@ -12,6 +12,7 @@ interface PlayerCollision {
     ground: boolean;
     platform: boolean;
     enemy: boolean;
+    flagPole: boolean;
 }
 //////////////////////////////////////////////////////////
 namespace Collisions {
@@ -19,7 +20,8 @@ namespace Collisions {
     let playerCollision: PlayerCollision = {
         ground: false,
         platform: false,
-        enemy: false
+        enemy: false,
+        flagPole: false
     };
     let structures: Structures;
     let player: Player;
@@ -76,16 +78,21 @@ namespace Collisions {
             playerCollision.enemy = true;
         else playerCollision.enemy = false;
 
+        // Player -> flagPole Collisions
+        if (checkCollision(player.body, structures.flagPole as Structure[]))
+            playerCollision.flagPole = true;
+        else playerCollision.flagPole = false;
+
         // Player -> Coins Collisions
-        var coin = whichCollision(player.body, structures.coins as Structure[]) as Coin 
-        if (coin !== null ) {
-            if (!coin.isPicked){
+        var coin = whichCollision(player.body, structures.coins as Structure[]) as Coin
+        if (coin !== null) {
+            if (!coin.isPicked) {
                 status.addCoin();
                 AudioPlayer.coinPlay();
-            } 
+            }
             coin.setIsPicked(true);
         }
-        
+
     }
 
     /**
@@ -103,6 +110,14 @@ namespace Collisions {
      */
     export function isPlayerOnGround(): boolean {
         return playerCollision.ground || playerCollision.platform;
+    }
+
+    /**
+     * Returns a boolean value of the collision between the player and the flagPole
+     * @returns Boolean 
+     */
+    export function isPlayerOnFlagPole(): boolean {
+        return playerCollision.flagPole;
     }
 
 }
