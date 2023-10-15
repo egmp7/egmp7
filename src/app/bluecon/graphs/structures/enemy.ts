@@ -12,23 +12,22 @@ export default class Enemy extends Structure {
 
     public isVisible: boolean = false;
     public body: Matter.Body = this.createBody(this.initPosition, this.area);
-    range: number;
-    speed: number;
+    private range: number;
+    private speed: number;
 
-    constructor(position: Matter.Vector, area: Area, range: number, speed: number) {
+    constructor(position: Matter.Vector, range: number, speed: number) {
 
-        super(position, area)
+        super(position, { w: 20, h: 44 })
         this.range = range;
         this.speed = speed;
-        this.setInertia(Infinity);
         this.setVelocity({ x: 5, y: this.body.velocity.y })
     }
 
     createBody(position: Matter.Vector, area: Area): Matter.Body {
-        return Bodies.rectangle(position.x, position.y, area.w, area.h, { isSensor: true })
+        return Bodies.rectangle(position.x, position.y, area.w, area.h, { isSensor: true, inertia: Infinity })
     }
 
-    run() {
+    run(): void {
         //Utilities.drawVertices(p5, this.body.vertices);
         this.reverseGravity(Physics.getEngineGravity(), this.body);
         this.switchVelocity((this.initPosition.x + Scroll.getScrollOffset().x), this.body.position.x, this.range, this.speed);
@@ -37,10 +36,10 @@ export default class Enemy extends Structure {
 
     /**
      * Apply a contrary gravity force to the body
-     * @param {Engine.gravity} gravity 
-     * @param {Matter.body} body 
+     * @param gravity 
+     * @param body 
      */
-    reverseGravity(gravity: Matter.Gravity, body: Matter.Body) {
+    reverseGravity(gravity: Matter.Gravity, body: Matter.Body): void {
         const negativeGravity = {
             x: -gravity.x * gravity.scale * body.mass,
             y: -gravity.y * gravity.scale * body.mass
@@ -49,13 +48,13 @@ export default class Enemy extends Structure {
     }
 
     /**
-     * Switches the speed when the enemy passes a threshold
-     * @param {number} xEnemyInit 
-     * @param {number} range 
-     * @param {number} xEnemyCurrent
-     * @param {number} speed 
+     * Switch x velocity
+     * @param xEnemyInit 
+     * @param xEnemyCurrent 
+     * @param range 
+     * @param speed 
      */
-    switchVelocity(xEnemyInit: number, xEnemyCurrent: number, range: number, speed: number) {
+    switchVelocity(xEnemyInit: number, xEnemyCurrent: number, range: number, speed: number): void {
         if (range < 0) throw "error: range must not be less than 0";
         if (xEnemyCurrent > xEnemyInit + range)
             this.setVelocity({ x: -speed, y: this.body.velocity.y })
@@ -63,13 +62,7 @@ export default class Enemy extends Structure {
             this.setVelocity({ x: speed, y: this.body.velocity.y })
     }
 
-    /**
-     * Draws an enemy
-     * @param {SketchProps.p5} p5 
-     * @param {Matter.Vector} position
-     * @param {Matter.Vector} velocity 
-     */
-    draw(position: Matter.Vector, velocity: Matter.Vector) {
+    draw(position: Matter.Vector, velocity: Matter.Vector): void {
         const yOffset = 3;
 
         p5.push();

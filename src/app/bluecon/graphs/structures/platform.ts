@@ -11,8 +11,8 @@ export default class Platform extends Structure {
     public isVisible: boolean = false;
     public body: Matter.Body = this.createBody(this.initPosition, this.area);
 
-    constructor(position: Matter.Vector, area: Area) {
-        super(position, area);
+    constructor(position: Matter.Vector, width: number) {
+        super(position, { w: width, h: 10 });
         this.setStatic(true);
     }
 
