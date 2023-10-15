@@ -10,6 +10,7 @@ import type Status from "../graphs/status";
 import type Button from "../abstract/button";
 import type Menu from "../graphs/menu";
 import { type Drawings, type Structures } from "../constants/assetTypes";
+import flagPole from "../graphs/structures/flagPole";
 
 enum GameState {
     Init,
@@ -52,7 +53,7 @@ namespace Rules {
         else loopFlag = false;
         if (checkOffLimits(700, player.body.position)) deathByFall();
         if (Collisions.isEnemyCollision()) deathByEnemy();
-        if (Collisions.isPlayerOnFlagPole()) console.log("collide with flagPole")
+        if (Collisions.isPlayerOnFlagPole()) playerPassedLevel();
         if (status.lives < 0) gameOver();
         if (loopFlag) p5.noLoop();
     }
@@ -117,6 +118,21 @@ namespace Rules {
         Render.setVisible(structures.enemies, false);
         menu.setType(MenuType.GameOver);
         status.setLives(3);
+        gameState = GameState.Over;
+    }
+
+    function playerPassedLevel(): void {
+        Render.setVisible(menu, true);
+        Render.setVisible(player, false);
+        Render.setVisible(status, false);
+        Render.setVisible(buttons, false);
+        Render.setVisible(structures.enemies, false);
+        Scroll.restartScroll();
+        AudioPlayer.flagPolePlay();
+        const flagPole = structures.flagPole[0] as flagPole;
+        flagPole.setIsReached(true);
+        player.setPosition(player.initPosition);
+        menu.setType(MenuType.Completed);
         gameState = GameState.Over;
     }
 }

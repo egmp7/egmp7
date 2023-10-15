@@ -36,7 +36,7 @@ const LevelOneAssets: Assets = {
             new Coin({ x: 200, y: 480 }, { w: 20, h: 20 }),
             new Coin({ x: 240, y: 480 }, { w: 20, h: 20 })
         ],
-        flagPole: [new flagPole({ x: 300, y: 400 })],
+        flagPole: [new flagPole({ x: 1400, y: 300 })],
         player: [new Player({ x: 100, y: 300 }, { w: 36, h: 82 })],
     }
 }
