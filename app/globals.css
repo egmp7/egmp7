@@ -14,10 +14,23 @@
   }
 }
 
+@font-face {
+  font-family: 'Jura';
+  src: url('./fonts/Jura-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Jura';
+  src: url('./fonts/Jura-Bold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
 }
 
 @layer utilities {
