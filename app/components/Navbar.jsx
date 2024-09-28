@@ -36,9 +36,9 @@ export default function Navbar() {
                     src="/images/egse7.png"
                     width={24}
                     height={24}
-                    alt="World rotating" />
+                    alt="egse7 logo" />
 
-                  <p className='self-center'>EGSE7</p>
+                  <p className='self-center text-slate-200'>EGSE7</p>
               </Link>
 
               {/* Space in between */}

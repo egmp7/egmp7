@@ -15,12 +15,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={"antialiased font-jura max-w-7xl mx-auto flex flex-col h-screen"}
+        className={"antialiased font-jura max-w-7xl mx-auto bg-slate-300 dark:bg-slate-900"}
       >
+        <div className="flex flex-col min-h-screen bg-slate-100 dark:bg-slate-800">
         <Navbar />
-        <div className="flex-1">{children}</div>
-        
+        {children}
         <div className="border-b-8 border-b-slate-600"></div>
+
+        </div>
       </body>
     </html>
   );
