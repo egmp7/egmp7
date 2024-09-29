@@ -5,8 +5,10 @@ const messages ={
     formEmail: "Email",
     formMessage: "Message",
     formSubmit: "SendMessage",
-    sectionTwoTitle: "Other Ways to Reach Me",
-    sectionTwoEmail: "Email: erick.softwaredev@gmail.com"
+    successfulTitle: "Thanks for reaching out!",
+    successfulMessage:"Your message has been sent. You will have a receipt of this message too. I will be in contact with you shortly. Take care.",
+    connectSectionTitle: "Other Ways to Reach Me",
+    connectSectionEmail: "Email: erick.softwaredev@gmail.com"
 }
 
 export default messages;
