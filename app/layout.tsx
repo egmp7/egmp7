@@ -18,12 +18,17 @@ export default function RootLayout({
         className={"antialiased font-jura max-w-7xl mx-auto bg-slate-300 dark:bg-slate-900"}
       >
         <div className="flex flex-col min-h-screen bg-slate-100 dark:bg-slate-800">
-        <Navbar />
-        {children}
-        <div className="border-b-8 border-b-slate-600"></div>
-
+          <Navbar />
+          <div className="flex flex-col my-auto">
+            {children}
+          </div>
+          <Footer />
         </div>
       </body>
     </html>
   );
+}
+
+function Footer() {
+  return (<div className="border-b-8 border-b-slate-600"></div>)
 }
