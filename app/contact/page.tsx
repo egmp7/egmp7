@@ -83,16 +83,19 @@ function ContactForm() {
   
       setIsSuccess(true); // Set success state
       setFormData({ name: '', email: '', message: '' }); // Reset form data
-    } catch (error: any) {
-      if (error.name === 'AbortError') {
-        alert('Request timed out. Please try again.');
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        if (error.name === 'AbortError') {
+          alert('Request timed out. Please try again.');
+        } else {
+          console.error('Error occurred:', error);
+          alert('An error occurred while sending your message. Please try again later.');
+        }
       } else {
-        console.error('Error occurred:', error);
-        alert('An error occurred while sending your message. Please try again later.');
+        console.error('Unknown error:', error);
+        alert('An unknown error occurred.');
       }
-    } finally {
-      setIsLoading(false); // Reset loading state
-    }
+    }    
   };
   
 
