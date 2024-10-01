@@ -1,8 +1,9 @@
 'use client';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination, Zoom } from 'swiper/modules';
+import { Keyboard, Navigation, Pagination, Zoom } from 'swiper/modules';
 import { XMarkIcon, VideoCameraIcon } from '@heroicons/react/24/solid';
+import Image from 'next/image';
 import SwiperCore from 'swiper';
 import 'swiper/swiper-bundle.css';
 
@@ -35,29 +36,35 @@ const MediaSlider: React.FC<MediaSliderProps> = ({ media }) => {
       <Swiper
         spaceBetween={10}
         slidesPerView={4}
+        className='rounded-lg'
         navigation
-        pagination={{ clickable: true }}
+        pagination={false}
         breakpoints={{
           640: { slidesPerView: 4 }, // lg screens: 4 slides
           0: { slidesPerView: 2 }, // sm screens: 2 slides
         }}
       >
         {media.map((item, index) => (
-          <SwiperSlide key={index}>
+          <SwiperSlide key={index} className='aspect-square cursor-pointer'>
             {item.type === 'image' ? (
-              <img
+              <Image
                 src={item.src}
                 alt={item.alt || `Media item ${index}`}
-                className="object-cover cursor-pointer w-full h-auto aspect-square rounded-lg transition-transform duration-300 ease-in-out transform hover:scale-105"
+                className=" rounded-lg transition-transform duration-300 ease-in-out transform hover:scale-105"
+                layout="fill"
+                objectFit="cover"
                 onClick={() => handleExpand(item.src, false, index)}
               />
             ) : (
-              <div className="relative cursor-pointer" onClick={() => handleExpand(item.src, true, index)}>
+              <div onClick={() => handleExpand(item.src, true, index)}>
                 {item.thumbnail ? (
-                  <img
+                  <Image
                     src={item.thumbnail}
-                    alt={item.alt || `Video thumbnail ${index}`}
-                    className="object-cover w-full h-auto aspect-square rounded-lg transition-transform duration-300 ease-in-out transform hover:scale-105"
+                    alt={item.alt || `Media item ${index}`}
+                    className=" rounded-lg transition-transform duration-300 ease-in-out transform hover:scale-105"
+                    layout="fill"
+                    objectFit="cover"
+                    onClick={() => handleExpand(item.src, false, index)}
                   />
                 ) : (
                   <div className="w-full h-full flex justify-center items-center bg-gray-400 rounded-lg text-white font-bold">
@@ -103,7 +110,7 @@ const Expander: React.FC<ExpanderProps> = ({ src, onClose, media, activeIndex, h
   const handleKeyDown = useCallback(
     (event: KeyboardEvent) => {
       if (!swiperRef.current) return;
-  
+
       switch (event.key) {
         case 'ArrowRight':
           swiperRef.current.slideNext();
@@ -134,7 +141,6 @@ const Expander: React.FC<ExpanderProps> = ({ src, onClose, media, activeIndex, h
 
   return (
     <div className="fixed top-0 left-0 w-full h-full flex flex-col justify-center bg-black bg-opacity-80 z-40">
-      {/* Close Button */}
       <button
         onClick={onClose}
         className="absolute top-0 right-0 block cursor-pointer hover:text-gray-400 transition-colors duration-200"
@@ -159,15 +165,20 @@ const Expander: React.FC<ExpanderProps> = ({ src, onClose, media, activeIndex, h
           modules={[Navigation]}
         >
           {media.map((item, index) => (
-            <SwiperSlide key={index} className="self-center h-[100vh]">
+            <SwiperSlide key={index} className='self-center'>
               {item.type === 'video' ? (
-                <video controls autoPlay className="max-h-[90vh] w-full">
+                <video controls autoPlay className="justify-center max-h-[90vh] w-full">
                   <source src={item.src} type="video/mp4" />
                   Your browser does not support the video tag.
                 </video>
               ) : (
-                <div>
-                  <img src={item.src} alt={`Expanded media ${index}`} className="max-h-[90vh] m-auto object-contain" />
+                <div className="relative w-full h-[80vh]"> {/* Set explicit height for the container */}
+                  <Image
+                    src={item.src}
+                    alt={`Expanded media ${index}`}
+                    fill
+                    className="object-contain" // Ensure the image is properly contained
+                  />
                 </div>
               )}
             </SwiperSlide>
@@ -180,3 +191,4 @@ const Expander: React.FC<ExpanderProps> = ({ src, onClose, media, activeIndex, h
 
 
 export default MediaSlider;
+
