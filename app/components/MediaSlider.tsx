@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Zoom } from 'swiper/modules';
 import { XMarkIcon, VideoCameraIcon } from '@heroicons/react/24/solid';
@@ -96,37 +96,39 @@ interface ExpanderProps {
   handleExpand: (src: string, isVideo: boolean, index: number) => void; // Handle thumbnail navigation
 }
 
-const Expander: React.FC<ExpanderProps> = ({ src, isVideo, onClose, media, activeIndex, handleExpand }) => {
-  const swiperRef = useRef<any>(null);
+const Expander: React.FC<ExpanderProps> = ({ src, onClose, media, activeIndex, handleExpand }) => {
+  const swiperRef = useRef<SwiperCore | null>(null);
 
   // Handle key events for arrow navigation and closing on Esc
-  const handleKeyDown = (event: KeyboardEvent) => {
-    if (!swiperRef.current) return;
-
-    switch (event.key) {
-      case 'ArrowRight':
-        swiperRef.current.slideNext(); // Slide to the next media
-        break;
-      case 'ArrowLeft':
-        swiperRef.current.slidePrev(); // Slide to the previous media
-        break;
-      case 'Escape':
-        onClose(); // Close the Expander
-        break;
-      default:
-        break;
-    }
-  };
+  const handleKeyDown = useCallback(
+    (event: KeyboardEvent) => {
+      if (!swiperRef.current) return;
+  
+      switch (event.key) {
+        case 'ArrowRight':
+          swiperRef.current.slideNext();
+          break;
+        case 'ArrowLeft':
+          swiperRef.current.slidePrev();
+          break;
+        case 'Escape':
+          onClose();
+          break;
+        default:
+          break;
+      }
+    },
+    [onClose]
+  );
 
   useEffect(() => {
     // Attach event listener when component mounts
     document.addEventListener('keydown', handleKeyDown);
-
     // Cleanup event listener on unmount
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
     };
-  }, []);
+  }, [handleKeyDown]);
 
   if (!src) return null;
 
