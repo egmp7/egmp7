@@ -1,7 +1,7 @@
 'use client';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Keyboard, Navigation, Pagination, Zoom } from 'swiper/modules';
+import { Navigation, Pagination, Zoom } from 'swiper/modules';
 import { XMarkIcon, VideoCameraIcon } from '@heroicons/react/24/solid';
 import Image from 'next/image';
 import SwiperCore from 'swiper';
