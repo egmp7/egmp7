@@ -93,7 +93,6 @@ const MediaSlider: React.FC<MediaSliderProps> = ({ media }) => {
   );
 };
 
-
 interface ExpanderProps {
   src: string | null; // The source of the media to expand (can be null if not expanded)
   isVideo: boolean; // Whether the media is a video or not
@@ -167,7 +166,7 @@ const Expander: React.FC<ExpanderProps> = ({ src, onClose, media, activeIndex, h
           {media.map((item, index) => (
             <SwiperSlide key={index} className='self-center'>
               {item.type === 'video' ? (
-                <video controls autoPlay className="justify-center max-h-[90vh] w-full">
+                <video controls autoPlay={false} className="justify-center max-h-[90vh] w-full">
                   <source src={item.src} type="video/mp4" />
                   Your browser does not support the video tag.
                 </video>
@@ -188,7 +187,6 @@ const Expander: React.FC<ExpanderProps> = ({ src, onClose, media, activeIndex, h
     </div>
   );
 };
-
 
 export default MediaSlider;
 
