@@ -202,10 +202,6 @@ function generateMediaArray(projectId: string, projectsFolder: string): Media[] 
     files.filter(isImageFile).forEach((image, index) => {
       const imageFolder = path.relative(projectPath, dir);
 
-      const thumbnailSrcs = media
-        .filter((media) => media.thumbnail)
-        .map((media) => media.thumbnail);
-
       media.push({
         type: 'image',
         src: `/projects/${projectId}${imageFolder === '' ? '' : '/' + imageFolder}/${image}`,
