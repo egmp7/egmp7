@@ -33,13 +33,20 @@ interface Projects {
 
 const projects: Projects = {
   "1": {
-    title: "Project Title",
-    summary: "Developed a full-stack web application for managing tasks.",
-    technologiesUsed: ["React", "Node.js", "Express", "MongoDB"],
-    role: "Team Lead, Project Lead",
-    keyFeatures: ["User authentication", "Task management", "Real-time updates Lorem ipsum odor amet, consectetuer adipiscing elit. Primis malesuada suspendisse orci aenean vivamus tempor. Ad ad mauris finibus; elementum ridiculus mi. Lacus tincidunt per, nec aliquet dis suscipit scelerisque ac. Elementum justo elementum elit suspendisse torquent. Vel elementum tellus nulla ligula penatibus turpis. Lorem ipsum odor amet, consectetuer adipiscing elit. Primis malesuada suspendisse orci aenean vivamus tempor. Ad ad mauris finibus; elementum ridiculus mi. Lacus tincidunt per, nec aliquet dis suscipit scelerisque ac. Elementum justo elementum elit suspendisse torquent. Vel elementum tellus nulla ligula penatibus turpis. Lorem ipsum odor amet, consectetuer adipiscing elit. Primis malesuada suspendisse orci aenean vivamus tempor. Ad ad mauris finibus; elementum ridiculus mi. Lacus tincidunt per, nec aliquet dis suscipit scelerisque ac. Elementum justo elementum elit suspendisse torquent. Vel elementum tellus nulla ligula penatibus turpis."],
-    challengesAndSolutions: "Handling real-time updates using WebSockets.",
-    impact: "Increased productivity by 25% for the client.",
+    title: "REPL Plus",
+    summary: "A Slack Application that allows UoL BSc students to read and write reviews of modules they have taken. Our main objective is to assist students in their decision making; making it easier for them to choose modules that best suit their needs. Our application will be made available to anyone that has access to the UoL BSc Workspace on Slack, hence, it may also be used by any University Admin; perhaps, allowing them to improve various aspects of the program and modules, utilising our review app as a resource.",
+    technologiesUsed: ["Deno", "TypeScript", "Slack API", "Web Standards"],
+    role: "Developer Lead",
+    keyFeatures: [
+      "User authentication for UoL BSc Workspace members",
+      "Module review and rating system",
+      "Real-time updates on new reviews and responses",
+      "Admin access for viewing and managing module feedback",
+      "Search and filter options for finding specific modules",
+      "Data visualization of module performance for students and university admin"
+    ],
+    challengesAndSolutions: "Handling real-time review updates was achieved using WebSockets, ensuring that students and admins receive instant feedback without refreshing the app. Additionally, ensuring secure access was critical, and OAuth was implemented for authentication tied to Slack Workspace members.",
+    impact: "Improved module selection process for students, leading to better-informed decisions. University Admins gained valuable insights for program improvements, positively impacting overall student satisfaction.",
     links: ["https://github.com/example/project-1"],
     duration: "6 months (Jan 2022 - Jun 2022)",
     media: [],
