@@ -49,7 +49,15 @@ const projects: Projects = {
     impact: "Improved module selection process for students, leading to better-informed decisions. University Admins gained valuable insights for program improvements, positively impacting overall student satisfaction.",
     links: ["https://github.com/example/project-1"],
     duration: "6 months (Jan 2022 - Jun 2022)",
-    media: [],
+    media: [ // Add media for project-1
+      { type: 'video', src: '/projects/1/REPL-Plus.mp4', thumbnail: '/projects/1/REPL-Plus.png' },
+      { type: 'image', src: '/projects/1/REPL-Plus-1.png', alt: 'Image 1' },
+      { type: 'image', src: '/projects/1/REPL-Plus-2.png', alt: 'Image 2' },
+      { type: 'image', src: '/projects/1/REPL-Plus-3.png', alt: 'Image 3' },
+      { type: 'image', src: '/projects/1/REPL-Plus-4.png', alt: 'Image 4' },
+      { type: 'image', src: '/projects/1/REPL-Plus-5.png', alt: 'Image 5' },
+      { type: 'image', src: '/projects/1/user-flow-diagram.jpg', alt: 'Image 6' },
+    ],
   },
   "2": {
     title: "Project Title",
@@ -75,12 +83,12 @@ interface ProjectProps {
 
 
 const ProjectPage = ({ params }: ProjectProps) => {
-  // Automatically populate media arrays for all projects
-  const projectsFolder = path.normalize('./public/pro'); // Adjust to your actual path
-  Object.keys(projects).forEach((projectId) => {
-    const key = projectId as keyof Projects; // Cast projectId to keyof Projects
-    projects[key].media = generateMediaArray(projectId, projectsFolder);
-  });
+  // // Automatically populate media arrays for all projects
+  // const projectsFolder = path.normalize('./public/pro'); // Adjust to your actual path
+  // Object.keys(projects).forEach((projectId) => {
+  //   const key = projectId as keyof Projects; // Cast projectId to keyof Projects
+  //   projects[key].media = generateMediaArray(projectId, projectsFolder);
+  // });
 
   // Log the updated projects object
   console.log(JSON.stringify(projects, null, 2));
