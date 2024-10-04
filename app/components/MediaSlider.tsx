@@ -140,14 +140,7 @@ const Expander: React.FC<ExpanderProps> = ({ src, onClose, media, activeIndex, h
 
   return (
     <div className="fixed top-0 left-0 w-full h-full flex flex-col justify-center bg-black bg-opacity-80 z-40">
-      <button
-        onClick={onClose}
-        className="absolute top-0 right-0 block cursor-pointer hover:text-gray-400 transition-colors duration-200"
-        aria-label="Close"
-      >
-        <XMarkIcon className="w-12 h-12 bg-black text-white bg-opacity-50 p-1 m-1 rounded" />
-      </button>
-
+     
       <div className="self-center max-h-[90vh] w-full">
         {/* Main Swiper for Media Display */}
         <Swiper
@@ -184,6 +177,15 @@ const Expander: React.FC<ExpanderProps> = ({ src, onClose, media, activeIndex, h
           ))}
         </Swiper>
       </div>
+
+      <button
+        onClick={onClose}
+        className="absolute top-0 right-0 block cursor-pointer hover:text-gray-400 transition-colors duration-200"
+        aria-label="Close"
+      >
+        <XMarkIcon className="w-12 h-12 bg-black text-white bg-opacity-50 p-1 m-1 rounded" />
+      </button>
+
     </div>
   );
 };
