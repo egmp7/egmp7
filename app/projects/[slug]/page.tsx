@@ -1,6 +1,4 @@
 import MediaSlider from "@/app/components/MediaSlider";
-import fs from 'fs';
-import path from 'path';
 
 // Define the project structure
 interface Media {
@@ -130,116 +128,116 @@ const ProjectPage = ({ params }: ProjectProps) => {
 };
 
 // Helper function to check if a file is an image
-function isImageFile(filename: string): boolean {
-  const imageExtensions = ['.jpg', '.jpeg', '.png', '.gif'];
-  return imageExtensions.includes(path.extname(filename).toLowerCase());
-}
+// function isImageFile(filename: string): boolean {
+//   const imageExtensions = ['.jpg', '.jpeg', '.png', '.gif'];
+//   return imageExtensions.includes(path.extname(filename).toLowerCase());
+// }
 
 // Helper function to check if a file is a video
-function isVideoFile(filename: string): boolean {
-  const videoExtensions = ['.mp4', '.mov', '.avi', '.mkv'];
-  return videoExtensions.includes(path.extname(filename).toLowerCase());
-}
+// function isVideoFile(filename: string): boolean {
+//   const videoExtensions = ['.mp4', '.mov', '.avi', '.mkv'];
+//   return videoExtensions.includes(path.extname(filename).toLowerCase());
+// }
 
 // Helper function to find a thumbnail for a video
-function findThumbnailForVideo(dir: string, videoBaseName: string): string | null {
-  const files = fs.readdirSync(dir);
+// function findThumbnailForVideo(dir: string, videoBaseName: string): string | null {
+//   const files = fs.readdirSync(dir);
 
-  for (const file of files) {
-    const fullPath = path.join(dir, file);
-    const stat = fs.statSync(fullPath);
+//   for (const file of files) {
+//     const fullPath = path.join(dir, file);
+//     const stat = fs.statSync(fullPath);
 
-    // If it's a directory, search recursively
-    if (stat.isDirectory()) {
-      const found = findThumbnailForVideo(fullPath, videoBaseName);
-      if (found) return found;
-    }
-    // Check if it's an image and matches the video base name
-    else if (stat.isFile()) {
-      const ext = path.extname(file).toLowerCase();
-      const baseName = path.basename(file, ext);
+//     // If it's a directory, search recursively
+//     if (stat.isDirectory()) {
+//       const found = findThumbnailForVideo(fullPath, videoBaseName);
+//       if (found) return found;
+//     }
+//     // Check if it's an image and matches the video base name
+//     else if (stat.isFile()) {
+//       const ext = path.extname(file).toLowerCase();
+//       const baseName = path.basename(file, ext);
 
-      // List of image extensions to match against
-      const imageExtensions = ['.jpg', '.jpeg', '.png', '.gif'];
+//       // List of image extensions to match against
+//       const imageExtensions = ['.jpg', '.jpeg', '.png', '.gif'];
 
-      if (baseName === videoBaseName && imageExtensions.includes(ext)) {
-        // Return the relative path to the thumbnail
-        return path.relative(process.cwd(), fullPath);
-      }
-    }
-  }
+//       if (baseName === videoBaseName && imageExtensions.includes(ext)) {
+//         // Return the relative path to the thumbnail
+//         return path.relative(process.cwd(), fullPath);
+//       }
+//     }
+//   }
 
-  // Return null if no match found
-  return null;
-}
+//   // Return null if no match found
+//   return null;
+// }
 
 
 // Function to recursively generate the media array with videos first, followed by images
-function generateMediaArray(projectId: string, projectsFolder: string): Media[] {
-  const media: Media[] = [];
+// function generateMediaArray(projectId: string, projectsFolder: string): Media[] {
+//   const media: Media[] = [];
 
-  const projectPath = path.join(projectsFolder, projectId);
+//   const projectPath = path.join(projectsFolder, projectId);
 
-  // Check if the project path exists
-  if (!fs.existsSync(projectPath)) {
-    console.error(`Project path does not exist: ${projectPath}`);
-    return media; // Return an empty array if the project path is missing
-  }
+//   // Check if the project path exists
+//   if (!fs.existsSync(projectPath)) {
+//     console.error(`Project path does not exist: ${projectPath}`);
+//     return media; // Return an empty array if the project path is missing
+//   }
 
-  // Recursive function to process files
-  function processFiles(dir: string) {
-    if (!fs.existsSync(dir)) {
-      // Guard to ensure the directory exists before scanning
-      console.warn(`Directory does not exist: ${dir}`);
-      return;
-    }
+//   // Recursive function to process files
+//   function processFiles(dir: string) {
+//     if (!fs.existsSync(dir)) {
+//       // Guard to ensure the directory exists before scanning
+//       console.warn(`Directory does not exist: ${dir}`);
+//       return;
+//     }
 
-    const items = fs.readdirSync(dir);
+//     const items = fs.readdirSync(dir);
 
-    // Separate files and subdirectories
-    const files = items.filter(item => fs.statSync(path.join(dir, item)).isFile());
-    const subdirs = items.filter(item => fs.statSync(path.join(dir, item)).isDirectory());
+//     // Separate files and subdirectories
+//     const files = items.filter(item => fs.statSync(path.join(dir, item)).isFile());
+//     const subdirs = items.filter(item => fs.statSync(path.join(dir, item)).isDirectory());
 
-    // Process videos first
-    files.filter(isVideoFile).forEach((video) => {
-      const videoBaseName = path.basename(video, path.extname(video));
-      const videoFolder = path.relative(projectPath, dir);
-      const thumbnail = findThumbnailForVideo(projectPath, videoBaseName);
+//     // Process videos first
+//     files.filter(isVideoFile).forEach((video) => {
+//       const videoBaseName = path.basename(video, path.extname(video));
+//       const videoFolder = path.relative(projectPath, dir);
+//       const thumbnail = findThumbnailForVideo(projectPath, videoBaseName);
 
-      media.push({
-        type: 'video',
-        src: `/projects/${projectId}${videoFolder === '' ? '' : '/' + videoFolder}/${video}`,
-        thumbnail: thumbnail ? `/projects/${projectId}/${path.relative(projectPath, thumbnail).replace(/\\/g, '/')}` : undefined
-      });
-    });
+//       media.push({
+//         type: 'video',
+//         src: `/projects/${projectId}${videoFolder === '' ? '' : '/' + videoFolder}/${video}`,
+//         thumbnail: thumbnail ? `/projects/${projectId}/${path.relative(projectPath, thumbnail).replace(/\\/g, '/')}` : undefined
+//       });
+//     });
 
-    // Then process images
-    files.filter(isImageFile).forEach((image, index) => {
-      const imageFolder = path.relative(projectPath, dir);
+//     // Then process images
+//     files.filter(isImageFile).forEach((image, index) => {
+//       const imageFolder = path.relative(projectPath, dir);
 
-      media.push({
-        type: 'image',
-        src: `/projects/${projectId}${imageFolder === '' ? '' : '/' + imageFolder}/${image}`,
-        alt: `Image ${index + 1}` // Assign alt text dynamically
-      });
-    });
+//       media.push({
+//         type: 'image',
+//         src: `/projects/${projectId}${imageFolder === '' ? '' : '/' + imageFolder}/${image}`,
+//         alt: `Image ${index + 1}` // Assign alt text dynamically
+//       });
+//     });
 
-    // Recurse into subdirectories
-    subdirs.forEach((subdir) => {
-      processFiles(path.join(dir, subdir));
-    });
-  }
+//     // Recurse into subdirectories
+//     subdirs.forEach((subdir) => {
+//       processFiles(path.join(dir, subdir));
+//     });
+//   }
 
-  // Start recursive processing from the project path
-  processFiles(projectPath);
+//   // Start recursive processing from the project path
+//   processFiles(projectPath);
 
-  // Collect all the thumbnail src values
-  const thumbnailSrcs = media
-    .filter((media) => media.thumbnail)
-    .map((media) => media.thumbnail);
+//   // Collect all the thumbnail src values
+//   const thumbnailSrcs = media
+//     .filter((media) => media.thumbnail)
+//     .map((media) => media.thumbnail);
 
-  // Filter the media array to exclude items where the src matches a thumbnail
-  return media.filter((media) => !thumbnailSrcs.includes(media.src));
-}
+//   // Filter the media array to exclude items where the src matches a thumbnail
+//   return media.filter((media) => !thumbnailSrcs.includes(media.src));
+// }
 
 export default ProjectPage;
