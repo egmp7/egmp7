@@ -76,7 +76,7 @@ interface ProjectProps {
 
 const ProjectPage = ({ params }: ProjectProps) => {
   // Automatically populate media arrays for all projects
-  const projectsFolder = path.normalize('./public/projects'); // Adjust to your actual path
+  const projectsFolder = path.normalize('/projects'); // Adjust to your actual path
   Object.keys(projects).forEach((projectId) => {
     const key = projectId as keyof Projects; // Cast projectId to keyof Projects
     projects[key].media = generateMediaArray(projectId, projectsFolder);
