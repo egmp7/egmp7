@@ -57,12 +57,12 @@ const projects: Projects = {
   },
   "2": {
     title: "Seratium",
-    summary: "Seratium is a DJ application capable of reading .mp3 and .wav files. The decks control music playback with cues, volume faders, and speed controllers. A crossfader controls the main mix of the decks. Timers and titles have been implemented to give users tracking tools and enhance the user experience. The playlist persists data, allows loading tracks to the decks for convenience, and has a search component that looks for items stored in the playlist.",
-    technologiesUsed: ["JUCE", "C++"],
+    summary: "Seratium is a DJ application capable of reading .mp3 and .wav files. The decks control music playback with cues, volume faders, and speed controllers. A crossfader manages the main mix of the decks. Timers and titles provide tracking tools to enhance the user experience. The playlist persists data, enables loading tracks to the decks for convenience, and includes a search component for finding items stored in the playlist.",
+    technologiesUsed: ["JUCE", "C++", "STL (Standard Template Library)", "Xcode / Visual Studio", "Git"],
     role: "Developer",
-    keyFeatures: ["Load files by drag and drop", "Two track playback", "Object Oriented Programming"],
-    challengesAndSolutions: "Setting a music library path. Using the framework is possible to acces the Current user folder and point to a folder that already exists such as the Music Library. The app requires permissions to write on this folder",
-    impact: "A quick application to resample audio for create performance",
+    keyFeatures: ["Drag-and-drop file loading", "Dual track playback", "Object-Oriented Programming (OOP) principles", "Playlist search and persistence"],
+    challengesAndSolutions: "One challenge was setting the music library path. Using the JUCE framework, the app can access the current user folder and point to an existing folder, such as the Music Library. The app requires user permissions to write to this folder.",
+    impact: "Created a fast and efficient application for resampling audio, enhancing DJ performance capabilities.",
     links: ["https://github.com/egmp7/Seratium"],
     duration: "3 months (Jan 2023 - March 2023)",
     media: [
