@@ -26,6 +26,7 @@ interface Project {
 interface Projects {
   "1": Project;
   "2": Project;
+  "3": Project;
   // Add more projects as needed
 }
 
@@ -68,9 +69,27 @@ const projects: Projects = {
     media: [
       { type: 'video', src: '/projects/2/seratirum_showcase.mp4', thumbnail: '/projects/2/Seratium.png' },
       { type: 'image', src: '/projects/2/Seratium.png', alt: 'Image 1' },
-      { type: 'image', src: '/projects/2/Seratium-0.png', alt: 'Image 1' },
-      { type: 'image', src: '/projects/2/Seratium-1.png', alt: 'Image 1' },
-      { type: 'image', src: '/projects/2/Seratium-2.png', alt: 'Image 1' },
+      { type: 'image', src: '/projects/2/Seratium-0.png', alt: 'Image 2' },
+      { type: 'image', src: '/projects/2/Seratium-1.png', alt: 'Image 3' },
+      { type: 'image', src: '/projects/2/Seratium-2.png', alt: 'Image 4' },
+    ],
+  },
+  "3": {
+    title: "Lost Memories",
+    summary: "Lost Memories is a horror game for Meta Quest 2, where players interact with various objects in a VR environment. Programmed events trigger frightening moments, enhancing the horror experience. The game’s objective is to create an immersive and terrifying experience that leverages the full potential of VR technology to engage and thrill players.",
+    technologiesUsed: ["Unity", "C#", "Oculus SDK", "Blender (3D Modeling)", "Git"],
+    role: "Developer",
+    keyFeatures: ["Interactive VR elements like doors, flashlights, and key objects", "Programmed scary moments to evoke fear and suspense", "Puzzle-solving mechanics", "Full utilization of VR for deep immersion"],
+    challengesAndSolutions: "One challenge was balancing motion design to minimize simulator sickness. A teleportation feature was implemented to reduce motion discomfort, providing player comfort without compromising gameplay. The challenge lay in ensuring that the horror atmosphere remained intact despite reduced player movement control.",
+    impact: "Created a fully immersive VR horror game with intense suspense and interactivity, catering to both casual gamers and horror enthusiasts.",
+    links: ["https://github.com/egmp7/lost-memories-vr"],
+    duration: "6 months (Apr 2024 - Sep 2024)",
+    media: [
+      { type: 'video', src: '/projects/3/lost-memories.mp4', thumbnail: '/projects/3/lost-memories-0.png' },
+      { type: 'image', src: '/projects/3/lost-memories-0.png', alt: 'Image 1' },
+      { type: 'image', src: '/projects/3/lost-memories-1.png', alt: 'Image 2' },
+      { type: 'image', src: '/projects/3/lost-memories-2.png', alt: 'Image 3' },
+      { type: 'image', src: '/projects/3/lost-memories-3.png', alt: 'Image 4' },
     ],
   },
   // Add more projects as needed
