@@ -5,7 +5,7 @@ import UserLinks from "./components/UserLinks";
 const messages = {
   title: "Software Engineer",
   name: "Erick Gonzalez",
-  action: "Check Projects"
+  action: "My Projects"
 }
 
 export default function Home() {
