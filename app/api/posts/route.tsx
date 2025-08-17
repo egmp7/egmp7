@@ -1,6 +1,7 @@
 import { supabase } from '@/app/lib/supabase'
 import { NextResponse } from 'next/server'
 import type { CreatePostData } from '@/app/types/blog'
+import { createSlug, generateUniqueSlug } from '@/app/lib/slugUtils'
 
 export async function GET() {
   try {
@@ -21,9 +22,31 @@ export async function POST(request: Request) {
   try {
     const body: CreatePostData = await request.json()
     
+    // Get existing slugs to check for uniqueness
+    const { data: existingPosts, error: fetchError } = await supabase
+      .from('posts')
+      .select('slug')
+    
+    if (fetchError) throw fetchError
+    
+    const existingSlugs = existingPosts?.map(post => post.slug) || []
+    
+    // Create a clean slug from the title if no slug provided, or format existing slug
+    let finalSlug = body.slug || body.title
+    finalSlug = createSlug(finalSlug)
+    
+    // Ensure slug uniqueness
+    finalSlug = generateUniqueSlug(finalSlug, existingSlugs)
+    
+    // Create post with the formatted slug
+    const postData = {
+      ...body,
+      slug: finalSlug
+    }
+    
     const { data, error } = await supabase
       .from('posts')
-      .insert([body])
+      .insert([postData])
       .select()
       .single()
     
