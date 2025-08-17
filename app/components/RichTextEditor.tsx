@@ -11,6 +11,7 @@ import Color from '@tiptap/extension-color'
 import Highlight from '@tiptap/extension-highlight'
 import CodeBlockLowlight from '@tiptap/extension-code-block-lowlight'
 import { all, createLowlight } from 'lowlight'
+import { useEffect, useState } from 'react'
 
 
 import { 
@@ -255,43 +256,84 @@ const MenuBar = ({ editor }: { editor: any }) => {
 }
 
 export default function RichTextEditor({ content, onChange, placeholder }: RichTextEditorProps) {
-    const editor = useEditor({
-        extensions: [
-          StarterKit,
-          Link.configure({
-            openOnClick: false,
-            HTMLAttributes: {
-              class: 'text-blue-600 underline hover:text-blue-800'
-            }
-          }),
-          Image.configure({
-            HTMLAttributes: {
-              class: 'max-w-full h-auto rounded-lg'
-            }
-          }),
-          TextAlign.configure({
-            types: ['heading', 'paragraph']
-          }),
-          Underline,
-          TextStyle,
-          Color,
-          Highlight,
-          CodeBlockLowlight.configure({
-            lowlight: lowlight
-          })
-        ],
-        content,
-        onUpdate: ({ editor }) => {
-          onChange(editor.getHTML())
-        },
-        immediatelyRender: false,
-            editorProps: {
+  const [isMounted, setIsMounted] = useState(false)
+
+  useEffect(() => {
+    setIsMounted(true)
+  }, [])
+
+  const editor = useEditor({
+    extensions: [
+      StarterKit,
+      Link.configure({
+        openOnClick: false,
+        HTMLAttributes: {
+          class: 'text-blue-600 underline hover:text-blue-800'
+        }
+      }),
+      Image.configure({
+        HTMLAttributes: {
+          class: 'max-w-full h-auto rounded-lg'
+        }
+      }),
+      TextAlign.configure({
+        types: ['heading', 'paragraph']
+      }),
+      Underline,
+      TextStyle,
+      Color,
+      Highlight,
+      CodeBlockLowlight.configure({
+        lowlight: lowlight
+      })
+    ],
+    content,
+    onUpdate: ({ editor }) => {
+      onChange(editor.getHTML())
+    },
+    immediatelyRender: false, // Required for SSR compatibility
+    editorProps: {
       attributes: {
-        class: 'prose prose-lg max-w-none focus:outline-none p-4 min-h-[300px]',
+        class: 'prose prose-lg max-w-none focus:outline-none p-4 min-h-[300px] rich-text-editor-content',
         style: 'color: #374151; background-color: #ffffff;'
       }
     }
-      })
+  })
+
+  // Sync editor content when content prop changes
+  useEffect(() => {
+    if (editor && content !== editor.getHTML()) {
+      editor.commands.setContent(content)
+    }
+  }, [content, editor])
+
+  // Add the CSS class to the ProseMirror element after it's created
+  useEffect(() => {
+    if (editor && isMounted) {
+      const editorElement = editor.view.dom
+      if (editorElement) {
+        editorElement.classList.add('rich-text-editor-content')
+        // Force a re-render to ensure formatting is visible
+        editor.commands.focus()
+      }
+    }
+  }, [editor, isMounted])
+
+  // Don't render until mounted to avoid SSR issues
+  if (!isMounted) {
+    return (
+      <div className="rich-text-editor-container">
+        <div className="border-b border-gray-200 p-2 bg-white rounded-t-lg">
+          <div className="flex flex-wrap gap-1 items-center">
+            <div className="p-2 text-gray-400">Loading editor...</div>
+          </div>
+        </div>
+        <div className="p-4 min-h-[300px] bg-gray-50 flex items-center justify-center text-gray-500">
+          Loading rich text editor...
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div className="rich-text-editor-container">
