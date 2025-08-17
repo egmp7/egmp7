@@ -95,7 +95,7 @@ export default function BlogPage() {
                     </p>
                   )}
                   <Link
-                    href={`/blog/${post.id}`}
+                    href={`/blog/${post.slug}`}
                     className="inline-flex items-center text-blue-600 hover:text-blue-800 font-medium transition-colors duration-200"
                   >
                     Read more

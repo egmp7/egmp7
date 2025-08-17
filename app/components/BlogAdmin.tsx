@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import type { Post, CreatePostData } from '@/app/types/blog'
+import RichTextEditor from './RichTextEditor'
 
 export default function BlogAdmin() {
   const [posts, setPosts] = useState<Post[]>([])
@@ -97,11 +98,10 @@ export default function BlogAdmin() {
           </div>
           <div>
             <label className="block text-sm font-medium mb-1 text-gray-800">Content</label>
-            <textarea
-              value={formData.content}
-              onChange={(e) => setFormData({...formData, content: e.target.value})}
-              className="w-full p-2 border rounded-md h-32 text-gray-900"
-              required
+            <RichTextEditor
+              content={formData.content}
+              onChange={(content) => setFormData({...formData, content})}
+              placeholder="Start writing your blog post..."
             />
           </div>
           <div>

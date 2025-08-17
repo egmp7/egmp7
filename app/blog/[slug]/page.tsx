@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import type { Post } from '@/app/types/blog'
+import RichTextViewer from '@/app/components/RichTextViewer'
 
 interface BlogPostPageProps {
   params: {
@@ -21,6 +22,7 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
 
   const fetchPost = async () => {
     try {
+      // Fetch by slug using the existing API endpoint
       const response = await fetch(`/api/posts/${params.slug}`)
       const result = await response.json()
       if (result.success) {
@@ -109,9 +111,9 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
         {/* Post Content */}
         <div className="prose prose-lg max-w-none">
           <div className="bg-white p-8 rounded-lg shadow-md">
-            <div 
+            <RichTextViewer 
+              content={post.content}
               className="text-gray-800 leading-relaxed"
-              dangerouslySetInnerHTML={{ __html: post.content }}
             />
           </div>
         </div>
