@@ -5,7 +5,7 @@ import UserLinks from "@/components/UserLinks";
 const messages = {
   title: "Software Engineer",
   name: "Erick Gonzalez",
-  action: "My Projects"
+  action: "Read My Blog"
 }
 
 export default function Home() {
@@ -23,7 +23,7 @@ export default function Home() {
         <p className="text-4xl">{messages.title}</p>
         <UserLinks />
         <Link
-          href="/projects">
+          href="/blog">
           <div className=" inline-block bg-blue-500 hover:bg-blue-600 text-xl text-white py-6 px-8 mt-4 w-full sm:w-auto text-center rounded">
             {messages.action}
           </div>

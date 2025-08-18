@@ -32,7 +32,7 @@ export default function BlogPage() {
       <div className="min-h-screen bg-gray-50 dark:bg-slate-900 flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
-          <p className="text-gray-600 dark:text-slate-400">Loading blog posts...</p>
+          <p className="text-gray-600 dark:text-slate-400">Loading projects...</p>
         </div>
       </div>
     )
@@ -44,9 +44,9 @@ export default function BlogPage() {
       <div className="bg-white dark:bg-slate-800 shadow-sm border-b border-gray-200 dark:border-slate-700">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="text-center">
-            <h1 className="text-4xl font-bold text-gray-900 dark:text-slate-100 mb-4">Blog</h1>
+            <h1 className="text-4xl font-bold text-gray-900 dark:text-slate-100 mb-4">Projects</h1>
             <p className="text-xl text-gray-600 dark:text-slate-400 max-w-2xl mx-auto">
-              Explore our latest thoughts, insights, and updates on technology, development, and innovation.
+              Explore the projects that I'm working on or have worked on.
             </p>
           </div>
         </div>
@@ -61,8 +61,8 @@ export default function BlogPage() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
               </svg>
             </div>
-            <h3 className="text-lg font-medium text-gray-900 dark:text-slate-100 mb-2">No posts yet</h3>
-            <p className="text-gray-500 dark:text-slate-400">Check back soon for new content!</p>
+            <h3 className="text-lg font-medium text-gray-900 dark:text-slate-100 mb-2">No projects yet</h3>
+            <p className="text-gray-500 dark:text-slate-400">Check back soon for new projects!</p>
           </div>
         ) : (
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
@@ -101,7 +101,7 @@ export default function BlogPage() {
                     href={`/blog/${post.slug}`}
                     className="inline-flex items-center text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 font-medium transition-colors duration-200"
                   >
-                    Read more
+                    View Project
                     <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>
