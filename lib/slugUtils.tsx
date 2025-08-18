@@ -29,7 +29,10 @@ export function createSlug(text: string): string {
  * @returns A properly formatted slug
  */
 export function formatSlug(slug: string): string {
-  return createSlug(decodeURIComponent(slug))
+  console.log('formatSlug input:', slug)
+  const result = createSlug(decodeURIComponent(slug))
+  console.log('formatSlug output:', result)
+  return result
 }
 
 /**

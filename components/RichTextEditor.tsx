@@ -13,8 +13,6 @@ import { Highlight } from "@tiptap/extension-highlight"
 import { Subscript } from "@tiptap/extension-subscript"
 import { Superscript } from "@tiptap/extension-superscript"
 import { Selection } from "@tiptap/extensions"
-import Link from '@tiptap/extension-link'
-import Underline from '@tiptap/extension-underline'
 
 // --- UI Primitives ---
 import { Button } from "@/components/tiptap-ui-primitive/button"
@@ -206,7 +204,11 @@ export default function RichTextEditor({ content, onChange, placeholder }: RichT
         link: {
           openOnClick: false,
           enableClickSelection: true,
+          HTMLAttributes: {
+            class: 'text-blue-600 underline hover:text-blue-800'
+          }
         },
+        underline: false,
       }),
       HorizontalRule,
       TextAlign.configure({ types: ["heading", "paragraph"] }),
@@ -218,13 +220,6 @@ export default function RichTextEditor({ content, onChange, placeholder }: RichT
       Superscript,
       Subscript,
       Selection,
-      Underline,
-      Link.configure({
-        openOnClick: false,
-        HTMLAttributes: {
-          class: 'text-blue-600 underline hover:text-blue-800'
-        }
-      }),
       ImageUploadNode.configure({
         accept: "image/*",
         maxSize: MAX_FILE_SIZE,
