@@ -26,9 +26,9 @@ export default function AuthenticatedAdmin({ onLogout }: AuthenticatedAdminProps
   }
 
   return (
-    <div className="min-h-screen bg-gray-50" onMouseMove={handleActivity} onKeyDown={handleActivity}>
+    <div className="min-h-screen bg-gray-50 dark:bg-slate-900" onMouseMove={handleActivity} onKeyDown={handleActivity}>
       {/* Session Status Bar */}
-      <div className="bg-blue-600 text-white px-4 py-2 flex justify-between items-center">
+      <div className="bg-blue-600 dark:bg-blue-700 text-white px-4 py-2 flex justify-between items-center">
         <div className="flex items-center space-x-4">
           <span className="font-medium">Admin Session Active</span>
           <span className="text-sm opacity-90">
@@ -37,7 +37,7 @@ export default function AuthenticatedAdmin({ onLogout }: AuthenticatedAdminProps
         </div>
         <button
           onClick={handleLogoutClick}
-          className="bg-red-600 hover:bg-red-700 px-3 py-2 rounded text-sm font-medium transition-colors"
+          className="bg-red-600 hover:bg-red-700 dark:bg-red-700 dark:hover:bg-red-800 px-3 py-2 rounded text-sm font-medium transition-colors"
         >
           Logout
         </button>

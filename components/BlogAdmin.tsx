@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect, useCallback } from 'react'
+import Image from 'next/image'
 import type { Post, CreatePostData } from '@/types/blog'
 import RichTextEditor from './RichTextEditor'
 
@@ -14,7 +15,8 @@ export default function BlogAdmin() {
     title: '',
     slug: '',
     content: '',
-    excerpt: ''
+    excerpt: '',
+    featured_image: ''
   })
 
 
@@ -60,12 +62,15 @@ export default function BlogAdmin() {
           body: JSON.stringify({ 
             ...formData, 
             id: editingPost.id,
-            slug: cleanSlug // Use cleaned slug
+            slug: cleanSlug, // Use cleaned slug
+            created_at: editingPost.created_at,
+            updated_at: editingPost.updated_at,
+            published_at: editingPost.published_at
           })
         })
         const result = await response.json()
         if (result.success) {
-          setFormData({ title: '', slug: '', content: '', excerpt: '' })
+          setFormData({ title: '', slug: '', content: '', excerpt: '', featured_image: '' })
           setEditingPost(null)
           setOriginalSlug('')
           fetchPosts()
@@ -86,7 +91,7 @@ export default function BlogAdmin() {
         })
         const result = await response.json()
         if (result.success) {
-          setFormData({ title: '', slug: '', content: '', excerpt: '' })
+          setFormData({ title: '', slug: '', content: '', excerpt: '', featured_image: '' })
           fetchPosts()
           showMessage('success', 'Post created successfully!')
         } else {
@@ -114,14 +119,15 @@ export default function BlogAdmin() {
       title: post.title,
       slug: post.slug,
       content: post.content,
-      excerpt: post.excerpt || ''
+      excerpt: post.excerpt || '',
+      featured_image: post.featured_image || ''
     })
   }
 
   const handleCancelEdit = () => {
     setEditingPost(null)
     setOriginalSlug('')
-    setFormData({ title: '', slug: '', content: '', excerpt: '' })
+    setFormData({ title: '', slug: '', content: '', excerpt: '', featured_image: '' })
   }
 
   const handleDelete = async (slug: string) => {
@@ -150,69 +156,150 @@ export default function BlogAdmin() {
   }, [fetchPosts])
 
 
-  if (loading) return <div>Loading...</div>
+  if (loading) return <div className="text-gray-900 dark:text-slate-100">Loading...</div>
 
   return (
     <div className="max-w-6xl mx-auto p-6">
-      <h1 className="text-3xl font-bold mb-8 text-gray-900">Blog Admin</h1>
+      <h1 className="text-3xl font-bold mb-8 text-gray-900 dark:text-slate-100">Blog Admin</h1>
       
       {/* Message Display */}
       {message && (
         <div className={`mb-6 p-4 rounded-md ${
           message.type === 'success' 
-            ? 'bg-green-100 border border-green-400 text-green-700' 
-            : 'bg-red-100 border border-red-400 text-red-700'
+            ? 'bg-green-100 dark:bg-green-900/20 border border-green-400 dark:border-green-800 text-green-700 dark:text-green-400' 
+            : 'bg-red-100 dark:bg-red-900/20 border border-red-400 dark:border-red-800 text-red-700 dark:text-red-400'
         }`}>
           {message.text}
         </div>
       )}
       
       {/* Create/Edit Post Form */}
-      <div className="bg-white p-6 rounded-lg shadow-md mb-8">
-        <h2 className="text-xl font-semibold mb-4 text-gray-900">
+      <div className="bg-white dark:bg-slate-800 p-6 rounded-lg shadow-md dark:shadow-slate-900/20 mb-8 border border-gray-200 dark:border-slate-700">
+        <h2 className="text-xl font-semibold mb-4 text-gray-900 dark:text-slate-100">
           {editingPost ? 'Edit Post' : 'Create New Post'}
         </h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium mb-1 text-gray-800">Title</label>
+              <label className="block text-sm font-medium mb-1 text-gray-800 dark:text-slate-200">Title</label>
               <input
                 type="text"
                 value={formData.title}
                 onChange={(e) => setFormData({...formData, title: e.target.value})}
-                className="w-full p-2 border rounded-md text-gray-900"
+                className="w-full p-2 border border-gray-300 dark:border-slate-600 rounded-md text-gray-900 dark:text-slate-100 bg-white dark:bg-slate-700"
                 required
               />
             </div>
             <div>
-              <label className="block text-sm font-medium mb-1 text-gray-800">Slug</label>
+              <label className="block text-sm font-medium mb-1 text-gray-800 dark:text-slate-200">Slug</label>
               <input
                 type="text"
                 value={formData.slug}
                 onChange={(e) => setFormData({...formData, slug: e.target.value})}
-                className="w-full p-2 border rounded-md text-gray-900"
+                className="w-full p-2 border border-gray-300 dark:border-slate-600 rounded-md text-gray-900 dark:text-slate-100 bg-white dark:bg-slate-700"
                 required
               />
               {formData.slug && (
-                <p className="text-sm text-gray-600 mt-1">
+                <p className="text-sm text-gray-600 dark:text-slate-400 mt-1">
                   Final slug: {formData.slug.trim().toLowerCase().replace(/\s+/g, '-')}
                 </p>
               )}
             </div>
           </div>
           <div>
-            <label className="block text-sm font-medium mb-1 text-gray-800">Excerpt</label>
+            <label className="block text-sm font-medium mb-1 text-gray-800 dark:text-slate-200">Excerpt</label>
             <textarea
               value={formData.excerpt}
               onChange={(e) => setFormData({...formData, excerpt: e.target.value})}
-              className="w-full p-2 border rounded-md h-20 text-gray-900"
+              className="w-full p-2 border border-gray-300 dark:border-slate-600 rounded-md h-20 text-gray-900 dark:text-slate-100 bg-white dark:bg-slate-700"
               placeholder="Brief description of your blog post..."
             />
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div>
+              <label className="block text-sm font-medium mb-1 text-gray-800 dark:text-slate-200">Created At</label>
+              <input
+                type="datetime-local"
+                value={editingPost ? new Date(editingPost.created_at).toISOString().slice(0, 16) : ''}
+                onChange={(e) => {
+                  if (editingPost) {
+                    const newDate = new Date(e.target.value)
+                    setEditingPost({
+                      ...editingPost,
+                      created_at: newDate.toISOString()
+                    })
+                  }
+                }}
+                className="w-full p-2 border border-gray-300 dark:border-slate-600 rounded-md text-gray-900 dark:text-slate-100 bg-white dark:bg-slate-700"
+                disabled={!editingPost}
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium mb-1 text-gray-800 dark:text-slate-200">Updated At</label>
+              <input
+                type="datetime-local"
+                value={editingPost ? new Date(editingPost.updated_at).toISOString().slice(0, 16) : ''}
+                onChange={(e) => {
+                  if (editingPost) {
+                    const newDate = new Date(e.target.value)
+                    setEditingPost({
+                      ...editingPost,
+                      updated_at: newDate.toISOString()
+                    })
+                  }
+                }}
+                className="w-full p-2 border border-gray-300 dark:border-slate-600 rounded-md text-gray-900 dark:text-slate-100 bg-white dark:bg-slate-700"
+                disabled={!editingPost}
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium mb-1 text-gray-800 dark:text-slate-200">Published At</label>
+              <input
+                type="datetime-local"
+                value={editingPost ? new Date(editingPost.published_at).toISOString().slice(0, 16) : ''}
+                onChange={(e) => {
+                  if (editingPost) {
+                    const newDate = new Date(e.target.value)
+                    setEditingPost({
+                      ...editingPost,
+                      published_at: newDate.toISOString()
+                    })
+                  }
+                }}
+                className="w-full p-2 border border-gray-300 dark:border-slate-600 rounded-md text-gray-900 dark:text-slate-100 bg-white dark:bg-slate-700"
+                disabled={!editingPost}
+              />
+            </div>
+          </div>
+          <div>
+            <label className="block text-sm font-medium mb-1 text-gray-800 dark:text-slate-200">Featured Image URL</label>
+            <input
+              type="url"
+              value={formData.featured_image}
+              onChange={(e) => setFormData({...formData, featured_image: e.target.value})}
+              className="w-full p-2 border border-gray-300 dark:border-slate-600 rounded-md text-gray-900 dark:text-slate-100 bg-white dark:bg-slate-700"
+              placeholder="https://example.com/image.jpg"
+            />
+            {formData.featured_image && (
+              <div className="mt-2">
+                <Image
+                  src={formData.featured_image}
+                  alt="Preview"
+                  width={128}
+                  height={128}
+                  className="w-32 h-32 object-cover rounded border border-gray-200 dark:border-slate-600"
+                  onError={() => {
+                    // Handle error if needed
+                  }}
+                  unoptimized={true}
+                />
+              </div>
+            )}
           </div>
           <div className="flex gap-3">
             <button
               type="submit"
-              className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700"
+              className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 dark:bg-blue-700 dark:hover:bg-blue-800"
             >
               {editingPost ? 'Update Post' : 'Create Post'}
             </button>
@@ -220,7 +307,7 @@ export default function BlogAdmin() {
               <button
                 type="button"
                 onClick={handleCancelEdit}
-                className="bg-gray-500 text-white px-4 py-2 rounded-md hover:bg-gray-600"
+                className="bg-gray-500 text-white px-4 py-2 rounded-md hover:bg-gray-600 dark:bg-gray-600 dark:hover:bg-gray-700"
               >
                 Cancel Edit
               </button>
@@ -230,8 +317,8 @@ export default function BlogAdmin() {
       </div>
 
       {/* Rich Text Editor - Outside the card with more space */}
-      <div className="bg-white p-6 rounded-lg shadow-md mb-8">
-        <h2 className="text-xl font-semibold mb-4 text-gray-900">Content</h2>
+      <div className="bg-white dark:bg-slate-800 p-6 rounded-lg shadow-md dark:shadow-slate-900/20 mb-8 border border-gray-200 dark:border-slate-700">
+        <h2 className="text-xl font-semibold mb-4 text-gray-900 dark:text-slate-100">Content</h2>
         <RichTextEditor
           content={formData.content}
           onChange={(content) => setFormData({...formData, content})}
@@ -239,22 +326,39 @@ export default function BlogAdmin() {
       </div>
 
       {/* Posts List */}
-      <div className="bg-white p-6 rounded-lg shadow-md">
-        <h2 className="text-xl font-semibold mb-4 text-gray-900">All Posts</h2>
+      <div className="bg-white dark:bg-slate-800 p-6 rounded-lg shadow-md dark:shadow-slate-900/20 border border-gray-200 dark:border-slate-700">
+        <h2 className="text-xl font-semibold mb-4 text-gray-900 dark:text-slate-100">All Posts</h2>
         <div className="space-y-4">
           {posts.map((post) => (
-            <div key={post.id} className={`border-b pb-4 ${
-              editingPost?.id === post.id ? 'bg-blue-50 border-blue-200 rounded-lg p-4' : ''
+            <div key={post.id} className={`border-b border-gray-200 dark:border-slate-700 pb-4 ${
+              editingPost?.id === post.id ? 'bg-blue-50 dark:bg-blue-900/20 border-blue-200 dark:border-blue-800 rounded-lg p-4' : ''
             }`}>
               <div className="flex justify-between items-start">
-                <div>
-                  <h3 className="font-semibold text-gray-900">{post.title}</h3>
-                  <p className="text-sm text-gray-700">{post.slug}</p>
-                  <p className="text-sm text-gray-600">
-                    {new Date(post.created_at).toLocaleDateString()}
-                  </p>
+                <div className="flex-1">
+                  <h3 className="font-semibold text-gray-900 dark:text-slate-100">{post.title}</h3>
+                  <p className="text-sm text-gray-700 dark:text-slate-300">{post.slug}</p>
+                  <div className="flex gap-4 text-sm text-gray-600 dark:text-slate-400 mt-1">
+                    <span>Created: {new Date(post.created_at).toLocaleDateString()}</span>
+                    <span>Updated: {new Date(post.updated_at).toLocaleDateString()}</span>
+                    <span>Published: {new Date(post.published_at).toLocaleDateString()}</span>
+                  </div>
+                  {post.featured_image && (
+                    <div className="mt-2">
+                      <Image
+                        src={post.featured_image}
+                        alt="Featured"
+                        width={80}
+                        height={80}
+                        className="w-20 h-20 object-cover rounded border border-gray-200 dark:border-slate-600"
+                        onError={() => {
+                          // Handle error if needed
+                        }}
+                        unoptimized={true}
+                      />
+                    </div>
+                  )}
                   {editingPost?.id === post.id && (
-                    <p className="text-sm text-blue-600 font-medium mt-1">
+                    <p className="text-sm text-blue-600 dark:text-blue-400 font-medium mt-1">
                       Currently editing
                     </p>
                   )}
@@ -264,8 +368,8 @@ export default function BlogAdmin() {
                     onClick={() => handleEdit(post)}
                     className={`px-3 py-1 rounded text-sm ${
                       editingPost?.id === post.id
-                        ? 'bg-gray-500 text-white cursor-not-allowed'
-                        : 'bg-blue-600 text-white hover:bg-blue-700'
+                        ? 'bg-gray-500 text-white cursor-not-allowed dark:bg-gray-600'
+                        : 'bg-blue-600 text-white hover:bg-blue-700 dark:bg-blue-700 dark:hover:bg-blue-800'
                     }`}
                     disabled={editingPost?.id === post.id}
                   >
@@ -273,7 +377,7 @@ export default function BlogAdmin() {
                   </button>
                   <button
                     onClick={() => handleDelete(post.slug)}
-                    className="bg-red-600 text-white px-3 py-1 rounded text-sm hover:bg-red-700"
+                    className="bg-red-600 text-white px-3 py-1 rounded text-sm hover:bg-red-700 dark:bg-red-700 dark:hover:bg-red-800"
                   >
                     Delete
                   </button>

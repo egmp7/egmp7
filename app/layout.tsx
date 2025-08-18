@@ -15,7 +15,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={"font-jura"}
+        className={"font-jura bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-slate-100"}
       >
         <div className="flex flex-col min-h-screen">
           <Navbar />
@@ -30,5 +30,5 @@ export default function RootLayout({
 }
 
 function Footer() {
-  return (<div className="border-b-8 border-b-slate-600"></div>)
+  return (<div className="border-b-8 border-b-slate-300 dark:border-b-slate-600 bg-slate-200 dark:bg-slate-700"></div>)
 }

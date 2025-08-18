@@ -40,10 +40,10 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="min-h-screen bg-gray-50 dark:bg-slate-900 flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
-          <p className="text-gray-600">Loading post...</p>
+          <p className="text-gray-600 dark:text-slate-400">Loading post...</p>
         </div>
       </div>
     )
@@ -54,13 +54,13 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-slate-900">
       {/* Back to Blog Link */}
-      <div className="bg-white border-b">
+      <div className="bg-white dark:bg-slate-800 border-b border-gray-200 dark:border-slate-700">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <Link
             href="/blog"
-            className="inline-flex items-center text-blue-600 hover:text-blue-800 font-medium transition-colors duration-200"
+            className="inline-flex items-center text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 font-medium transition-colors duration-200"
           >
             <svg className="mr-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -75,10 +75,10 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
         {/* Header */}
         <header className="mb-8">
           <div className="text-center mb-6">
-            <h1 className="text-4xl font-bold text-gray-900 mb-4 leading-tight">
+            <h1 className="text-4xl font-bold text-gray-900 dark:text-slate-100 mb-4 leading-tight">
               {post.title}
             </h1>
-            <div className="flex items-center justify-center text-sm text-gray-500">
+            <div className="flex items-center justify-center text-sm text-gray-500 dark:text-slate-400">
               <time dateTime={post.created_at}>
                 {new Date(post.created_at).toLocaleDateString('en-US', {
                   year: 'numeric',
@@ -91,7 +91,7 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
           
           {post.excerpt && (
             <div className="text-center">
-              <p className="text-xl text-gray-600 italic max-w-3xl mx-auto leading-relaxed">
+              <p className="text-xl text-gray-600 dark:text-slate-300 italic max-w-3xl mx-auto leading-relaxed">
                 {post.excerpt}
               </p>
             </div>
@@ -104,7 +104,7 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
             <Image
               src={post.featured_image}
               alt={post.title}
-              className="w-full h-64 md:h-96 object-cover rounded-lg shadow-lg"
+              className="w-full h-64 md:h-96 object-cover rounded-lg shadow-lg dark:shadow-slate-900/30"
               width={500}
               height={300}
             />
@@ -113,20 +113,20 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
 
         {/* Post Content */}
         <div className="prose prose-lg max-w-none">
-          <div className="bg-white p-8 rounded-lg shadow-md">
+          <div className="bg-white dark:bg-slate-800 p-8 rounded-lg shadow-md dark:shadow-slate-900/20 border border-gray-200 dark:border-slate-700">
             <RichTextViewer 
               content={post.content}
-              className="text-gray-800 leading-relaxed"
+              className="text-gray-800 dark:text-slate-200 leading-relaxed"
             />
           </div>
         </div>
 
         {/* Footer */}
-        <footer className="mt-12 pt-8 border-t border-gray-200">
+        <footer className="mt-12 pt-8 border-t border-gray-200 dark:border-slate-700">
           <div className="text-center">
             <Link
               href="/blog"
-              className="inline-flex items-center text-blue-600 hover:text-blue-800 font-medium transition-colors duration-200"
+              className="inline-flex items-center text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 font-medium transition-colors duration-200"
             >
               ← Back to all posts
             </Link>

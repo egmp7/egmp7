@@ -73,21 +73,21 @@ export default function AdminLogin({ onLoginSuccess }: AdminLoginProps) {
 
   if (isLocked) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="max-w-md w-full bg-white rounded-lg shadow-md p-8">
+      <div className="min-h-screen bg-gray-50 dark:bg-slate-900 flex items-center justify-center">
+        <div className="max-w-md w-full bg-white dark:bg-slate-800 rounded-lg shadow-md dark:shadow-slate-900/20 p-8 border border-gray-200 dark:border-slate-700">
           <div className="text-center">
-            <div className="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-red-100 mb-4">
-              <svg className="h-6 w-6 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <div className="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-red-100 dark:bg-red-900/20 mb-4">
+              <svg className="h-6 w-6 text-red-600 dark:text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z" />
               </svg>
             </div>
-            <h2 className="text-2xl font-bold text-gray-900 mb-2">Account Locked</h2>
-            <p className="text-gray-600 mb-4">
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-slate-100 mb-2">Account Locked</h2>
+            <p className="text-gray-600 dark:text-slate-400 mb-4">
               Too many failed login attempts. Please try again later.
             </p>
-            <div className="bg-gray-100 rounded-lg p-4">
-              <p className="text-sm text-gray-600 mb-2">Time remaining:</p>
-              <p className="text-2xl font-mono text-gray-900">{formatTime(lockoutTime)}</p>
+            <div className="bg-gray-100 dark:bg-slate-700 rounded-lg p-4">
+              <p className="text-sm text-gray-600 dark:text-slate-400 mb-2">Time remaining:</p>
+              <p className="text-2xl font-mono text-gray-900 dark:text-slate-100">{formatTime(lockoutTime)}</p>
             </div>
           </div>
         </div>
@@ -96,16 +96,16 @@ export default function AdminLogin({ onLoginSuccess }: AdminLoginProps) {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-      <div className="max-w-md w-full bg-white rounded-lg shadow-md p-8">
+    <div className="min-h-screen bg-gray-50 dark:bg-slate-900 flex items-center justify-center">
+      <div className="max-w-md w-full bg-white dark:bg-slate-800 rounded-lg shadow-md dark:shadow-slate-900/20 p-8 border border-gray-200 dark:border-slate-700">
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-900">Admin Access</h1>
-          <p className="text-gray-600 mt-2">Enter your password to continue</p>
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-slate-100">Admin Access</h1>
+          <p className="text-gray-600 dark:text-slate-400 mt-2">Enter your password to continue</p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
-            <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
+            <label htmlFor="password" className="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-2">
               Password
             </label>
             <input
@@ -113,7 +113,7 @@ export default function AdminLogin({ onLoginSuccess }: AdminLoginProps) {
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              className="w-full px-3 py-2 border border-gray-300 dark:border-slate-600 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-slate-700 dark:text-slate-100 dark:placeholder-slate-400"
               placeholder="Enter admin password"
               disabled={isLoading}
               autoComplete="current-password"
@@ -121,14 +121,14 @@ export default function AdminLogin({ onLoginSuccess }: AdminLoginProps) {
           </div>
 
           {error && (
-            <div className="bg-red-50 border border-red-200 rounded-md p-3">
-              <p className="text-sm text-red-600">{error}</p>
+            <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-md p-3">
+              <p className="text-sm text-red-600 dark:text-red-400">{error}</p>
             </div>
           )}
 
           {attempts > 0 && (
-            <div className="bg-yellow-50 border border-yellow-200 rounded-md p-3">
-              <p className="text-sm text-yellow-700">
+            <div className="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-md p-3">
+              <p className="text-sm text-yellow-700 dark:text-yellow-300">
                 Failed attempts: {attempts}/5
               </p>
             </div>
@@ -137,7 +137,7 @@ export default function AdminLogin({ onLoginSuccess }: AdminLoginProps) {
           <button
             type="submit"
             disabled={isLoading || !password.trim()}
-            className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed dark:ring-offset-slate-800"
           >
             {isLoading ? (
               <div className="flex items-center">
@@ -154,7 +154,7 @@ export default function AdminLogin({ onLoginSuccess }: AdminLoginProps) {
         </form>
 
         <div className="mt-6 text-center">
-          <p className="text-xs text-gray-500">
+          <p className="text-xs text-gray-500 dark:text-slate-500">
             Secure admin access for blog management
           </p>
         </div>
