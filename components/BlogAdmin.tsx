@@ -69,40 +69,34 @@ export default function BlogAdmin() {
   if (loading) return <div>Loading...</div>
 
   return (
-    <div className="max-w-4xl mx-auto p-6">
+    <div className="max-w-6xl mx-auto p-6">
       <h1 className="text-3xl font-bold mb-8 text-gray-900">Blog Admin</h1>
       
       {/* Create Post Form */}
       <div className="bg-white p-6 rounded-lg shadow-md mb-8">
         <h2 className="text-xl font-semibold mb-4 text-gray-900">Create New Post</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
-          <div>
-            <label className="block text-sm font-medium mb-1 text-gray-800">Title</label>
-            <input
-              type="text"
-              value={formData.title}
-              onChange={(e) => setFormData({...formData, title: e.target.value})}
-              className="w-full p-2 border rounded-md text-gray-900"
-              required
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium mb-1 text-gray-800">Slug</label>
-            <input
-              type="text"
-              value={formData.slug}
-              onChange={(e) => setFormData({...formData, slug: e.target.value})}
-              className="w-full p-2 border rounded-md text-gray-900"
-              required
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium mb-1 text-gray-800">Content</label>
-            <RichTextEditor
-              content={formData.content}
-              onChange={(content) => setFormData({...formData, content})}
-              placeholder="Start writing your blog post..."
-            />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label className="block text-sm font-medium mb-1 text-gray-800">Title</label>
+              <input
+                type="text"
+                value={formData.title}
+                onChange={(e) => setFormData({...formData, title: e.target.value})}
+                className="w-full p-2 border rounded-md text-gray-900"
+                required
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium mb-1 text-gray-800">Slug</label>
+              <input
+                type="text"
+                value={formData.slug}
+                onChange={(e) => setFormData({...formData, slug: e.target.value})}
+                className="w-full p-2 border rounded-md text-gray-900"
+                required
+              />
+            </div>
           </div>
           <div>
             <label className="block text-sm font-medium mb-1 text-gray-800">Excerpt</label>
@@ -110,6 +104,7 @@ export default function BlogAdmin() {
               value={formData.excerpt}
               onChange={(e) => setFormData({...formData, excerpt: e.target.value})}
               className="w-full p-2 border rounded-md h-20 text-gray-900"
+              placeholder="Brief description of your blog post..."
             />
           </div>
           <button
@@ -119,6 +114,15 @@ export default function BlogAdmin() {
             Create Post
           </button>
         </form>
+      </div>
+
+      {/* Rich Text Editor - Outside the card with more space */}
+      <div className="bg-white p-6 rounded-lg shadow-md mb-8">
+        <h2 className="text-xl font-semibold mb-4 text-gray-900">Content</h2>
+        <RichTextEditor
+          content={formData.content}
+          onChange={(content) => setFormData({...formData, content})}
+        />
       </div>
 
       {/* Posts List */}

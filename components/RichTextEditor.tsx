@@ -1,42 +1,76 @@
 'use client'
 
-import { useEditor, EditorContent } from '@tiptap/react'
-import StarterKit from '@tiptap/starter-kit'
+import * as React from "react"
+import { EditorContent, EditorContext, useEditor } from "@tiptap/react"
+
+// --- Tiptap Core Extensions ---
+import { StarterKit } from "@tiptap/starter-kit"
+import { Image } from "@tiptap/extension-image"
+import { TaskItem, TaskList } from "@tiptap/extension-list"
+import { TextAlign } from "@tiptap/extension-text-align"
+import { Typography } from "@tiptap/extension-typography"
+import { Highlight } from "@tiptap/extension-highlight"
+import { Subscript } from "@tiptap/extension-subscript"
+import { Superscript } from "@tiptap/extension-superscript"
+import { Selection } from "@tiptap/extensions"
 import Link from '@tiptap/extension-link'
-import Image from '@tiptap/extension-image'
-import TextAlign from '@tiptap/extension-text-align'
 import Underline from '@tiptap/extension-underline'
-import {TextStyle} from '@tiptap/extension-text-style'
-import Color from '@tiptap/extension-color'
-import Highlight from '@tiptap/extension-highlight'
-import CodeBlockLowlight from '@tiptap/extension-code-block-lowlight'
-import { all, createLowlight } from 'lowlight'
-import { useEffect, useState } from 'react'
 
+// --- UI Primitives ---
+import { Button } from "@/components/tiptap-ui-primitive/button"
+import { Spacer } from "@/components/tiptap-ui-primitive/spacer"
+import {
+  Toolbar,
+  ToolbarGroup,
+  ToolbarSeparator,
+} from "@/components/tiptap-ui-primitive/toolbar"
 
-import { 
-  Bold, 
-  Italic, 
-  Underline as UnderlineIcon, 
-  Strikethrough, 
-  Code, 
-  Quote, 
-  List, 
-  ListOrdered, 
-  AlignLeft, 
-  AlignCenter, 
-  AlignRight, 
-  AlignJustify,
-  Link as LinkIcon,
-  Image as ImageIcon,
-  Palette,
-  Highlighter,
-  Heading1,
-  Heading2,
-  Heading3,
-  Undo,
-  Redo
-} from 'lucide-react'
+// --- Tiptap Node ---
+import { ImageUploadNode } from "@/components/tiptap-node/image-upload-node/image-upload-node-extension"
+import { HorizontalRule } from "@/components/tiptap-node/horizontal-rule-node/horizontal-rule-node-extension"
+import "@/components/tiptap-node/blockquote-node/blockquote-node.scss"
+import "@/components/tiptap-node/code-block-node/code-block-node.scss"
+import "@/components/tiptap-node/horizontal-rule-node/horizontal-rule-node.scss"
+import "@/components/tiptap-node/list-node/list-node.scss"
+import "@/components/tiptap-node/image-node/image-node.scss"
+import "@/components/tiptap-node/heading-node/heading-node.scss"
+import "@/components/tiptap-node/paragraph-node/paragraph-node.scss"
+
+// --- Tiptap UI ---
+import { HeadingDropdownMenu } from "@/components/tiptap-ui/heading-dropdown-menu"
+import { ImageUploadButton } from "@/components/tiptap-ui/image-upload-button"
+import { ListDropdownMenu } from "@/components/tiptap-ui/list-dropdown-menu"
+import { BlockquoteButton } from "@/components/tiptap-ui/blockquote-button"
+import { CodeBlockButton } from "@/components/tiptap-ui/code-block-button"
+import {
+  ColorHighlightPopover,
+  ColorHighlightPopoverContent,
+  ColorHighlightPopoverButton,
+} from "@/components/tiptap-ui/color-highlight-popover"
+import {
+  LinkPopover,
+  LinkContent,
+  LinkButton,
+} from "@/components/tiptap-ui/link-popover"
+import { MarkButton } from "@/components/tiptap-ui/mark-button"
+import { TextAlignButton } from "@/components/tiptap-ui/text-align-button"
+import { UndoRedoButton } from "@/components/tiptap-ui/undo-redo-button"
+
+// --- Icons ---
+import { ArrowLeftIcon } from "@/components/tiptap-icons/arrow-left-icon"
+import { HighlighterIcon } from "@/components/tiptap-icons/highlighter-icon"
+import { LinkIcon } from "@/components/tiptap-icons/link-icon"
+
+// --- Hooks ---
+import { useIsMobile } from "@/hooks/use-mobile"
+import { useWindowSize } from "@/hooks/use-window-size"
+import { useCursorVisibility } from "@/hooks/use-cursor-visibility"
+
+// --- Lib ---
+import { handleImageUpload, MAX_FILE_SIZE } from "@/lib/tiptap-utils"
+
+// --- Styles ---
+import "@/components/tiptap-templates/simple/simple-editor.scss"
 
 interface RichTextEditorProps {
   content: string
@@ -44,283 +78,186 @@ interface RichTextEditorProps {
   placeholder?: string
 }
 
-const lowlight = createLowlight(all)
-
-const MenuBar = ({ editor }: { editor: any }) => {
-  if (!editor) {
-    return null
-  }
-
-  const addImage = () => {
-    const url = window.prompt('Enter image URL:')
-    if (url) {
-      editor.chain().focus().setImage({ src: url }).run()
-    }
-  }
-
-  const setLink = () => {
-    const url = window.prompt('Enter URL:')
-    if (url) {
-      editor.chain().focus().setLink({ href: url }).run()
-    }
-  }
-
-  const setColor = (color: string) => {
-    editor.chain().focus().setColor(color).run()
-  }
-
-  const setHighlight = (color: string) => {
-    editor.chain().focus().setHighlight({ color }).run()
-  }
-
+const MainToolbarContent = ({
+  onHighlighterClick,
+  onLinkClick,
+  isMobile,
+}: {
+  onHighlighterClick: () => void
+  onLinkClick: () => void
+  isMobile: boolean
+}) => {
   return (
-    <div className="border-b border-gray-200 p-2 bg-white rounded-t-lg">
-      <div className="flex flex-wrap gap-1 items-center">
-        {/* Text Formatting */}
-        <div className="flex items-center gap-1 border-r border-gray-200 pr-2">
-          <button
-            onClick={() => editor.chain().focus().toggleBold().run()}
-            className={`p-2 rounded hover:bg-gray-100 ${editor.isActive('bold') ? 'bg-blue-100 text-blue-600' : 'text-gray-600'}`}
-            title="Bold"
-          >
-            <Bold size={16} />
-          </button>
-          <button
-            onClick={() => editor.chain().focus().toggleItalic().run()}
-            className={`p-2 rounded hover:bg-gray-100 ${editor.isActive('italic') ? 'bg-blue-100 text-blue-600' : 'text-gray-600'}`}
-            title="Italic"
-          >
-            <Italic size={16} />
-          </button>
-          <button
-            onClick={() => editor.chain().focus().toggleUnderline().run()}
-            className={`p-2 rounded hover:bg-gray-100 ${editor.isActive('underline') ? 'bg-blue-100 text-blue-600' : 'text-gray-600'}`}
-            title="Underline"
-          >
-            <UnderlineIcon size={16} />
-          </button>
-          <button
-            onClick={() => editor.chain().focus().toggleStrike().run()}
-            className={`p-2 rounded hover:bg-gray-100 ${editor.isActive('strike') ? 'bg-blue-100 text-blue-600' : 'text-gray-600'}`}
-            title="Strikethrough"
-          >
-            <Strikethrough size={16} />
-          </button>
-          <button
-            onClick={() => editor.chain().focus().toggleCode().run()}
-            className={`p-2 rounded hover:bg-gray-100 ${editor.isActive('code') ? 'bg-blue-100 text-blue-600' : 'text-gray-600'}`}
-            title="Inline Code"
-          >
-            <Code size={16} />
-          </button>
-        </div>
+    <>
+      <Spacer />
 
-        {/* Headings */}
-        <div className="flex items-center gap-1 border-r border-gray-200 pr-2">
-          <button
-            onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}
-            className={`p-2 rounded hover:bg-gray-100 ${editor.isActive('heading', { level: 1 }) ? 'bg-blue-100 text-blue-600' : 'text-gray-600'}`}
-            title="Heading 1"
-          >
-            <Heading1 size={16} />
-          </button>
-          <button
-            onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
-            className={`p-2 rounded hover:bg-gray-100 ${editor.isActive('heading', { level: 2 }) ? 'bg-blue-100 text-blue-600' : 'text-gray-600'}`}
-            title="Heading 2"
-          >
-            <Heading2 size={16} />
-          </button>
-          <button
-            onClick={() => editor.chain().focus().toggleHeading({ level: 3 }).run()}
-            className={`p-2 rounded hover:bg-gray-100 ${editor.isActive('heading', { level: 3 }) ? 'bg-blue-100 text-blue-600' : 'text-gray-600'}`}
-            title="Heading 3"
-          >
-            <Heading3 size={16} />
-          </button>
-        </div>
+      <ToolbarGroup>
+        <UndoRedoButton action="undo" />
+        <UndoRedoButton action="redo" />
+      </ToolbarGroup>
 
-        {/* Lists */}
-        <div className="flex items-center gap-1 border-r border-gray-200 pr-2">
-          <button
-            onClick={() => editor.chain().focus().toggleBulletList().run()}
-            className={`p-2 rounded hover:bg-gray-100 ${editor.isActive('bulletList') ? 'bg-blue-100 text-blue-600' : 'text-gray-600'}`}
-            title="Bullet List"
-          >
-            <List size={16} />
-          </button>
-          <button
-            onClick={() => editor.chain().focus().toggleOrderedList().run()}
-            className={`p-2 rounded hover:bg-gray-100 ${editor.isActive('orderedList') ? 'bg-blue-100 text-blue-600' : 'text-gray-600'}`}
-            title="Ordered List"
-          >
-            <ListOrdered size={16} />
-          </button>
-          <button
-            onClick={() => editor.chain().focus().toggleBlockquote().run()}
-            className={`p-2 rounded hover:bg-gray-100 ${editor.isActive('blockquote') ? 'bg-blue-100 text-blue-600' : 'text-gray-600'}`}
-            title="Blockquote"
-          >
-            <Quote size={16} />
-          </button>
-        </div>
+      <ToolbarSeparator />
 
-        {/* Alignment */}
-        <div className="flex items-center gap-1 border-r border-gray-200 pr-2">
-          <button
-            onClick={() => editor.chain().focus().setTextAlign('left').run()}
-            className={`p-2 rounded hover:bg-gray-100 ${editor.isActive({ textAlign: 'left' }) ? 'bg-blue-100 text-blue-600' : 'text-gray-600'}`}
-            title="Align Left"
-          >
-            <AlignLeft size={16} />
-          </button>
-          <button
-            onClick={() => editor.chain().focus().setTextAlign('center').run()}
-            className={`p-2 rounded hover:bg-gray-100 ${editor.isActive({ textAlign: 'center' }) ? 'bg-blue-100 text-blue-600' : 'text-gray-600'}`}
-            title="Align Center"
-          >
-            <AlignCenter size={16} />
-          </button>
-          <button
-            onClick={() => editor.chain().focus().setTextAlign('right').run()}
-            className={`p-2 rounded hover:bg-gray-100 ${editor.isActive({ textAlign: 'right' }) ? 'bg-blue-100 text-blue-600' : 'text-gray-600'}`}
-            title="Align Right"
-          >
-            <AlignRight size={16} />
-          </button>
-          <button
-            onClick={() => editor.chain().focus().setTextAlign('justify').run()}
-            className={`p-2 rounded hover:bg-gray-100 ${editor.isActive({ textAlign: 'justify' }) ? 'bg-blue-100 text-blue-600' : 'text-gray-600'}`}
-            title="Justify"
-          >
-            <AlignJustify size={16} />
-          </button>
-        </div>
+      <ToolbarGroup>
+        <HeadingDropdownMenu levels={[1, 2, 3, 4]} portal={isMobile} />
+        <ListDropdownMenu
+          types={["bulletList", "orderedList", "taskList"]}
+          portal={isMobile}
+        />
+        <BlockquoteButton />
+        <CodeBlockButton />
+      </ToolbarGroup>
 
-        {/* Links and Images */}
-        <div className="flex items-center gap-1 border-r border-gray-200 pr-2">
-          <button
-            onClick={setLink}
-            className="p-2 rounded hover:bg-gray-100 text-gray-600"
-            title="Add Link"
-          >
-            <LinkIcon size={16} />
-          </button>
-          <button
-            onClick={addImage}
-            className="p-2 rounded hover:bg-gray-100 text-gray-600"
-            title="Add Image"
-          >
-            <ImageIcon size={16} />
-          </button>
-        </div>
+      <ToolbarSeparator />
 
-        {/* Colors */}
-        <div className="flex items-center gap-1 border-r border-gray-200 pr-2">
-          <button
-            onClick={() => setColor('#ef4444')}
-            className="p-2 rounded hover:bg-gray-100 text-red-500"
-            title="Red Text"
-          >
-            <Palette size={16} />
-          </button>
-          <button
-            onClick={() => setHighlight('#fef3c7')}
-            className="p-2 rounded hover:bg-gray-100 text-yellow-500"
-            title="Highlight"
-          >
-            <Highlighter size={16} />
-          </button>
-        </div>
+      <ToolbarGroup>
+        <MarkButton type="bold" />
+        <MarkButton type="italic" />
+        <MarkButton type="strike" />
+        <MarkButton type="code" />
+        <MarkButton type="underline" />
+        {!isMobile ? (
+          <ColorHighlightPopover />
+        ) : (
+          <ColorHighlightPopoverButton onClick={onHighlighterClick} />
+        )}
+        {!isMobile ? <LinkPopover /> : <LinkButton onClick={onLinkClick} />}
+      </ToolbarGroup>
 
-        {/* History */}
-        <div className="flex items-center gap-1">
-          <button
-            onClick={() => editor.chain().focus().undo().run()}
-            className="p-2 rounded hover:bg-gray-100 text-gray-600"
-            title="Undo"
-          >
-            <Undo size={16} />
-          </button>
-          <button
-            onClick={() => editor.chain().focus().redo().run()}
-            className="p-2 rounded hover:bg-gray-100 text-gray-600"
-            title="Redo"
-          >
-            <Redo size={16} />
-          </button>
-        </div>
-      </div>
-    </div>
+      <ToolbarSeparator />
+
+      <ToolbarGroup>
+        <MarkButton type="superscript" />
+        <MarkButton type="subscript" />
+      </ToolbarGroup>
+
+      <ToolbarSeparator />
+
+      <ToolbarGroup>
+        <TextAlignButton align="left" />
+        <TextAlignButton align="center" />
+        <TextAlignButton align="right" />
+        <TextAlignButton align="justify" />
+      </ToolbarGroup>
+
+      <ToolbarSeparator />
+
+      <ToolbarGroup>
+        <ImageUploadButton text="Add" />
+      </ToolbarGroup>
+
+      <Spacer />
+    </>
   )
 }
 
-export default function RichTextEditor({ content, onChange, placeholder }: RichTextEditorProps) {
-  const [isMounted, setIsMounted] = useState(false)
+const MobileToolbarContent = ({
+  type,
+  onBack,
+}: {
+  type: "highlighter" | "link"
+  onBack: () => void
+}) => (
+  <>
+    <ToolbarGroup>
+      <Button data-style="ghost" onClick={onBack}>
+        <ArrowLeftIcon className="tiptap-button-icon" />
+        {type === "highlighter" ? (
+          <HighlighterIcon className="tiptap-button-icon" />
+        ) : (
+          <LinkIcon className="tiptap-button-icon" />
+        )}
+      </Button>
+    </ToolbarGroup>
 
-  useEffect(() => {
-    setIsMounted(true)
-  }, [])
+    <ToolbarSeparator />
+
+    {type === "highlighter" ? (
+      <ColorHighlightPopoverContent />
+    ) : (
+      <LinkContent />
+    )}
+  </>
+)
+
+export default function RichTextEditor({ content, onChange, placeholder }: RichTextEditorProps) {
+  const isMobile = useIsMobile()
+  const { height } = useWindowSize()
+  const [mobileView, setMobileView] = React.useState<
+    "main" | "highlighter" | "link"
+  >("main")
+  const toolbarRef = React.useRef<HTMLDivElement>(null)
 
   const editor = useEditor({
+    immediatelyRender: false,
+    shouldRerenderOnTransaction: false,
+    editorProps: {
+      attributes: {
+        autocomplete: "off",
+        autocorrect: "off",
+        autocapitalize: "off",
+        "aria-label": "Main content area, start typing to enter text.",
+        class: "simple-editor",
+      },
+    },
     extensions: [
-      StarterKit,
+      StarterKit.configure({
+        horizontalRule: false,
+        link: {
+          openOnClick: false,
+          enableClickSelection: true,
+        },
+      }),
+      HorizontalRule,
+      TextAlign.configure({ types: ["heading", "paragraph"] }),
+      TaskList,
+      TaskItem.configure({ nested: true }),
+      Highlight.configure({ multicolor: true }),
+      Image,
+      Typography,
+      Superscript,
+      Subscript,
+      Selection,
+      Underline,
       Link.configure({
         openOnClick: false,
         HTMLAttributes: {
           class: 'text-blue-600 underline hover:text-blue-800'
         }
       }),
-      Image.configure({
-        HTMLAttributes: {
-          class: 'max-w-full h-auto rounded-lg'
-        }
+      ImageUploadNode.configure({
+        accept: "image/*",
+        maxSize: MAX_FILE_SIZE,
+        limit: 3,
+        upload: handleImageUpload,
+        onError: (error) => console.error("Upload failed:", error),
       }),
-      TextAlign.configure({
-        types: ['heading', 'paragraph']
-      }),
-      Underline,
-      TextStyle,
-      Color,
-      Highlight,
-      CodeBlockLowlight.configure({
-        lowlight: lowlight
-      })
     ],
     content,
     onUpdate: ({ editor }) => {
       onChange(editor.getHTML())
     },
-    immediatelyRender: false, // Required for SSR compatibility
-    editorProps: {
-      attributes: {
-        class: 'prose prose-lg max-w-none focus:outline-none p-4 min-h-[300px] rich-text-editor-content',
-        style: 'color: #374151; background-color: #ffffff;'
-      }
-    }
   })
 
+  const rect = useCursorVisibility({
+    editor,
+    overlayHeight: toolbarRef.current?.getBoundingClientRect().height ?? 0,
+  })
+
+  React.useEffect(() => {
+    if (!isMobile && mobileView !== "main") {
+      setMobileView("main")
+    }
+  }, [isMobile, mobileView])
+
   // Sync editor content when content prop changes
-  useEffect(() => {
+  React.useEffect(() => {
     if (editor && content !== editor.getHTML()) {
       editor.commands.setContent(content)
     }
   }, [content, editor])
 
-  // Add the CSS class to the ProseMirror element after it's created
-  useEffect(() => {
-    if (editor && isMounted) {
-      const editorElement = editor.view.dom
-      if (editorElement) {
-        editorElement.classList.add('rich-text-editor-content')
-        // Force a re-render to ensure formatting is visible
-        editor.commands.focus()
-      }
-    }
-  }, [editor, isMounted])
-
-  // Don't render until mounted to avoid SSR issues
-  if (!isMounted) {
+  if (!editor) {
     return (
       <div className="rich-text-editor-container">
         <div className="border-b border-gray-200 p-2 bg-white rounded-t-lg">
@@ -328,7 +265,7 @@ export default function RichTextEditor({ content, onChange, placeholder }: RichT
             <div className="p-2 text-gray-400">Loading editor...</div>
           </div>
         </div>
-        <div className="p-4 min-h-[300px] bg-gray-50 flex items-center justify-center text-gray-500">
+        <div className="p-4 min-h-[400px] bg-gray-50 flex items-center justify-center text-gray-500">
           Loading rich text editor...
         </div>
       </div>
@@ -336,14 +273,43 @@ export default function RichTextEditor({ content, onChange, placeholder }: RichT
   }
 
   return (
-    <div className="rich-text-editor-container">
-      <MenuBar editor={editor} />
-      <EditorContent editor={editor} />
-      {placeholder && !content && (
-        <div className="absolute top-16 left-4 text-gray-400 pointer-events-none">
-          {placeholder}
-        </div>
-      )}
+    <div className="rich-text-editor-content">
+      <EditorContext.Provider value={{ editor }}>
+        <Toolbar
+          ref={toolbarRef}
+          style={{
+            ...(isMobile
+              ? {
+                  bottom: `calc(100% - ${height - rect.y}px)`,
+                }
+              : {}),
+          }}
+        >
+          {mobileView === "main" ? (
+            <MainToolbarContent
+              onHighlighterClick={() => setMobileView("highlighter")}
+              onLinkClick={() => setMobileView("link")}
+              isMobile={isMobile}
+            />
+          ) : (
+            <MobileToolbarContent
+              type={mobileView === "highlighter" ? "highlighter" : "link"}
+              onBack={() => setMobileView("main")}
+            />
+          )}
+        </Toolbar>
+
+        <EditorContent
+          editor={editor}
+          role="presentation"
+          className="simple-editor-content"
+        />
+        {placeholder && !content && (
+          <div className="absolute top-16 left-4 text-gray-400 pointer-events-none">
+            {placeholder}
+          </div>
+        )}
+      </EditorContext.Provider>
     </div>
   )
 }
