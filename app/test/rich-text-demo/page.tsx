@@ -16,9 +16,10 @@ export default function RichTextDemoPage() {
       <li><strong>Headings</strong> (H1, H2, H3)</li>
       <li><strong>Lists</strong> (bullet and numbered)</li>
       <li><strong>Text alignment</strong> (left, center, right, justify)</li>
-      <li><strong>Links and images</strong></li>
+      <li><strong>Links</strong></li>
       <li><strong>Code blocks</strong> with syntax highlighting</li>
       <li><strong>Blockquotes</strong> for important content</li>
+      <li><strong>Horizontal rules</strong> for content separation</li>
       <li><strong>Text colors</strong> and highlighting</li>
     </ul>
     
@@ -30,6 +31,8 @@ export default function RichTextDemoPage() {
     <blockquote>
       <p>This is a beautiful blockquote that stands out from the rest of the content.</p>
     </blockquote>
+    
+    <hr>
     
     <p>Try editing the content above to see the rich text editor in action!</p>
   `)
@@ -66,7 +69,7 @@ export default function RichTextDemoPage() {
 
         <div className="mt-12 text-center">
           <p className="text-gray-600">
-            The content above demonstrates various rich text features. Edit in the left panel and see the changes reflected in the right panel.
+            The content above demonstrates various rich text features including the new horizontal rule button. Edit in the left panel and see the changes reflected in the right panel.
           </p>
         </div>
       </div>
