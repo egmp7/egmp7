@@ -1,8 +1,8 @@
 'use client';
 import React, { useState, ChangeEvent, FormEvent } from 'react';
 import messages from './messages';
-import Loading from '../components/Loading';
-import UserLinks from '../components/UserLinks';
+import Loading from '@/components/Loading';
+import UserLinks from '@/components/UserLinks';
 
 interface FormData {
   name: string;

@@ -3,8 +3,8 @@
 import { useState, useEffect } from 'react'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
-import type { Post } from '@/app/types/blog'
-import RichTextViewer from '@/app/components/RichTextViewer'
+import type { Post } from '@/types/blog'
+import RichTextViewer from '@/components/RichTextViewer'
 
 interface BlogPostPageProps {
   params: {

@@ -1,7 +1,7 @@
-import { supabase } from '@/app/lib/supabase'
+import { supabase } from '@/lib/supabase'
 import { NextResponse } from 'next/server'
-import type { CreatePostData } from '@/app/types/blog'
-import { createSlug, generateUniqueSlug } from '@/app/lib/slugUtils'
+import type { CreatePostData } from '@/types/blog'
+import { createSlug, generateUniqueSlug } from '@/lib/slugUtils'
 
 export async function GET() {
   try {

@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import type { Post } from '@/app/types/blog'
+import type { Post } from '@/types/blog'
 
 export default function BlogPage() {
   const [posts, setPosts] = useState<Post[]>([])

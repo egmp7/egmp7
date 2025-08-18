@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import type { Post, CreatePostData } from '@/app/types/blog'
+import type { Post, CreatePostData } from '@/types/blog'
 import RichTextEditor from './RichTextEditor'
 
 export default function BlogAdmin() {

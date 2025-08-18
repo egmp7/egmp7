@@ -1,6 +1,6 @@
-import { supabase } from '@/app/lib/supabase'
+import { supabase } from '@/lib/supabase'
 import { NextResponse } from 'next/server'
-import { formatSlug } from '@/app/lib/slugUtils'
+import { formatSlug } from '@/lib/slugUtils'
 
 export async function GET(
   request: Request,

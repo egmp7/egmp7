@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import UserLinks from "./components/UserLinks";
+import UserLinks from "@/components/UserLinks";
 
 const messages = {
   title: "Software Engineer",

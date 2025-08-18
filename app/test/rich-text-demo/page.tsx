@@ -1,8 +1,9 @@
 'use client'
 
 import { useState } from 'react'
-import RichTextEditor from '@/app/components/RichTextEditor'
-import RichTextViewer from '@/app/components/RichTextViewer'
+import RichTextEditor from '@/components/RichTextEditor'
+import RichTextViewer from '@/components/RichTextViewer'
+
 
 export default function RichTextDemoPage() {
   const [content, setContent] = useState(`

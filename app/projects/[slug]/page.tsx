@@ -1,4 +1,4 @@
-import MediaSlider from "@/app/components/MediaSlider";
+import MediaSlider from "@/components/MediaSlider";
 
 // Define the project structure
 interface Media {

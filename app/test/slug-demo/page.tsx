@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { createSlug, formatSlug, generateUniqueSlug } from '@/app/lib/slugUtils'
+import { createSlug, formatSlug, generateUniqueSlug } from '@/lib/slugUtils'
 
 export default function SlugDemoPage() {
   const [inputText, setInputText] = useState('Si estaremos juntos')
