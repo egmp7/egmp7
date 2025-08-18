@@ -46,7 +46,7 @@ export default function BlogPage() {
           <div className="text-center">
             <h1 className="text-4xl font-bold text-gray-900 dark:text-slate-100 mb-4">Projects</h1>
             <p className="text-xl text-gray-600 dark:text-slate-400 max-w-2xl mx-auto">
-              Explore the projects that I'm working on or have worked on.
+              Explore the projects that I&apos;m working on or have worked on.
             </p>
           </div>
         </div>
