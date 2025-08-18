@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import type { Post, CreatePostData } from '@/types/blog'
 import RichTextEditor from './RichTextEditor'
 
@@ -17,16 +17,13 @@ export default function BlogAdmin() {
     excerpt: ''
   })
 
-  useEffect(() => {
-    fetchPosts()
-  }, [])
 
-  const showMessage = (type: 'success' | 'error', text: string) => {
+  const showMessage = useCallback((type: 'success' | 'error', text: string) => {
     setMessage({ type, text })
     setTimeout(() => setMessage(null), 5000)
-  }
+  }, [])
 
-  const fetchPosts = async () => {
+  const fetchPosts = useCallback(async () => {
     try {
       const response = await fetch('/api/posts')
       const result = await response.json()
@@ -39,7 +36,7 @@ export default function BlogAdmin() {
     } finally {
       setLoading(false)
     }
-  }
+  }, [showMessage])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -147,6 +144,11 @@ export default function BlogAdmin() {
       }
     }
   }
+
+  useEffect(() => {
+    fetchPosts()
+  }, [fetchPosts])
+
 
   if (loading) return <div>Loading...</div>
 

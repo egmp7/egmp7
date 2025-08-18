@@ -1,10 +1,11 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import type { Post } from '@/types/blog'
 import RichTextViewer from '@/components/RichTextViewer'
+import Image from 'next/image'
 
 interface BlogPostPageProps {
   params: {
@@ -16,11 +17,7 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
   const [post, setPost] = useState<Post | null>(null)
   const [loading, setLoading] = useState(true)
 
-  useEffect(() => {
-    fetchPost()
-  }, [params.slug])
-
-  const fetchPost = async () => {
+  const fetchPost = useCallback(async () => {
     try {
       // Fetch by slug using the existing API endpoint
       const response = await fetch(`/api/posts/${params.slug}`)
@@ -35,7 +32,11 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
     } finally {
       setLoading(false)
     }
-  }
+  }, [params.slug])
+
+  useEffect(() => {
+    fetchPost()
+  }, [fetchPost])
 
   if (loading) {
     return (
@@ -100,10 +101,12 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
         {/* Featured Image */}
         {post.featured_image && (
           <div className="mb-8">
-            <img
+            <Image
               src={post.featured_image}
               alt={post.title}
               className="w-full h-64 md:h-96 object-cover rounded-lg shadow-lg"
+              width={500}
+              height={300}
             />
           </div>
         )}

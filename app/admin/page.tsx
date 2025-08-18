@@ -12,7 +12,7 @@ export default function AdminPage() {
   useEffect(() => {
     checkAuthStatus()
     setIsLoading(false)
-  }, []) // Remove checkAuthStatus from dependencies since it's now stable
+  }, [checkAuthStatus])
 
   const handleLoginSuccess = () => {
     checkAuthStatus()

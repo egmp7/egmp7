@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import type { Post } from '@/types/blog'
+import Image from 'next/image'
 
 export default function BlogPage() {
   const [posts, setPosts] = useState<Post[]>([])
@@ -69,10 +70,12 @@ export default function BlogPage() {
               <article key={post.id} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
                 {post.featured_image && (
                   <div className="aspect-w-16 aspect-h-9">
-                    <img
+                    <Image
                       src={post.featured_image}
                       alt={post.title}
                       className="w-full h-48 object-cover"
+                      width={500}
+                      height={300}
                     />
                   </div>
                 )}

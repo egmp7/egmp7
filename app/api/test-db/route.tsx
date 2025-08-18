@@ -29,7 +29,7 @@ export async function GET() {
     }
     
     // Test specific post lookup
-    const { data: testPost, error: testError } = await supabase
+    const { error: testError } = await supabase
       .from('posts')
       .select('slug')
       .limit(1)

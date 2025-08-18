@@ -27,8 +27,9 @@ export async function GET(
     }
     
     return NextResponse.json({ success: true, data })
-  } catch (error: any) {
-    return NextResponse.json({ success: false, error: error.message }, { status: 500 })
+  } catch (error) {
+    const errorMessage = error instanceof Error ? error.message : 'An unknown error occurred'
+    return NextResponse.json({ success: false, error: errorMessage }, { status: 500 })
   }
 }
 
@@ -48,7 +49,7 @@ export async function PUT(
     console.log('PUT request - Body:', body)
     
     // Remove id from body since we're updating by slug
-    const { id, ...updateData } = body
+    const { ...updateData } = body
     
     // First check if the post exists
     const { data: existingPost, error: fetchError } = await supabase
@@ -107,9 +108,10 @@ export async function PUT(
     }
     
     return NextResponse.json({ success: true, data })
-  } catch (error: any) {
+  } catch (error) {
     console.error('PUT error:', error)
-    return NextResponse.json({ success: false, error: error.message }, { status: 500 })
+    const errorMessage = error instanceof Error ? error.message : 'An unknown error occurred'
+    return NextResponse.json({ success: false, error: errorMessage }, { status: 500 })
   }
 }
 
@@ -130,7 +132,8 @@ export async function DELETE(
     if (error) throw error
     
     return NextResponse.json({ success: true, message: 'Post deleted successfully' })
-  } catch (error: any) {
-    return NextResponse.json({ success: false, error: error.message }, { status: 500 })
+  } catch (error) {
+    const errorMessage = error instanceof Error ? error.message : 'An unknown error occurred'
+    return NextResponse.json({ success: false, error: errorMessage }, { status: 500 })
   }
 }

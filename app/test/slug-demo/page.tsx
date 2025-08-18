@@ -97,19 +97,19 @@ export default function SlugDemoPage() {
             <h2 className="text-2xl font-semibold text-gray-900 mb-4">Example Conversions</h2>
             <div className="grid md:grid-cols-2 gap-4">
               <div className="space-y-2">
-                <div className="text-sm text-gray-600">"Hello World!" →</div>
+                <div className="text-sm text-gray-600">&ldquo;Hello World!&rdquo; →</div>
                 <div className="font-mono text-gray-900">{createSlug('Hello World!')}</div>
               </div>
               <div className="space-y-2">
-                <div className="text-sm text-gray-600">"My Post & Article" →</div>
+                <div className="text-sm text-gray-600">&ldquo;My Post & Article&rdquo; →</div>
                 <div className="font-mono text-gray-900">{createSlug('My Post & Article')}</div>
               </div>
               <div className="space-y-2">
-                <div className="text-sm text-gray-600">"C++ Programming" →</div>
+                <div className="text-sm text-gray-600">&ldquo;C++ Programming&rdquo; →</div>
                 <div className="font-mono text-gray-900">{createSlug('C++ Programming')}</div>
               </div>
               <div className="space-y-2">
-                <div className="text-sm text-gray-600">"Si%20estaremos%20juntos" →</div>
+                <div className="text-sm text-gray-600">&ldquo;Si%20estaremos%20juntos&rdquo; →</div>
                 <div className="font-mono text-gray-900">{formatSlug('Si%20estaremos%20juntos')}</div>
               </div>
             </div>
