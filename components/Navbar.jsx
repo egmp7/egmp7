@@ -4,20 +4,21 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/react'
-import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
+import { Bars3Icon, XMarkIcon, SunIcon, MoonIcon } from '@heroicons/react/24/outline'
+import { useTheme } from '@/hooks/useTheme';
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
 export default function Navbar() {
-
+  const { isDark, toggleTheme } = useTheme();
   const pathname = usePathname();
 
   const navigation = [
     { name: 'Home', href: '/' },
     { name: 'About', href: '/about' },
-    { name: 'Projects', href: '/projects' },
+    { name: 'Blog', href: '/blog' },
     { name: 'Contact', href: '/contact' },
   ]
   return (
@@ -56,6 +57,23 @@ export default function Navbar() {
 
               {/* Space in between */}
               <div className="hidden flex-grow sm:block"></div>
+
+              {/* Dark Mode Toggle */}
+              <button
+                onClick={toggleTheme}
+                className={`mr-4 p-2 rounded-md transition-all duration-200 ${
+                  isDark 
+                    ? 'text-yellow-400 hover:text-yellow-300 hover:bg-slate-600' 
+                    : 'text-blue-400 hover:text-blue-300 hover:bg-slate-600'
+                }`}
+                title={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+              >
+                {isDark ? (
+                  <SunIcon className="h-6 w-6" />
+                ) : (
+                  <MoonIcon className="h-6 w-6" />
+                )}
+              </button>
 
               {/* Nav Links - Large View */}
               <div className='hidden sm:block'>

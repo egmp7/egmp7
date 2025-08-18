@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import Navbar from "./components/Navbar"
-import "./globals.css";
+import Navbar from "@/components/Navbar"
+import "./globals.scss";
 
 export const metadata: Metadata = {
   title: "EGSE7",
@@ -15,9 +15,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={"antialiased font-jura max-w-7xl mx-auto bg-slate-300 dark:bg-slate-900"}
+        className={"font-jura bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-slate-100"}
       >
-        <div className="flex flex-col min-h-screen bg-slate-100 dark:bg-slate-800">
+        <div className="flex flex-col min-h-screen">
           <Navbar />
           <div className="flex flex-col my-auto">
             {children}
@@ -30,5 +30,5 @@ export default function RootLayout({
 }
 
 function Footer() {
-  return (<div className="border-b-8 border-b-slate-600"></div>)
+  return (<div className="border-b-8 border-b-slate-300 dark:border-b-slate-600 bg-slate-200 dark:bg-slate-700"></div>)
 }
