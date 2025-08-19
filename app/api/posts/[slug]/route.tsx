@@ -5,11 +5,13 @@ import type { UpdatePostData } from '@/types/blog'
 
 export async function GET(
   request: Request,
-  { params }: { params: { slug: string } }
+  { params }: { params: Promise<{ slug: string }> }
 ) {
   try {
+    // Await the params since they're now asynchronous
+    const { slug } = await params
     // First decode the URL-encoded slug
-    const decodedSlug = decodeURIComponent(params.slug)
+    const decodedSlug = decodeURIComponent(slug)
     const formattedSlug = formatSlug(decodedSlug)
     
     const { data, error } = await supabase
@@ -35,13 +37,15 @@ export async function GET(
 
 export async function PUT(
   request: Request,
-  { params }: { params: { slug: string } }
+  { params }: { params: Promise<{ slug: string }> }
 ) {
   try {
+    // Await the params since they're now asynchronous
+    const { slug } = await params
     // First decode the URL-encoded slug
-    const decodedSlug = decodeURIComponent(params.slug)
+    const decodedSlug = decodeURIComponent(slug)
     const formattedSlug = formatSlug(decodedSlug)
-    console.log('PUT request - Original slug:', params.slug)
+    console.log('PUT request - Original slug:', slug)
     console.log('PUT request - Decoded slug:', decodedSlug)
     console.log('PUT request - Formatted slug:', formattedSlug)
     
@@ -117,11 +121,13 @@ export async function PUT(
 
 export async function DELETE(
   request: Request,
-  { params }: { params: { slug: string } }
+  { params }: { params: Promise<{ slug: string }> }
 ) {
   try {
+    // Await the params since they're now asynchronous
+    const { slug } = await params
     // First decode the URL-encoded slug
-    const decodedSlug = decodeURIComponent(params.slug)
+    const decodedSlug = decodeURIComponent(slug)
     const formattedSlug = formatSlug(decodedSlug)
     
     const { error } = await supabase
