@@ -1,3 +1,4 @@
+import { use } from 'react'
 import MediaSlider from "@/components/MediaSlider";
 
 // Define the project structure
@@ -97,15 +98,15 @@ const projects: Projects = {
 
 // Update the ProjectPage component
 interface ProjectProps {
-  params: {
+  params: Promise<{
     slug: keyof Projects; // Use keyof to ensure only valid project keys
-  };
+  }>;
 }
 
 
 const ProjectPage = ({ params }: ProjectProps) => {
-
-  const project = projects[params.slug]; // Now the slug will be properly typed
+  const resolvedParams = use(params)
+  const project = projects[resolvedParams.slug]; // Now the slug will be properly typed
 
   if (!project) {
     return <div className="text-center text-xl">Project not found | 404</div>;

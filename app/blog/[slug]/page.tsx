@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, use } from 'react'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import type { Post } from '@/types/blog'
@@ -8,19 +8,20 @@ import RichTextViewer from '@/components/RichTextViewer'
 import Image from 'next/image'
 
 interface BlogPostPageProps {
-  params: {
+  params: Promise<{
     slug: string
-  }
+  }>
 }
 
 export default function BlogPostPage({ params }: BlogPostPageProps) {
+  const resolvedParams = use(params)
   const [post, setPost] = useState<Post | null>(null)
   const [loading, setLoading] = useState(true)
 
   const fetchPost = useCallback(async () => {
     try {
       // Fetch by slug using the existing API endpoint
-      const response = await fetch(`/api/posts/${params.slug}`)
+      const response = await fetch(`/api/posts/${resolvedParams.slug}`)
       const result = await response.json()
       if (result.success) {
         setPost(result.data)
@@ -32,7 +33,7 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
     } finally {
       setLoading(false)
     }
-  }, [params.slug])
+  }, [resolvedParams.slug])
 
   useEffect(() => {
     fetchPost()
