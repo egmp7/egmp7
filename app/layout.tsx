@@ -4,7 +4,7 @@ import "./globals.scss";
 import { GoogleAnalytics } from "@next/third-parties/google";
 
 export const metadata: Metadata = {
-  title: "EGSE7",
+  title: "EGMP7",
   description: "Erick Gonzalez Software Engineer",
 };
 
