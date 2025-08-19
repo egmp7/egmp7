@@ -78,6 +78,7 @@ function ContactForm() {
         const errorDetails = await response.json();
         console.error('Server error:', errorDetails);
         alert(`Failed to send message: ${errorDetails.message || 'Please try again.'}`);
+        setIsLoading(false);
         return;
       }
   
@@ -95,7 +96,10 @@ function ContactForm() {
         console.error('Unknown error:', error);
         alert('An unknown error occurred.');
       }
-    }    
+      setIsLoading(false); 
+    } finally {
+      setIsLoading(false); 
+    }
   };
   
 
