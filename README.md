@@ -2,18 +2,27 @@
 
 ### Interests
 
-- React Web Development
-- Unity Game Engine
-- 3D Animation
-- Machine Learning
+* React Web Development
+* Unity Game Engine
+* 3D Animation
+* Machine Learning
 
-### Now
+### Currently Working On
 
-Looking for a web & game development related job roles.  
-Interested of job positions in Chicago area, USA or  
-Remote positions also in consideration.
+* Exploring game concepts and conducting market research for new indie game projects
+* Developing games with Unity using C# and gameplay systems such as state machines and AI behavior trees
+* Improving problem-solving skills through LeetCode and C++ practice
+* Building personal software projects and expanding my full-stack development skills
+* Learning more about game architecture, design patterns, and scalable code practices
 
-### Elsewhere
+### Career Goals
 
-- <a rel="me" href="https://egmp7.vercel.app">Personal Website</a>
-- <a rel="me" href="https://ramonepersonalchef.com">Landing page build for a customer</a>
+Looking for Web Development, Software Engineering, or Game Development opportunities.
+
+### Recent Projects
+
+* Unity game development projects
+* Badge application
+* Calculator application
+* Food application
+* Additional university software development projects
